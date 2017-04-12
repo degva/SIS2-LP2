@@ -1,0 +1,6 @@
+LP2 se refiere al proyecto en Java
+PokemonV referido al proyecto en C#
+
+Debido a que hay algunas clases que están ligadas tanto a la lógica del juego(Java) como a la administración de la base de datos(C#)
+se ha decidido, tras consultarle al profesor, que este tipo de clases estén implementados tanto en Java como en C#. Por ende,
+se van a encontrar muchas clases declaradas en ambos lenguajes.

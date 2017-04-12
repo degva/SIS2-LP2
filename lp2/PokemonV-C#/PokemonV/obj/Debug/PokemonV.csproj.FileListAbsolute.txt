@@ -1,0 +1,7 @@
+T:\Lp2\PokemonV\PokemonV\bin\Debug\PokemonV.exe.config
+T:\LP2\PokemonV\PokemonV\PokemonV\bin\Debug\PokemonV.exe.config
+T:\LP2\PokemonV\PokemonV\PokemonV\bin\Debug\PokemonV.exe
+T:\LP2\PokemonV\PokemonV\PokemonV\bin\Debug\PokemonV.pdb
+T:\LP2\PokemonV\PokemonV\PokemonV\obj\Debug\PokemonV.csprojResolveAssemblyReference.cache
+T:\LP2\PokemonV\PokemonV\PokemonV\obj\Debug\PokemonV.exe
+T:\LP2\PokemonV\PokemonV\PokemonV\obj\Debug\PokemonV.pdb
