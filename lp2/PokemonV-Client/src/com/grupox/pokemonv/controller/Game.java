@@ -12,6 +12,7 @@ public class Game extends Canvas implements Runnable{
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     private BufferStrategy strategy;
+    public InputHandler input;
     
     private double now, last, elapsed, lastInfoPrint;
     private int ticks, fps;
@@ -20,8 +21,15 @@ public class Game extends Canvas implements Runnable{
     public final double TIME_PER_FRAME = 1000000000/FPS;    // 1 second as nanosecond / 60 frames
     
     public Game(){
+        // Main loop
         running = false;
+        
+        // UI
         initUI();
+        
+        // Keyboard
+        input = new InputHandler();
+        frame.addKeyListener(input);
     }
     
     public void start(){
@@ -86,6 +94,9 @@ public class Game extends Canvas implements Runnable{
     }
     
     private void tick(){
+        if(input.up.down){
+            System.out.println("Up pressed ");
+        }
     }
     
     private void render(){
