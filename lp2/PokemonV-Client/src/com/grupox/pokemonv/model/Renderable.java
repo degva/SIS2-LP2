@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public abstract class Renderable {
-    /* Enumeration declaration */
+    /* Enum declaration */
     public enum Direction { UP, DOWN, LEFT, RIGHT };
     
     /* Attributes */    

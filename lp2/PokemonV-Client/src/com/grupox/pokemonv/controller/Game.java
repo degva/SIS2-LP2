@@ -5,6 +5,9 @@ import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.SpriteSheet;
 import com.grupox.pokemonv.model.Tile;
 import com.grupox.pokemonv.model.User;
+import com.grupox.pokemonv.view.Battle;
+import com.grupox.pokemonv.view.Login;
+import com.grupox.pokemonv.view.Pokemons;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,6 +34,7 @@ public class Game extends Canvas implements Runnable{
     private Map map;
     private User user;
     
+    /* Constructors */
     public Game(){
         // Main loop
         running = false;
@@ -40,39 +44,40 @@ public class Game extends Canvas implements Runnable{
         
         // Keyboard
         input = new InputHandler();
-        this.addKeyListener(input);
+        this.addKeyListener( input );
         
         // Initialization
         map = new Map();
-        user = new Player(input);
+        user = new Player( input );
         Tile tile = map.getGrid()[0][0];
-        tile.setUser(user);
-        user.setTile(tile);
+        tile.setUser( user );
+        user.setTile( tile );
     }
     
+    /* Methods */
     public void start(){
         running = true;
-        Thread thread = new Thread(this);   // Start this class as a new thread
+        Thread thread = new Thread( this );   // Start this class as a new thread
         thread.run();   // Calls Game.run();
     }
     
     public void initUI(){
-        frame = new JFrame("Pokemon V");
-        frame.setIgnoreRepaint(true);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame = new JFrame( "Pokemon V" );
+        frame.setIgnoreRepaint( true );
+        frame.setResizable( false );
+        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         
-        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        this.setIgnoreRepaint(true);
-        this.setFocusable(true);
+        this.setPreferredSize( new Dimension( WIDTH, HEIGHT ) );
+        this.setIgnoreRepaint( true );
+        this.setFocusable( true );
         
-        frame.add(this);
+        frame.add( this );
         frame.pack();
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+        frame.setVisible( true );
+        frame.setLocationRelativeTo( null );
         
         // Needed to render
-        this.createBufferStrategy(2);
+        this.createBufferStrategy( 2 );
         strategy = this.getBufferStrategy();
     }
     
@@ -83,29 +88,29 @@ public class Game extends Canvas implements Runnable{
         fps = 0;
         lastInfoPrint = System.nanoTime();
         shouldRender = false;
-        while(running){
+        while( running ){
             now = System.nanoTime();
             elapsed += now - last;   // Time elapsed since last loop
             last = now;
             
             // Tick as many times as it should in "TIME_PER_FRAME" interval
-            while(elapsed > TIME_PER_FRAME){
+            while( elapsed > TIME_PER_FRAME ){
                 elapsed -= TIME_PER_FRAME;
                 ticks++;
                 tick();
                 shouldRender = true;
             }
             
-            if(shouldRender){
+            if( shouldRender ){
                 fps++;
                 render();
                 shouldRender = false;
             }
             
             // If one second has passed since the last info print, print again and update counters
-            if(System.nanoTime() - lastInfoPrint > 1000000000){
+            if( System.nanoTime() - lastInfoPrint > 1000000000 ){
                 lastInfoPrint += 1000000000;
-                System.out.println("ticks:" + ticks + ",fps:" + fps);
+                System.out.println( "ticks:" + ticks + ",fps:" + fps );
                 fps = 0;
                 ticks = 0;
             }
@@ -118,24 +123,25 @@ public class Game extends Canvas implements Runnable{
     
     private void render(){
         Graphics2D g = ( Graphics2D )strategy.getDrawGraphics();
-        g.setColor(Color.black);
-        g.fillRect(0, 0, WIDTH, HEIGHT);
         
+        // Print background
+        g.setColor( Color.black );
+        g.fillRect( 0, 0, WIDTH, HEIGHT );
+        
+        // Print all other stuff
         map.render(g, user);
-        
         
         // Finally, show the contents in g and destroy it
         strategy.show();
         g.dispose();
-        
-//        // Test
-//        g.drawImage(SpriteSheet.getInstance().getSubImage(0, 0), 0, 0, 14*4,21*4, null);
-//        strategy.show();
-//        g.dispose();
     }
     
     public static void main( String args[] ){
+        new Battle().setVisible(true);
+        new Login().setVisible(true);
+        new Pokemons().setVisible(true);
         Game game = new Game();
         game.start();
+        
     }
 }

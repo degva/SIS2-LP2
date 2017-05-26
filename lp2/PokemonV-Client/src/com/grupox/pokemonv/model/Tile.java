@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Tile extends Renderable {
-    // Type enum declaration
+    // Enum declaration
     public enum Type { GRASS, SAND, ROCK };
     
     /* Attributes */

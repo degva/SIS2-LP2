@@ -12,6 +12,7 @@ public abstract class User extends Renderable{
     protected String password;
     protected String name;
     protected String email;
+    protected String address;
     
     protected Tile tile;
     
@@ -93,5 +94,21 @@ public abstract class User extends Renderable{
     }
     public void setTile( Tile tile ) {
         this.tile = tile;
-    }  
+    }
+
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress( String address ) {
+        this.address = address;
+    }
+
+    public InputHandler getInput() {
+        return input;
+    }
+    public void setInput( InputHandler input ) {
+        this.input = input;
+    }
+    
+    
 }
