@@ -1,11 +1,19 @@
 package com.grupox.pokemonv.controller;
 
+import com.grupox.pokemonv.model.Map;
+import com.grupox.pokemonv.model.Player;
+import com.grupox.pokemonv.model.SpriteSheet;
+import com.grupox.pokemonv.model.Tile;
+import com.grupox.pokemonv.model.User;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable{
+    /* Attributes */
     private boolean running = false;
     
     private JFrame frame;
@@ -20,6 +28,9 @@ public class Game extends Canvas implements Runnable{
     public final int FPS = 60;
     public final double TIME_PER_FRAME = 1000000000/FPS;    // 1 second as nanosecond / 60 frames
     
+    private Map map;
+    private User user;
+    
     public Game(){
         // Main loop
         running = false;
@@ -29,7 +40,14 @@ public class Game extends Canvas implements Runnable{
         
         // Keyboard
         input = new InputHandler();
-        frame.addKeyListener(input);
+        this.addKeyListener(input);
+        
+        // Initialization
+        map = new Map();
+        user = new Player(input);
+        Tile tile = map.getGrid()[0][0];
+        tile.setUser(user);
+        user.setTile(tile);
     }
     
     public void start(){
@@ -46,13 +64,14 @@ public class Game extends Canvas implements Runnable{
         
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setIgnoreRepaint(true);
+        this.setFocusable(true);
         
         frame.add(this);
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         
-        // Needed to render in the future
+        // Needed to render
         this.createBufferStrategy(2);
         strategy = this.getBufferStrategy();
     }
@@ -94,15 +113,28 @@ public class Game extends Canvas implements Runnable{
     }
     
     private void tick(){
-        if(input.up.down){
-            System.out.println("Up pressed ");
-        }
+        user.tick();
     }
     
     private void render(){
+        Graphics2D g = ( Graphics2D )strategy.getDrawGraphics();
+        g.setColor(Color.black);
+        g.fillRect(0, 0, WIDTH, HEIGHT);
+        
+        map.render(g, user);
+        
+        
+        // Finally, show the contents in g and destroy it
+        strategy.show();
+        g.dispose();
+        
+//        // Test
+//        g.drawImage(SpriteSheet.getInstance().getSubImage(0, 0), 0, 0, 14*4,21*4, null);
+//        strategy.show();
+//        g.dispose();
     }
     
-    public static void main(String args[]){
+    public static void main( String args[] ){
         Game game = new Game();
         game.start();
     }
