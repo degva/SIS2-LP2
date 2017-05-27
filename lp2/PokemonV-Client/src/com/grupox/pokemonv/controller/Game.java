@@ -16,6 +16,9 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable{
+    /* Enum declaration */
+    private enum State { MAP, BATTLE, POKEMON_BELT };
+    
     /* Attributes */
     private boolean running = false;
     
@@ -31,8 +34,9 @@ public class Game extends Canvas implements Runnable{
     public final int FPS = 60;
     public final double TIME_PER_FRAME = 1000000000/FPS;    // 1 second as nanosecond / 60 frames
     
-    private Map map;
+    private MapManager mapManager;
     private User user;
+    private State state;
     
     /* Constructors */
     public Game(){
@@ -47,11 +51,9 @@ public class Game extends Canvas implements Runnable{
         this.addKeyListener( input );
         
         // Initialization
-        map = new Map();
         user = new Player( input );
-        Tile tile = map.getGrid()[0][0];
-        tile.setUser( user );
-        user.setTile( tile );
+        mapManager = new MapManager( user );
+        state = State.MAP;
     }
     
     /* Methods */
@@ -118,7 +120,19 @@ public class Game extends Canvas implements Runnable{
     }
     
     private void tick(){
-        user.tick();
+        
+        switch( state ){
+            case MAP:
+                mapManager.tick();
+                break;
+            case BATTLE:
+                // @TODO
+                break;
+            case POKEMON_BELT:
+                // @TODO
+                break;
+        }
+        
     }
     
     private void render(){
@@ -127,9 +141,19 @@ public class Game extends Canvas implements Runnable{
         // Print background
         g.setColor( Color.black );
         g.fillRect( 0, 0, WIDTH, HEIGHT );
-        
-        // Print all other stuff
-        map.render(g, user);
+          
+        // Render screen according to state
+        switch( state ){
+            case MAP:
+                mapManager.render( g );
+                break;
+            case BATTLE:
+                // @TODO
+                break;
+            case POKEMON_BELT:
+                // @TODO
+                break;
+        }
         
         // Finally, show the contents in g and destroy it
         strategy.show();
@@ -137,9 +161,6 @@ public class Game extends Canvas implements Runnable{
     }
     
     public static void main( String args[] ){
-        new Battle().setVisible(true);
-        new Login().setVisible(true);
-        new Pokemons().setVisible(true);
         Game game = new Game();
         game.start();
         
