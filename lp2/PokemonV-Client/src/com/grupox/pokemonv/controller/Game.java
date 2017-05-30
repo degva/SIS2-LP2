@@ -146,6 +146,7 @@ public class Game extends Canvas implements Runnable{
         switch( state ){
             case MAP:
                 mapManager.render( g );
+                Font.getInstance().drawString("Hola mundo!", g, 0, 0);
                 break;
             case BATTLE:
                 // @TODO
@@ -163,6 +164,5 @@ public class Game extends Canvas implements Runnable{
     public static void main( String args[] ){
         Game game = new Game();
         game.start();
-        
     }
 }

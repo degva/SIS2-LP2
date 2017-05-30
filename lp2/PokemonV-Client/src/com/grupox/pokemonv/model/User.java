@@ -1,10 +1,10 @@
 package com.grupox.pokemonv.model;
 
 import com.grupox.pokemonv.controller.InputHandler;
-import static com.grupox.pokemonv.model.Tile.spriteHeight;
-import static com.grupox.pokemonv.model.Tile.spriteWidth;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import static com.grupox.pokemonv.model.Tile.spriteWidthOut;
+import static com.grupox.pokemonv.model.Tile.spriteHeightOut;
 
 public abstract class User extends Renderable{
     /* Attributes */
@@ -51,7 +51,7 @@ public abstract class User extends Renderable{
     }
     
     public void render( Graphics2D g, int x, int y ){
-        g.drawImage( sprite, x * spriteWidth, y * spriteHeight, spriteWidth, spriteHeight, null );
+        g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
     }
     
     /*

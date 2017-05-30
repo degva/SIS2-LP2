@@ -14,8 +14,12 @@ public class SpriteSheet {
     
     private BufferedImage spriteSheet;
     private final String route = "res/sprites/sheet.png";
-    private final int spriteWidth = 16; // Width of each sprite in the sheet
-    private final int spriteHeight = 16;    // Height of each sprite in the sheet
+    
+    private final int spriteWidthIn = 16;  // Width of each sprite in the sheet
+    private final int spriteHeightIn = 16; // Height of each sprite in the sheet
+    
+    private final int fontWidthIn = 8;  // Width of each font in the sheet
+    private final int fontHeightIn = 8; // Height of each sfont in the sheet
     
     /* Constructors */
     private SpriteSheet(){
@@ -37,7 +41,11 @@ public class SpriteSheet {
     
     // Get a subImage from the sprite sheet. Give x,y in the spritesheet( 0, 1, 2...) and get the img
     public BufferedImage getSubImage( int x, int y ){
-        return spriteSheet.getSubimage( 1 + ( spriteWidth + 1 ) * x, 1 + ( spriteHeight + 1 )* y, spriteWidth, spriteHeight );
+        return spriteSheet.getSubimage(1 + ( spriteWidthIn + 1 ) * x, 1 + ( spriteHeightIn + 1 )* y, spriteWidthIn, spriteHeightIn );
+    }
+    
+    public BufferedImage getSubFont( int x, int row ){
+        return spriteSheet.getSubimage( fontWidthIn * x, ( spriteHeightIn + 1 ) * 25 + fontWidthIn * row, fontWidthIn, fontHeightIn );
     }
 
 }

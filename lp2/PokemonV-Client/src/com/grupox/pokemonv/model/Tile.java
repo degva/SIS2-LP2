@@ -13,8 +13,8 @@ public class Tile extends Renderable {
     private boolean isItemEnabled;
     private Map map;
     
-    public static final int spriteWidth = 64;
-    public static final int spriteHeight = 64;
+    public static final int spriteWidthOut = 64;    // Width with which is rendered each sprite
+    public static final int spriteHeightOut = 64;   // Height with which is rendered each sprite
     
     /* Constructors */
     public Tile( Type type, User user, boolean isItemEnabled, Map map ){
@@ -62,7 +62,7 @@ public class Tile extends Renderable {
     }
     
     public void render( Graphics2D g, int x, int y ){
-        g.drawImage( sprite, x * spriteWidth, y * spriteHeight, spriteWidth, spriteHeight, null );
+        g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
         if( user != null ){
             user.render( g, x, y );
         }

@@ -12,8 +12,8 @@ public class Map {
     private Tile[][] grid;
     private final int HEIGHT = 8;   // NUMBER OF CELLS
     private final int WIDTH = 8;    // NUMBER OF CELLS
-    private final int TILES_IN_WIDTH = (int)Math.ceil( (double)Game.WIDTH / Tile.spriteWidth);
-    private final int TILES_IN_HEIGHT = (int)Math.ceil( (double)Game.HEIGHT / Tile.spriteHeight);
+    private final int TILES_IN_WIDTH = (int)Math.ceil( (double)Game.WIDTH / Tile.spriteWidthOut);
+    private final int TILES_IN_HEIGHT = (int)Math.ceil( (double)Game.HEIGHT / Tile.spriteHeightOut);
     
     /* Constructors */
     public Map(){
