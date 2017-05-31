@@ -13,11 +13,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable{
     /* Enum declaration */
-    private enum State { MAP, BATTLE, POKEMON_BELT };
+    public enum State { MAP, BATTLE, POKEMON_BELT };
     
     /* Attributes */
     private boolean running = false;
@@ -36,7 +38,7 @@ public class Game extends Canvas implements Runnable{
     
     private MapManager mapManager;
     private User user;
-    private State state;
+    private static State state;
     
     /* Constructors */
     public Game(){
@@ -116,11 +118,17 @@ public class Game extends Canvas implements Runnable{
                 fps = 0;
                 ticks = 0;
             }
+            try {
+                Thread.sleep( 1 );
+            } catch (Exception e) {}
         }
     }
     
     private void tick(){
+        // Update input
+        input.tick();
         
+        // Update objects
         switch( state ){
             case MAP:
                 mapManager.tick();
@@ -146,7 +154,6 @@ public class Game extends Canvas implements Runnable{
         switch( state ){
             case MAP:
                 mapManager.render( g );
-                Font.getInstance().drawString("Hola mundo!", g, 0, 0);
                 break;
             case BATTLE:
                 // @TODO
@@ -160,6 +167,16 @@ public class Game extends Canvas implements Runnable{
         strategy.show();
         g.dispose();
     }
+
+    /* Getters & Setters */
+    public static State getState() {
+        return state;
+    }
+    public static void setState(State newState) {
+        state = newState;
+    }
+    
+    
     
     public static void main( String args[] ){
         Game game = new Game();

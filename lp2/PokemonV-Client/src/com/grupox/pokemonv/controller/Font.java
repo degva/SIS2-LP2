@@ -12,8 +12,8 @@ public class Font {
     private static final int lastChar = alphabet.indexOf(' ') + 1;  // Second ' '
     private static Font instance;
     
-    public static final int fontWidthOut = 16;
-    public static final int fontHeightOut = 16;
+    public static final int fontWidthOut = Tile.spriteWidthOut / 4;
+    public static final int fontHeightOut = Tile.spriteHeightOut * 3 / 4;
     
     /* Constructors */
     private Font(){
@@ -27,7 +27,13 @@ public class Font {
         return instance;
     }
     
-    public void drawString(String msg, Graphics2D g, int x, int y){
+    // X and Y in tiles
+    public void drawStringInsideTile( String msg, Graphics2D g, int x, int y ){
+        drawString( msg, g, x * Tile.spriteWidthOut, y * Tile.spriteHeightOut );
+    }
+    
+    // X and Y in pixels
+    public void drawString( String msg, Graphics2D g, int x, int y ){
         msg = msg.toUpperCase();
         int ix, row;
         
@@ -42,7 +48,7 @@ public class Font {
             
             // Get and draw the fontSprite
             BufferedImage fontSprite = SpriteSheet.getInstance().getSubFont(ix, row);
-            g.drawImage(fontSprite, x * Tile.spriteWidthOut + i * fontWidthOut, y * Tile.spriteHeightOut, fontWidthOut, fontHeightOut, null );
+            g.drawImage(fontSprite, x + i * fontWidthOut, y, fontWidthOut, fontHeightOut, null );
         }
     }
 }

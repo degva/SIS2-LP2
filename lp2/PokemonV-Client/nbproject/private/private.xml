@@ -4,10 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo%207/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/MapManager.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo%207/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/model/User.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo%207/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/Font.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo%207/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/model/SpriteSheet.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo%207/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/model/Map.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo%207/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/Menu.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo%207/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/InputHandler.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo%207/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/MenuItem.java</file>
             <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo%207/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/Game.java</file>
         </group>
     </open-files>

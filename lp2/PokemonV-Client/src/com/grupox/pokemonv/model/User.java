@@ -34,16 +34,16 @@ public abstract class User extends Renderable{
         // Check movement
         now = System.nanoTime();
         if( input != null && now - lastMove > movePeriod ){
-            if( input.up.down && !input.down.down ){
+            if( input.up.isPressed && !input.down.isPressed ){
                 tile.getMap().tryMove( this, Direction.UP );
                 lastMove = now;
-            }else if( input.down.down && !input.up.down ){
+            }else if( input.down.isPressed && !input.up.isPressed ){
                 tile.getMap().tryMove( this, Direction.DOWN );
                 lastMove = now;
-            }else if( input.left.down && !input.right.down ){
+            }else if( input.left.isPressed && !input.right.isPressed ){
                 tile.getMap().tryMove( this, Direction.LEFT );
                 lastMove = now;
-            }else if( input.right.down && !input.left.down ){
+            }else if( input.right.isPressed && !input.left.isPressed ){
                 tile.getMap().tryMove( this, Direction.RIGHT );
                 lastMove = now;
             }
