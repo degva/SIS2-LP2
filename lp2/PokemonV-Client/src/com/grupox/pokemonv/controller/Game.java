@@ -179,6 +179,7 @@ public class Game extends Canvas implements Runnable{
     
     
     public static void main( String args[] ){
+//        new Login().setVisible( true );
         Game game = new Game();
         game.start();
     }
