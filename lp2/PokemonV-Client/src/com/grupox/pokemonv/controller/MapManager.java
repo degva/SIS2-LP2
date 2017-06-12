@@ -43,7 +43,7 @@ public class MapManager {
             menu.setSelectedIndex( 0 );
             
             state = State.MENU;
-        }else if( ( input.esc.isFirstPressed || input.back.isFirstPressed || input.menu.isFirstPressed) && state == State.MENU ){
+        }else if( ( input.back.isFirstPressed || input.menu.isFirstPressed) && state == State.MENU ){
             state = State.MOVING;
         }
         

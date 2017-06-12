@@ -2,6 +2,7 @@ package com.grupox.pokemonv.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class InputHandler implements KeyListener{
 
@@ -14,6 +15,7 @@ public class InputHandler implements KeyListener{
         
         /* Constructors */
         public Key(){
+            keys.add(this);
             isPressed = false;
             lastTimePressed = false;
             isFirstPressed = false;
@@ -36,9 +38,10 @@ public class InputHandler implements KeyListener{
     /* Attributes */
     public Key up, down, left, right;
     public Key menu;
-    public Key esc, action, back;
+    public Key action, back;
     
-    private Key[] keys;
+    //private Key[] keys;
+    private ArrayList<Key> keys = new ArrayList();
     
     /* Constructors */
     public InputHandler(){
@@ -47,52 +50,46 @@ public class InputHandler implements KeyListener{
         left = new Key();
         right = new Key();
         menu = new Key();
-        esc = new Key();
         action = new Key();
         back = new Key();
 
-        keys = new Key[8];
-        keys[0] = up;
-        keys[1] = down;
-        keys[2] = left;
-        keys[3] = right;
-        keys[4] = menu;
-        keys[5] = esc;
-        keys[6] = action;
-        keys[7] = back;
+//        keys = new Key[8];
+//        keys[0] = up;
+//        keys[1] = down;
+//        keys[2] = left;
+//        keys[3] = right;
+//        keys[4] = menu;
+//        keys[5] = action;
+//        keys[6] = back;
     }
 
     /* Methods */
     public void tick(){
-        for( int i = 0; i < keys.length; i++ ){
-            keys[i].tick();
+        for( int i = 0; i < keys.size(); i++ ){
+            keys.get(i).tick();
         }
     }
     
     private void toggle( KeyEvent ke, boolean pressed ){
-        if( ke.getKeyCode() == KeyEvent.VK_W || ke.getKeyCode() == KeyEvent.VK_UP ){
+        if( ke.getKeyCode() == KeyEvent.VK_UP ){
             up.toggle( pressed );
             
         }
         
-        if( ke.getKeyCode() == KeyEvent.VK_S || ke.getKeyCode() == KeyEvent.VK_DOWN ){
+        if( ke.getKeyCode() == KeyEvent.VK_DOWN ){
             down.toggle( pressed );
         }
         
-        if( ke.getKeyCode() == KeyEvent.VK_A || ke.getKeyCode() == KeyEvent.VK_LEFT ){
+        if( ke.getKeyCode() == KeyEvent.VK_LEFT ){
             left.toggle( pressed );
         }
         
-        if( ke.getKeyCode() == KeyEvent.VK_D || ke.getKeyCode() == KeyEvent.VK_RIGHT ){
+        if( ke.getKeyCode() == KeyEvent.VK_RIGHT ){
             right.toggle( pressed );
         }
         
         if( ke.getKeyCode() == KeyEvent.VK_M ){
             menu.toggle( pressed );
-        }
-        
-        if( ke.getKeyCode() == KeyEvent.VK_ESCAPE ){
-            esc.toggle( pressed );
         }
         
         if( ke.getKeyCode() == KeyEvent.VK_Z ){
