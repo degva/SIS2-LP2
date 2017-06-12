@@ -1,6 +1,7 @@
 package com.grupox.pokemonv.controller;
 
 import com.grupox.pokemonv.model.SpriteSheet;
+import com.grupox.pokemonv.model.Tile;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -33,14 +34,34 @@ public abstract class Menu {
     /* Methods */
     public abstract void tick();
     
-    // No need to pass where to draw (final variables defined at the start will calculate the final position)
-    public abstract void render( Graphics2D g );
+    /**
+     * Draws the menu items inside the border. Its width should be approximately as the one stated in getWithInTiles
+     */
+    protected abstract void drawMenuItems( Graphics2D g );
     
-    protected abstract int getWidthInTiles();
+    /**
+     * Gets the length, in characters, of the longest row
+     */
+    protected abstract int getMaxLen();
     
-    protected abstract int calculateLeftOffset();
+    /**
+     * Gets the number of rows.
+     */
+    protected abstract int getMaxRows();
     
-    // Returns the index
+    /**
+     * No need to pass where to draw (final variables defined at the start will calculate the final position)
+     * DrawBorders will only work if getWidthInTiles is implemented properly. drawMenuItems should span exactly 'getWidthInTiles' tiles
+     */
+    public void render( Graphics2D g ){
+        drawBorders( g );
+        
+        drawMenuItems( g );
+    }
+    
+    /**
+     * Adds an item and returns its index
+     */
     public int addItem( String description ){
         items.add( new MenuItem( description ) );
         if(selectedIndex == -1){
@@ -69,16 +90,59 @@ public abstract class Menu {
         borders[8] = SpriteSheet.getInstance().getSubImage(17, 24);
     }
     
-    // Gets the length of the menuItem's longest description
-    protected int getMaxLen(){
-        int maxLen = 0;
-        for( int i = 0; i < items.size(); i++ ){
-            if( items.get( i ).description.length() > maxLen ){
-                maxLen = items.get( i ).description.length();
-            }
+    private void drawBorders( Graphics2D g ){
+        
+        /* Draw top border */
+        // Left
+        g.drawImage( borders[0], leftOffset, topOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
+        
+        // Middle
+        for( int i = 0; i < widthInTiles ; i++ ){
+            g.drawImage( borders[1], leftOffset + ( 1 + i ) * Tile.spriteWidthOut, topOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
         }
-        return maxLen;
+        
+        // Right
+        g.drawImage( borders[2], leftOffset + ( 1 + widthInTiles ) * Tile.spriteWidthOut, topOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
+        
+        /* Draw body */
+        int localTopOffset;
+        for(int i = 0; i < getMaxRows(); i++ ){
+            localTopOffset = topOffset +  (1 + i ) * Tile.spriteHeightOut;
+            // Left
+            g.drawImage( borders[3], leftOffset, localTopOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
+            
+            // Middle
+            g.drawImage( borders[4], leftOffset + Tile.spriteWidthOut, localTopOffset, Tile.spriteWidthOut * widthInTiles, Tile.spriteHeightOut, null );
+            
+            // Right
+            g.drawImage( borders[5], leftOffset + Tile.spriteWidthOut * ( widthInTiles + 1 ), localTopOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
+        }
+        
+        /* Draw bottom */
+        // Left
+        localTopOffset = topOffset + ( 1 + getMaxRows() ) * Tile.spriteHeightOut;
+        g.drawImage( borders[6], leftOffset, localTopOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
+        
+        // Middle
+        for( int i = 0; i < widthInTiles ; i++ ){
+            g.drawImage( borders[7], leftOffset + ( 1 + i ) * Tile.spriteWidthOut, localTopOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
+        }
+        
+        // Right
+        g.drawImage( borders[8], leftOffset + ( 1 + widthInTiles ) * Tile.spriteWidthOut, localTopOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
     }
+    
+    /**
+     * Gets the number of tiles needed to cover the width, not considering the left and right border.
+     */
+    private int getWidthInTiles(){
+        return (int)Math.ceil( 1.0 * getMaxLen() * Font.fontWidthOut / Tile.spriteWidthOut);    // Ceil or floor
+
+    }
+    
+    private int calculateLeftOffset(){
+        return Game.WIDTH - rightOffset - ( 2 + widthInTiles ) * Tile.spriteWidthOut;
+    }    
     
     /* Getters & Setters */
     public int getSelectedIndex() {

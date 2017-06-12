@@ -14,7 +14,7 @@ public class MapManager {
     private User user;
     private InputHandler input;
     
-    private Menu menu;
+    private MapMenu menu;
     private State state;
     
     /* Constructors */

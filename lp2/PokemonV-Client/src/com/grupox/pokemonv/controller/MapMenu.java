@@ -3,7 +3,7 @@ package com.grupox.pokemonv.controller;
 import com.grupox.pokemonv.model.Tile;
 
 public class MapMenu extends SingleColumnMenu{
-    private final int pokemonIndex, bagIndex, closeIndex;
+    private final int pokemonIndex, bagIndex, closeIndex;   // Variables to hold MenuItems indexs
     private MapManager mapManager;  // Needed to change state when "Close" option is selected
     
     public MapMenu(InputHandler input, int topOffset, int rightOffset, MapManager mapManager ) {
