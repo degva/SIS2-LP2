@@ -4,11 +4,12 @@ import com.grupox.pokemonv.model.SpriteSheet;
 import com.grupox.pokemonv.model.Tile;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Menu {
     /* Attributes */
     private InputHandler input;
-    private MenuItem[] items;
+    private ArrayList<MenuItem> items;
     private int selectedIndex;
     private BufferedImage[] borders;
     
@@ -21,6 +22,41 @@ public class Menu {
         this.input = input;
         
         // Boards
+        loadBorders();
+        
+        // Menu items
+        items = new ArrayList<>();
+        items.add( new MenuItem( "Pokemons" ) );
+        items.add( new MenuItem( "Bag" ) );
+        items.add( new MenuItem( "Exit" ) );
+        items.get( 0 ).isSelected = true;
+        
+        selectedIndex = 0;
+        
+        calculateLeftOffset();
+    }
+    
+    /* Methods */
+    public void tick(){
+        if ( input.action.isFirstPressed ){
+            // @TODO
+        }else if ( input.up.isFirstPressed && selectedIndex > 0){
+            items.get( selectedIndex-- ).isSelected = false;
+            items.get( selectedIndex ).isSelected = true;
+        }else if ( input.down.isFirstPressed && selectedIndex < items.size() - 1){
+            items.get( selectedIndex++ ).isSelected = false;
+            items.get( selectedIndex ).isSelected = true;
+        }
+    }
+    
+    // No need to pass where to draw (final variables defined at the start will calculate the final position)
+    public void render( Graphics2D g ){
+        drawBorders( g );
+
+        drawMenuItems( g );
+    }
+    
+    private void loadBorders(){
         borders = new BufferedImage[9];
         borders[0] = SpriteSheet.getInstance().getSubImage(15, 22);
         borders[1] = SpriteSheet.getInstance().getSubImage(16, 22);
@@ -33,38 +69,6 @@ public class Menu {
         borders[6] = SpriteSheet.getInstance().getSubImage(15, 24);
         borders[7] = SpriteSheet.getInstance().getSubImage(16, 24);
         borders[8] = SpriteSheet.getInstance().getSubImage(17, 24);
-        
-        
-        // Menu items
-        items = new MenuItem[ 3 ];
-        items[0] = new MenuItem( "Pokemons" );
-        items[1] = new MenuItem( "Bag" );
-        items[2] = new MenuItem( "Exit" );
-        items[0].isSelected = true;
-        
-        selectedIndex = 0;
-        
-        calculateLeftOffset();
-    }
-    
-    /* Methods */
-    public void tick(){
-        if ( input.action.isFirstPressed ){
-            // @TODO
-        }else if ( input.up.isFirstPressed && selectedIndex > 0){
-            items[selectedIndex--].isSelected = false;
-            items[selectedIndex].isSelected = true;
-        }else if ( input.down.isFirstPressed && selectedIndex < items.length - 1){
-            items[selectedIndex++].isSelected = false;
-            items[selectedIndex].isSelected = true;
-        }
-    }
-    
-    // No need to pass where to draw (final variables defined at the start will calculate the final position)
-    public void render( Graphics2D g ){
-        drawBorders( g );
-
-        drawMenuItems( g );
     }
     
     private void drawBorders( Graphics2D g  ){
@@ -84,7 +88,7 @@ public class Menu {
         
         /* Draw body */
         int localTopOffset;
-        for(int i = 0; i < items.length; i++ ){
+        for(int i = 0; i < items.size(); i++ ){
             localTopOffset = topOffset +  (1 + i ) * Tile.spriteHeightOut;
             // Left
             g.drawImage( borders[3], leftOffset, localTopOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
@@ -98,7 +102,7 @@ public class Menu {
         
         /* Draw bottom */
         // Left
-        localTopOffset = topOffset + ( 1 + items.length ) * Tile.spriteHeightOut;
+        localTopOffset = topOffset + ( 1 + items.size() ) * Tile.spriteHeightOut;
         g.drawImage( borders[6], leftOffset, localTopOffset, Tile.spriteWidthOut, Tile.spriteHeightOut, null );
         
         // Middle
@@ -112,8 +116,8 @@ public class Menu {
     
     private void drawMenuItems( Graphics2D g ){
         int x = leftOffset + Tile.spriteWidthOut, y = topOffset + Tile.spriteHeightOut;
-        for( int i = 0; i < items.length; i++, y += Tile.spriteHeightOut ){
-            items[i].render( g, x, y );
+        for( int i = 0; i < items.size(); i++, y += Tile.spriteHeightOut ){
+            items.get( i ).render( g, x, y );
         }
     }
     
@@ -126,8 +130,8 @@ public class Menu {
     // Gets the length of the menuItem's longest description
     private int getMaxLen(){
         int maxLen = -1;
-        for( int i = 0; i < items.length; i++ ){
-            if( items[i].description.length() > maxLen ) maxLen = items[i].description.length();
+        for( int i = 0; i < items.size(); i++ ){
+            if( items.get( i ).description.length() > maxLen ) maxLen = items.get( i ).description.length();
         }
         return maxLen;
     }
@@ -147,11 +151,13 @@ public class Menu {
     public void setSelectedIndex( int selectedIndex ) {
         this.selectedIndex = selectedIndex;
     }
-    public MenuItem[] getItems() {
+
+    public ArrayList<MenuItem> getItems() {
         return items;
     }
-    public void setItems( MenuItem[] items ) {
+    public void setItems( ArrayList<MenuItem> items ) {
         this.items = items;
     }
+    
     
 }

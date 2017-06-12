@@ -38,8 +38,8 @@ public class MapManager {
         // Listen to input and set the inner state
         if( input.menu.isFirstPressed && state == State.MOVING ){
             // Set first element as selected
-            menu.getItems()[menu.getSelectedIndex()].isSelected = false;
-            menu.getItems()[0].isSelected = true;
+            menu.getItems().get( menu.getSelectedIndex() ).isSelected = false;
+            menu.getItems().get( 0 ).isSelected = true;
             menu.setSelectedIndex( 0 );
             
             state = State.MENU;
