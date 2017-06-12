@@ -28,7 +28,7 @@ public class MapManager {
         tile.setUser( user );
         user.setTile( tile );
         
-        menu = new Menu( input );
+        menu = new MapMenu( input, 20, Game.WIDTH / 80, this );
         state = State.MOVING;
     }
     
@@ -36,14 +36,14 @@ public class MapManager {
     public void tick(){
         
         // Listen to input and set the inner state
-        if( input.menu.isFirstPressed && state == State.MOVING ){
+        if( state == State.MOVING && input.menu.isFirstPressed ){
             // Set first element as selected
             menu.getItems().get( menu.getSelectedIndex() ).isSelected = false;
             menu.getItems().get( 0 ).isSelected = true;
             menu.setSelectedIndex( 0 );
             
             state = State.MENU;
-        }else if( ( input.back.isFirstPressed || input.menu.isFirstPressed) && state == State.MENU ){
+        }else if( state == State.MENU && ( input.back.isFirstPressed || input.menu.isFirstPressed) ){
             state = State.MOVING;
         }
         
@@ -65,4 +65,14 @@ public class MapManager {
             menu.render(g);
         }
     }
+    
+    /* Getters && Setters */
+
+    public State getState() {
+        return state;
+    }
+    public void setState( State state ) {
+        this.state = state;
+    }
+    
 }
