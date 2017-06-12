@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 
 public class MenuItem {
     /* Attributes */
-    public String description;
     public boolean isSelected;
+    private String description;
 
     /* Constructors */
     public MenuItem( String description ){
@@ -22,4 +22,14 @@ public class MenuItem {
             Font.getInstance().drawString(" " + description, g, x, y);
         }
     }
+    
+    public int length(){
+        return 1 + description.length();
+    }
+    
+    /* Getters && Setters */
+    public String getDescription() {
+        return description;
+    }
+    
 }

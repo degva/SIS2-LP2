@@ -7,7 +7,6 @@ import com.grupox.pokemonv.controller.manager.MapManager;
 import com.grupox.pokemonv.controller.menu.SingleColumnMenu;
 
 public class MapMenu extends SingleColumnMenu{
-    private final int pokemonIndex, bagIndex, closeIndex;   // Variables to hold MenuItems indexs
     private Game game;  // Needed to change state when an option is selected
     
     public MapMenu(InputHandler input, int topOffset, int rightOffset, Game game ) {
@@ -15,23 +14,23 @@ public class MapMenu extends SingleColumnMenu{
         
         this.game = game;
         
-        pokemonIndex = this.addItem("Pokemon");
-        bagIndex = this.addItem("Bag");
-        closeIndex = this.addItem("Close");
+        this.addItem("Pokemon");
+        this.addItem("Bag");
+        this.addItem("Close");
     }
     
     @Override
     public void tick(){
         super.tick();
         
-        if ( input.action.isFirstPressed && items.size() != 0){
-            if ( selectedIndex == pokemonIndex ){
+        if ( input.action.isFirstPressed && !items.isEmpty() ){
+            if ( items.get( selectedIndex ).getDescription().equals( "Pokemon" ) ){
                 // @TODO
-            }else if( selectedIndex == bagIndex ){
+            }else if( items.get( selectedIndex ).getDescription().equals( "Bag" ) ){
                 game.getBagManager().setState( BagManager.State.POKEBALLS );
                 game.getBagManager().getBagMenu().setSelectedItem( 0 );
                 game.setState( Game.State.BAG );
-            }else if( selectedIndex == closeIndex ){
+            }else if( items.get( selectedIndex ).getDescription().equals( "Close" ) ){
                 game.getMapManager().setState( MapManager.State.MOVING );
             }
         }

@@ -57,12 +57,12 @@ public class DoubleColumnMenu extends Menu{
         for( int i = 0; i < items.size(); i++ ){
             // If 'i' is pair, it goes to the left column max
             if ( ( i & 1 ) == 0 ){
-                if( items.get( i ).description.length() > leftColMaxLen ){
-                    leftColMaxLen = items.get( i ).description.length();
+                if( items.get( i ).length() > leftColMaxLen ){
+                    leftColMaxLen = items.get( i ).length();
                 }
             }else{
-                if( items.get( i ).description.length() > rightColMaxLen ){
-                    rightColMaxLen = items.get( i ).description.length();
+                if( items.get( i ).length() > rightColMaxLen ){
+                    rightColMaxLen = items.get( i ).length();
                 }
             }   
         }

@@ -37,8 +37,8 @@ public abstract class SingleColumnMenu extends Menu{
     protected int getMaxLen(){
         int maxLen = 0;
         for( int i = 0; i < items.size(); i++ ){
-            if( items.get( i ).description.length() > maxLen ){
-                maxLen = items.get( i ).description.length();
+            if( items.get( i ).length() > maxLen ){
+                maxLen = items.get( i ).length();
             }
         }
         return maxLen;

@@ -151,7 +151,9 @@ public abstract class Menu {
      * Sets the selectedIndex item to selected. It also deselects the old selectedIndex item.
      */
     public void setSelectedItem( int selectedIndex ) {
-        items.get( this.selectedIndex ).isSelected = false;
+        if( this.selectedIndex != -1){
+            items.get( this.selectedIndex ).isSelected = false;
+        }
         items.get( selectedIndex ).isSelected = true;
         this.selectedIndex = selectedIndex;
     }    

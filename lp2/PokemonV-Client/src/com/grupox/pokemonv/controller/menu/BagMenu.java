@@ -10,8 +10,6 @@ public class BagMenu extends SingleColumnMenu {
     private Game game;
     private Player player;
     
-    private final int closeIndex;
-    
     /* Constructors */
     public BagMenu( Player player, int topOffset, int rightOffset, Game game ) {
         super( player.getInput(), topOffset, rightOffset );
@@ -20,15 +18,15 @@ public class BagMenu extends SingleColumnMenu {
         this.game = game;
         
         this.addItem( "Pokeball" );
-        closeIndex = this.addItem( "Close" );
+        this.addItem( "Close" );
     }
     
     /* Methods */
     public void tick(){
         super.tick();
         
-        if( input.action.isFirstPressed && this.selectedIndex > -1){
-            if( selectedIndex == closeIndex){
+        if( input.action.isFirstPressed && !items.isEmpty() ){
+            if( items.get( selectedIndex ).getDescription().equals( "Close" ) ){
                 game.setState( Game.State.MAP );
             }
         }
