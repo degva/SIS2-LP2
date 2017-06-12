@@ -1,5 +1,7 @@
-package com.grupox.pokemonv.controller;
+package com.grupox.pokemonv.controller.menu;
 
+import com.grupox.pokemonv.controller.Game;
+import com.grupox.pokemonv.controller.menu.SingleColumnMenu;
 import com.grupox.pokemonv.model.Player;
 
 public class BagMenu extends SingleColumnMenu {

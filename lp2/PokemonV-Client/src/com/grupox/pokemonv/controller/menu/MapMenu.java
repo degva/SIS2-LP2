@@ -1,4 +1,10 @@
-package com.grupox.pokemonv.controller;
+package com.grupox.pokemonv.controller.menu;
+
+import com.grupox.pokemonv.controller.manager.BagManager;
+import com.grupox.pokemonv.controller.Game;
+import com.grupox.pokemonv.controller.InputHandler;
+import com.grupox.pokemonv.controller.manager.MapManager;
+import com.grupox.pokemonv.controller.menu.SingleColumnMenu;
 
 public class MapMenu extends SingleColumnMenu{
     private final int pokemonIndex, bagIndex, closeIndex;   // Variables to hold MenuItems indexs

@@ -1,5 +1,8 @@
-package com.grupox.pokemonv.controller;
+package com.grupox.pokemonv.controller.manager;
 
+import com.grupox.pokemonv.controller.Game;
+import com.grupox.pokemonv.controller.InputHandler;
+import com.grupox.pokemonv.controller.menu.MapMenu;
 import com.grupox.pokemonv.model.Map;
 import com.grupox.pokemonv.model.Tile;
 import com.grupox.pokemonv.model.User;

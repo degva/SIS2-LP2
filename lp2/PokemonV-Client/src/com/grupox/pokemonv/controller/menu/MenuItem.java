@@ -1,5 +1,6 @@
-package com.grupox.pokemonv.controller;
+package com.grupox.pokemonv.controller.menu;
 
+import com.grupox.pokemonv.controller.Font;
 import java.awt.Graphics2D;
 
 public class MenuItem {

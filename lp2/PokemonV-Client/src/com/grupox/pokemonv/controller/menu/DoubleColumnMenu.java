@@ -1,5 +1,8 @@
-package com.grupox.pokemonv.controller;
+package com.grupox.pokemonv.controller.menu;
 
+import com.grupox.pokemonv.controller.Font;
+import com.grupox.pokemonv.controller.InputHandler;
+import com.grupox.pokemonv.controller.menu.Menu;
 import com.grupox.pokemonv.model.Tile;
 import java.awt.Graphics2D;
 

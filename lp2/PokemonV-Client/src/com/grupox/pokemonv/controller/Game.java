@@ -1,5 +1,7 @@
 package com.grupox.pokemonv.controller;
 
+import com.grupox.pokemonv.controller.manager.BagManager;
+import com.grupox.pokemonv.controller.manager.MapManager;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.User;
 import java.awt.Canvas;
