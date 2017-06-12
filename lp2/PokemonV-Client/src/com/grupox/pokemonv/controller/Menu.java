@@ -142,16 +142,18 @@ public abstract class Menu {
     
     private int calculateLeftOffset(){
         return Game.WIDTH - rightOffset - ( 2 + widthInTiles ) * Tile.spriteWidthOut;
+    }
+
+    /**
+     * Sets the selectedIndex item to selected. It also deselects the old selectedIndex item.
+     */
+    public void setSelectedItem( int selectedIndex ) {
+        items.get( this.selectedIndex ).isSelected = false;
+        items.get( selectedIndex ).isSelected = true;
+        this.selectedIndex = selectedIndex;
     }    
     
     /* Getters & Setters */
-    public int getSelectedIndex() {
-        return selectedIndex;
-    }
-    public void setSelectedIndex( int selectedIndex ) {
-        this.selectedIndex = selectedIndex;
-    }
-
     public ArrayList<MenuItem> getItems() {
         return items;
     }

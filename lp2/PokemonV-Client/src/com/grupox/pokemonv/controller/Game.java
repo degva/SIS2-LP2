@@ -1,25 +1,17 @@
 package com.grupox.pokemonv.controller;
 
-import com.grupox.pokemonv.model.Map;
 import com.grupox.pokemonv.model.Player;
-import com.grupox.pokemonv.model.SpriteSheet;
-import com.grupox.pokemonv.model.Tile;
 import com.grupox.pokemonv.model.User;
-import com.grupox.pokemonv.view.Battle;
-import com.grupox.pokemonv.view.Login;
-import com.grupox.pokemonv.view.Pokemons;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable{
     /* Enum declaration */
-    public enum State { MAP, BATTLE, POKEMON_BELT };
+    public enum State { MAP, BATTLE, POKEMON_BELT, BAG };
     
     /* Attributes */
     private boolean running = false;
@@ -37,8 +29,9 @@ public class Game extends Canvas implements Runnable{
     public final double TIME_PER_FRAME = 1000000000/FPS;    // 1 second as nanosecond / 60 frames
     
     private MapManager mapManager;
+    private BagManager bagManager;
     private User user;
-    private static State state;
+    private State state;
     
     /* Constructors */
     public Game(){
@@ -54,7 +47,8 @@ public class Game extends Canvas implements Runnable{
         
         // Initialization
         user = new Player( input );
-        mapManager = new MapManager( user );
+        mapManager = new MapManager( user, this );
+        bagManager = new BagManager( (Player)user, this );
         state = State.MAP;
     }
     
@@ -139,16 +133,15 @@ public class Game extends Canvas implements Runnable{
             case POKEMON_BELT:
                 // @TODO
                 break;
+            case BAG:
+                bagManager.tick();
+                break;
         }
         
     }
     
     private void render(){
         Graphics2D g = ( Graphics2D )strategy.getDrawGraphics();
-        
-        // Print background
-        g.setColor( Color.black );
-        g.fillRect( 0, 0, WIDTH, HEIGHT );
           
         // Render screen according to state
         switch( state ){
@@ -161,6 +154,10 @@ public class Game extends Canvas implements Runnable{
             case POKEMON_BELT:
                 // @TODO
                 break;
+            case BAG:
+                mapManager.render( g );
+                bagManager.render( g );
+                break;
         }
         
         // Finally, show the contents in g and destroy it
@@ -169,13 +166,20 @@ public class Game extends Canvas implements Runnable{
     }
 
     /* Getters & Setters */
-    public static State getState() {
+    public State getState() {
         return state;
     }
-    public static void setState(State newState) {
+    public void setState( State newState ) {
         state = newState;
     }
-    
+
+    public MapManager getMapManager() {
+        return mapManager;
+    }
+
+    public BagManager getBagManager() {
+        return bagManager;
+    }
     
     
     public static void main( String args[] ){
