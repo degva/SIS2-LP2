@@ -20,13 +20,13 @@ public class PokemonBeltManager {
     private InputHandler input; //
     private PokemonBelt pokemonBelt;
     
-    private Menu menu;
+    //private Menu menu;
     private int ind;
     private boolean presionado= false;
     /*constructor*/
     public PokemonBeltManager(User user){
         input = user.getInput();
-        menu = new Menu( input );
+        //menu = new Menu( input );
         //pokemonBelt = new PokemonBelt(map);
         pokemonBelt = new PokemonBelt();
         ind =0;

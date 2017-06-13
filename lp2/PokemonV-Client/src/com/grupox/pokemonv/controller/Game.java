@@ -16,10 +16,12 @@ import java.awt.image.BufferStrategy;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import com.grupox.pokemonv.controller.manager.*;
+
 
 public class Game extends Canvas implements Runnable{
     /* Enum declaration */
-    public enum State { MAP, BATTLE, POKEMON_BELT };
+    public enum State { MAP, BATTLE, POKEMON_BELT, BAG };
     
     /* Attributes */
     private boolean running = false;
@@ -37,6 +39,7 @@ public class Game extends Canvas implements Runnable{
     public final double TIME_PER_FRAME = 1000000000/FPS;    // 1 second as nanosecond / 60 frames
     
     private MapManager mapManager;
+    private BagManager bagManager;
     private User user;
     private static State state;
     private PokemonBeltManager pokemonBeltManager;
@@ -54,10 +57,11 @@ public class Game extends Canvas implements Runnable{
         
         // Initialization
         user = new Player( input );
-        mapManager = new MapManager( user );
+        mapManager = new MapManager( user,this );
         pokemonBeltManager = new PokemonBeltManager(user);
-        //state = State.MAP;
-        state = State.POKEMON_BELT;
+        bagManager = new BagManager( (Player)user, this );
+        state = State.MAP;
+        //state = State.POKEMON_BELT;
     }
     
     /* Methods */
@@ -142,6 +146,9 @@ public class Game extends Canvas implements Runnable{
                 // @TODO yop
                 pokemonBeltManager.tick();
                 break;
+            case BAG:
+                bagManager.tick();
+                break;
         }
     }
     
@@ -164,6 +171,10 @@ public class Game extends Canvas implements Runnable{
                 // @TODO
                 pokemonBeltManager.render(g);
                 break;
+            case BAG:
+                mapManager.render( g );
+                bagManager.render( g );
+                break;
         }
         
         // Finally, show the contents in g and destroy it
@@ -178,8 +189,13 @@ public class Game extends Canvas implements Runnable{
     public static void setState(State newState) {
         state = newState;
     }
+    public MapManager getMapManager() {
+        return mapManager;
+    }
     
-    
+    public BagManager getBagManager() {
+        return bagManager;
+    }
     
     public static void main( String args[] ){
 //        new Login().setVisible( true );
