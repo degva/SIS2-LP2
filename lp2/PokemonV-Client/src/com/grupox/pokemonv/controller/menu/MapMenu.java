@@ -26,7 +26,10 @@ public class MapMenu extends SingleColumnMenu{
         
         if ( input.action.isFirstPressed && items.size() != 0){
             if ( selectedIndex == pokemonIndex ){
-                // @TODO
+                // @TODO aqui entra lo mio!
+                game.setState(Game.State.POKEMON_BELT);
+                
+                
             }else if( selectedIndex == bagIndex ){
                 game.getBagManager().setState( BagManager.State.POKEBALLS );
                 game.getBagManager().getBagMenu().setSelectedItem( 0 );

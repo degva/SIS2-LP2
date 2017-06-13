@@ -39,7 +39,7 @@ public class DoubleColumnMenu extends Menu{
     
     @Override
     protected void drawMenuItems( Graphics2D g ) {
-        int x1 = leftOffset + Tile.spriteWidthOut, x2 = x1 + (space + leftColumnMaxLen) * Font.fontWidthOut;
+        int x1 = leftOffset + Tile.spriteWidthOut, x2 = x1 + (space + leftColumnMaxLen) * Font.getFontWidthOut();
         int y = topOffset + Tile.spriteHeightOut;
         for( int i = 0; i < items.size(); i++, y += Tile.spriteHeightOut ){
             items.get( i ).render( g, x1, y );  // Left column

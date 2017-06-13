@@ -58,10 +58,9 @@ public class Game extends Canvas implements Runnable{
         // Initialization
         user = new Player( input );
         mapManager = new MapManager( user,this );
-        pokemonBeltManager = new PokemonBeltManager(user);
+        pokemonBeltManager = new PokemonBeltManager(user,this);
         bagManager = new BagManager( (Player)user, this );
         state = State.MAP;
-        //state = State.POKEMON_BELT;
     }
     
     /* Methods */
@@ -191,6 +190,9 @@ public class Game extends Canvas implements Runnable{
     }
     public MapManager getMapManager() {
         return mapManager;
+    }
+    public PokemonBeltManager getPokemonBeltManager() {
+        return pokemonBeltManager;
     }
     
     public BagManager getBagManager() {

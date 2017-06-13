@@ -139,7 +139,7 @@ public abstract class Menu {
      * Gets the number of tiles needed to cover the width, not considering the left and right border.
      */
     private int getWidthInTiles(){
-        return (int)Math.ceil( 1.0 * getMaxLen() * Font.fontWidthOut / Tile.spriteWidthOut);    // Ceil or floor
+        return (int)Math.ceil( 1.0 * getMaxLen() * Font.getFontWidthOut() / Tile.spriteWidthOut);    // Ceil or floor
 
     }
     

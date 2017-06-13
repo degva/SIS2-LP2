@@ -19,17 +19,19 @@ public class PokemonBeltManager {
     private User user; //
     private InputHandler input; //
     private PokemonBelt pokemonBelt;
+    private Game game;
+    private boolean menuSalida = false;
+    
     
     //private Menu menu;
     private int ind;
     private boolean presionado= false;
     /*constructor*/
-    public PokemonBeltManager(User user){
+    public PokemonBeltManager(User user, Game game){
         input = user.getInput();
-        //menu = new Menu( input );
-        //pokemonBelt = new PokemonBelt(map);
         pokemonBelt = new PokemonBelt();
         ind =0;
+        this.game = game;
     }
     
     /*method*/
@@ -53,10 +55,18 @@ public class PokemonBeltManager {
             presionado = true;
         }
         
-        if(input.back.isPressed){
-            System.out.println("action is presioned");
+        if(input.back.isPressed && presionado){
+            System.out.println("back is presioned");
             presionado = false;
         }
+        else if(input.back.isFirstPressed && !presionado){
+            System.out.println("salir");
+            //falta menu de salir
+            menuSalida = true;
+            
+            game.setState( Game.State.BAG );
+        }
+        
         //System.out.println(pokemonBelt.tamanoLista());//4
     }
     

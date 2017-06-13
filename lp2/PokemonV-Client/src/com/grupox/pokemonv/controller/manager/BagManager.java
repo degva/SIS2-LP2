@@ -18,9 +18,7 @@ public class BagManager {
     /* Constructors */
     public BagManager( Player player, Game game ){
         state = State.POKEBALLS;
-        
         this.player = player;
-        
         bagMenu = new BagMenu(player, 50, Game.WIDTH / 8, game);
     }
     
@@ -48,6 +46,5 @@ public class BagManager {
     public void setBagMenu( BagMenu bagMenu ) {
         this.bagMenu = bagMenu;
     }
-    
     
 }

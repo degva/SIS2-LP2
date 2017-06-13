@@ -6,6 +6,10 @@
 package com.grupox.pokemonv.controller;
 import static com.grupox.pokemonv.controller.Game.HEIGHT;
 import static com.grupox.pokemonv.controller.Game.WIDTH;
+//añadi esto!
+//import static com.grupox.pokemonv.controller.Font.fontWidthOut;
+//import static com.grupox.pokemonv.controller.Font.fontHeightOut;
+
 import com.grupox.pokemonv.model.Map;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.SpriteSheet;
@@ -37,8 +41,8 @@ public class PokemonBelt {
     
     private int altura=2;//alejandro me matara por el español ... tengo sueño!
     
-    private int spriteWidthOut = 35;
-    private int spriteHeightOut = 35;
+    private int spriteWidthOut = 23;//con esto aparecen los 6
+    private int spriteHeightOut = 23;
     //private int indice;
     
     public PokemonBelt(){
@@ -99,30 +103,32 @@ public class PokemonBelt {
     }
     
     private void drawInfo(Graphics2D g, int ind){
-        int x = leftOffset + spriteWidthOut, y = topOffset +spriteHeightOut*3/4;
+        int x = leftOffset + spriteWidthOut+80, y = topOffset +spriteHeightOut*3/4;//80+
         Pokemon pok = listaPokemones.get(ind);
         pok.isSelected = true;
         listaPokemones.set(ind, pok);
         int fin,ini;
-        if(listaPokemones.size() <4){
+        if(listaPokemones.size() <6){
             ini = 0;
             fin = listaPokemones.size();
         }
         else{
-            if(ind< 4) {
+            if(ind< 6) {
                 ini = 0;
-                fin = 4;
+                fin = 6;
             }
             else{
                 fin = ind+1;
-                ini = fin-4;
+                ini = fin-6;
             }
         }
-        for( int i = ini; i < fin; i++, y += spriteHeightOut+ 3*spriteWidthOut+1 ){ //hard codeo total XD
+        for( int i = ini; i < fin; i++, y += spriteHeightOut+ 3*spriteWidthOut+1 ){ //3+
             pok = listaPokemones.get(i);
-            if(pok.isSelected) Font.getInstance().drawString(">>", g, x-2*spriteWidthOut, y);
+            int fontAnt = Font.getFontHeightOut();
+            Font.setFontHeightOut(fontAnt - 20);
+            if(pok.isSelected) Font.getInstance().drawString(">>", g, x-6*spriteWidthOut, y+10);
             Font.getInstance().drawString(pok.getName(), g, x, y);
-            Font.getInstance().drawString(Double.toString(pok.getLife()),g, x, y+ spriteHeightOut + spriteHeightOut/2 );
+            Font.getInstance().drawString("HP:"+Double.toString(pok.getLife()),g, x, y+ spriteHeightOut + spriteHeightOut/2 );
             
             BufferedImage spriteSheet= new BufferedImage(96, 96, BufferedImage.TYPE_INT_RGB);
             String route = "res/pokemons/"+pok.getId()+".png";
@@ -131,8 +137,9 @@ public class PokemonBelt {
             } catch ( IOException ex ) {
                 Logger.getLogger( SpriteSheet.class.getName() ).log( Level.SEVERE, null, ex );
             }
-            g.drawImage(spriteSheet,600,y-38, 5*spriteWidthOut, 5*spriteHeightOut, null );
+            g.drawImage(spriteSheet,430,y-38, 6*spriteWidthOut, 6*spriteHeightOut, null );
             
+            Font.setFontHeightOut(fontAnt);
             pok.isSelected = false;
             listaPokemones.set(i, pok);
         }
@@ -154,21 +161,21 @@ public class PokemonBelt {
     
     
     private void drawBorders( Graphics2D g,int ind, boolean presionado){
-        int widthInTiles = getWidthInTiles();
+        int widthInTiles = getWidthInTiles()-2;//ver esto para el ancho!-2
         int suma = 4*spriteWidthOut+1;
         int fin,ini;
-        if(listaPokemones.size() <4){
+        if(listaPokemones.size() <6){//para que salgan los 6 pokemones en la pantalla
             ini = 0;
             fin = listaPokemones.size();
         }
         else{
-            if(ind< 4) {
+            if(ind< 6) {
                 ini = 0;
-                fin = 4;
+                fin = 6;
             }
             else{
                 fin = ind+1;
-                ini = fin-4;
+                ini = fin-6;
             }
         }
         int a=0;
@@ -185,7 +192,7 @@ public class PokemonBelt {
         
     }
     
-    private void draw(Graphics2D g, int suma,int a,int widthInTiles){
+    public void draw(Graphics2D g, int suma,int a,int widthInTiles){
         /* Draw top border */
             // Left
             g.drawImage( borders[0], leftOffset, topOffset+ suma*a, spriteWidthOut, spriteHeightOut, null );
@@ -229,9 +236,9 @@ public class PokemonBelt {
     
     
     private void drawInformacionCompleta(Graphics2D g, int ind){
-        int widthInTiles = 8;
-        leftOffset = 10;
-        altura = 14;
+        int widthInTiles = 13;
+        leftOffset = 50;
+        altura = 20;
         //topOffset = 10;
         draw(g, 0,0,widthInTiles);
         calculateLeftOffset();
@@ -254,16 +261,14 @@ public class PokemonBelt {
         } catch ( IOException ex ) {
             Logger.getLogger( SpriteSheet.class.getName() ).log( Level.SEVERE, null, ex );
         }
-        g.drawImage(spriteSheet,33,9*spriteWidthOut, 9*spriteWidthOut, 9*spriteHeightOut, null );
+        g.drawImage(spriteSheet,73,14*spriteWidthOut, 12*spriteWidthOut, 12*spriteHeightOut, null );
             
-        
-        
     }
     
     
     private int getWidthInTiles(){
         int maxLen = 20;//cambiando por defecto
-        return (int)Math.floor( 1.0 * maxLen * Font.fontWidthOut / spriteWidthOut);
+        return (int)Math.floor( 1.0 * maxLen * Font.getFontWidthOut() / spriteWidthOut);
     }
     private void calculateLeftOffset(){
         int widthInTiles = getWidthInTiles();
