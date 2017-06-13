@@ -18,10 +18,12 @@ public class BagMenu extends SingleColumnMenu {
         this.game = game;
         
         this.addItem( "Pokeball" );
+        this.addItem( "Potion");
         this.addItem( "Close" );
     }
     
     /* Methods */
+    @Override
     public void tick(){
         super.tick();
         
@@ -29,6 +31,8 @@ public class BagMenu extends SingleColumnMenu {
             if( items.get( selectedIndex ).getDescription().equals( "Close" ) ){
                 game.setState( Game.State.MAP );
             }
+        }else if ( input.back.isFirstPressed ){
+            game.setState( Game.State.MAP );
         }
     }
 }

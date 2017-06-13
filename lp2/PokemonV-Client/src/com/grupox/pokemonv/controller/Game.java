@@ -5,7 +5,6 @@ import com.grupox.pokemonv.controller.manager.MapManager;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.User;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;

@@ -3,7 +3,6 @@ package com.grupox.pokemonv.controller.manager;
 import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.menu.BagMenu;
 import com.grupox.pokemonv.model.Player;
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class BagManager {
@@ -34,7 +33,6 @@ public class BagManager {
     }
     
     /* Getters && Setters */
-
     public State getState() {
         return state;
     }

@@ -3,8 +3,6 @@ package com.grupox.pokemonv.model;
 // @TODO This class should have a render() method
 
 import com.grupox.pokemonv.controller.Game;
-import static com.grupox.pokemonv.controller.Game.HEIGHT;
-import static com.grupox.pokemonv.controller.Game.WIDTH;
 import java.awt.Graphics2D;
 
 public class Map {
@@ -81,8 +79,7 @@ public class Map {
         // Render only if in screen.
         int[] pos = getPosUser( user );
         int x = pos[0], y = pos[1]; // Asume that the user exists
-        //grid[x][y].render(g, x, y);
-        //x - i + TILES_IN_WIDTH/2
+        
         // Tiles from and to where to draw
         int xStart = Integer.max( 0, x - TILES_IN_WIDTH / 2 );
         int yStart = Integer.max( 0, y - TILES_IN_HEIGHT / 2 );
@@ -91,15 +88,7 @@ public class Map {
         
         for( int i = xStart; i < xEnd; i++ ){
             for( int j = yStart; j < yEnd; j++ ){
-//                if( i * Tile.spriteWidth < Game.WIDTH && j * Tile.spriteHeight < Game.HEIGHT ){
-//                    grid[i][j].render( g, i, j );
-//                }
-                //if( x - i < 0 || x + i >= TILES_IN_WIDTH || y - j < 0 || y + j >= TILES_IN_HEIGHT)
-                    //g.fillRect(Game.WIDTH - (x-i)*Tile.spriteWidth, Game.WIDTH - (x-i) * Tile.spriteHeight, Tile.spriteWidth, Tile.spriteHeight);
-                //else
-                    grid[i][j].render( g, TILES_IN_WIDTH / 2 - (x - i) , TILES_IN_HEIGHT / 2 - (y - j) );
-//                else
-//                    g.fillRect(i-x, y, WIDTH, HEIGHT);
+                grid[i][j].render( g, TILES_IN_WIDTH / 2 - (x - i) , TILES_IN_HEIGHT / 2 - (y - j) );
             }
         }
         

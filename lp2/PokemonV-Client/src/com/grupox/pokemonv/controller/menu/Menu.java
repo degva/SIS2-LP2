@@ -71,6 +71,7 @@ public abstract class Menu {
             selectedIndex = 0;
             items.get( selectedIndex ).isSelected = true;
         }
+        
         // Update menu widths
         widthInTiles = getWidthInTiles();
         leftOffset = calculateLeftOffset();
