@@ -5,6 +5,7 @@
  */
 package com.grupox.pokemonv.controller;
 
+import com.grupox.pokemonv.controller.menu.PokemonBeltMenu;
 import com.grupox.pokemonv.model.Map;
 import com.grupox.pokemonv.model.Tile;
 import com.grupox.pokemonv.model.User;
@@ -20,18 +21,21 @@ public class PokemonBeltManager {
     private InputHandler input; //
     private PokemonBelt pokemonBelt;
     private Game game;
-    private boolean menuSalida = false;
     
     
-    //private Menu menu;
+    private PokemonBeltMenu menu;
+    
     private int ind;
     private boolean presionado= false;
+    public static boolean presionadoF= false;
     /*constructor*/
     public PokemonBeltManager(User user, Game game){
         input = user.getInput();
         pokemonBelt = new PokemonBelt();
         ind =0;
         this.game = game;
+        
+        menu = new PokemonBeltMenu(input, 20, Game.WIDTH/80, game);
     }
     
     /*method*/
@@ -40,38 +44,36 @@ public class PokemonBeltManager {
         // Listen to input and set the inner state
         //vamos a cambiar esto :)
         
-        if( input.up.isFirstPressed && ind >0 ){
+        if( input.up.isFirstPressed && ind >0 && !presionadoF){
             ind--;
             System.out.println(ind);
             presionado = false;
-        }else if(input.down.isFirstPressed && ind < pokemonBelt.tamanoLista()-1){
+        }else if(input.down.isFirstPressed && ind < pokemonBelt.tamanoLista()-1 && !presionadoF){
             ind++;
             System.out.println(ind);
             presionado = false;
         }
         
-        if(input.action.isPressed){
+        if(input.action.isPressed && !presionadoF){
             System.out.println("action is presioned");
             presionado = true;
         }
         
-        if(input.back.isPressed && presionado){
+        if(input.back.isPressed && presionado ){
             System.out.println("back is presioned");
             presionado = false;
         }
-        else if(input.back.isFirstPressed && !presionado){
+        else if(input.back.isFirstPressed && !presionadoF){
             System.out.println("salir");
-            //falta menu de salir
-            menuSalida = true;
-            
-            game.setState( Game.State.BAG );
+            presionado = false;
+            presionadoF = true;
+            menu.setSelectedItem(0);
         }
-        
-        //System.out.println(pokemonBelt.tamanoLista());//4
+        if(presionadoF) menu.tick();
     }
     
     public void render(Graphics2D g){
         pokemonBelt.render(g,ind, presionado);
-        //presionado = false;
+        if(presionadoF) menu.render(g);
     }
 }
