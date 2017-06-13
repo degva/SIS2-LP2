@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable{
     private MapManager mapManager;
     private User user;
     private static State state;
-    
+    private PokemonBeltManager pokemonBeltManager;
     /* Constructors */
     public Game(){
         // Main loop
@@ -55,7 +55,9 @@ public class Game extends Canvas implements Runnable{
         // Initialization
         user = new Player( input );
         mapManager = new MapManager( user );
-        state = State.MAP;
+        pokemonBeltManager = new PokemonBeltManager(user);
+        //state = State.MAP;
+        state = State.POKEMON_BELT;
     }
     
     /* Methods */
@@ -137,10 +139,10 @@ public class Game extends Canvas implements Runnable{
                 // @TODO
                 break;
             case POKEMON_BELT:
-                // @TODO
+                // @TODO yop
+                pokemonBeltManager.tick();
                 break;
         }
-        
     }
     
     private void render(){
@@ -160,6 +162,7 @@ public class Game extends Canvas implements Runnable{
                 break;
             case POKEMON_BELT:
                 // @TODO
+                pokemonBeltManager.render(g);
                 break;
         }
         

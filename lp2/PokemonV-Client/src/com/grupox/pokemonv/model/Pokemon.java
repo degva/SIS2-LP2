@@ -11,7 +11,8 @@ public class Pokemon {
     public float life;
     public String name;
     public TypeP type;
-
+    public boolean isSelected;
+    
     /* Constructors */
     public Pokemon( int id, int attack_pts, int defense_pts, int life, String name, TypeP type ) {
         this.id = id;
@@ -20,6 +21,7 @@ public class Pokemon {
         this.life = life;
         this.name = name;
         this.type = type;
+        this.isSelected = false;
     }
 
     /* Getters & Setters */
