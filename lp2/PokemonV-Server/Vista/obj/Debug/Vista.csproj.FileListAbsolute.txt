@@ -1,0 +1,74 @@
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Vista\bin\Debug\Vista.exe.config
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Vista\bin\Debug\Vista.exe
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Vista\bin\Debug\Vista.pdb
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Vista\obj\Debug\Vista.csprojResolveAssemblyReference.cache
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Vista\obj\Debug\Vista.Properties.Resources.resources
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Vista\obj\Debug\Vista.csproj.GenerateResource.Cache
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Vista\obj\Debug\Vista.exe
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Vista\obj\Debug\Vista.pdb
+E:\PokemonV\Vista\bin\Debug\Vista.exe.config
+E:\PokemonV\Vista\bin\Debug\Vista.exe
+E:\PokemonV\Vista\bin\Debug\Vista.pdb
+E:\PokemonV\Vista\obj\Debug\Vista.csprojResolveAssemblyReference.cache
+E:\PokemonV\Vista\obj\Debug\Vista.Properties.Resources.resources
+E:\PokemonV\Vista\obj\Debug\Vista.csproj.GenerateResource.Cache
+E:\PokemonV\Vista\obj\Debug\Vista.exe
+E:\PokemonV\Vista\obj\Debug\Vista.pdb
+E:\PokemonV\Vista\obj\Debug\Vista.FrmLogueo.resources
+F:\PokemonV\Vista\obj\Debug\Vista.csprojResolveAssemblyReference.cache
+F:\PokemonV\Vista\obj\Debug\Vista.FrmLogueo.resources
+F:\PokemonV\Vista\obj\Debug\Vista.Properties.Resources.resources
+F:\PokemonV\Vista\obj\Debug\Vista.csproj.GenerateResource.Cache
+F:\PokemonV\Vista\obj\Debug\Vista.exe
+F:\PokemonV\Vista\obj\Debug\Vista.pdb
+E:\PokemonV\Vista\bin\Debug\AccesoDatos.dll
+E:\PokemonV\Vista\bin\Debug\Entidades.dll
+E:\PokemonV\Vista\bin\Debug\MySql.Data.dll
+E:\PokemonV\Vista\bin\Debug\AccesoDatos.pdb
+E:\PokemonV\Vista\bin\Debug\Entidades.pdb
+E:\PokemonV\Vista\obj\Debug\Vista.frmRegister.resources
+C:\Users\Carlos\Desktop\PokemonV\Vista\bin\Debug\Vista.exe.config
+C:\Users\Carlos\Desktop\PokemonV\Vista\bin\Debug\Vista.exe
+C:\Users\Carlos\Desktop\PokemonV\Vista\bin\Debug\Vista.pdb
+C:\Users\Carlos\Desktop\PokemonV\Vista\bin\Debug\AccesoDatos.dll
+C:\Users\Carlos\Desktop\PokemonV\Vista\bin\Debug\Entidades.dll
+C:\Users\Carlos\Desktop\PokemonV\Vista\bin\Debug\MySql.Data.dll
+C:\Users\Carlos\Desktop\PokemonV\Vista\bin\Debug\AccesoDatos.pdb
+C:\Users\Carlos\Desktop\PokemonV\Vista\bin\Debug\Entidades.pdb
+C:\Users\Carlos\Desktop\PokemonV\Vista\obj\Debug\Vista.csprojResolveAssemblyReference.cache
+C:\Users\Carlos\Desktop\PokemonV\Vista\obj\Debug\Vista.FrmLogueo.resources
+C:\Users\Carlos\Desktop\PokemonV\Vista\obj\Debug\Vista.FrmRegister.resources
+C:\Users\Carlos\Desktop\PokemonV\Vista\obj\Debug\Vista.Properties.Resources.resources
+C:\Users\Carlos\Desktop\PokemonV\Vista\obj\Debug\Vista.csproj.GenerateResource.Cache
+C:\Users\Carlos\Desktop\PokemonV\Vista\obj\Debug\Vista.exe
+C:\Users\Carlos\Desktop\PokemonV\Vista\obj\Debug\Vista.pdb
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\bin\Debug\Vista.exe.config
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\bin\Debug\Vista.exe
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\bin\Debug\Vista.pdb
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\bin\Debug\AccesoDatos.dll
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\bin\Debug\Entidades.dll
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\bin\Debug\MySql.Data.dll
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\bin\Debug\AccesoDatos.pdb
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\bin\Debug\Entidades.pdb
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\obj\Debug\Vista.csprojResolveAssemblyReference.cache
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\obj\Debug\Vista.FrmLogueo.resources
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\obj\Debug\Vista.FrmRegister.resources
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\obj\Debug\Vista.Properties.Resources.resources
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\obj\Debug\Vista.csproj.GenerateResource.Cache
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\obj\Debug\Vista.exe
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Vista\obj\Debug\Vista.pdb
+E:\lp2\PokemonV_Server\Vista\bin\Debug\Vista.exe.config
+E:\lp2\PokemonV_Server\Vista\bin\Debug\Vista.exe
+E:\lp2\PokemonV_Server\Vista\bin\Debug\Vista.pdb
+E:\lp2\PokemonV_Server\Vista\bin\Debug\AccesoDatos.dll
+E:\lp2\PokemonV_Server\Vista\bin\Debug\Entidades.dll
+E:\lp2\PokemonV_Server\Vista\bin\Debug\MySql.Data.dll
+E:\lp2\PokemonV_Server\Vista\bin\Debug\AccesoDatos.pdb
+E:\lp2\PokemonV_Server\Vista\bin\Debug\Entidades.pdb
+E:\lp2\PokemonV_Server\Vista\obj\Debug\Vista.csprojResolveAssemblyReference.cache
+E:\lp2\PokemonV_Server\Vista\obj\Debug\Vista.FrmLogueo.resources
+E:\lp2\PokemonV_Server\Vista\obj\Debug\Vista.FrmRegister.resources
+E:\lp2\PokemonV_Server\Vista\obj\Debug\Vista.Properties.Resources.resources
+E:\lp2\PokemonV_Server\Vista\obj\Debug\Vista.csproj.GenerateResource.Cache
+E:\lp2\PokemonV_Server\Vista\obj\Debug\Vista.exe
+E:\lp2\PokemonV_Server\Vista\obj\Debug\Vista.pdb

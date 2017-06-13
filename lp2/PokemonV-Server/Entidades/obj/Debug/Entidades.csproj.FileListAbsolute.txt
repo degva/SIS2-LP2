@@ -1,0 +1,30 @@
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Entidades\bin\Debug\Entidades.dll
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Entidades\bin\Debug\Entidades.pdb
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Entidades\obj\Debug\Entidades.dll
+c:\users\alulab14.inf.000\documents\visual studio 2017\Projects\PokemonV\Entidades\obj\Debug\Entidades.pdb
+E:\PokemonV\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+E:\PokemonV\Entidades\obj\Debug\Entidades.dll
+E:\PokemonV\Entidades\obj\Debug\Entidades.pdb
+E:\PokemonV\Entidades\bin\Debug\Entidades.dll
+E:\PokemonV\Entidades\bin\Debug\Entidades.pdb
+F:\PokemonV\Entidades\bin\Debug\Entidades.dll
+F:\PokemonV\Entidades\bin\Debug\Entidades.pdb
+F:\PokemonV\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+F:\PokemonV\Entidades\obj\Debug\Entidades.dll
+F:\PokemonV\Entidades\obj\Debug\Entidades.pdb
+C:\Users\Carlos\Desktop\PokemonV\Entidades\bin\Debug\Entidades.dll
+C:\Users\Carlos\Desktop\PokemonV\Entidades\bin\Debug\Entidades.pdb
+C:\Users\Carlos\Desktop\PokemonV\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+C:\Users\Carlos\Desktop\PokemonV\Entidades\obj\Debug\Entidades.dll
+C:\Users\Carlos\Desktop\PokemonV\Entidades\obj\Debug\Entidades.pdb
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Entidades\bin\Debug\Entidades.dll
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Entidades\bin\Debug\Entidades.pdb
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Entidades\obj\Debug\Entidades.dll
+C:\Users\alulab14.INF.000\Desktop\lp2\PokemonV_Server\Entidades\obj\Debug\Entidades.pdb
+E:\lp2\PokemonV_Server\Entidades\bin\Debug\Entidades.dll
+E:\lp2\PokemonV_Server\Entidades\bin\Debug\Entidades.pdb
+E:\lp2\PokemonV_Server\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+E:\lp2\PokemonV_Server\Entidades\obj\Debug\Entidades.dll
+E:\lp2\PokemonV_Server\Entidades\obj\Debug\Entidades.pdb
