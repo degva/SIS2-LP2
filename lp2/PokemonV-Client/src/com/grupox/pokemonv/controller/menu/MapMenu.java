@@ -24,7 +24,7 @@ public class MapMenu extends SingleColumnMenu{
         
         if ( input.action.isFirstPressed && !items.isEmpty() ){
             if ( items.get( selectedIndex ).getDescription().equals( "Pokemon" ) ){
-                // @TODO
+                game.setState( Game.State.POKEMON_BELT );
             }else if( items.get( selectedIndex ).getDescription().equals( "Bag" ) ){
                 game.getBagManager().setState( BagManager.State.POKEBALLS );
                 game.getBagManager().getBagMenu().setSelectedItem( 0 );
