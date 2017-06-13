@@ -2,7 +2,6 @@ package com.grupox.pokemonv.controller.menu;
 
 import com.grupox.pokemonv.controller.Font;
 import com.grupox.pokemonv.controller.InputHandler;
-import com.grupox.pokemonv.controller.menu.Menu;
 import com.grupox.pokemonv.model.Tile;
 import java.awt.Graphics2D;
 
@@ -12,10 +11,12 @@ public class DoubleColumnMenu extends Menu{
     private int leftColumnMaxLen;
     private final int space = 3;    // Space between columns in characters units. Should consider '>' icon
 
+    /* Constructors */
     public DoubleColumnMenu(InputHandler input, int topOffset, int rightOffset) {
         super( input, topOffset, rightOffset );
     }
 
+    /* Methods */
     @Override
     public void tick() {
         if ( input.up.isFirstPressed && selectedIndex > 1){
@@ -73,7 +74,5 @@ public class DoubleColumnMenu extends Menu{
     @Override
     protected int getMaxRows() {
         return ( items.size() & 1 ) == 0 ? items.size() / 2 : items.size() / 2 + 1;
-    }
-    
-    
+    }    
 }

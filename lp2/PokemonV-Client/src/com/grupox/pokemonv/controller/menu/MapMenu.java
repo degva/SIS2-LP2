@@ -4,7 +4,6 @@ import com.grupox.pokemonv.controller.manager.BagManager;
 import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.controller.manager.MapManager;
-import com.grupox.pokemonv.controller.menu.SingleColumnMenu;
 
 public class MapMenu extends SingleColumnMenu{
     private Game game;  // Needed to change state when an option is selected

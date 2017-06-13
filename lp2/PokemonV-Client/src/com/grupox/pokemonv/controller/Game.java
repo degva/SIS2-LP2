@@ -1,7 +1,5 @@
 package com.grupox.pokemonv.controller;
 
-import com.grupox.pokemonv.controller.manager.BagManager;
-import com.grupox.pokemonv.controller.manager.MapManager;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.User;
 import java.awt.Canvas;
@@ -9,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
+import com.grupox.pokemonv.controller.manager.*;
+
 
 public class Game extends Canvas implements Runnable{
     /* Enum declaration */
@@ -32,8 +32,8 @@ public class Game extends Canvas implements Runnable{
     private MapManager mapManager;
     private BagManager bagManager;
     private User user;
-    private State state;
-    
+    private static State state;
+    private PokemonBeltManager pokemonBeltManager;
     /* Constructors */
     public Game(){
         // Main loop
@@ -48,7 +48,8 @@ public class Game extends Canvas implements Runnable{
         
         // Initialization
         user = new Player( input );
-        mapManager = new MapManager( user, this );
+        mapManager = new MapManager( user,this );
+        pokemonBeltManager = new PokemonBeltManager(user,this);
         bagManager = new BagManager( (Player)user, this );
         state = State.MAP;
     }
@@ -132,13 +133,12 @@ public class Game extends Canvas implements Runnable{
                 // @TODO
                 break;
             case POKEMON_BELT:
-                // @TODO
+                pokemonBeltManager.tick();
                 break;
             case BAG:
                 bagManager.tick();
                 break;
         }
-        
     }
     
     private void render(){
@@ -153,7 +153,7 @@ public class Game extends Canvas implements Runnable{
                 // @TODO
                 break;
             case POKEMON_BELT:
-                // @TODO
+                pokemonBeltManager.render(g);
                 break;
             case BAG:
                 mapManager.render( g );
@@ -167,21 +167,22 @@ public class Game extends Canvas implements Runnable{
     }
 
     /* Getters & Setters */
-    public State getState() {
+    public static State getState() {
         return state;
     }
-    public void setState( State newState ) {
+    public static void setState(State newState) {
         state = newState;
     }
-
     public MapManager getMapManager() {
         return mapManager;
     }
-
+    public PokemonBeltManager getPokemonBeltManager() {
+        return pokemonBeltManager;
+    }
+    
     public BagManager getBagManager() {
         return bagManager;
     }
-    
     
     public static void main( String args[] ){
 //        new Login().setVisible( true );

@@ -13,7 +13,18 @@ public class Font {
     private static Font instance;
     
     public static final int fontWidthOut = Tile.spriteWidthOut / 4;
-    public static final int fontHeightOut = Tile.spriteHeightOut * 3 / 4;
+    public static int fontHeightOut = Tile.spriteHeightOut * 3 / 4;
+
+    public static int getFontWidthOut() {
+        return fontWidthOut;
+    }
+
+    public static int getFontHeightOut() {
+        return fontHeightOut;
+    }
+    public static void setFontHeightOut(int num) {
+        fontHeightOut = num;
+    }
     
     /* Constructors */
     private Font(){
