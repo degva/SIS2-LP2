@@ -63,7 +63,7 @@ public abstract class Menu {
     }
     
     /**
-     * Adds an item and returns its index
+     * Adds an item and returns its index.
      */
     public int addItem( String description ){
         items.add( new MenuItem( description ) );
@@ -76,7 +76,56 @@ public abstract class Menu {
         widthInTiles = getWidthInTiles();
         leftOffset = calculateLeftOffset();
         
+        // For every item, update the longest description in the menu
+        for(MenuItem item : items){
+            item.setLongestDescrip( getMaxLen() );
+        }
+        
         return items.size() - 1;
+    }
+    
+    /**
+     * Adds a quantity item and returns its index.
+     */
+    public int addItem( String description, int quantity ){
+        
+        // Add the item, whether found or not
+        int index = searchItem( description );
+        if( index == -1 ){
+            items.add( new QuantityMenuItem( description, quantity) );
+        }else{
+            QuantityMenuItem qmi = (QuantityMenuItem)(items.get( index ));
+            qmi.setQuantity( qmi.getQuantity() + quantity);
+        }
+        
+        // Sets selected item as 0 if it is the first item added
+        if(selectedIndex == -1){
+            selectedIndex = 0;
+            items.get( selectedIndex ).isSelected = true;
+        }
+        
+        // Update menu widths
+        widthInTiles = getWidthInTiles();
+        leftOffset = calculateLeftOffset();
+
+        // For every item, update the longest description in the menu
+        for(MenuItem item : items){
+            item.setLongestDescrip( getMaxLen() );
+        }
+        
+        return items.size() - 1;
+    }
+    
+    /**
+     * Searches an item in items and returns its index. If not found, returns -1.
+     */
+    private int searchItem( String description ){
+        for( int i = 0; i < items.size(); i++ ){
+            if( items.get( i ).equals( description ) ){
+                return i;
+            }
+        }
+        return -1;
     }
     
     private void loadBorders(){
@@ -140,7 +189,7 @@ public abstract class Menu {
      * Gets the number of tiles needed to cover the width, not considering the left and right border.
      */
     private int getWidthInTiles(){
-        return (int)Math.ceil( 1.0 * getMaxLen() * Font.fontWidthOut / Tile.spriteWidthOut);    // Ceil or floor
+        return (int)Math.round( 1.0 * getMaxLen() * Font.fontWidthOut / Tile.spriteWidthOut);    // Ceil or floor
 
     }
     

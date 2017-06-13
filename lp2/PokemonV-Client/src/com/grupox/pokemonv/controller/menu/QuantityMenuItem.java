@@ -1,7 +1,6 @@
 package com.grupox.pokemonv.controller.menu;
 
 import com.grupox.pokemonv.controller.Font;
-import com.sun.org.glassfish.gmbal.Description;
 import java.awt.Graphics2D;
 
 public class QuantityMenuItem extends MenuItem{
@@ -16,24 +15,29 @@ public class QuantityMenuItem extends MenuItem{
     }
     
     /* Methods */
-    @Override
-    /**
-     * Returns the length of the item.
-     */
-    public int length() {
-        return 1 + description.length() + 4;    // Adds +4 for " x01" string
-    }
 
-    @Override
     /**
-     * X and Y in pixels
+     * X and Y in pixels. NOTE: Its menu should override "getMaxRows" and "drawItems" in order to work accordingly.
      */
     public void render(Graphics2D g, int x, int y) {
         if( isSelected ){
-            Font.getInstance().drawString(">" + description + " x" + String.format("%02d", quantity), g, x, y);
+            Font.getInstance().drawString(">" + description, g, x, y);
         }else{
-            Font.getInstance().drawString(" " + description + " x" + String.format("%02d", quantity), g, x, y);
+            Font.getInstance().drawString(" " + description, g, x, y);
+        }
+        if(quantity != -1){ // quantity == -1 means that that item should not display its quantity
+            Font.getInstance().drawString(" x" + String.format("%02d", quantity), g, x + (longestDescrip - 4) * Font.fontWidthOut, y + Font.fontHeightOut);
         }
     }
+    
+    /* Getters && Setters */
+
+    public int getQuantity() {
+        return quantity;
+    }
+    public void setQuantity( int quantity ) {
+        this.quantity = quantity;
+    }
+    
     
 }

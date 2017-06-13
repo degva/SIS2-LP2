@@ -1,10 +1,9 @@
 package com.grupox.pokemonv.controller.menu;
 
 import com.grupox.pokemonv.controller.Game;
-import com.grupox.pokemonv.controller.menu.SingleColumnMenu;
 import com.grupox.pokemonv.model.Player;
 
-public class BagMenu extends SingleColumnMenu {
+public class BagMenu extends QuantityMenu {
     
     /* Attributes */
     private Game game;
@@ -17,8 +16,8 @@ public class BagMenu extends SingleColumnMenu {
         this.player = player;
         this.game = game;
         
-        this.addItem( "Pokeball" );
-        this.addItem( "Potion");
+        this.addItem( "Pokeball", 15 );
+        this.addItem( "Potion", 1);
         this.addItem( "Close" );
     }
     

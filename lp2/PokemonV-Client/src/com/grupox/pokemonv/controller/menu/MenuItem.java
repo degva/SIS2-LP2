@@ -7,10 +7,12 @@ public class MenuItem {
     /* Attributes */
     public boolean isSelected;
     protected String description;
+    protected int longestDescrip;   // Longest description in the menu
 
     /* Constructors */
     public MenuItem( String description ){
         this.description = description;
+        this.longestDescrip = 0;
     }
     
     /* Methods */
@@ -36,6 +38,13 @@ public class MenuItem {
     /* Getters && Setters */
     public String getDescription() {
         return description;
+    }
+
+    public int getLongestDescrip() {
+        return longestDescrip;
+    }
+    public void setLongestDescrip( int longestDescrip ) {
+        this.longestDescrip = longestDescrip;
     }
     
 }
