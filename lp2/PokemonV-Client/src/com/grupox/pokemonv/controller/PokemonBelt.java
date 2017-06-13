@@ -278,4 +278,11 @@ public class PokemonBelt {
     public int tamanoLista(){
         return listaPokemones.size();
     }
+    
+    public void intercambiar(int A, int B){
+        Pokemon pokA= listaPokemones.get(A);
+        Pokemon pokB= listaPokemones.get(B);
+        listaPokemones.set(A, pokB);
+        listaPokemones.set(B, pokA);
+    }
 }
