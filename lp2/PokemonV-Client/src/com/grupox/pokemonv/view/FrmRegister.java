@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.grupox.pokemonv.view;
 
 import com.grupox.pokemonv.model.Player;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
-/**
- *
- * @author alulab14
- */
 public class FrmRegister extends javax.swing.JFrame {
 
     /**

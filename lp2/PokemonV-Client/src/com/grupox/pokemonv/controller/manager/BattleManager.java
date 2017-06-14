@@ -162,7 +162,7 @@ public class BattleManager {
             Font.getInstance().drawString("TE HAS RETIRADO PERDIENDO LA BATALLA", g, 30, 300);
         }
         else if (state==State.SECONDLEFT){
-            Font.getInstance().drawString("GANASTE LA BATALLA POR RETIRO DEL OTRO JUGADOR", g, 300, 300);
+            Font.getInstance().drawString("GANASTE LA BATALLA POR RETIRO DEL OTRO JUGADOR", g, 30, 300);
         }
     }
 

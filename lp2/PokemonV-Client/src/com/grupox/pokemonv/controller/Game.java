@@ -157,15 +157,7 @@ public class Game extends Canvas implements Runnable {
                 break;
             case BATTLE:
                 battleManager.render(g);
-                if ((battleManager.getState() == BattleManager.State.FIRSTLEFT)
-                        || (battleManager.getState() == BattleManager.State.SECONDLEFT)) {
-                    try {
-                        Thread.sleep(1500);
-                    } catch (Exception exp) {
-                    }
-                    state = State.MAP;
-                }
-                
+
                 break;
             case POKEMON_BELT:
                 pokemonBeltManager.render(g);
@@ -178,6 +170,15 @@ public class Game extends Canvas implements Runnable {
 
         // Finally, show the contents in g and destroy it
         strategy.show();
+        if ((battleManager.getState() == BattleManager.State.FIRSTLEFT)
+                || (battleManager.getState() == BattleManager.State.SECONDLEFT)) {
+            try {
+                Thread.sleep(2500);
+            } catch (Exception exp) {
+            }
+            state = State.MAP;
+            battleManager.setState(BattleManager.State.BEGIN);
+        }
         g.dispose();
     }
 
@@ -205,8 +206,6 @@ public class Game extends Canvas implements Runnable {
     public BagManager getBagManager() {
         return bagManager;
     }
-    
-    
 
     public static void main(String args[]) {
 //        new Login().setVisible( true );

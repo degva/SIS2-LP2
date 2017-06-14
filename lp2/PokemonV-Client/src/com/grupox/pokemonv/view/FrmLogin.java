@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.grupox.pokemonv.view;
 
-/**
- *
- * @author alulab14
- */
 public class FrmLogin extends javax.swing.JFrame {
 
+    public static boolean done;
     /**
      * Creates new form FrmLogin
      */
     public FrmLogin() {
         initComponents();
+        done = false;
         //setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
