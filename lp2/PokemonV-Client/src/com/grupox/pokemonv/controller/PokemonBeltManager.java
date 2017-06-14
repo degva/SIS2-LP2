@@ -25,9 +25,13 @@ public class PokemonBeltManager {
     
     private PokemonBeltMenu menu;
     
-    private int ind;
+    public static int ind;
+
     private boolean presionado= false;
     public static boolean presionadoF= false;
+    public static int indiceA;
+    public static int indiceB;
+    
     /*constructor*/
     public PokemonBeltManager(User user, Game game){
         input = user.getInput();
@@ -73,6 +77,11 @@ public class PokemonBeltManager {
     }
     
     public void render(Graphics2D g){
+        if(menu.getVez() == 2){
+            pokemonBelt.intercambiar(indiceA, indiceB); //funciona!
+            menu.setVez(0);
+        }
+        
         pokemonBelt.render(g,ind, presionado);
         if(presionadoF) menu.render(g);
     }
