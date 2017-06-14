@@ -205,6 +205,8 @@ public class Game extends Canvas implements Runnable {
     public BagManager getBagManager() {
         return bagManager;
     }
+    
+    
 
     public static void main(String args[]) {
 //        new Login().setVisible( true );
