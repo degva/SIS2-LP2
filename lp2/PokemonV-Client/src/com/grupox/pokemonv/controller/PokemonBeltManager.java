@@ -50,25 +50,25 @@ public class PokemonBeltManager {
         
         if( input.up.isFirstPressed && ind >0 && !presionadoF){
             ind--;
-            System.out.println(ind);
+            //System.out.println(ind);
             presionado = false;
         }else if(input.down.isFirstPressed && ind < pokemonBelt.tamanoLista()-1 && !presionadoF){
             ind++;
-            System.out.println(ind);
+            //System.out.println(ind);
             presionado = false;
         }
         
         if(input.action.isPressed && !presionadoF){
-            System.out.println("action is presioned");
+            //System.out.println("action is presioned");
             presionado = true;
         }
         
         if(input.back.isPressed && presionado ){
-            System.out.println("back is presioned");
+            //System.out.println("back is presioned");
             presionado = false;
         }
         else if(input.back.isFirstPressed && !presionadoF){
-            System.out.println("salir");
+            //System.out.println("salir");
             presionado = false;
             presionadoF = true;
             menu.setSelectedItem(0);

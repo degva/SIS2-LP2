@@ -52,15 +52,6 @@ public class InputHandler implements KeyListener{
         menu = new Key();
         action = new Key();
         back = new Key();
-
-//        keys = new Key[8];
-//        keys[0] = up;
-//        keys[1] = down;
-//        keys[2] = left;
-//        keys[3] = right;
-//        keys[4] = menu;
-//        keys[5] = action;
-//        keys[6] = back;
     }
 
     /* Methods */

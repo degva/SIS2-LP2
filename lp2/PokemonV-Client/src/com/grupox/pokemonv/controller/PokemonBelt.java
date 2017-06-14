@@ -39,7 +39,7 @@ public class PokemonBelt {
 //    private Map map;
     private ArrayList<Pokemon> listaPokemones;
     
-    private int altura=2;//alejandro me matara por el español ... tengo sueño!
+    private int altura=2;//alejandro me matara por el español ... tengo sueño! @SE EMPUTA
     
     private int spriteWidthOut = 23;//con esto aparecen los 6
     private int spriteHeightOut = 23;
