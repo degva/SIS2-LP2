@@ -4,26 +4,193 @@ package com.grupox.pokemonv.model;
 
 import com.grupox.pokemonv.controller.Game;
 import java.awt.Graphics2D;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Map {
     /* Attributes */
     private Tile[][] grid;
-    private final int HEIGHT = 8;   // NUMBER OF CELLS
-    private final int WIDTH = 8;    // NUMBER OF CELLS
+    private int height = 8;   // NUMBER OF CELLS
+    private int width = 8;    // NUMBER OF CELLS
     private final int TILES_IN_WIDTH = (int)Math.ceil( (double)Game.WIDTH / Tile.spriteWidthOut);
     private final int TILES_IN_HEIGHT = (int)Math.ceil( (double)Game.HEIGHT / Tile.spriteHeightOut);
     
     /* Constructors */
     public Map(){
-        grid = new Tile[ WIDTH ][ HEIGHT ];
-        for( int i = 0; i < WIDTH; i++ ){
-            for( int j = 0; j < HEIGHT; j++ ){
+        loadGrid();
+        /*grid = new Tile[ width ][ height ];
+        for( int i = 0; i < width; i++ ){
+            for( int j = 0; j < height; j++ ){
                 // TEST
                 Tile.Type type;
-                if( i == j || i + j == HEIGHT-1) type = Tile.Type.SAND;
+                if( i == j || i + j == height-1) type = Tile.Type.SAND;
                 else type = Tile.Type.GRASS;
 
                 grid[i][j] = new Tile( type, null, false, this );
+            }
+        }*/
+    }
+    
+    private void loadGrid(){
+        ArrayList tileStrings = new ArrayList();
+        String route = "./res/maps/main.txt";
+        try {
+            
+            BufferedReader reader = new BufferedReader(new FileReader(route));
+            height = 0;
+            while(true){
+                String line = reader.readLine();
+                if(line == null) break;
+                
+                String lines[] = line.split(" ");
+                if(height == 0) width = lines.length;
+                height++;
+                
+                for(String tileString : lines)
+                    tileStrings.add(tileString);
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Map.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Map.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        fillTiles(tileStrings);
+    }
+    
+    private void fillTiles(ArrayList tileStrings){
+        grid = new Tile[width][];
+        for(int i = 0; i < width; i++){
+            grid[i] = new Tile[height];
+            for(int j = 0; j < height; j++){
+                String tileChar = (String)tileStrings.get(j * width + i); // From one dimension to two dimensions
+                
+                Tile.Type type;
+                switch (tileChar){
+                    case "FLR01":
+                        type = Tile.Type.FLR01;
+                        break;
+                    case "FLR02":
+                        type = Tile.Type.FLR02;
+                        break;
+                    case "FLR03":
+                        type = Tile.Type.FLR03;
+                        break;    
+                    case "SGN01":
+                        type = Tile.Type.SGN01;
+                        break;
+                    case "GRA00":
+                        type = Tile.Type.GRA00;
+                        break;
+                    case "GRA01":
+                        type = Tile.Type.GRA01;
+                        break;
+                    case "GRA02":
+                        type = Tile.Type.GRA02;
+                        break;
+                    case "GRA03":
+                        type = Tile.Type.GRA03;
+                        break;
+                    case "GRA04":
+                        type = Tile.Type.GRA04;
+                        break;
+                    case "GRA05":
+                        type = Tile.Type.GRA05;
+                        break;                        
+                    case "GRA06":
+                        type = Tile.Type.GRA06;
+                        break;
+                    case "GRA07":
+                        type = Tile.Type.GRA07;
+                        break;
+                    case "GRA08":
+                        type = Tile.Type.GRA08;
+                        break;                        
+                    case "GRA09":
+                        type = Tile.Type.GRA09;
+                        break;                
+                    case "SND01":
+                        type = Tile.Type.SND01;
+                        break;
+                    case "SND02":
+                        type = Tile.Type.SND02;
+                        break;
+                    case "SND03":
+                        type = Tile.Type.SND03;
+                        break;
+                    case "SND04":
+                        type = Tile.Type.SND04;
+                        break;
+                    case "SND05":
+                        type = Tile.Type.SND05;
+                        break;
+                    case "SND06":
+                        type = Tile.Type.SND06;
+                        break;
+                    case "SND07":
+                        type = Tile.Type.SND07;
+                        break;
+                    case "SND08":
+                        type = Tile.Type.SND08;
+                        break;
+                    case "SND09":
+                        type = Tile.Type.SND09;
+                        break;                
+                    case "TRG01":
+                        type = Tile.Type.TRG01;
+                        break;
+                    case "TRG02":
+                        type = Tile.Type.TRG02;
+                        break;
+                    case "TRG03":
+                        type = Tile.Type.TRG03;
+                        break;                
+                    case "HO101":
+                        type = Tile.Type.HO101;
+                        break;
+                    case "HO102":
+                        type = Tile.Type.HO102;
+                        break;
+                    case "HO103":
+                        type = Tile.Type.HO103;
+                        break;
+                    case "HO104":
+                        type = Tile.Type.HO104;
+                        break;
+                    case "HO105":
+                        type = Tile.Type.HO105;
+                        break;
+                    case "HO106":
+                        type = Tile.Type.HO106;
+                        break;
+                    case "HO107":
+                        type = Tile.Type.HO107;
+                        break;
+                    case "HO108":
+                        type = Tile.Type.HO108;
+                        break;
+                    case "HO109":
+                        type = Tile.Type.HO109;
+                        break;
+                    case "HO110":
+                        type = Tile.Type.HO110;
+                        break;
+                    case "HO111":
+                        type = Tile.Type.HO111;
+                        break;
+                    case "HO112":
+                        type = Tile.Type.HO112;
+                        break;
+                    default:
+                        type = Tile.Type.FLR02;
+                        break;
+                }
+                grid[i][j] = new Tile(type, null, false, this);    // @TODO chance according to type
             }
         }
     }
@@ -35,7 +202,7 @@ public class Map {
         int[] pos = getPosUser( user );
         int i = pos[0], j = pos[1];
         
-        if( i == WIDTH || j == HEIGHT ) return false;
+        if( i == width || j == height ) return false;
         
         Tile nextTile;
         switch ( direction ){
@@ -44,7 +211,7 @@ public class Map {
                 nextTile = grid[i][j - 1];
                 break;
             case DOWN:
-                if( j == HEIGHT - 1 ) return false;
+                if( j == height - 1 ) return false;
                 nextTile = grid[i][j + 1];
                 break;
             case LEFT:
@@ -52,7 +219,7 @@ public class Map {
                 nextTile = grid[i - 1][j];
                 break;
             case RIGHT:
-                if( i == WIDTH - 1 ) return false;
+                if( i == width - 1 ) return false;
                 nextTile = grid[i + 1][j];
                 break;
             default:
@@ -83,8 +250,8 @@ public class Map {
         // Tiles from and to where to draw
         int xStart = Integer.max( 0, x - TILES_IN_WIDTH / 2 );
         int yStart = Integer.max( 0, y - TILES_IN_HEIGHT / 2 );
-        int xEnd = Integer.min( WIDTH, x + TILES_IN_WIDTH / 2 + 1);
-        int yEnd = Integer.min( HEIGHT, y + TILES_IN_HEIGHT / 2 + 1);
+        int xEnd = Integer.min(width, x + TILES_IN_WIDTH / 2 + 1);
+        int yEnd = Integer.min(height, y + TILES_IN_HEIGHT / 2 + 1);
         
         for( int i = xStart; i < xEnd; i++ ){
             for( int j = yStart; j < yEnd; j++ ){
@@ -100,8 +267,8 @@ public class Map {
         int i=0, j=0;
         
         outerloop:  // Helpful when I want to break from a nested loop
-        for( i = 0; i < WIDTH; i++ ){
-            for( j = 0; j < HEIGHT; j++ ){
+        for( i = 0; i < width; i++ ){
+            for( j = 0; j < height; j++ ){
                 User currUser = grid[i][j].getUser();
                 if( currUser != null ){
                     if( currUser.getUser_id() == user.getUser_id() ) break outerloop;
@@ -117,12 +284,12 @@ public class Map {
     public Tile[][] getGrid() {
         return grid;
     }
-
-    public int getHEIGHT() {
-        return HEIGHT;
+    
+    public int getHeight() {
+        return height;
     }
-    public int getWIDTH() {
-        return WIDTH;
+    public int getWidth() {
+        return width;
     }
     
 }
