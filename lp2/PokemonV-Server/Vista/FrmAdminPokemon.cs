@@ -18,6 +18,8 @@ namespace Vista
     {
         public FrmAdminPokemon()
         {
+            //MapDA mapda = new MapDA();
+            //mapda.upload();   WOOP
             InitializeComponent();
             load();
             inicio();
