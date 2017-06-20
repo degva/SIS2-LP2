@@ -12,14 +12,11 @@ using AccesoDatos;
 
 namespace Vista
 {
-    public partial class FrmLogueo : Form
+    public partial class FrmLogin : Form
     {
-        public FrmLogueo()
+        public FrmLogin()
         {
             InitializeComponent();
-
-            
-
 
             TXTpassword.Text = "";
             TXTpassword.PasswordChar = '*';
@@ -29,7 +26,6 @@ namespace Vista
             this.BackgroundImage = image;
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
-
         }
 
         
@@ -38,7 +34,7 @@ namespace Vista
         {
             int flag = 1;
 
-            UsuarioDA con = new UsuarioDA();
+            AdminDA con = new AdminDA();
 
             if (TXTusername.Text.Contains(" "))
             {
@@ -54,7 +50,7 @@ namespace Vista
 
             if(flag == 1)
             {
-                if ((con.verificarLogin(TXTusername.Text, TXTpassword.Text) == 1))
+                if ((con.verifyLogin(TXTusername.Text, TXTpassword.Text) == 1))
                 {
 
                     MessageBox.Show("Login satisfactorio");
@@ -68,7 +64,6 @@ namespace Vista
                     MessageBox.Show("Usuario y/o contraseña incorrectas");
                 }
             }
-            
         }
 
         private void BTNregister_Click(object sender, EventArgs e)
@@ -110,7 +105,7 @@ namespace Vista
             {
                 int flag = 1;
 
-                UsuarioDA con = new UsuarioDA();
+                AdminDA con = new AdminDA();
 
                 if (TXTusername.Text.Contains(" "))
                 {
@@ -126,7 +121,7 @@ namespace Vista
 
                 if (flag == 1)
                 {
-                    if ((con.verificarLogin(TXTusername.Text, TXTpassword.Text) == 1))
+                    if ((con.verifyLogin(TXTusername.Text, TXTpassword.Text) == 1))
                     {
 
                         MessageBox.Show("Login satisfactorio");

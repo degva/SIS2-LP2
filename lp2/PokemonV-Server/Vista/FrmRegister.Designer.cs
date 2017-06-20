@@ -36,13 +36,15 @@
             this.TXTemail = new System.Windows.Forms.TextBox();
             this.BTNregister = new System.Windows.Forms.Button();
             this.BTNcancel = new System.Windows.Forms.Button();
+            this.TXTname = new System.Windows.Forms.TextBox();
+            this.LBLname = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LBLusername
             // 
             this.LBLusername.AutoSize = true;
             this.LBLusername.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLusername.Location = new System.Drawing.Point(124, 112);
+            this.LBLusername.Location = new System.Drawing.Point(124, 132);
             this.LBLusername.Name = "LBLusername";
             this.LBLusername.Size = new System.Drawing.Size(105, 24);
             this.LBLusername.TabIndex = 0;
@@ -53,7 +55,7 @@
             // 
             this.LBLemail.AutoSize = true;
             this.LBLemail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLemail.Location = new System.Drawing.Point(124, 243);
+            this.LBLemail.Location = new System.Drawing.Point(124, 263);
             this.LBLemail.Name = "LBLemail";
             this.LBLemail.Size = new System.Drawing.Size(62, 24);
             this.LBLemail.TabIndex = 1;
@@ -64,7 +66,7 @@
             // 
             this.LBLpassword.AutoSize = true;
             this.LBLpassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLpassword.Location = new System.Drawing.Point(124, 176);
+            this.LBLpassword.Location = new System.Drawing.Point(124, 196);
             this.LBLpassword.Name = "LBLpassword";
             this.LBLpassword.Size = new System.Drawing.Size(100, 24);
             this.LBLpassword.TabIndex = 2;
@@ -73,24 +75,25 @@
             // 
             // TXTusername
             // 
-            this.TXTusername.Location = new System.Drawing.Point(249, 112);
+            this.TXTusername.Location = new System.Drawing.Point(249, 132);
             this.TXTusername.Name = "TXTusername";
             this.TXTusername.Size = new System.Drawing.Size(168, 20);
             this.TXTusername.TabIndex = 3;
             // 
             // TXTpassword
             // 
-            this.TXTpassword.Location = new System.Drawing.Point(249, 180);
+            this.TXTpassword.Location = new System.Drawing.Point(249, 200);
             this.TXTpassword.Name = "TXTpassword";
             this.TXTpassword.Size = new System.Drawing.Size(168, 20);
             this.TXTpassword.TabIndex = 4;
             // 
             // TXTemail
             // 
-            this.TXTemail.Location = new System.Drawing.Point(249, 246);
+            this.TXTemail.Location = new System.Drawing.Point(249, 266);
             this.TXTemail.Name = "TXTemail";
             this.TXTemail.Size = new System.Drawing.Size(168, 20);
             this.TXTemail.TabIndex = 5;
+            this.TXTemail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXTemail_KeyPress);
             // 
             // BTNregister
             // 
@@ -118,11 +121,31 @@
             this.BTNcancel.UseVisualStyleBackColor = false;
             this.BTNcancel.Click += new System.EventHandler(this.BTNcancel_Click);
             // 
+            // TXTname
+            // 
+            this.TXTname.Location = new System.Drawing.Point(249, 76);
+            this.TXTname.Name = "TXTname";
+            this.TXTname.Size = new System.Drawing.Size(168, 20);
+            this.TXTname.TabIndex = 9;
+            // 
+            // LBLname
+            // 
+            this.LBLname.AutoSize = true;
+            this.LBLname.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLname.Location = new System.Drawing.Point(124, 76);
+            this.LBLname.Name = "LBLname";
+            this.LBLname.Size = new System.Drawing.Size(65, 24);
+            this.LBLname.TabIndex = 8;
+            this.LBLname.Text = "Name";
+            this.LBLname.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // FrmRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(512, 436);
+            this.Controls.Add(this.TXTname);
+            this.Controls.Add(this.LBLname);
             this.Controls.Add(this.BTNcancel);
             this.Controls.Add(this.BTNregister);
             this.Controls.Add(this.TXTemail);
@@ -150,5 +173,7 @@
         private System.Windows.Forms.TextBox TXTemail;
         private System.Windows.Forms.Button BTNregister;
         private System.Windows.Forms.Button BTNcancel;
+        private System.Windows.Forms.TextBox TXTname;
+        private System.Windows.Forms.Label LBLname;
     }
 }

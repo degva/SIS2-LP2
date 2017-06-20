@@ -8,7 +8,7 @@ namespace Entidades
 {
     public class Admin : User
     {
-        public Admin(string username, string password, string name, string email) : base(username, password, name, email) { }
+        public Admin(string username, string password, string name, string email, int deleted, int isAdmin) : base(username, password, name, email, deleted, isAdmin) { }
 
         public void kick()
         {

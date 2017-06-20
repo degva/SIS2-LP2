@@ -1,6 +1,6 @@
 ﻿namespace Vista
 {
-    partial class FrmLogueo
+    partial class FrmLogin
     {
         /// <summary>
         /// Variable del diseñador necesaria.

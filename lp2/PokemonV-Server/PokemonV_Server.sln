@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.12
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vista", "Vista\Vista.csproj", "{CB371C5F-7C4E-409B-88AA-63B2661BEB20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "Vista\View.csproj", "{CB371C5F-7C4E-409B-88AA-63B2661BEB20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos\AccesoDatos.csproj", "{192CF83A-76B5-44E2-9C5E-7E93DEA4FE0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "AccesoDatos\DataAccess.csproj", "{192CF83A-76B5-44E2-9C5E-7E93DEA4FE0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{900BC073-8095-4AEB-B260-E672EB510C61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entidades\Entity.csproj", "{900BC073-8095-4AEB-B260-E672EB510C61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

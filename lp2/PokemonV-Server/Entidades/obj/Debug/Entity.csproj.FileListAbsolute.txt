@@ -1,0 +1,5 @@
+E:\PokemonV-Server\Entidades\bin\Debug\Entidades.dll
+E:\PokemonV-Server\Entidades\bin\Debug\Entidades.pdb
+E:\PokemonV-Server\Entidades\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+E:\PokemonV-Server\Entidades\obj\Debug\Entidades.dll
+E:\PokemonV-Server\Entidades\obj\Debug\Entidades.pdb

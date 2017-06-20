@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public enum Type { Fire, Water, Earth, Wind };
+    public enum TypeofPokemon { Fire, Water, Earth, Wind };
     public class Pokemon
     {
-        public Pokemon(int id, float attack_pts, float defense_pts, float life, string name, Type type)
+        public Pokemon(int attack_pts, int defense_pts, int life, string name, TypeofPokemon type, int deleted)
         {
-            this.id = id;
             this.attack_pts = attack_pts;
             this.defense_pts = defense_pts;
             this.life = life;
             this.name = name;
             this.type = type;
+            this.Deleted = deleted;
         }
 
         public void attack(Pokemon pokemon)
@@ -36,20 +36,20 @@ namespace Entidades
             get { return id; }
             set { id = value; }
         }
-        private float attack_pts;
-        public float Attack_pts
+        private int attack_pts;
+        public int Attack_pts
         {
             get { return attack_pts; }
             set { attack_pts = value; }
         }
-        private float defense_pts;
-        public float Defense_pts
+        private int defense_pts;
+        public int Defense_pts
         {
             get { return defense_pts; }
             set { defense_pts = value; }
         }
-        private float life;
-        public float Life
+        private int life;
+        public int Life
         {
             get { return life; }
             set { life = value; }
@@ -60,11 +60,15 @@ namespace Entidades
             get { return name; }
             set { name = value; }
         }
-        private Type type;
-        public Type Type
+        private TypeofPokemon type;
+        public TypeofPokemon Type
         {
             get { return type; }
             set { type = value; }
         }
+
+        public int Deleted { get => deleted; set => deleted = value; }
+
+        private int deleted;
     }
 }
