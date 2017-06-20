@@ -7,12 +7,12 @@ using MySql.Data.MySqlClient;
 
 namespace AccesoDatos
 {
-    public class Conexion
+    public class Connection
     {
         private string cadena = "server = quilla.lab.inf.pucp.edu.pe ; user = inf282gx ; database = inf282gx ; port = 3306 ; password = m8h53r9A6xBfeOe6;";
         public MySqlConnection conn;
 
-        public Conexion()
+        public Connection()
         {
             try
             {

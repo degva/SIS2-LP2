@@ -9,24 +9,21 @@ using MySql.Data.MySqlClient;
 
 namespace AccesoDatos
 {
-    public class UsuarioDA
+    public class AdminDA
     {
 
-        public UsuarioDA()
+        public AdminDA()
         {
 
         }
 
-        public int agregarUsuario(User u)
+        public int addAdmin(Admin adm)
         {
             try
             {
-                Conexion conexion = new Conexion();
+                Connection conexion = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                string sql = "INSERT INTO USER" +
-                    "(PASSWORD,NAME,EMAIL)"
-                    + "values" +
-                    "('" + u.Password + "','" + u.Username + "', '" + u.Email + "')";
+                string sql = $"INSERT INTO USER (NAME,USERNAME,PASSWORD,EMAIL,DELETED,ISADMIN)values('{adm.Name}','{adm.Username}', '{adm.Password}' , '{adm.Email}' , '{adm.Deleted}'  , '{adm.IsAdmin}')";
                 cmd.Connection = conexion.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -41,14 +38,14 @@ namespace AccesoDatos
         }
 
 
-        public int verificarLogin(string username, string password)
+        public int verifyLogin(string username, string password)
         {
             try
             {
-                Conexion conexion = new Conexion();
+                Connection conexion = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char caracter = '"';
-                string sql = "SELECT * FROM USER WHERE NAME=" + caracter +  username + caracter + " AND PASSWORD= " +caracter +  password + caracter ;
+                string sql = "SELECT * FROM USER WHERE USERNAME =" + caracter +  username + caracter + " AND PASSWORD= " +caracter +  password + caracter ;
                 cmd.Connection = conexion.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -70,14 +67,14 @@ namespace AccesoDatos
         }
 		
 		
-		 public int verificarUsuarioRepetido(User u)
+		 public int verifyRepeatUsername(Admin adm)
         {
             try
             {
-                Conexion conexion = new Conexion();
+                Connection conexion = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char caracter = '"';
-                string sql = "SELECT * FROM USER WHERE NAME=" + caracter +  u.Username + caracter ;
+                string sql = "SELECT * FROM USER WHERE USERNAME =" + caracter + adm.Username + caracter ;
                 cmd.Connection = conexion.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -100,14 +97,14 @@ namespace AccesoDatos
             }
         }
 
-        public int verificarCorreoRepetido(User u)
+        public int verifyRepeatemail(Admin adm)
         {
             try
             {
-                Conexion conexion = new Conexion();
+                Connection conexion = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char caracter = '"';
-                string sql = "SELECT * FROM USER WHERE EMAIL =" + caracter + u.Password+ caracter;
+                string sql = "SELECT * FROM USER WHERE EMAIL = " + caracter + adm.Email+ caracter;
                 cmd.Connection = conexion.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
