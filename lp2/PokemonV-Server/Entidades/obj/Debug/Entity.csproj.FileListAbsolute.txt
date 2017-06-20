@@ -1,0 +1,18 @@
+E:\PokemonV-Server\Entidades\bin\Debug\Entidades.dll
+E:\PokemonV-Server\Entidades\bin\Debug\Entidades.pdb
+E:\PokemonV-Server\Entidades\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+E:\PokemonV-Server\Entidades\obj\Debug\Entidades.dll
+E:\PokemonV-Server\Entidades\obj\Debug\Entidades.pdb
+<<<<<<< HEAD
+C:\Users\alulab14.INF\Downloads\20140196\SIS2-LP2\lp2\PokemonV-Server\Entidades\bin\Debug\Entidades.dll
+C:\Users\alulab14.INF\Downloads\20140196\SIS2-LP2\lp2\PokemonV-Server\Entidades\bin\Debug\Entidades.pdb
+C:\Users\alulab14.INF\Downloads\20140196\SIS2-LP2\lp2\PokemonV-Server\Entidades\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+C:\Users\alulab14.INF\Downloads\20140196\SIS2-LP2\lp2\PokemonV-Server\Entidades\obj\Debug\Entidades.dll
+C:\Users\alulab14.INF\Downloads\20140196\SIS2-LP2\lp2\PokemonV-Server\Entidades\obj\Debug\Entidades.pdb
+=======
+C:\Users\alulab14\SIS2-LP2\lp2\PokemonV-Server\Entidades\bin\Debug\Entidades.dll
+C:\Users\alulab14\SIS2-LP2\lp2\PokemonV-Server\Entidades\bin\Debug\Entidades.pdb
+C:\Users\alulab14\SIS2-LP2\lp2\PokemonV-Server\Entidades\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+C:\Users\alulab14\SIS2-LP2\lp2\PokemonV-Server\Entidades\obj\Debug\Entidades.dll
+C:\Users\alulab14\SIS2-LP2\lp2\PokemonV-Server\Entidades\obj\Debug\Entidades.pdb
+>>>>>>> ab8c2e5f4b672f492b87359faa456a94eeab128e
