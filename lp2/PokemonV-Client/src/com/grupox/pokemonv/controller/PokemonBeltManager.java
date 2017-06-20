@@ -23,14 +23,14 @@ public class PokemonBeltManager {
     private Game game;
     
     
-    private PokemonBeltMenu menu;
+    public static PokemonBeltMenu menu; //veamos eso!
     
     public static int ind;
 
     private boolean presionado= false;
     public static boolean presionadoF= false;
-    public static int indiceA;
-    public static int indiceB;
+    public static int indiceA = -1;
+    public static int indiceB = -1;
     
     /*constructor*/
     public PokemonBeltManager(User user, Game game){
@@ -80,6 +80,8 @@ public class PokemonBeltManager {
         if(menu.getVez() == 2){
             pokemonBelt.intercambiar(indiceA, indiceB); //funciona!
             menu.setVez(0);
+            indiceA = -1;
+            indiceB = -1;
         }
         
         pokemonBelt.render(g,ind, presionado);

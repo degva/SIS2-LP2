@@ -1,5 +1,6 @@
 package com.grupox.pokemonv.controller;
 
+import com.grupox.pokemonv.BD.PokemonAD;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.User;
 import java.awt.Canvas;
@@ -211,5 +212,7 @@ public class Game extends Canvas implements Runnable {
 //        new Login().setVisible( true );
         Game game = new Game();
         game.start();
+        
+
     }
 }
