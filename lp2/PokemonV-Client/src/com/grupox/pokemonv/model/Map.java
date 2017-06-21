@@ -226,10 +226,12 @@ public class Map {
         
         if( !nextTile.containsUser() && nextTile.isWalkable() ){
             user.getTile().setUser( null ); // Current tile
-            nextTile.setUser( user );
             user.setTile(nextTile);
+            nextTile.setUser( user );
+            System.out.println("RESULT TRY MOVE TRUE TO " + direction);
             return true;
         }else{
+            System.out.println("RESULT TRY MOVE TRUE TO " + direction);
             return false;
         }
     }

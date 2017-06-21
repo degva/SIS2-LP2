@@ -55,25 +55,29 @@ public class Game extends Canvas implements Runnable {
 
         // Initialization
         user = new Player(input);
+        user.setUser_id(1);
+        
         mapManager = new MapManager(user, this);
         pokemonBeltManager = new PokemonBeltManager(user, this);
         bagManager = new BagManager((Player) user, this);
         battleManager = new BattleManager((Player) user, this);
         //battleManager = new BattleManager(this);
-        state = State.BATTLE;
+        state = State.MAP;
         
         enemy = new Player(null);
+        enemy.setUser_id(2);
         enemy.getPokemons().add(new Pokemon(1,10,10,10,"Carlos", Pokemon.TypeP.Earth));
         
+        // TEST: SET PLAYER POSITION
+        Tile tile = mapManager.getMap().getGrid()[0][0];
+        tile.setUser(user);
+        user.setTile(tile);
+        
         // TEST: SET ENEMY POSITION
-        Tile tile = mapManager.getMap().getGrid()[4][4];
+        tile = mapManager.getMap().getGrid()[4][4];
         tile.setUser(enemy);
         enemy.setTile(tile);
         
-        // TEST: SET PLAYER POSITION
-        tile = mapManager.getMap().getGrid()[0][0];
-        tile.setUser(user);
-        user.setTile(tile);
     }
 
     /* Methods */

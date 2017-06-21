@@ -212,11 +212,9 @@ public abstract class User extends Renderable{
                 this.sprite = SpriteSheet.getInstance().getSubImage(0, 25);
                 break;
         }
-        System.out.println("PRINTING");
     }
     
     /* Getters & Setters */
-
     public int getUser_id() {
         return user_id;
     }

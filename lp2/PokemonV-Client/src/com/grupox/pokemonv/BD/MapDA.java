@@ -53,7 +53,7 @@ public class MapDA {
     
     private void readTiles(Map map) throws SQLException{
         map.setGrid( new Tile[map.getWidth()][map.getHeight()] );
-        System.out.println("BOUNDARIES: " + map.getWidth() + ", " + map.getHeight());
+        //System.out.println("BOUNDARIES: " + map.getWidth() + ", " + map.getHeight());
         
         Statement st = con.createStatement();
         String query = "SELECT * FROM TILE WHERE MAP_ID=1";
