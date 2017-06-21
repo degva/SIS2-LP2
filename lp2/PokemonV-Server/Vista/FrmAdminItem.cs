@@ -110,21 +110,15 @@ namespace Vista
             {
                 TXThp.Text = ((int)DGVitem.CurrentRow.Cells["HP"].Value).ToString();
                 TXThp.Enabled = true;
-                TXTcatchprob.Enabled = true;
-                TXTsteps.Enabled = true;
             }
             else if (CADtype == "Pokeball")
             {
                 TXTcatchprob.Text = ((int)DGVitem.CurrentRow.Cells["CATCH_PROB"].Value).ToString();
-                TXThp.Enabled = true;
                 TXTcatchprob.Enabled = true;
-                TXTsteps.Enabled = true;
             }
             else if (CADtype == "Repellent")
             {
                 TXTsteps.Text = ((int)DGVitem.CurrentRow.Cells["STEPS"].Value).ToString();
-                TXThp.Enabled = true;
-                TXTcatchprob.Enabled = true;
                 TXTsteps.Enabled = true;
             }
 
@@ -511,6 +505,9 @@ namespace Vista
                 TXTcatchprob.Enabled = false;
                 TXTsteps.Enabled = false;
                 TXThp.Enabled = true;
+                TXTcatchprob.Text = "";
+                TXTsteps.Text = "";
+                TXThp.Text = "";
             }
 
             if (CMBtype.SelectedItem.ToString() == "Repellent")
@@ -518,6 +515,9 @@ namespace Vista
                 TXTcatchprob.Enabled = false;
                 TXThp.Enabled = false;
                 TXTsteps.Enabled = true;
+                TXTcatchprob.Text = "";
+                TXTsteps.Text = "";
+                TXThp.Text = "";
             }
 
             if (CMBtype.SelectedItem.ToString() == "Pokeball")
@@ -525,6 +525,9 @@ namespace Vista
                 TXTcatchprob.Enabled = false;
                 TXTsteps.Enabled = false;
                 TXTcatchprob.Enabled = true;
+                TXTcatchprob.Text = "";
+                TXTsteps.Text = "";
+                TXThp.Text = "";
             }
         }
     }

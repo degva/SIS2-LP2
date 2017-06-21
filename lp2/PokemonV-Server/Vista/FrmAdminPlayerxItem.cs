@@ -16,6 +16,7 @@ namespace Vista
 {
     public partial class FrmAdminPlayerxItem : Form
     {
+        int lastitemid, lastplayerid;
         public FrmAdminPlayerxItem()
         {
             InitializeComponent();
@@ -84,11 +85,170 @@ namespace Vista
             int iditem = (int)DGVplayerxitem.CurrentRow.Cells["ITEM_ID"].Value;
             int idplayer = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_USER_ID"].Value;
 
-            //PlayersPokemonDA playersPokemon = new PlayersPokemonDA();
-            //playersPokemon.deletePokemonOfPlayer(idpokemon, idplayer);
+            PlayersItemDA playersItem = new PlayersItemDA();
+            playersItem.deleteItemOfPlayer(iditem, idplayer);
 
             load();
             inicio();
+        }
+
+        
+
+        private void BTNrecover_Click(object sender, EventArgs e)
+        {
+            int playerid = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_USER_ID"].Value;
+            int itemid = (int)DGVplayerxitem.CurrentRow.Cells["ITEM_ID"].Value;
+            
+            TXTitemid.Text = itemid.ToString();
+            TXTplayerid.Text = playerid.ToString();
+
+            TXTitemid.Enabled = true;
+            TXTplayerid.Enabled = true;
+
+            BTNdelete.Enabled = false;
+            BTNrecover.Enabled = false;
+            BTNnew.Enabled = false;
+            BTNsave.Enabled = false;
+            BTNupdate.Enabled = true;
+            BTNcancel.Enabled = true;
+
+            lastitemid = Convert.ToInt32(TXTitemid.Text);
+            lastplayerid = Convert.ToInt32(TXTplayerid.Text);
+        }
+
+        
+
+        private void BTNupdate_Click(object sender, EventArgs e)
+        {
+            int flag = 1;
+
+
+            if (TXTplayerid.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter a player id", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                Int32.Parse(TXTplayerid.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Must enter a number for player id", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            PlayerDA admin = new PlayerDA();
+            if (admin.verifyID(Convert.ToInt32(TXTplayerid.Text)) != 1)
+            {
+                MessageBox.Show("Doesnt exist that player", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+
+            if (TXTitemid.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter an item id ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                Int32.Parse(TXTitemid.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Must enter a number for item id", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+            ItemDA itemda= new ItemDA();
+            if (itemda.verifyID(Convert.ToInt32(TXTitemid.Text)) != 1)
+            {
+                MessageBox.Show("Doesn't exist that item", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+
+            if (flag == 1)
+            {
+                PlayersItemDA playersItemDA = new PlayersItemDA();
+
+                playersItemDA.updatePlayersItem(Convert.ToInt32(TXTitemid.Text),Convert.ToInt32(TXTplayerid.Text), lastitemid, lastplayerid);
+
+                load();
+                inicio();
+
+            }
+        }
+
+
+
+        private void BTNsave_Click(object sender, EventArgs e)
+        {
+
+            int flag = 1;
+
+
+            if (TXTplayerid.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter a player id", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                Int32.Parse(TXTplayerid.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Must enter a number for player id", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            PlayerDA admin = new PlayerDA();
+            if (admin.verifyID(Convert.ToInt32(TXTplayerid.Text)) != 1)
+            {
+                MessageBox.Show("Doesnt exist that player", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+
+            if (TXTitemid.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter an item id ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                Int32.Parse(TXTitemid.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Must enter a number for item id", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+            ItemDA itemda = new ItemDA();
+            if (itemda.verifyID(Convert.ToInt32(TXTitemid.Text)) != 1)
+            {
+                MessageBox.Show("Doesn't exist that item", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+            if (flag == 1)
+            {
+                PlayersItemDA playersItemDA = new PlayersItemDA();
+                playersItemDA.addPlayersItem(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTitemid.Text));
+
+                load();
+                inicio();
+
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Vista
 
 
         int lastpokemonid;
-        int order;
+        int lastorder;
         int lastplayerid;
         public FrmAdminPlayerxPokemon()
         {
@@ -115,7 +115,7 @@ namespace Vista
             BTNcancel.Enabled = true;
 
             lastpokemonid = Convert.ToInt32(TXTpokemonid.Text);
-            order = Convert.ToInt32(TXTorder.Text);
+            lastorder = Convert.ToInt32(TXTorder.Text);
             lastplayerid = Convert.ToInt32(TXTplayerid.Text);
         }
 
@@ -206,7 +206,7 @@ namespace Vista
             {
                 PlayersPokemonDA playersPokDA = new PlayersPokemonDA();
                 
-                playersPokDA.updatePlayersPokemon(Convert.ToInt32(TXTpokemonid.Text), Convert.ToInt32(TXTorder.Text), Convert.ToInt32(TXTplayerid.Text) , lastpokemonid, lastplayerid );
+                playersPokDA.updatePlayersPokemon(Convert.ToInt32(TXTpokemonid.Text), Convert.ToInt32(TXTorder.Text), Convert.ToInt32(TXTplayerid.Text) , lastpokemonid, lastplayerid, lastorder);
 
                 load();
                 inicio();

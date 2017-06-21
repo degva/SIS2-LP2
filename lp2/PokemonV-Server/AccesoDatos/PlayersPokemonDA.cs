@@ -39,7 +39,7 @@ namespace AccesoDatos
             }
         }
 
-        public int updatePlayersPokemon(int newidpokemon, int neworder, int newidplayer, int lastidpokemon, int lastidplayer)
+        public int updatePlayersPokemon(int newidpokemon, int neworder, int newidplayer, int lastidpokemon, int lastidplayer, int lastorder)
         {
             try
             {
@@ -48,7 +48,8 @@ namespace AccesoDatos
                 char caracter = '"';
                 string sql = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + caracter + newidpokemon + caracter + ", ORDER_POKEMON = " + caracter + neworder + caracter + ", PLAYER_USER_ID = "
                     + caracter + newidplayer + caracter 
-                + "where PLAYER_USER_ID = " + caracter + lastidplayer + caracter + "AND POKEMON_ID = " + caracter + lastidpokemon + caracter;
+                + "where PLAYER_USER_ID = " + caracter + lastidplayer + caracter + "AND POKEMON_ID = " + caracter + lastidpokemon + caracter 
+                + "AND ORDER_POKEMON = " + caracter + lastorder + caracter;
 
                 cmd.Connection = conexion.conn;
                 cmd.CommandText = sql;

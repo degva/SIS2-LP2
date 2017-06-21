@@ -106,6 +106,7 @@
             this.BTNupdate.TabIndex = 35;
             this.BTNupdate.Text = "Update";
             this.BTNupdate.UseVisualStyleBackColor = true;
+            this.BTNupdate.Click += new System.EventHandler(this.BTNupdate_Click);
             // 
             // BTNdelete
             // 
@@ -127,6 +128,7 @@
             this.BTNsave.TabIndex = 33;
             this.BTNsave.Text = "Save";
             this.BTNsave.UseVisualStyleBackColor = true;
+            this.BTNsave.Click += new System.EventHandler(this.BTNsave_Click);
             // 
             // BTNrecover
             // 
@@ -137,6 +139,7 @@
             this.BTNrecover.TabIndex = 32;
             this.BTNrecover.Text = "Recover";
             this.BTNrecover.UseVisualStyleBackColor = true;
+            this.BTNrecover.Click += new System.EventHandler(this.BTNrecover_Click);
             // 
             // BTNnew
             // 
