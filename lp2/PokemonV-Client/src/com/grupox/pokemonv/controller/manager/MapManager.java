@@ -4,6 +4,7 @@ import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.controller.menu.MapMenu;
 import com.grupox.pokemonv.model.Map;
+import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.User;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -41,6 +42,13 @@ public class MapManager {
               menu.setSelectedItem( 0 );
             
             state = State.MENU;
+        }else if( state == State.MOVING && input.action.isFirstPressed ){
+            Player enemy = map.tryBattle((Player)user, user.getDirection());
+            if(enemy != null){
+                //Game.setState(Game.State.BATTLE);
+                //game.getBattleManager().startBattle((Player)user, enemy);
+                System.out.println("POKEMON BATTLE");
+            }
         }else if( state == State.MENU && ( input.back.isFirstPressed || input.menu.isFirstPressed) ){
             state = State.MOVING;
         }

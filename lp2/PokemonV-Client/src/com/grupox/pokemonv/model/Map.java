@@ -1,7 +1,5 @@
 package com.grupox.pokemonv.model;
 
-// @TODO This class should have a render() method
-
 import com.grupox.pokemonv.controller.Game;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -234,6 +232,40 @@ public class Map {
         }else{
             return false;
         }
+    }
+    
+    public Player tryBattle( Player player, Renderable.Direction direction){
+        int[] pos = getPosUser( player );
+        int i = pos[0], j = pos[1];
+        
+        if( i == width || j == height ) return null;
+        
+        Tile nextTile;
+        switch ( direction ){
+            case UP:
+                if ( j == 0 ) return null;
+                nextTile = grid[i][j - 1];
+                break;
+            case DOWN:
+                if( j == height - 1 ) return null;
+                nextTile = grid[i][j + 1];
+                break;
+            case LEFT:
+                if( i == 0 ) return null;
+                nextTile = grid[i - 1][j];
+                break;
+            case RIGHT:
+                if( i == width - 1 ) return null;
+                nextTile = grid[i + 1][j];
+                break;
+            default:
+                return null;
+        }
+        
+        if(nextTile.containsUser())
+            return (Player)nextTile.getUser();
+        else
+            return null;
     }
     
     /*
