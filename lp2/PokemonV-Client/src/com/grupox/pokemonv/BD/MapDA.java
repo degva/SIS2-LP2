@@ -42,7 +42,7 @@ public class MapDA {
 
         while(rs.next()){
             map.setHeight(rs.getInt("height"));
-            map.setHeight(rs.getInt("width"));
+            map.setWidth(rs.getInt("width"));
             break;
         }
         
@@ -53,7 +53,6 @@ public class MapDA {
     
     private void readTiles(Map map) throws SQLException{
         map.setGrid( new Tile[map.getWidth()][map.getHeight()] );
-        //System.out.println("BOUNDARIES: " + map.getWidth() + ", " + map.getHeight());
         
         Statement st = con.createStatement();
         String query = "SELECT * FROM TILE WHERE MAP_ID=1";
@@ -69,8 +68,6 @@ public class MapDA {
             
             // Set
             map.getGrid()[x][y] = new Tile(getType(type), getUser(user_id), item_enabled, map);
-            System.out.println(x + ", " + y);
-            //break;
         }
     }
     

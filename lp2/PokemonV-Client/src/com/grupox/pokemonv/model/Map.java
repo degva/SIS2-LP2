@@ -1,5 +1,6 @@
 package com.grupox.pokemonv.model;
 
+import com.grupox.pokemonv.BD.MapDA;
 import com.grupox.pokemonv.controller.Game;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -19,18 +20,7 @@ public class Map {
     
     /* Constructors */
     public Map(){
-        loadGrid();
-        /*grid = new Tile[ width ][ height ];
-        for( int i = 0; i < width; i++ ){
-            for( int j = 0; j < height; j++ ){
-                // TEST
-                Tile.Type type;
-                if( i == j || i + j == height-1) type = Tile.Type.SAND;
-                else type = Tile.Type.GRASS;
-
-                grid[i][j] = new Tile( type, null, false, this );
-            }
-        }*/
+        //loadGrid();
     }
     
     private void loadGrid(){
@@ -228,10 +218,8 @@ public class Map {
             user.getTile().setUser( null ); // Current tile
             user.setTile(nextTile);
             nextTile.setUser( user );
-            System.out.println("RESULT TRY MOVE TRUE TO " + direction);
             return true;
         }else{
-            System.out.println("RESULT TRY MOVE TRUE TO " + direction);
             return false;
         }
     }

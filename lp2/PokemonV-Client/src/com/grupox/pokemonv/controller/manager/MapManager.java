@@ -29,9 +29,9 @@ public class MapManager {
         this.game = game;
         input = user.getInput();
         
-        //MapDA mapDA = new MapDA();
-        //map = mapDA.getMap();
-        map = new Map();
+        MapDA mapDA = new MapDA();
+        map = mapDA.getMap();
+        //map = new Map();
         
         menu = new MapMenu( input, 20, Game.WIDTH / 80, game );
         state = State.MOVING;
