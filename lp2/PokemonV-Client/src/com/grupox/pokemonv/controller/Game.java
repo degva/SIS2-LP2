@@ -36,7 +36,7 @@ public class Game extends Canvas implements Runnable {
     private MapManager mapManager;
     private BagManager bagManager;
     private BattleManager battleManager;
-    private User user;
+    private Player user;
     private Player enemy;
     private static State state;
     private PokemonBeltManager pokemonBeltManager;
@@ -60,12 +60,18 @@ public class Game extends Canvas implements Runnable {
         mapManager = new MapManager(user, this);
         pokemonBeltManager = new PokemonBeltManager(user, this);
         bagManager = new BagManager((Player) user, this);
-        battleManager = new BattleManager((Player) user, this);
+        battleManager = new BattleManager(this);
         //battleManager = new BattleManager(this);
         state = State.MAP;
         
         enemy = new Player(null);
         enemy.setUser_id(2);
+        user.getPokemons().add(new Pokemon(7,10,10,10,"Squirtle", Pokemon.TypeP.Earth));
+        user.getPokemons().add(new Pokemon(4,30,20,46,"Charmander", Pokemon.TypeP.Fire));
+        user.getPokemons().add(new Pokemon(1,10,20,30,"Bulbasaur", Pokemon.TypeP.Earth));
+        user.getPokemons().add(new Pokemon(12,60,22,44,"Butterfree", Pokemon.TypeP.Earth));
+        user.getPokemons().add(new Pokemon(7,10,10,10,"Squirtle5", Pokemon.TypeP.Earth));
+        user.getPokemons().add(new Pokemon(1,10,10,10,"Carlos2", Pokemon.TypeP.Earth));
         enemy.getPokemons().add(new Pokemon(1,10,10,10,"Carlos", Pokemon.TypeP.Earth));
         
         // TEST: SET PLAYER POSITION
