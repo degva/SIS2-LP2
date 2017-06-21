@@ -56,8 +56,8 @@ public class PokemonBelt {
 //        this.map = map;
         //como aun no tengo el ID del usuario
         pokAD = new PokemonAD();
-        listaPokemones = player.getPokemons();
-        //listaPokemones = pokAD.getListaPokemones(4);
+        //listaPokemones = player.getPokemons();
+        listaPokemones = pokAD.getListaPokemones(4);
         
 //        Pokemon.TypeP tipoE = Pokemon.TypeP.Earth;
 //        Pokemon.TypeP tipoF = Pokemon.TypeP.Fire;
