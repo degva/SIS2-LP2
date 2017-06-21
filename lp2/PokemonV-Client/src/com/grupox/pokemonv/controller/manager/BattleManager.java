@@ -271,6 +271,8 @@ public class BattleManager extends Renderable {
         }
         if (endBattle) {
             game.setState(Game.State.MAP);
+            endBattle = false;
+            state = State.P1_IDLE;
         }
     }
 
