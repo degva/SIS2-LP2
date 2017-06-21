@@ -19,13 +19,13 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 string sql = $"INSERT INTO POKEMON (NAME,LIFE,ATTACK_PTS,DEFFENSE_PTS,TYPE,DELETED)values('{pok.Name}','{pok.Life}', '{pok.Attack_pts}' , '{pok.Defense_pts}' , '{pok.Type}' , '{pok.Deleted}')";
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -39,16 +39,16 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
+                char character = '"';
                 string sql = "UPDATE POKEMON SET DELETED = '1' "
-                + "where ID = " + caracter + id + caracter;
+                + "where ID = " + character + id + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -61,11 +61,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM POKEMON WHERE NAME=" + caracter + pok.Name + caracter + "AND ID <> " + caracter + id + caracter;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM POKEMON WHERE NAME=" + character + pok.Name + character + "AND ID <> " + character + id + character;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -79,7 +79,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {
@@ -92,18 +92,18 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "UPDATE POKEMON SET NAME = " + caracter + pok.Name+ caracter + ", LIFE = " + caracter + pok.Life + caracter
-                    + ", ATTACK_PTS = " + caracter + pok.Attack_pts + caracter + ", DEFFENSE_PTS = " + caracter + pok.Defense_pts + caracter
-                    + ",TYPE = " + caracter + pok.Type + caracter 
-                + "where ID = " + caracter + id + caracter;
+                char character = '"';
+                string sql = "UPDATE POKEMON SET NAME = " + character + pok.Name+ character + ", LIFE = " + character + pok.Life + character
+                    + ", ATTACK_PTS = " + character + pok.Attack_pts + character + ", DEFFENSE_PTS = " + character + pok.Defense_pts + character
+                    + ",TYPE = " + character + pok.Type + character 
+                + "where ID = " + character + id + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -116,11 +116,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM POKEMON WHERE NAME=" + caracter + pok.Name + caracter;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM POKEMON WHERE NAME=" + character + pok.Name + character;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -134,7 +134,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {
@@ -146,11 +146,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM POKEMON WHERE ID =" + caracter + id + caracter;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM POKEMON WHERE ID =" + character + id + character;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -164,7 +164,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {

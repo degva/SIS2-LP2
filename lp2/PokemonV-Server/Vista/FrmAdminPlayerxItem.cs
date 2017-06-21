@@ -20,6 +20,8 @@ namespace Vista
         public FrmAdminPlayerxItem()
         {
             InitializeComponent();
+            init();
+            load();
         }
 
 
@@ -45,7 +47,7 @@ namespace Vista
             }
         }
 
-        public void inicio()
+        public void init()
         {
             TXTitemid.Enabled = false;
             TXTplayerid.Enabled = false;
@@ -77,7 +79,7 @@ namespace Vista
 
         private void BTNcancel_Click(object sender, EventArgs e)
         {
-            inicio();
+            init();
         }
 
         private void BTNdelete_Click(object sender, EventArgs e)
@@ -89,7 +91,7 @@ namespace Vista
             playersItem.deleteItemOfPlayer(iditem, idplayer);
 
             load();
-            inicio();
+            init();
         }
 
         
@@ -179,7 +181,7 @@ namespace Vista
                 playersItemDA.updatePlayersItem(Convert.ToInt32(TXTitemid.Text),Convert.ToInt32(TXTplayerid.Text), lastitemid, lastplayerid);
 
                 load();
-                inicio();
+                init();
 
             }
         }
@@ -246,7 +248,7 @@ namespace Vista
                 playersItemDA.addPlayersItem(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTitemid.Text));
 
                 load();
-                inicio();
+                init();
 
             }
         }

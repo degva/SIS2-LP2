@@ -16,16 +16,16 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
+                char character = '"';
                 string sql = "UPDATE PLAYER_X_ITEM SET DELETED = '1' "
-                + "where ITEM_ID = " + caracter + iditem+ caracter + "AND PLAYER_USER_ID = " + caracter + idplayer + caracter;
+                + "where ITEM_ID = " + character + iditem+ character + "AND PLAYER_USER_ID = " + character + idplayer + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -38,17 +38,17 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "UPDATE PLAYER_X_ITEM SET ITEM_ID = " + caracter + newiditem + caracter + ", PLAYER_USER_ID = "
-                    + caracter + newidplayer + caracter
-                + "where PLAYER_USER_ID = " + caracter + lastidplayer + caracter + "AND ITEM_ID = " + caracter + lastiditem + caracter;
+                char character = '"';
+                string sql = "UPDATE PLAYER_X_ITEM SET ITEM_ID = " + character + newiditem + character + ", PLAYER_USER_ID = "
+                    + character + newidplayer + character
+                + "where PLAYER_USER_ID = " + character + lastidplayer + character + "AND ITEM_ID = " + character + lastiditem + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -61,13 +61,13 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 string sql = $"INSERT INTO PLAYER_X_ITEM (PLAYER_USER_ID,ITEM_ID,DELETED)values('{playerid}','{itemid}', '{0}')";
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)

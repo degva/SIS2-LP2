@@ -20,14 +20,14 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 string sql = $"INSERT INTO USER (NAME,USERNAME,PASSWORD,EMAIL,DELETED,ISADMIN)values('{play.Name}','{play.Username}', '{play.Password}' , '{play.Email}' , '{play.Deleted}'  , '{play.IsAdmin}')";
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -43,11 +43,11 @@ namespace AccesoDatos
             try
             {
 
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                string caracter = "'";
-                string sql1 = "SELECT * FROM USER WHERE USERNAME=" + caracter + play.Username + caracter;
-                cmd.Connection = conexion.conn;
+                string character = "'";
+                string sql1 = "SELECT * FROM USER WHERE USERNAME=" + character + play.Username + character;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql1;
                 MySqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
@@ -55,11 +55,11 @@ namespace AccesoDatos
                 int id = reader.GetInt32("ID");
                 if (reader.HasRows)
                 {
-                    conexion.cerrarConexion();
-                    conexion = new Connection();
+                    connection.closeConnection();
+                    connection = new Connection();
                     MySqlCommand cmd1 = new MySqlCommand();
                     string sql2 = $"INSERT INTO PLAYER (USER_ID,LEVEL,EXPERIENCE)values('{id}' , '{1}'  , '{1}')";
-                    cmd1.Connection = conexion.conn;
+                    cmd1.Connection = connection.conn;
                     cmd1.CommandText = sql2;
                     cmd1.ExecuteNonQuery();
                 }
@@ -79,16 +79,16 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
+                char character = '"';
                 string sql = "UPDATE USER SET DELETED = '1' "
-                + "where USERNAME = " + caracter + cadena + caracter ;
+                + "where USERNAME = " + character + cadena + character ;
                 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -104,17 +104,17 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "UPDATE USER SET USERNAME = " + caracter + play.Username + caracter + ", PASSWORD = " + caracter + play.Password + caracter 
-                    + ", EMAIL = " + caracter + play.Email + caracter  + ", NAME = " +caracter + play.Name + caracter 
-                + "where ID = " + caracter + id + caracter;
+                char character = '"';
+                string sql = "UPDATE USER SET USERNAME = " + character + play.Username + character + ", PASSWORD = " + character + play.Password + character 
+                    + ", EMAIL = " + character + play.Email + character  + ", NAME = " +character + play.Name + character 
+                + "where ID = " + character + id + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -128,11 +128,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM USER WHERE USERNAME=" + caracter + play.Username + caracter + "AND ID <> " + caracter + id + caracter ;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM USER WHERE USERNAME=" + character + play.Username + character + "AND ID <> " + character + id + character ;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -147,7 +147,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {
@@ -159,11 +159,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM USER WHERE USERNAME =" + caracter + play.Username + caracter;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM USER WHERE USERNAME =" + character + play.Username + character;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -177,7 +177,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {
@@ -189,11 +189,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM USER WHERE EMAIL = " + caracter + play.Email + caracter;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM USER WHERE EMAIL = " + character + play.Email + character;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -207,7 +207,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {
@@ -219,11 +219,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM USER WHERE EMAIL = " + caracter + play.Email + caracter + "AND ID <> " + caracter + id + caracter ;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM USER WHERE EMAIL = " + character + play.Email + character + "AND ID <> " + character + id + character ;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -237,7 +237,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {
@@ -250,11 +250,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM USER WHERE ID =" + caracter + id + caracter +  "AND   ISADMIN = " + caracter + 0 + caracter;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM USER WHERE ID =" + character + id + character +  "AND   ISADMIN = " + character + 0 + character;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -268,7 +268,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {

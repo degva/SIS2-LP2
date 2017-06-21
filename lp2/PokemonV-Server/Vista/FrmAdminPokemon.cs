@@ -57,6 +57,7 @@ namespace Vista
             TXTlife.Enabled = false;
             TXTdeffensepts.Enabled = false;
             CMBtype.Enabled = false;
+            TXTid.Enabled = false;
 
             BTNdelete.Enabled = true;
             BTNrecover.Enabled = true;
@@ -70,6 +71,7 @@ namespace Vista
             TXTlife.Text = "";
             TXTdeffensepts.Text = "";
             CMBtype.Text = "";
+            TXTid.Text = "";
 
         }
 
@@ -81,6 +83,7 @@ namespace Vista
             TXTdeffensepts.Enabled = true;
             TXTlife.Enabled = true;
             CMBtype.Enabled = true;
+            TXTid.Enabled = true;
 
             BTNnew.Enabled = false;
             BTNrecover.Enabled = false;
@@ -113,6 +116,7 @@ namespace Vista
             int attackpts = (int)DGVpokemon.CurrentRow.Cells["ATTACK_PTS"].Value;
             int deffensepts = (int)DGVpokemon.CurrentRow.Cells["DEFFENSE_PTS"].Value;
             string CADtype = (string)DGVpokemon.CurrentRow.Cells["TYPE"].Value;
+            int id = (int)DGVpokemon.CurrentRow.Cells["ID"].Value;
 
 
             TXTname.Text = CADname;
@@ -120,6 +124,7 @@ namespace Vista
             TXTdeffensepts.Text = deffensepts.ToString();
             TXTlife.Text = life.ToString();
             CMBtype.Text = CADtype;
+            TXTid.Text = id.ToString();
 
 
             TXTattackpts.Enabled = true;
@@ -127,6 +132,7 @@ namespace Vista
             TXTdeffensepts.Enabled = true;
             TXTlife.Enabled = true;
             CMBtype.Enabled = true;
+            TXTid.Enabled = true;
 
             BTNdelete.Enabled = false;
             BTNrecover.Enabled = false;
@@ -168,7 +174,40 @@ namespace Vista
                 MessageBox.Show("Life points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-           
+
+
+
+
+            if (TXTid.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter an id", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                Int32.Parse(TXTid.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Must enter a number for id ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if ((Convert.ToInt32(TXTid.Text)) < 1)
+            {
+                MessageBox.Show("ID can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            PokemonDA adminPOK = new PokemonDA();
+            if (adminPOK.verifyID(Convert.ToInt32(TXTid.Text)) == 1)
+            {
+                MessageBox.Show("That id has been registered ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+
 
 
 
@@ -291,6 +330,36 @@ namespace Vista
                 MessageBox.Show("Life points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
+
+            if (TXTid.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter an id", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                Int32.Parse(TXTid.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Must enter a number for id ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if ((Convert.ToInt32(TXTid.Text)) < 1)
+            {
+                MessageBox.Show("ID can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            PokemonDA adminPOK = new PokemonDA();
+            if (adminPOK.verifyID(Convert.ToInt32(TXTid.Text)) == 1)
+            {
+                MessageBox.Show("That id has been registered ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
 
 
 

@@ -9,23 +9,23 @@ namespace AccesoDatos
 {
     public class Connection
     {
-        private string cadena = "server = quilla.lab.inf.pucp.edu.pe ; user = inf282gx ; database = inf282gx ; port = 3306 ; password = m8h53r9A6xBfeOe6;";
+        private string cad = "server = quilla.lab.inf.pucp.edu.pe ; user = inf282gx ; database = inf282gx ; port = 3306 ; password = m8h53r9A6xBfeOe6;";
         public MySqlConnection conn;
 
         public Connection()
         {
             try
             {
-                conn = new MySqlConnection(cadena);
+                conn = new MySqlConnection(cad);
                 conn.Open();
-				Console.WriteLine("Se establecio la conexion");
+				Console.WriteLine("Successful Connection");
                 
             }catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-        public void cerrarConexion()
+        public void closeConnection()
         {
             conn.Close();
         }

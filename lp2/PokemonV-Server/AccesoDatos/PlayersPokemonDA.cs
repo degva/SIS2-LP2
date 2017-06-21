@@ -11,26 +11,22 @@ namespace AccesoDatos
     public class PlayersPokemonDA
     {
         
-        public PlayersPokemonDA()
-        {
-
-        }
 
 
         public int deletePokemonOfPlayer(int idpokemon, int idplayer)
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
+                char character = '"';
                 string sql = "UPDATE PLAYER_X_POKEMON SET DELETED = '1' "
-                + "where POKEMON_ID = " + caracter + idpokemon + caracter + "AND PLAYER_USER_ID = " + caracter + idplayer + caracter ;
+                + "where POKEMON_ID = " + character + idpokemon + character + "AND PLAYER_USER_ID = " + character + idplayer + character ;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -43,18 +39,18 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + caracter + newidpokemon + caracter + ", ORDER_POKEMON = " + caracter + neworder + caracter + ", PLAYER_USER_ID = "
-                    + caracter + newidplayer + caracter 
-                + "where PLAYER_USER_ID = " + caracter + lastidplayer + caracter + "AND POKEMON_ID = " + caracter + lastidpokemon + caracter 
-                + "AND ORDER_POKEMON = " + caracter + lastorder + caracter;
+                char character = '"';
+                string sql = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + character + newidpokemon + character + ", ORDER_POKEMON = " + character + neworder + character + ", PLAYER_USER_ID = "
+                    + character + newidplayer + character 
+                + "where PLAYER_USER_ID = " + character + lastidplayer + character + "AND POKEMON_ID = " + character + lastidpokemon + character 
+                + "AND ORDER_POKEMON = " + character + lastorder + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -68,13 +64,13 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 string sql = $"INSERT INTO PLAYER_X_POKEMON (PLAYER_USER_ID,POKEMON_ID,ORDER_POKEMON,DELETED)values('{playerid}','{pokemonid}', '{order}' , '{0}')";
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)

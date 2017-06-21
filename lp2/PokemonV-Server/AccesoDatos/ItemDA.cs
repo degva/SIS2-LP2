@@ -19,13 +19,13 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 string sql = $"INSERT INTO ITEM (NAME,DESCRIPTION,ITEM_TYPE,CATCH_PROB,DELETED)values('{pokeball.Name}','{pokeball.Description}', '{pokeball.Type}' , '{pokeball.Catch_probability}' , '{0}')";
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -39,13 +39,13 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 string sql = $"INSERT INTO ITEM (NAME,DESCRIPTION,ITEM_TYPE,HP,DELETED)values('{pot.Name}','{pot.Description}', '{pot.Type}' , '{pot.HealthPoints}' , '{0}')";
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -59,13 +59,13 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 string sql = $"INSERT INTO ITEM (NAME,DESCRIPTION,ITEM_TYPE,STEPS,DELETED)values('{repel.Name}','{repel.Description}', '{repel.Type}' , '{repel.Steps}' , '{0}')";
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -80,11 +80,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM ITEM WHERE NAME=" + caracter + item.Name + caracter;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM ITEM WHERE NAME=" + character + item.Name + character;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -98,7 +98,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {
@@ -111,16 +111,16 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
+                char character = '"';
                 string sql = "UPDATE ITEM SET DELETED = '1' "
-                + "where ID = " + caracter + id + caracter;
+                + "where ID = " + character + id + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -134,11 +134,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM ITEM WHERE NAME=" + caracter + item.Name + caracter + "AND ID <> " + caracter + id + caracter;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM ITEM WHERE NAME=" + character + item.Name + character + "AND ID <> " + character + id + character;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -152,7 +152,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {
@@ -164,18 +164,18 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "UPDATE ITEM SET NAME = " + caracter + pok.Name + caracter + ", DESCRIPTION = " + caracter + pok.Description + caracter
-                    + ", ITEM_TYPE = " + caracter + pok.Type + caracter + ", CATCH_PROB = " + caracter + pok.Catch_probability + caracter
-                    + ",STEPS = " + caracter + null + caracter + ",HP = " + caracter + null + caracter 
-                + "where ID = " + caracter + id + caracter;
+                char character = '"';
+                string sql = "UPDATE ITEM SET NAME = " + character + pok.Name + character + ", DESCRIPTION = " + character + pok.Description + character
+                    + ", ITEM_TYPE = " + character + pok.Type + character + ", CATCH_PROB = " + character + pok.Catch_probability + character
+                    + ",STEPS = " + character + null + character + ",HP = " + character + null + character 
+                + "where ID = " + character + id + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -188,18 +188,18 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "UPDATE ITEM SET NAME = " + caracter + pot.Name + caracter + ", DESCRIPTION = " + caracter + pot.Description + caracter
-                    + ", ITEM_TYPE = " + caracter + pot.Type + caracter + ", HP = " + caracter + pot.HealthPoints + caracter
-                    + ",STEPS = " + caracter + null + caracter + ",CATCH_PROB = " + caracter + null + caracter
-                + "where ID = " + caracter + id + caracter;
+                char character = '"';
+                string sql = "UPDATE ITEM SET NAME = " + character + pot.Name + character + ", DESCRIPTION = " + character + pot.Description + character
+                    + ", ITEM_TYPE = " + character + pot.Type + character + ", HP = " + character + pot.HealthPoints + character
+                    + ",STEPS = " + character + null + character + ",CATCH_PROB = " + character + null + character
+                + "where ID = " + character + id + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -213,18 +213,18 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "UPDATE ITEM SET NAME = " + caracter + repel.Name + caracter + ", DESCRIPTION = " + caracter + repel.Description + caracter
-                    + ", ITEM_TYPE = " + caracter + repel.Type + caracter + ", STEPS = " + caracter + repel.Steps + caracter
-                    + ",CATCH_PROB = " + caracter + null + caracter + ",HP = " + caracter + null + caracter
-                + "where ID = " + caracter + id + caracter;
+                char character = '"';
+                string sql = "UPDATE ITEM SET NAME = " + character + repel.Name + character + ", DESCRIPTION = " + character + repel.Description + character
+                    + ", ITEM_TYPE = " + character + repel.Type + character + ", STEPS = " + character + repel.Steps + character
+                    + ",CATCH_PROB = " + character + null + character + ",HP = " + character + null + character
+                + "where ID = " + character + id + character;
 
-                cmd.Connection = conexion.conn;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-                conexion.cerrarConexion();
+                connection.closeConnection();
                 return 1;
             }
             catch (Exception ex)
@@ -238,11 +238,11 @@ namespace AccesoDatos
         {
             try
             {
-                Connection conexion = new Connection();
+                Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                char caracter = '"';
-                string sql = "SELECT * FROM ITEM WHERE ID =" + caracter + id + caracter ;
-                cmd.Connection = conexion.conn;
+                char character = '"';
+                string sql = "SELECT * FROM ITEM WHERE ID =" + character + id + character ;
+                cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -256,7 +256,7 @@ namespace AccesoDatos
                 }
                 reader.Read();
 
-                conexion.cerrarConexion();
+                connection.closeConnection();
             }
             catch (Exception ex)
             {

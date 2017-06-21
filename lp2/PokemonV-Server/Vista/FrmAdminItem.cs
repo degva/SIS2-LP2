@@ -20,7 +20,7 @@ namespace Vista
         {
             InitializeComponent();
             load();
-            inicio();
+            init();
 
         }
 
@@ -47,7 +47,7 @@ namespace Vista
             }
         }
 
-        public void inicio()
+        public void init()
         {
             TXTcatchprob.Enabled = false;
             TXTdescription.Enabled = false;
@@ -92,7 +92,7 @@ namespace Vista
 
         private void BTNcancel_Click(object sender, EventArgs e)
         {
-            inicio();
+            init();
         }
 
         private void BTNrecover_Click(object sender, EventArgs e)
@@ -145,7 +145,7 @@ namespace Vista
             itemda.deleteItem(id);
 
             load();
-            inicio();
+            init();
         }
 
         private void BTNsave_Click(object sender, EventArgs e)
@@ -252,15 +252,15 @@ namespace Vista
 
             if (flag == 1)
             {
-                TypeofItem tipo;
+                TypeofItem typeItem;
                 
                 
                 if (CMBtype.Text == "Pokeball")
                 {
-                    tipo = TypeofItem.Pokeball;
+                    typeItem = TypeofItem.Pokeball;
 
 
-                    Pokeball poke = new Pokeball (TXTname.Text,TXTdescription.Text,tipo, Convert.ToInt32(TXTcatchprob.Text));
+                    Pokeball poke = new Pokeball (TXTname.Text,TXTdescription.Text, typeItem, Convert.ToInt32(TXTcatchprob.Text));
 
                     ItemDA itemDA= new ItemDA();
                     if ((itemDA.verifyRepeatName2(poke)) == 1)
@@ -272,16 +272,16 @@ namespace Vista
                         itemDA.addItem1(poke);
 
                         load();
-                        inicio();
+                        init();
                     }
 
 
                 }
                 else if (CMBtype.Text == "Repellent")
                 {
-                    tipo = TypeofItem.Repellent;
+                    typeItem = TypeofItem.Repellent;
 
-                    Repellent repel = new Repellent(TXTname.Text, TXTdescription.Text, tipo, Convert.ToInt32(TXTsteps.Text));
+                    Repellent repel = new Repellent(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXTsteps.Text));
 
                     ItemDA itemDA = new ItemDA();
                     if ((itemDA.verifyRepeatName2(repel)) == 1)
@@ -293,14 +293,14 @@ namespace Vista
                         itemDA.addItem3(repel);
 
                         load();
-                        inicio();
+                        init();
                     }
                 }
                 else if (CMBtype.Text == "Potion")
                 {
-                    tipo  = TypeofItem.Potion;
+                    typeItem = TypeofItem.Potion;
 
-                    Potion pot = new Potion(TXTname.Text, TXTdescription.Text, tipo, Convert.ToInt32(TXThp.Text));
+                    Potion pot = new Potion(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXThp.Text));
 
                     ItemDA itemDA = new ItemDA();
                     if ((itemDA.verifyRepeatName2(pot)) == 1)
@@ -312,7 +312,7 @@ namespace Vista
                         itemDA.addItem2(pot);
 
                         load();
-                        inicio();
+                        init();
                     }
                 }
                 
@@ -430,15 +430,15 @@ namespace Vista
 
             if (flag == 1)
             {
-                TypeofItem tipo;
+                TypeofItem typeItem;
 
 
                 if (CMBtype.Text == "Pokeball")
                 {
-                    tipo = TypeofItem.Pokeball;
+                    typeItem = TypeofItem.Pokeball;
 
 
-                    Pokeball poke = new Pokeball(TXTname.Text, TXTdescription.Text, tipo, Convert.ToInt32(TXTcatchprob.Text));
+                    Pokeball poke = new Pokeball(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXTcatchprob.Text));
 
                     ItemDA itemDA = new ItemDA();
                     if ((itemDA.verifyRepeatName(poke,id)) == 1)
@@ -450,16 +450,16 @@ namespace Vista
                         itemDA.updateItem1(poke,id);
 
                         load();
-                        inicio();
+                        init();
                     }
 
 
                 }
                 else if (CMBtype.Text == "Repellent")
                 {
-                    tipo = TypeofItem.Repellent;
+                    typeItem = TypeofItem.Repellent;
 
-                    Repellent repel = new Repellent(TXTname.Text, TXTdescription.Text, tipo, Convert.ToInt32(TXTsteps.Text));
+                    Repellent repel = new Repellent(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXTsteps.Text));
 
                     ItemDA itemDA = new ItemDA();
                     if ((itemDA.verifyRepeatName(repel,id)) == 1)
@@ -471,14 +471,14 @@ namespace Vista
                         itemDA.updateItem3(repel, id);
 
                         load();
-                        inicio();
+                        init();
                     }
                 }
                 else if (CMBtype.Text == "Potion")
                 {
-                    tipo = TypeofItem.Potion;
+                    typeItem = TypeofItem.Potion;
 
-                    Potion pot = new Potion(TXTname.Text, TXTdescription.Text, tipo, Convert.ToInt32(TXThp.Text));
+                    Potion pot = new Potion(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXThp.Text));
 
                     ItemDA itemDA = new ItemDA();
                     if ((itemDA.verifyRepeatName(pot,id)) == 1)
@@ -490,7 +490,7 @@ namespace Vista
                         itemDA.updateItem2(pot, id);
 
                         load();
-                        inicio();
+                        init();
                     }
                 }
 

@@ -41,7 +41,7 @@ namespace AccesoDatos
                 }
             }
 
-            connection.cerrarConexion();
+            connection.closeConnection();
         }
 
         private List<string> readFile() {
