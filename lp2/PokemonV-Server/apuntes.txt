@@ -1,0 +1,2 @@
+que haga el cambio de pokemon(intercambio)
+que el usuario pueda elegir el ID de pokemon
