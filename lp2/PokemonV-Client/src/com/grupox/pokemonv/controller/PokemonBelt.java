@@ -15,6 +15,7 @@ import static com.grupox.pokemonv.controller.PokemonBeltManager.*;
 //import static com.grupox.pokemonv.controller.Font.fontHeightOut;
 
 import com.grupox.pokemonv.model.Map;
+import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.SpriteSheet;
 import static com.grupox.pokemonv.model.Tile.spriteHeightOut;
@@ -48,12 +49,15 @@ public class PokemonBelt {
     private int spriteWidthOut = 23;//con esto aparecen los 6
     private int spriteHeightOut = 23;
     //private int indice;
+    private Player player;
     
-    public PokemonBelt(){
+    public PokemonBelt(Player player){
+        this.player = player;
 //        this.map = map;
         //como aun no tengo el ID del usuario
         pokAD = new PokemonAD();
-        listaPokemones = pokAD.getListaPokemones(4);
+        listaPokemones = player.getPokemons();
+        //listaPokemones = pokAD.getListaPokemones(4);
         
 //        Pokemon.TypeP tipoE = Pokemon.TypeP.Earth;
 //        Pokemon.TypeP tipoF = Pokemon.TypeP.Fire;

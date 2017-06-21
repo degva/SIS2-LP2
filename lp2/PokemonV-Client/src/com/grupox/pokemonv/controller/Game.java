@@ -67,6 +67,11 @@ public class Game extends Canvas implements Runnable {
         enemy = new Player(null);
         enemy.setUser_id(2);
         user.getPokemons().add(new Pokemon(7,10,10,10,"Squirtle", Pokemon.TypeP.Earth));
+        user.getPokemons().add(new Pokemon(4,30,20,46,"Charmander", Pokemon.TypeP.Fire));
+        user.getPokemons().add(new Pokemon(1,10,20,30,"Bulbasaur", Pokemon.TypeP.Earth));
+        user.getPokemons().add(new Pokemon(12,60,22,44,"Butterfree", Pokemon.TypeP.Earth));
+        user.getPokemons().add(new Pokemon(7,10,10,10,"Squirtle5", Pokemon.TypeP.Earth));
+        user.getPokemons().add(new Pokemon(1,10,10,10,"Carlos2", Pokemon.TypeP.Earth));
         enemy.getPokemons().add(new Pokemon(1,10,10,10,"Carlos", Pokemon.TypeP.Earth));
         
         // TEST: SET PLAYER POSITION
