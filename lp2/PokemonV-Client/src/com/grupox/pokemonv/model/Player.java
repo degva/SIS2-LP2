@@ -3,17 +3,21 @@ package com.grupox.pokemonv.model;
 import com.grupox.pokemonv.controller.InputHandler;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends User{
     /* Attributes */
     private int experience;
     private int level;
+    private ArrayList<Pokemon> pokemons;
     
     /* Constructors */
     public Player( InputHandler input ){
         super( input );
         
         this.sprite = SpriteSheet.getInstance().getSubImage( 0, 0 );
+        
+        pokemons = new ArrayList<>();
         
         experience = 0;
         level = 0;
@@ -43,5 +47,8 @@ public class Player extends User{
     }
     public void setLevel( int level ) {
         this.level = level;
+    }
+    public ArrayList<Pokemon> getPokemons() {
+        return pokemons;
     }
 }
