@@ -26,6 +26,7 @@ public class MapManager {
     /* Constructors */
     public MapManager( User user, Game game ){
         this.user = user;
+        this.game = game;
         input = user.getInput();
         
         //MapDA mapDA = new MapDA();
@@ -48,9 +49,8 @@ public class MapManager {
         }else if( state == State.MOVING && input.action.isFirstPressed ){
             Player enemy = map.tryBattle((Player)user, user.getDirection());
             if(enemy != null){
-                //Game.setState(Game.State.BATTLE);
-                //game.getBattleManager().startBattle((Player)user, enemy);
-                System.out.println("POKEMON BATTLE");
+                Game.setState(Game.State.BATTLE);
+                game.getBattleManager().startBattle((Player)user, enemy);
             }
         }else if( state == State.MENU && ( input.back.isFirstPressed || input.menu.isFirstPressed) ){
             state = State.MOVING;

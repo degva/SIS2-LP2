@@ -137,7 +137,6 @@ public class BattleManager extends Renderable {
     public void startBattle(Player p1, Player p2) {
         this.player = p1;
         input = p1.getInput();
-
     }
 
     public void loadBattleAnimation() {
