@@ -3,6 +3,7 @@ package com.grupox.pokemonv.controller.manager;
 import com.grupox.pokemonv.controller.*;
 import com.grupox.pokemonv.controller.menu.BattleMenu;
 import com.grupox.pokemonv.model.Player;
+import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.Renderable;
 import com.grupox.pokemonv.model.User;
 import java.awt.Color;
@@ -36,14 +37,16 @@ public class BattleManager extends Renderable {
     private Player player;
     private Player player2;
     private BufferedImage currSprite2;
-    private final String route1 = "res/battle/bulb_back1.png";
-    private final String route2 = "res/battle/pika_front1.png";
-    private final String rutaAni1 = "res/battle/bulb_back2.png";
-    private final String rutaAni2 = "res/battle/bulb_back3.png";
-    private final String rutaAniOp1 = "res/battle/pika_front2.png";
-    private final String rutaAniOp2 = "res/battle/pika_front3.png";
+    private String route1 = "res/battle/bulb_back1.png";
+    private String route2 = "res/battle/pika_front1.png";
+    private String rutaAni1 = "res/battle/bulb_back2.png";
+    private String rutaAni2 = "res/battle/bulb_back3.png";
+    private String rutaAniOp1 = "res/battle/pika_front2.png";
+    private String rutaAniOp2 = "res/battle/pika_front3.png";
+    
+    private String nombrePokPlayer1;
+    private String nombrePokPlayer2;
     private final String rutaOpcion = "res/battle/fondoOpciones.png";
-
     HashMap<Integer, ArrayList<String>> mapPokemons;
     ArrayList<String> rutasPOK1;
     ArrayList<String> rutasPOK2;
@@ -66,8 +69,8 @@ public class BattleManager extends Renderable {
     private final int topOffset = 390;   // px
     private final int rightOffset = Game.WIDTH / 1000;
     private final double movePeriod = 0.2;
+
     private BufferedImage pokemon1;
-    private Image pokemon1Attack;
     private BufferedImage pokemon2;
     private BufferedImage imgFondo;
     private BufferedImage hp1;
@@ -79,45 +82,60 @@ public class BattleManager extends Renderable {
     private BufferedImage fondoOpcion;
     private int NUM_TICKS_WAIT = 2;
 
-    private String lastMessage;
     private int vidaPok1;
     private int vidaPok2;
     private Animation atk;
     private Animation idle;
     private Animation atkP2;
     private Animation idleP2;
-    private double now;
-    private double lastMove = 0;
     private int numTicks = 0;
+
     private BattleMenu menu;
     private FileReader lector;
     private BufferedReader entrada;
     private String response;
     private boolean endBattle = false;
 
-    
-
-    public BattleManager(Player player, Game game) {
+    public BattleManager(Game game) {
         //Loading the buffered images
         super();
         linkRoutes();
-        this.player = player;
-        input = player.getInput();
         this.game = game;
         try {
-            pokemon1 = ImageIO.read(new File(route1));
-            //pokemon1Attack = new ImageIcon(route1Attack).getImage();
-            pokemon2 = ImageIO.read(new File(route2));
-            animacion1 = ImageIO.read(new File(rutaAni1));
-            animacion2 = ImageIO.read(new File(rutaAni2));
-            animacionOp1 = ImageIO.read(new File(rutaAniOp1));
-            animacionOp2 = ImageIO.read(new File(rutaAniOp2));
             imgFondo = ImageIO.read(new File(rutaFondo));
             fondoOpcion = ImageIO.read(new File(rutaOpcion));
             hp1 = ImageIO.read(new File(rutaHP1));
             hp2 = ImageIO.read(new File(rutaHP2));
             lector = new FileReader("res/battle/other1.txt");
-            entrada = new BufferedReader(lector);
+        } catch (Exception exp) {
+        }
+        entrada = new BufferedReader(lector);
+    }
+
+    public void establishRoutes(Pokemon pok1, Pokemon pok2) {
+        int idPok1 = pok1.id;
+        int idPok2 = pok2.id;
+
+        route1 = mapPokemons.get(idPok1).get(0);
+        route2 = mapPokemons.get(idPok2).get(3);
+        rutaAni1 = mapPokemons.get(idPok1).get(1);
+        rutaAni2 = mapPokemons.get(idPok1).get(2);
+        rutaAniOp1 = mapPokemons.get(idPok2).get(4);
+        rutaAniOp2 = mapPokemons.get(idPok2).get(5);
+
+    }
+
+    public void startBattle(Player p1, Player p2) {
+        this.player = p1;
+        input = p1.getInput();
+        establishRoutes(p1.getPokemons().get(0), p2.getPokemons().get(0)); //Obtiene el primer pokemon de cada uno
+        try {
+            pokemon1 = ImageIO.read(new File(route1));
+            pokemon2 = ImageIO.read(new File(route2));
+            animacion1 = ImageIO.read(new File(rutaAni1));
+            animacion2 = ImageIO.read(new File(rutaAni2));
+            animacionOp1 = ImageIO.read(new File(rutaAniOp1));
+            animacionOp2 = ImageIO.read(new File(rutaAniOp2));
         } catch (Exception exp) {
         }
         state = State.P1_IDLE;
@@ -128,15 +146,12 @@ public class BattleManager extends Renderable {
         atkP2 = animations.get(findAnimation("attackP2"));
         idle = animations.get(findAnimation("idlePok1"));
         idleP2 = animations.get(findAnimation("idleP2"));
+        nombrePokPlayer1 = p1.getPokemons().get(0).getName();
+        nombrePokPlayer2 = p2.getPokemons().get(0).getName();
         atk.play();
         atkP2.play();
         idle.play();
         idleP2.play();
-    }
-
-    public void startBattle(Player p1, Player p2) {
-        this.player = p1;
-        input = p1.getInput();
     }
 
     public void loadBattleAnimation() {
@@ -186,9 +201,11 @@ public class BattleManager extends Renderable {
                     System.out.println("Usuario 1 realizo un ataque");
                     numTicks = 0;
                     vidaPok2 -= 20;
+                    if (vidaPok2==0) endBattle=true;
                 }
                 break;
             case P1_BAG:
+                endBattle=true;
                 break;
             case P1_GIVEUP:
                 currSprite = idle.getCurrSprite();
@@ -224,10 +241,12 @@ public class BattleManager extends Renderable {
                     state = State.P1_IDLE;
                     System.out.println("Usuario 2 realizo un ataque");
                     vidaPok1 -= 20;
+                    if (vidaPok1==0) endBattle=true;
                     numTicks = 0;
                 }
                 break;
             case P2_BAG:
+                endBattle=true;
                 break;
             case P2_GIVEUP:
                 currSprite = idle.getCurrSprite();
@@ -265,7 +284,7 @@ public class BattleManager extends Renderable {
         g.setColor(Color.green);
         g.fillRect(480, 208 + 125, vidaPok1, 20);
         g.drawImage(hp1, 360, 145 + 125, 280, 110, null);
-        Font.getInstance().drawString("BULBASAUR", g, 450, 160 + 125);
+        Font.getInstance().drawString(nombrePokPlayer1, g, 450, 160 + 125);
 
         g.setColor(Color.red);
         g.fillRect(165, 85 + 75, 140, 20);
@@ -273,7 +292,7 @@ public class BattleManager extends Renderable {
         g.fillRect(165, 85 + 75, vidaPok2, 20);
         g.drawImage(hp2, 60, 30 + 75, 280, 110, null);
 
-        Font.getInstance().drawString("PIKACHU", g, 120, 40 + 75);
+        Font.getInstance().drawString(nombrePokPlayer2, g, 120, 40 + 75);
 
         //g.fillRect(330,180,230,10);
         switch (state) {
@@ -283,9 +302,13 @@ public class BattleManager extends Renderable {
                 Font.getInstance().drawString("CHOOSE ONE OPTION", g, 30, 475);
                 break;
             case P1_ATTACK:
-                Font.getInstance().drawString("YOU ARE ATTACKING...", g, 30, 475);
+                if(!endBattle)Font.getInstance().drawString("YOU ARE ATTACKING...", g, 30, 475);
+                else Font.getInstance().drawString("YOU WON THE MATCH", g, 30, 475);
+                
                 break;
             case P1_BAG:
+                Font.getInstance().drawString("YOU USED THE BAG", g, 30, 475);
+                
                 break;
             case P1_GIVEUP:
                 Font.getInstance().drawString("YOU RAN AWAY, LOSING THE BATTLE", g, 30, 475);
@@ -293,9 +316,13 @@ public class BattleManager extends Renderable {
             case P2_IDLE:
                 break;
             case P2_ATTACK:
-                Font.getInstance().drawString("YOUR OPONENT IS ATTACKING...", g, 30, 475);
+                if(!endBattle)Font.getInstance().drawString("YOUR OPONENT IS ATTACKING...", g, 30, 475);
+                else Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
+                
                 break;
             case P2_BAG:
+                Font.getInstance().drawString("HE USED THE BAG", g, 30, 475);
+                
                 break;
             case P2_GIVEUP:
                 Font.getInstance().drawString("YOU WON THE MATCH, THE OTHER PLAYER LEFT", g, 30, 475);
@@ -310,10 +337,6 @@ public class BattleManager extends Renderable {
 
     public void setState(State state) {
         this.state = state;
-    }
-
-    public void setMessage(String mes) {
-        this.lastMessage = mes;
     }
 
     public String getOtherResponse() {
@@ -335,7 +358,7 @@ public class BattleManager extends Renderable {
     public void setAttack(boolean b) {
         attack = b;
     }
-    
+
     public void linkRoutes() {
         mapPokemons = new HashMap<Integer, ArrayList<String>>();
         rutasPOK1 = new ArrayList<String>();
@@ -343,43 +366,43 @@ public class BattleManager extends Renderable {
         rutasPOK3 = new ArrayList<String>();
         rutasPOK4 = new ArrayList<String>();
         rutasPOK7 = new ArrayList<String>();
-        
+
         rutasPOK1.add("res/battle/bulb_back1.png");
         rutasPOK1.add("res/battle/bulb_back2.png");
         rutasPOK1.add("res/battle/bulb_back3.png");
         rutasPOK1.add("res/battle/bulb_front1.png");
         rutasPOK1.add("res/battle/bulb_front2.png");
         rutasPOK1.add("res/battle/bulb_front3.png");
-        
+
         rutasPOK2.add("res/battle/pika_back1.png");
         rutasPOK2.add("res/battle/pika_back2.png");
         rutasPOK2.add("res/battle/pika_back3.png");
         rutasPOK2.add("res/battle/pika_front1.png");
         rutasPOK2.add("res/battle/pika_front2.png");
         rutasPOK2.add("res/battle/pika_front3.png");
-        
+
         rutasPOK3.add("res/battle/butt_back1.png");
         rutasPOK3.add("res/battle/butt_back2.png");
         rutasPOK3.add("res/battle/butt_back3.png");
         rutasPOK3.add("res/battle/butt_front1.png");
         rutasPOK3.add("res/battle/butt_front2.png");
         rutasPOK3.add("res/battle/butt_front3.png");
-        
+
         rutasPOK4.add("res/battle/char_back1.png");
         rutasPOK4.add("res/battle/char_back2.png");
         rutasPOK4.add("res/battle/char_back3.png");
         rutasPOK4.add("res/battle/char_front1.png");
         rutasPOK4.add("res/battle/char_front2.png");
         rutasPOK4.add("res/battle/char_front3.png");
-        
+
         rutasPOK7.add("res/battle/sq_back1.png");
         rutasPOK7.add("res/battle/sq_back2.png");
         rutasPOK7.add("res/battle/sq_back3.png");
         rutasPOK7.add("res/battle/sq_front1.png");
         rutasPOK7.add("res/battle/sq_front2.png");
         rutasPOK7.add("res/battle/sq_front3.png");
-        
-        mapPokemons.put(1, rutasPOK1); // ID:2->Pikachu
+
+        mapPokemons.put(1, rutasPOK1); // ID:1->Bulbasaur
         mapPokemons.put(2, rutasPOK2); // ID:2->Pikachu
         mapPokemons.put(3, rutasPOK3); // ID:3->Butterfree
         mapPokemons.put(4, rutasPOK4); // ID:4->Charmander
