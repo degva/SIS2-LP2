@@ -129,26 +129,26 @@ namespace Vista
 
             if (TXTname.Text == "")
             {
-                MessageBox.Show("Debe colocar un nombre", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
             if (TXTusername.Text == "")
             {
-                MessageBox.Show("Debe colocar un usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter an username", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
             if (TXTpassword.Text == "")
             {
-                MessageBox.Show("Debe colocar una contraseña", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a password", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
 
             if (TXTemail.Text == "")
             {
-                MessageBox.Show("Debe colocar un correo", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter an email", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
                 flag2 = 0;
             }
@@ -157,7 +157,7 @@ namespace Vista
             {
                 if (verifyemail(TXTemail.Text) == 0)
                 {
-                    MessageBox.Show("Debe colocar un correo válido", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Must enter a valid email ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     flag = 0;
                 }
 
@@ -166,34 +166,39 @@ namespace Vista
 
             if ((TXTusername.Text.Contains(" ")) || (TXTusername.Text.Contains('"')))
             {
-                MessageBox.Show("No se permiten espacios ni comillas en el nombre de usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Spaces and quotation marks are not allowed in the username", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
             if ((TXTpassword.Text.Contains(" ")) || (TXTpassword.Text.Contains('"')))
             {
-                MessageBox.Show("No se permiten espacios ni comillas en la contraseña", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Spaces and quotation marks are not allowed in the password", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
-            if(flag == 1)
+            if (flag == 1)
             {
+                TXTemail.Text = TXTemail.Text.ToLower();
+                TXTemail.Text = TXTemail.Text.Trim();
+                TXTpassword.Text = TXTpassword.Text.Trim();
+                TXTusername.Text = TXTusername.Text.Trim();
+
                 Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text, 0, 0);
 
                 PlayerDA playerDA = new PlayerDA();
                 if ((playerDA.verifyRepeatUsername(player)) == 1)
                 {
-                    MessageBox.Show("Ya se encuentra registrado ese usuario");
+                    MessageBox.Show("That username has already been registered");
                 }
                 else if ((playerDA.verifyRepeatemail(player)) == 1)
                 {
-                    MessageBox.Show("El correo ya esta registrado. Ingresa uno diferente");
+                    MessageBox.Show("That email has already been registered");
                 }
                 else
                 {
                     playerDA.addPlayer(player);
                     playerDA.addPlayer2(player);
-                    MessageBox.Show("Registro exitoso");
+                    MessageBox.Show("New player has been added");
                     this.DialogResult = DialogResult.OK;
 
                     load();
@@ -259,26 +264,26 @@ namespace Vista
 
             if (TXTname.Text == "")
             {
-                MessageBox.Show("Debe colocar un nombre", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
             if (TXTusername.Text == "")
             {
-                MessageBox.Show("Debe colocar un usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter an username", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
             if (TXTpassword.Text == "")
             {
-                MessageBox.Show("Debe colocar una contraseña", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a password", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
 
             if (TXTemail.Text == "")
             {
-                MessageBox.Show("Debe colocar un correo", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter an email", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
                 flag2 = 0;
             }
@@ -287,7 +292,7 @@ namespace Vista
             {
                 if (verifyemail(TXTemail.Text) == 0)
                 {
-                    MessageBox.Show("Debe colocar un correo válido", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Must enter a valid email ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     flag = 0;
                 }
 
@@ -296,28 +301,36 @@ namespace Vista
 
             if ((TXTusername.Text.Contains(" ")) || (TXTusername.Text.Contains('"')))
             {
-                MessageBox.Show("No se permiten espacios ni comillas en el nombre de usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Spaces and quotation marks are not allowed in the username", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
             if ((TXTpassword.Text.Contains(" ")) || (TXTpassword.Text.Contains('"')))
             {
-                MessageBox.Show("No se permiten espacios ni comillas en la contraseña", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Spaces and quotation marks are not allowed in the password", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
+
+
             if (flag == 1)
             {
+
+                TXTemail.Text = TXTemail.Text.ToLower();
+                TXTemail.Text = TXTemail.Text.Trim();
+                TXTpassword.Text = TXTpassword.Text.Trim();
+                TXTusername.Text = TXTusername.Text.Trim();
+
                 Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0, 0);
 
                 PlayerDA playerDA = new PlayerDA();
                 if((playerDA.verifyRepeatUsername2(player, id)) == 1)
                 {
-                    MessageBox.Show("Ya se encuentra registrado ese usuario");
+                    MessageBox.Show("That username has already been registered");
                 }
                 else if ((playerDA.verifyRepeatemail2(player, id)) == 1)
                 {
-                    MessageBox.Show("El correo ya esta registrado. Ingresa uno diferente");
+                    MessageBox.Show("That email has already been registered");
                 }
                 else
                 {

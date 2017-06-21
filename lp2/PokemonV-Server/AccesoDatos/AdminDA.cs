@@ -37,6 +37,42 @@ namespace AccesoDatos
 
         }
 
+        public int addAdmin2(Admin adm)
+        {
+            try
+            {
+
+                Connection conexion = new Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                string caracter = "'";
+                string sql1 = "SELECT * FROM USER WHERE USERNAME=" + caracter + adm.Username + caracter;
+                cmd.Connection = conexion.conn;
+                cmd.CommandText = sql1;
+                MySqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+
+                int id = reader.GetInt32("ID");
+                if (reader.HasRows)
+                {
+                    conexion.cerrarConexion();
+                    conexion = new Connection();
+                    MySqlCommand cmd1 = new MySqlCommand();
+                    string sql2 = $"INSERT INTO ADMIN (USER_ID,PERMISSION_LEVEL)values('{id}' , '{5}')";
+                    cmd1.Connection = conexion.conn;
+                    cmd1.CommandText = sql2;
+                    cmd1.ExecuteNonQuery();
+                }
+
+                return 1;
+
+            }
+            catch (Exception exp)
+            {
+                return 0;
+            }
+
+
+        }
 
         public int verifyLogin(string username, string password)
         {

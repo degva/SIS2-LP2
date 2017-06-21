@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
+    <Compile Include="ItemDA.cs" />
     <Compile Include="MapDA.cs" />
     <Compile Include="PlayerDA.cs" />
     <Compile Include="PlayersPokemonDA.cs" />

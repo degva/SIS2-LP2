@@ -214,7 +214,7 @@ namespace Vista
             }
 
 
-            if (TXTname.Text.Contains('"'))
+            if ((TXTname.Text.Contains('"')) || (TXTname.Text.Contains(' ')))
             {
                 MessageBox.Show("Quotation mark and spaces are not allowed in the name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
