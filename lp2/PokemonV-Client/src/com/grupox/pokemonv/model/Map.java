@@ -224,7 +224,7 @@ public class Map {
                 return false;
         }
         
-        if( !nextTile.containsUser() ){
+        if( !nextTile.containsUser() && nextTile.isWalkable() ){
             user.getTile().setUser( null ); // Current tile
             nextTile.setUser( user );
             user.setTile(nextTile);
