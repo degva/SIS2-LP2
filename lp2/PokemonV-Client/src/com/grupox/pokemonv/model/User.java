@@ -30,7 +30,11 @@ public abstract class User extends Renderable{
         
         this.input = input;
         user_id = 5;
+        direction = Direction.DOWN;
         
+        if( input == null ){
+            getNPCSprite();
+        }
         loadAnimations();
     }
     
@@ -84,7 +88,6 @@ public abstract class User extends Renderable{
                 // Animate
                 Animation walkRight = animations.get( findAnimation( "walkRight" ) );
                 if( input.up.isFirstPressed ){
-                    System.out.println("FIRST PRESSED ANIMATIONS STOPPED");
                     //stopAnimations();
                     walkRight.play();
                 }
@@ -117,7 +120,11 @@ public abstract class User extends Renderable{
     }
     
     public void render( Graphics2D g, int x, int y ){
-        g.drawImage(currSprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
+        if(input == null){
+            g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
+        }else{
+            g.drawImage(currSprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
+        }
     }
     
     private void loadAnimations(){
@@ -187,10 +194,26 @@ public abstract class User extends Renderable{
         animations.add( walkRightAnimation );
     }
     
-    /*
-    login(){}
-    logout(){}
-    */
+    private void getNPCSprite(){
+        switch ( direction ){
+            case DOWN:
+                this.sprite = SpriteSheet.getInstance().getSubImage(0, 25);
+                break;
+            case LEFT:
+                this.sprite = SpriteSheet.getInstance().getSubImage(1, 25);
+                break;
+            case RIGHT:
+                this.sprite = SpriteSheet.getInstance().getSubImage(2, 25);
+                break;
+            case UP:
+                this.sprite = SpriteSheet.getInstance().getSubImage(3, 25);
+                break;
+            default:
+                this.sprite = SpriteSheet.getInstance().getSubImage(0, 25);
+                break;
+        }
+        System.out.println("PRINTING");
+    }
     
     /* Getters & Setters */
 

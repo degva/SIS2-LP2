@@ -15,8 +15,6 @@ public class Player extends User{
     public Player( InputHandler input ){
         super( input );
         
-        this.sprite = SpriteSheet.getInstance().getSubImage( 0, 0 );
-        
         pokemons = new ArrayList<>();
         
         experience = 0;

@@ -1,6 +1,5 @@
 package com.grupox.pokemonv.controller;
 
-import com.grupox.pokemonv.BD.PokemonAD;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.User;
 import java.awt.Canvas;
@@ -10,6 +9,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import com.grupox.pokemonv.controller.manager.*;
 import com.grupox.pokemonv.model.Pokemon;
+import com.grupox.pokemonv.model.Tile;
 
 public class Game extends Canvas implements Runnable {
 
@@ -59,10 +59,20 @@ public class Game extends Canvas implements Runnable {
         pokemonBeltManager = new PokemonBeltManager(user, this);
         bagManager = new BagManager((Player) user, this);
         battleManager = new BattleManager((Player) user, this);
-        state = State.BATTLE;
+        state = State.MAP;
         
         enemy = new Player(null);
         enemy.getPokemons().add(new Pokemon(1,10,10,10,"Carlos", Pokemon.TypeP.Earth));
+        
+        // TEST: SET ENEMY POSITION
+        Tile tile = mapManager.getMap().getGrid()[4][4];
+        tile.setUser(enemy);
+        enemy.setTile(tile);
+        
+        // TEST: SET PLAYER POSITION
+        tile = mapManager.getMap().getGrid()[0][0];
+        tile.setUser(user);
+        user.setTile(tile);
     }
 
     /* Methods */
@@ -155,7 +165,6 @@ public class Game extends Canvas implements Runnable {
 
     private void render() {
         Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
-
         // Render screen according to state
         switch (state) {
             case MAP:
@@ -163,7 +172,6 @@ public class Game extends Canvas implements Runnable {
                 break;
             case BATTLE:
                 battleManager.render(g);
-
                 break;
             case POKEMON_BELT:
                 pokemonBeltManager.render(g);

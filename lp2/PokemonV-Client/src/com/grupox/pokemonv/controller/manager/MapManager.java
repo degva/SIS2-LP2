@@ -4,7 +4,6 @@ import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.controller.menu.MapMenu;
 import com.grupox.pokemonv.model.Map;
-import com.grupox.pokemonv.model.Tile;
 import com.grupox.pokemonv.model.User;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -28,10 +27,6 @@ public class MapManager {
         input = user.getInput();
         
         map = new Map();
-        
-        Tile tile = map.getGrid()[0][0];    // Initial position of user - test only
-        tile.setUser( user );
-        user.setTile( tile );
         
         menu = new MapMenu( input, 20, Game.WIDTH / 80, game );
         state = State.MOVING;
@@ -80,6 +75,10 @@ public class MapManager {
     }
     public void setState( State state ) {
         this.state = state;
+    }
+
+    public Map getMap() {
+        return map;
     }
     
 }
