@@ -43,6 +43,9 @@ public class BattleManager extends Renderable {
     private String rutaAni2 = "res/battle/bulb_back3.png";
     private String rutaAniOp1 = "res/battle/pika_front2.png";
     private String rutaAniOp2 = "res/battle/pika_front3.png";
+    
+    private String nombrePokPlayer1;
+    private String nombrePokPlayer2;
     private final String rutaOpcion = "res/battle/fondoOpciones.png";
     HashMap<Integer, ArrayList<String>> mapPokemons;
     ArrayList<String> rutasPOK1;
@@ -143,6 +146,8 @@ public class BattleManager extends Renderable {
         atkP2 = animations.get(findAnimation("attackP2"));
         idle = animations.get(findAnimation("idlePok1"));
         idleP2 = animations.get(findAnimation("idleP2"));
+        nombrePokPlayer1 = p1.getPokemons().get(0).getName();
+        nombrePokPlayer2 = p2.getPokemons().get(0).getName();
         atk.play();
         atkP2.play();
         idle.play();
@@ -196,9 +201,11 @@ public class BattleManager extends Renderable {
                     System.out.println("Usuario 1 realizo un ataque");
                     numTicks = 0;
                     vidaPok2 -= 20;
+                    if (vidaPok2==0) endBattle=true;
                 }
                 break;
             case P1_BAG:
+                endBattle=true;
                 break;
             case P1_GIVEUP:
                 currSprite = idle.getCurrSprite();
@@ -234,10 +241,12 @@ public class BattleManager extends Renderable {
                     state = State.P1_IDLE;
                     System.out.println("Usuario 2 realizo un ataque");
                     vidaPok1 -= 20;
+                    if (vidaPok1==0) endBattle=true;
                     numTicks = 0;
                 }
                 break;
             case P2_BAG:
+                endBattle=true;
                 break;
             case P2_GIVEUP:
                 currSprite = idle.getCurrSprite();
@@ -275,7 +284,7 @@ public class BattleManager extends Renderable {
         g.setColor(Color.green);
         g.fillRect(480, 208 + 125, vidaPok1, 20);
         g.drawImage(hp1, 360, 145 + 125, 280, 110, null);
-        Font.getInstance().drawString("BULBASAUR", g, 450, 160 + 125);
+        Font.getInstance().drawString(nombrePokPlayer1, g, 450, 160 + 125);
 
         g.setColor(Color.red);
         g.fillRect(165, 85 + 75, 140, 20);
@@ -283,7 +292,7 @@ public class BattleManager extends Renderable {
         g.fillRect(165, 85 + 75, vidaPok2, 20);
         g.drawImage(hp2, 60, 30 + 75, 280, 110, null);
 
-        Font.getInstance().drawString("PIKACHU", g, 120, 40 + 75);
+        Font.getInstance().drawString(nombrePokPlayer2, g, 120, 40 + 75);
 
         //g.fillRect(330,180,230,10);
         switch (state) {
@@ -293,9 +302,13 @@ public class BattleManager extends Renderable {
                 Font.getInstance().drawString("CHOOSE ONE OPTION", g, 30, 475);
                 break;
             case P1_ATTACK:
-                Font.getInstance().drawString("YOU ARE ATTACKING...", g, 30, 475);
+                if(!endBattle)Font.getInstance().drawString("YOU ARE ATTACKING...", g, 30, 475);
+                else Font.getInstance().drawString("YOU WON THE MATCH", g, 30, 475);
+                
                 break;
             case P1_BAG:
+                Font.getInstance().drawString("YOU USED THE BAG", g, 30, 475);
+                
                 break;
             case P1_GIVEUP:
                 Font.getInstance().drawString("YOU RAN AWAY, LOSING THE BATTLE", g, 30, 475);
@@ -303,9 +316,13 @@ public class BattleManager extends Renderable {
             case P2_IDLE:
                 break;
             case P2_ATTACK:
-                Font.getInstance().drawString("YOUR OPONENT IS ATTACKING...", g, 30, 475);
+                if(!endBattle)Font.getInstance().drawString("YOUR OPONENT IS ATTACKING...", g, 30, 475);
+                else Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
+                
                 break;
             case P2_BAG:
+                Font.getInstance().drawString("HE USED THE BAG", g, 30, 475);
+                
                 break;
             case P2_GIVEUP:
                 Font.getInstance().drawString("YOU WON THE MATCH, THE OTHER PLAYER LEFT", g, 30, 475);
