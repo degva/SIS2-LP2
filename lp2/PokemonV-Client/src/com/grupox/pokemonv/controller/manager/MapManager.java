@@ -1,5 +1,6 @@
 package com.grupox.pokemonv.controller.manager;
 
+import com.grupox.pokemonv.BD.MapDA;
 import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.controller.menu.MapMenu;
@@ -27,6 +28,8 @@ public class MapManager {
         this.user = user;
         input = user.getInput();
         
+        //MapDA mapDA = new MapDA();
+        //map = mapDA.getMap();
         map = new Map();
         
         menu = new MapMenu( input, 20, Game.WIDTH / 80, game );
