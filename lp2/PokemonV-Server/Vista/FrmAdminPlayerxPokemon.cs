@@ -194,6 +194,11 @@ namespace Vista
                 return;
             }
 
+            if ((Convert.ToInt32(TXTorder.Text)) < 1)
+            {
+                MessageBox.Show("Order can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
 
 
@@ -294,6 +299,12 @@ namespace Vista
             if ((Convert.ToInt32(TXTorder.Text)) > 6)
             {
                 MessageBox.Show("Order can't be more than 6", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if ((Convert.ToInt32(TXTorder.Text)) < 1)
+            {
+                MessageBox.Show("Order can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

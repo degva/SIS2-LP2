@@ -37,7 +37,7 @@
             // BTNmanageusers
             // 
             this.BTNmanageusers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNmanageusers.Location = new System.Drawing.Point(169, 63);
+            this.BTNmanageusers.Location = new System.Drawing.Point(176, 47);
             this.BTNmanageusers.Name = "BTNmanageusers";
             this.BTNmanageusers.Size = new System.Drawing.Size(204, 48);
             this.BTNmanageusers.TabIndex = 0;
@@ -48,7 +48,7 @@
             // BTNmanagepokemon
             // 
             this.BTNmanagepokemon.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNmanagepokemon.Location = new System.Drawing.Point(169, 163);
+            this.BTNmanagepokemon.Location = new System.Drawing.Point(176, 135);
             this.BTNmanagepokemon.Name = "BTNmanagepokemon";
             this.BTNmanagepokemon.Size = new System.Drawing.Size(204, 48);
             this.BTNmanagepokemon.TabIndex = 1;
@@ -59,7 +59,7 @@
             // BTNmanageplayerspokemon
             // 
             this.BTNmanageplayerspokemon.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNmanageplayerspokemon.Location = new System.Drawing.Point(125, 258);
+            this.BTNmanageplayerspokemon.Location = new System.Drawing.Point(132, 225);
             this.BTNmanageplayerspokemon.Name = "BTNmanageplayerspokemon";
             this.BTNmanageplayerspokemon.Size = new System.Drawing.Size(286, 48);
             this.BTNmanageplayerspokemon.TabIndex = 2;
@@ -70,7 +70,7 @@
             // BTNmanageitem
             // 
             this.BTNmanageitem.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTNmanageitem.Location = new System.Drawing.Point(169, 342);
+            this.BTNmanageitem.Location = new System.Drawing.Point(176, 317);
             this.BTNmanageitem.Name = "BTNmanageitem";
             this.BTNmanageitem.Size = new System.Drawing.Size(204, 48);
             this.BTNmanageitem.TabIndex = 3;

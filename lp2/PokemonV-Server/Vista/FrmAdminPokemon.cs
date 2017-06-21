@@ -163,12 +163,13 @@ namespace Vista
                 MessageBox.Show("Must enter a number for life points", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if ((Convert.ToInt32(TXTlife.Text)) > 99 )
+            if ((Convert.ToInt32(TXTlife.Text)) < 1 )
             {
-                MessageBox.Show("Life points can't be more than 99", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Life points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
            
+
 
 
             if (TXTattackpts.Text.Trim() == "")
@@ -185,9 +186,9 @@ namespace Vista
                 MessageBox.Show("Must enter a number for attack points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if ((Convert.ToInt32(TXTattackpts.Text)) > 99)
+            if ((Convert.ToInt32(TXTattackpts.Text)) < 1)
             {
-                MessageBox.Show("Attack points can't be more than 99", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Attack points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -207,9 +208,9 @@ namespace Vista
                 MessageBox.Show("Must enter a number for deffense points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if ((Convert.ToInt32(TXTdeffensepts.Text)) > 99)
+            if ((Convert.ToInt32(TXTdeffensepts.Text)) < 1)
             {
-                MessageBox.Show("Deffense points can't be more than 99", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Deffense points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -285,9 +286,9 @@ namespace Vista
                 MessageBox.Show("Must enter a number for life points", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if ((Convert.ToInt32(TXTlife.Text)) > 99)
+            if ((Convert.ToInt32(TXTlife.Text)) < 1)
             {
-                MessageBox.Show("Life points can't be more than 99", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Life points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -307,9 +308,9 @@ namespace Vista
                 MessageBox.Show("Must enter a number for attack points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if ((Convert.ToInt32(TXTattackpts.Text)) > 99)
+            if ((Convert.ToInt32(TXTattackpts.Text)) < 1)
             {
-                MessageBox.Show("Attack points can't be more than 99", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Attack points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -331,7 +332,7 @@ namespace Vista
             }
             if ((Convert.ToInt32(TXTdeffensepts.Text)) > 99)
             {
-                MessageBox.Show("Deffense points can't be more than 99", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Deffense points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

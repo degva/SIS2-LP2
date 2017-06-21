@@ -293,3 +293,5 @@ C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\View.csproj.Generat
 C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\Vista.exe
 C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\Vista.pdb
 C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\Vista.FrmAdminItem.resources
+C:\Users\alulab14\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\Vista.FrmAdminEverything.resources
+C:\Users\alulab14\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\Vista.FrmAdminItem.resources
