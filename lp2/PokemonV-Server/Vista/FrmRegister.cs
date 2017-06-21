@@ -15,21 +15,19 @@ namespace Vista
 {
     public partial class FrmRegister : Form
     {
-        Player player;
+        Admin admin;
         public FrmRegister()
         {
             InitializeComponent();
-
             TXTpassword.Text = "";
             TXTpassword.PasswordChar = '*';
             TXTpassword.MaxLength = 30;
-
 
         }
 
         private void BTNcancel_Click(object sender, EventArgs e)
         {
-			this.DialogResult =  DialogResult.No;
+            this.DialogResult = DialogResult.No;
         }
 
 
@@ -44,7 +42,7 @@ namespace Vista
             Regex reg4 = new Regex(@"@outlook.com");
 
             /* ..... */
-            if ((!reg.IsMatch(cad)) && (!reg1.IsMatch(cad) ) && (!reg2.IsMatch(cad)) && (!reg3.IsMatch(cad)) && (!reg4.IsMatch(cad)) )  return 0;
+            if ((!reg.IsMatch(cad)) && (!reg1.IsMatch(cad)) && (!reg2.IsMatch(cad)) && (!reg3.IsMatch(cad)) && (!reg4.IsMatch(cad))) return 0;
             if (reg.Matches(cad).Count > 1) return 0;
             if (reg1.Matches(cad).Count > 1) return 0;
             if (reg2.Matches(cad).Count > 1) return 0;
@@ -61,7 +59,14 @@ namespace Vista
         {
             int flag = 1, flag2 = 1;
 
-            
+
+
+            if (TXTname.Text == "")
+            {
+                MessageBox.Show("Debe colocar un nombre", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                flag = 0;
+            }
+
             if (TXTusername.Text == "")
             {
                 MessageBox.Show("Debe colocar un usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -81,18 +86,19 @@ namespace Vista
                 flag = 0;
                 flag2 = 0;
             }
-            
-            if (flag2 == 1) {
+
+            if (flag2 == 1)
+            {
                 if (verifyemail(TXTemail.Text) == 0)
                 {
                     MessageBox.Show("Debe colocar un correo válido", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     flag = 0;
                 }
 
-                
+
             }
 
-            if(( TXTusername.Text.Contains(" ") ) || (TXTusername.Text.Contains('"')))
+            if ((TXTusername.Text.Contains(" ")) || (TXTusername.Text.Contains('"')))
             {
                 MessageBox.Show("No se permiten espacios ni comillas en el nombre de usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
@@ -107,31 +113,30 @@ namespace Vista
 
 
             if (flag == 1)
-            {   
+            {
                 TXTemail.Text = TXTemail.Text.ToLower();
                 TXTemail.Text = TXTemail.Text.Trim();
                 TXTpassword.Text = TXTpassword.Text.Trim();
                 TXTusername.Text = TXTusername.Text.Trim();
 
-                player = new Player(TXTusername.Text, TXTpassword.Text, "", TXTemail.Text);
-                UsuarioDA playerDA = new UsuarioDA();
-                if ((playerDA.verificarUsuarioRepetido(player)) == 1)
+                admin = new Admin(TXTusername.Text, TXTpassword.Text,TXTname.Text,TXTemail.Text,1, 1);
+                AdminDA AdminDA = new AdminDA();
+                if ((AdminDA.verifyRepeatUsername(admin)) == 1)
                 {
                     MessageBox.Show("Ya se encuentra registrado ese usuario");
-                }else if ((playerDA.verificarCorreoRepetido(player)) == 1)
+                }
+                else if ((AdminDA.verifyRepeatemail(admin)) == 1)
                 {
                     MessageBox.Show("El correo ya esta registrado. Ingresa uno diferente");
                 }
-                else {
-                        playerDA.agregarUsuario(player);
-                        MessageBox.Show("Registro exitoso");
-                        this.DialogResult = DialogResult.OK;
+                else
+                {
+                    AdminDA.addAdmin(admin);
+                    MessageBox.Show("Registro exitoso");
+                    this.DialogResult = DialogResult.OK;
                 }
-                
+
             }
-
-            
-
         }
 
         protected override void WndProc(ref Message message)
@@ -151,6 +156,86 @@ namespace Vista
             base.WndProc(ref message);
         }
 
+        private void TXTemail_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                int flag = 1, flag2 = 1;
 
+
+                if (TXTusername.Text == "")
+                {
+                    MessageBox.Show("Debe colocar un usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    flag = 0;
+                }
+
+                if (TXTpassword.Text == "")
+                {
+                    MessageBox.Show("Debe colocar una contraseña", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    flag = 0;
+                }
+
+
+                if (TXTemail.Text == "")
+                {
+                    MessageBox.Show("Debe colocar un correo", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    flag = 0;
+                    flag2 = 0;
+                }
+
+                if (flag2 == 1)
+                {
+                    if (verifyemail(TXTemail.Text) == 0)
+                    {
+                        MessageBox.Show("Debe colocar un correo válido", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        flag = 0;
+                    }
+
+
+                }
+
+                if ((TXTusername.Text.Contains(" ")) || (TXTusername.Text.Contains('"')))
+                {
+                    MessageBox.Show("No se permiten espacios ni comillas en el nombre de usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    flag = 0;
+                }
+
+                if ((TXTpassword.Text.Contains(" ")) || (TXTpassword.Text.Contains('"')))
+                {
+                    MessageBox.Show("No se permiten espacios ni comillas en la contraseña", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    flag = 0;
+                }
+
+
+
+                if (flag == 1)
+                {
+                    TXTemail.Text = TXTemail.Text.ToLower();
+                    TXTemail.Text = TXTemail.Text.Trim();
+                    TXTpassword.Text = TXTpassword.Text.Trim();
+                    TXTusername.Text = TXTusername.Text.Trim();
+
+                    admin = new Admin(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text, 1,1);
+                    AdminDA playerDA = new AdminDA();
+                    if ((playerDA.verifyRepeatUsername(admin)) == 1)
+                    {
+                        MessageBox.Show("Ya se encuentra registrado ese usuario");
+                    }
+                    else if ((playerDA.verifyRepeatemail(admin)) == 1)
+                    {
+                        MessageBox.Show("El correo ya esta registrado. Ingresa uno diferente");
+                    }
+                    else
+                    {
+                        playerDA.addAdmin(admin);
+                        MessageBox.Show("Registro exitoso");
+                        this.DialogResult = DialogResult.OK;
+                    }
+
+                }
+            }
+        }
+
+        
     }
 }

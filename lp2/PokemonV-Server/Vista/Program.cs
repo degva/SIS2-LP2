@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Vista
 {
     static class Program
@@ -16,7 +17,9 @@ namespace Vista
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmLogueo());
+            //Application.Run(new FrmAdminUser());
+            //Application.Run(new FrmLogin());
+            Application.Run(new FrmAdminPokemon());
         }
     }
 }

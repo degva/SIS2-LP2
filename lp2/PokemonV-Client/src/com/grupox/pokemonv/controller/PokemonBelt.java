@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 package com.grupox.pokemonv.controller;
+import com.grupox.pokemonv.BD.PokemonAD;
 import static com.grupox.pokemonv.controller.Game.HEIGHT;
 import static com.grupox.pokemonv.controller.Game.WIDTH;
+import static com.grupox.pokemonv.controller.PokemonBeltManager.*;
+
+
 //añadi esto!
 //import static com.grupox.pokemonv.controller.Font.fontWidthOut;
 //import static com.grupox.pokemonv.controller.Font.fontHeightOut;
@@ -38,7 +42,7 @@ public class PokemonBelt {
     private BufferedImage[] borders;
 //    private Map map;
     private ArrayList<Pokemon> listaPokemones;
-    
+    private PokemonAD pokAD;
     private int altura=2;//alejandro me matara por el español ... tengo sueño! @SE EMPUTA
     
     private int spriteWidthOut = 23;//con esto aparecen los 6
@@ -47,25 +51,26 @@ public class PokemonBelt {
     
     public PokemonBelt(){
 //        this.map = map;
+        //como aun no tengo el ID del usuario
+        pokAD = new PokemonAD();
+        listaPokemones = pokAD.getListaPokemones(4);
         
-        listaPokemones = new ArrayList<>();
-        
-        Pokemon.TypeP tipoE = Pokemon.TypeP.Earth;
-        Pokemon.TypeP tipoF = Pokemon.TypeP.Fire;
-        Pokemon.TypeP tipoWa = Pokemon.TypeP.Water;
-        Pokemon.TypeP tipoWi = Pokemon.TypeP.Wind;
-        Pokemon pok1 = new Pokemon(1,10,20,30,"Bulbasaur",tipoE);
-        Pokemon pok2 = new Pokemon(4,30,20,46,"Charmander",tipoF);
-        Pokemon pok3 = new Pokemon(7,50,10,30,"Squirtle",tipoWa);
-        Pokemon pok4 = new Pokemon(12,60,22,44,"Butterfree",tipoWi);
-        Pokemon pok5 = new Pokemon(12,60,22,44,"Butterfree2",tipoWi);
-        Pokemon pok6 = new Pokemon(12,60,22,44,"Butterfree3",tipoWi);
-        listaPokemones.add(pok1);
-        listaPokemones.add(pok2);
-        listaPokemones.add(pok3);
-        listaPokemones.add(pok4);
-        listaPokemones.add(pok5);
-        listaPokemones.add(pok6);
+//        Pokemon.TypeP tipoE = Pokemon.TypeP.Earth;
+//        Pokemon.TypeP tipoF = Pokemon.TypeP.Fire;
+//        Pokemon.TypeP tipoWa = Pokemon.TypeP.Water;
+//        Pokemon.TypeP tipoWi = Pokemon.TypeP.Wind;
+//        Pokemon pok1 = new Pokemon(1,10,20,30,"Bulbasaur",tipoE);
+//        Pokemon pok2 = new Pokemon(4,30,20,46,"Charmander",tipoF);
+//        Pokemon pok3 = new Pokemon(7,50,10,30,"Squirtle",tipoWa);
+//        Pokemon pok4 = new Pokemon(12,60,22,44,"Butterfree",tipoWi);
+//        Pokemon pok5 = new Pokemon(12,60,22,44,"Butterfree2",tipoWi);
+//        Pokemon pok6 = new Pokemon(12,60,22,44,"Butterfree3",tipoWi);
+//        listaPokemones.add(pok1);
+//        listaPokemones.add(pok2);
+//        listaPokemones.add(pok3);
+//        listaPokemones.add(pok4);
+//        listaPokemones.add(pok5);
+//        listaPokemones.add(pok6);
         
         
         // Boards
@@ -95,6 +100,8 @@ public class PokemonBelt {
     }
     
     public void render(Graphics2D g, int ind, boolean presionado){
+        
+        
         g.setColor( Color.orange );
         g.fillRect( 0, 0, WIDTH, HEIGHT );
         
@@ -159,6 +166,19 @@ public class PokemonBelt {
         borders[8] = SpriteSheet.getInstance().getSubImage(13, 7);
     }
     
+    private void cambiarFormatoExchange(){
+        borders[0] = SpriteSheet.getInstance().getSubImage(15, 2);
+        borders[1] = SpriteSheet.getInstance().getSubImage(16, 2);
+        borders[2] = SpriteSheet.getInstance().getSubImage(17, 2);
+        
+        borders[3] = SpriteSheet.getInstance().getSubImage(15, 3);
+        borders[4] = SpriteSheet.getInstance().getSubImage(16, 3);
+        borders[5] = SpriteSheet.getInstance().getSubImage(17, 3);
+        
+        borders[6] = SpriteSheet.getInstance().getSubImage(15, 4);
+        borders[7] = SpriteSheet.getInstance().getSubImage(16, 4);
+        borders[8] = SpriteSheet.getInstance().getSubImage(17, 4);
+    }
     
     private void drawBorders( Graphics2D g,int ind, boolean presionado){
         int widthInTiles = getWidthInTiles()-2;//ver esto para el ancho!-2
@@ -183,6 +203,9 @@ public class PokemonBelt {
             if (b == ind && presionado) {
                 cambiarFormato();
                 drawInformacionCompleta(g,ind);
+            }
+            if(menu.getVez()> 0 && (b == indiceA || b == indiceB)){
+                cambiarFormatoExchange();
             }
             draw(g, suma,a,widthInTiles);
             a++;
@@ -282,7 +305,7 @@ public class PokemonBelt {
     public void intercambiar(int A, int B){
         Pokemon pokA= listaPokemones.get(A);
         Pokemon pokB= listaPokemones.get(B);
-        listaPokemones.set(A, pokB);
-        listaPokemones.set(B, pokA);
+        pokAD.intercambiarDA(pokA,pokB,4);
+        listaPokemones = pokAD.getListaPokemones(4);
     }
 }

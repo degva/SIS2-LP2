@@ -8,10 +8,12 @@ namespace Entidades
 {
     public class Item
     {
-        public Item(string name, string description)
+        public enum TypeofItem { Potion, Pokeball, Repellent};
+        public Item(string name, string description, TypeofItem typePoke)
         {
             this.name = name;
             this.description = description;
+            this.type = typePoke;
         }
 
         protected string name;
@@ -27,5 +29,10 @@ namespace Entidades
             get { return description; }
             set { description = value; }
         }
+
+        public TypeofItem Type { get => type; set => type = value; }
+
+        protected TypeofItem type;
+
     }
 }

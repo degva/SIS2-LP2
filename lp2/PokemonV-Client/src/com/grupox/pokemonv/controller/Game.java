@@ -1,5 +1,6 @@
 package com.grupox.pokemonv.controller;
 
+import com.grupox.pokemonv.BD.PokemonAD;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.User;
 import java.awt.Canvas;
@@ -8,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import com.grupox.pokemonv.controller.manager.*;
+import com.grupox.pokemonv.model.Pokemon;
 
 public class Game extends Canvas implements Runnable {
 
@@ -35,6 +37,7 @@ public class Game extends Canvas implements Runnable {
     private BagManager bagManager;
     private BattleManager battleManager;
     private User user;
+    private Player enemy;
     private static State state;
     private PokemonBeltManager pokemonBeltManager;
 
@@ -57,6 +60,9 @@ public class Game extends Canvas implements Runnable {
         bagManager = new BagManager((Player) user, this);
         battleManager = new BattleManager((Player) user, this);
         state = State.BATTLE;
+        
+        enemy = new Player(null);
+        enemy.getPokemons().add(new Pokemon(1,10,10,10,"Carlos", Pokemon.TypeP.Earth));
     }
 
     /* Methods */
@@ -211,5 +217,7 @@ public class Game extends Canvas implements Runnable {
 //        new Login().setVisible( true );
         Game game = new Game();
         game.start();
+        
+
     }
 }

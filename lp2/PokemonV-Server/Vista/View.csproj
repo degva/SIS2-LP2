@@ -32,6 +32,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\v4.5\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF5">
+      <HintPath>..\..\..\..\v4.5\MySql.Data.Entity.EF5.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6">
+      <HintPath>..\..\..\..\v4.5\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Fabric.Plugin">
+      <HintPath>..\..\..\..\v4.5\MySql.Fabric.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Web">
+      <HintPath>..\..\..\..\v4.5\MySql.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,11 +61,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmLogueo.cs">
+    <Compile Include="FrmAdminPlayerxPokemon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmLogueo.Designer.cs">
-      <DependentUpon>FrmLogueo.cs</DependentUpon>
+    <Compile Include="FrmAdminPlayerxPokemon.Designer.cs">
+      <DependentUpon>FrmAdminPlayerxPokemon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdminPokemon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdminPokemon.Designer.cs">
+      <DependentUpon>FrmAdminPokemon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdminUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdminUser.Designer.cs">
+      <DependentUpon>FrmAdminUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmRegister.cs">
       <SubType>Form</SubType>
@@ -59,8 +93,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmLogueo.resx">
-      <DependentUpon>FrmLogueo.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAdminPlayerxPokemon.resx">
+      <DependentUpon>FrmAdminPlayerxPokemon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAdminPokemon.resx">
+      <DependentUpon>FrmAdminPokemon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAdminUser.resx">
+      <DependentUpon>FrmAdminUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmRegister.resx">
       <DependentUpon>FrmRegister.cs</DependentUpon>
@@ -88,13 +131,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
+    <ProjectReference Include="..\AccesoDatos\DataAccess.csproj">
       <Project>{192cf83a-76b5-44e2-9c5e-7e93dea4fe0c}</Project>
-      <Name>AccesoDatos</Name>
+      <Name>DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Entidades\Entidades.csproj">
+    <ProjectReference Include="..\Entidades\Entity.csproj">
       <Project>{900bc073-8095-4aeb-b260-e672eb510c61}</Project>
-      <Name>Entidades</Name>
+      <Name>Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

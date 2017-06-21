@@ -10,12 +10,14 @@ namespace Entidades
     public enum Direction { Up, Down, Right, Left };
     public abstract class User
     {
-        public User(string username, string password, string name, string email)
+        public User(string username, string password, string name, string email, int deleted, int isAdmin)
         {
             this.username = username;
             this.password = password;
             this.name = name;
             this.email = email;
+            this.Deleted = deleted;
+            this.isAdmin = isAdmin;
         }
 
         public bool move()
@@ -62,6 +64,8 @@ namespace Entidades
             set { email = value; }
         }
 
+        private int deleted;
+
         protected float pos_x;
         public float Pos_x
         {
@@ -89,5 +93,12 @@ namespace Entidades
             get { return bag; }
             set { bag = value; }
         }
+
+        
+        public int IsAdmin { get => isAdmin; set => isAdmin = value; }
+        public int Deleted { get => deleted; set => deleted = value; }
+
+        protected int isAdmin;
+
     }
 }
