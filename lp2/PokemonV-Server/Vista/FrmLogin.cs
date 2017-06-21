@@ -34,7 +34,7 @@ namespace Vista
         {
             int flag = 1;
 
-            AdminDA con = new AdminDA();
+            AdminDA admin = new AdminDA();
 
             if (TXTusername.Text.Contains(" "))
             {
@@ -50,7 +50,7 @@ namespace Vista
 
             if(flag == 1)
             {
-                if ((con.verifyLogin(TXTusername.Text, TXTpassword.Text) == 1))
+                if ((admin.verifyLogin(TXTusername.Text, TXTpassword.Text) == 1))
                 {
                     FrmAdminEverything form = new FrmAdminEverything();
                     form.StartPosition = FormStartPosition.Manual;

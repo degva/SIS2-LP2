@@ -81,7 +81,7 @@ namespace AccesoDatos
                 Connection conexion = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char caracter = '"';
-                string sql = "SELECT * FROM USER WHERE USERNAME =" + caracter +  username + caracter + " AND PASSWORD= " +caracter +  password + caracter ;
+                string sql = "SELECT * FROM USER WHERE USERNAME =" + caracter +  username + caracter + " AND PASSWORD = " + caracter +  password + caracter + "AND ISADMIN = " + caracter + 1 + caracter;
                 cmd.Connection = conexion.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();

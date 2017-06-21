@@ -298,3 +298,4 @@ C:\Users\alulab14\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\Vista.FrmAdminIte
 C:\Users\alulab14.INF\Downloads\20140196\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\Vista.FrmAdminEverything.resources
 C:\Users\alulab14.INF\Downloads\20140196\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\Vista.FrmAdminItem.resources
 >>>>>>> 676d53851d81b9f630942b052ddc727d874349b1
+C:\Users\alulab14\SIS2-LP2\lp2\PokemonV-Server\Vista\obj\Debug\Vista.FrmAdminPlayerxItem.resources

@@ -68,6 +68,7 @@
     <Compile Include="ItemDA.cs" />
     <Compile Include="MapDA.cs" />
     <Compile Include="PlayerDA.cs" />
+    <Compile Include="PlayersItemDA.cs" />
     <Compile Include="PlayersPokemonDA.cs" />
     <Compile Include="PokemonDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
