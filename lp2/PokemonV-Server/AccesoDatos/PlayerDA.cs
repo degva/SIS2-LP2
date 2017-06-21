@@ -246,6 +246,36 @@ namespace AccesoDatos
         }
 
 
+        public int verifyID(int id)
+        {
+            try
+            {
+                Connection conexion = new Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                char caracter = '"';
+                string sql = "SELECT * FROM USER WHERE ID =" + caracter + id + caracter +  "AND   ISADMIN = " + caracter + 0 + caracter;
+                cmd.Connection = conexion.conn;
+                cmd.CommandText = sql;
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+                reader.Read();
+
+                conexion.cerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
     }
 
 }
