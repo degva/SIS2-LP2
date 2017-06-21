@@ -503,5 +503,29 @@ namespace Vista
 
             }
         }
+
+        private void CMBtype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CMBtype.SelectedItem.ToString() == "Potion")
+            {
+                TXTcatchprob.Enabled = false;
+                TXTsteps.Enabled = false;
+                TXThp.Enabled = true;
+            }
+
+            if (CMBtype.SelectedItem.ToString() == "Repellent")
+            {
+                TXTcatchprob.Enabled = false;
+                TXThp.Enabled = false;
+                TXTsteps.Enabled = true;
+            }
+
+            if (CMBtype.SelectedItem.ToString() == "Pokeball")
+            {
+                TXTcatchprob.Enabled = false;
+                TXTsteps.Enabled = false;
+                TXTcatchprob.Enabled = true;
+            }
+        }
     }
 }

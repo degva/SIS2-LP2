@@ -71,6 +71,7 @@
             this.CMBtype.Name = "CMBtype";
             this.CMBtype.Size = new System.Drawing.Size(190, 23);
             this.CMBtype.TabIndex = 34;
+            this.CMBtype.SelectedIndexChanged += new System.EventHandler(this.CMBtype_SelectedIndexChanged);
             // 
             // LBLtype
             // 

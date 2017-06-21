@@ -84,8 +84,8 @@ namespace Vista
             int iditem = (int)DGVplayerxitem.CurrentRow.Cells["ITEM_ID"].Value;
             int idplayer = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_USER_ID"].Value;
 
-            PlayersPokemonDA playersPokemon = new PlayersPokemonDA();
-            playersPokemon.deletePokemonOfPlayer(idpokemon, idplayer);
+            //PlayersPokemonDA playersPokemon = new PlayersPokemonDA();
+            //playersPokemon.deletePokemonOfPlayer(idpokemon, idplayer);
 
             load();
             inicio();
