@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/model/Renderable.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/model/User.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/PokemonBeltManager.java</file>
             <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/Game.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/PokemonBelt.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/model/SpriteSheet.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/Animation.java</file>
-            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/model/Player.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/view/FrmRegister.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/view/FrmLogin.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/PUCP/Ciclo07/LP2/Game/SIS2-LP2/lp2/PokemonV-Client/src/com/grupox/pokemonv/controller/manager/BattleManager.java</file>
         </group>
     </open-files>
 </project-private>
