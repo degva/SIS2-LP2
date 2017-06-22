@@ -37,19 +37,42 @@ namespace AccesoDatos
 
         public int updatePlayersPokemon(int newidpokemon, int neworder, int newidplayer, int lastidpokemon, int lastidplayer, int lastorder)
         {
+            char character = '"';
             try
             {
                 Connection connection = new Connection();
-                MySqlCommand cmd = new MySqlCommand();
-                char character = '"';
-                string sql = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + character + newidpokemon + character + ", ORDER_POKEMON = " + character + neworder + character + ", PLAYER_USER_ID = "
-                    + character + newidplayer + character 
-                + "where PLAYER_USER_ID = " + character + lastidplayer + character + "AND POKEMON_ID = " + character + lastidpokemon + character 
-                + "AND ORDER_POKEMON = " + character + lastorder + character;
 
-                cmd.Connection = connection.conn;
-                cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
+                if(newidplayer == lastidplayer)
+                {
+
+                    MySqlCommand cmd = new MySqlCommand();
+                    string sql = "SELECT * FROM PLAYER_X_POKEMON WHERE PLAYER_USER_ID =" + character + newidplayer + character + "AND ORDER_POKEMON = " + character + neworder + character;
+                    cmd.Connection = connection.conn;
+                    cmd.CommandText = sql;
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        
+                    }
+                    else
+                    {
+                        MySqlCommand cmd1 = new MySqlCommand();
+                        string sql1 = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + character + newidpokemon + character + ", ORDER_POKEMON = " + character + neworder + character + ", PLAYER_USER_ID = "
+                            + character + newidplayer + character
+                        + "where PLAYER_USER_ID = " + character + lastidplayer + character + "AND POKEMON_ID = " + character + lastidpokemon + character
+                        + "AND ORDER_POKEMON = " + character + lastorder + character;
+
+                        cmd1.Connection = connection.conn;
+                        cmd1.CommandText = sql1;
+                        cmd1.ExecuteNonQuery();
+                    }
+                }else if(newidplayer != lastidplayer)
+                {
+
+                }
+
+                
                 connection.closeConnection();
                 return 1;
             }
