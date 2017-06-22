@@ -77,46 +77,47 @@ namespace Vista
 
         private void BTNdelete_Click(object sender, EventArgs e)
         {
-            int idpokemon = (int)DGVpokemons.CurrentRow.Cells["POKEMON_ID"].Value;
-            int idplayer = (int)DGVpokemons.CurrentRow.Cells["PLAYER_USER_ID"].Value;
+            if (DGVpokemons.Rows.Count > 1)
+            {
+                int idpokemon = (int)DGVpokemons.CurrentRow.Cells["POKEMON_ID"].Value;
+                int idplayer = (int)DGVpokemons.CurrentRow.Cells["PLAYER_USER_ID"].Value;
 
-            PlayersPokemonDA playersPokemon = new PlayersPokemonDA();
-            playersPokemon.deletePokemonOfPlayer(idpokemon,idplayer);
+                PlayersPokemonDA playersPokemon = new PlayersPokemonDA();
+                playersPokemon.deletePokemonOfPlayer(idpokemon, idplayer);
 
-            load();
-            inicio();
+                load();
+                inicio();
+            }
         }
 
         private void BTNrecover_Click(object sender, EventArgs e)
         {
-            
-            int playerid = (int)DGVpokemons.CurrentRow.Cells["PLAYER_USER_ID"].Value;
-            int pokemonid = (int)DGVpokemons.CurrentRow.Cells["POKEMON_ID"].Value;
-            int order = (int)DGVpokemons.CurrentRow.Cells["ORDER_POKEMON"].Value;
-            
 
+            if (DGVpokemons.Rows.Count > 1)
+            {
+                int playerid = (int)DGVpokemons.CurrentRow.Cells["PLAYER_USER_ID"].Value;
+                int pokemonid = (int)DGVpokemons.CurrentRow.Cells["POKEMON_ID"].Value;
+                int order = (int)DGVpokemons.CurrentRow.Cells["ORDER_POKEMON"].Value;
 
-            
-            TXTorder.Text = order.ToString();
-            TXTplayerid.Text = playerid.ToString();
-            TXTpokemonid.Text = pokemonid.ToString();
+                TXTorder.Text = order.ToString();
+                TXTplayerid.Text = playerid.ToString();
+                TXTpokemonid.Text = pokemonid.ToString();
 
+                TXTorder.Enabled = true;
+                TXTplayerid.Enabled = true;
+                TXTpokemonid.Enabled = true;
 
+                BTNdelete.Enabled = false;
+                BTNrecover.Enabled = false;
+                BTNnew.Enabled = false;
+                BTNsave.Enabled = false;
+                BTNupdate.Enabled = true;
+                BTNcancel.Enabled = true;
 
-            TXTorder.Enabled = true;
-            TXTplayerid.Enabled = true;
-            TXTpokemonid.Enabled = true;
-
-            BTNdelete.Enabled = false;
-            BTNrecover.Enabled = false;
-            BTNnew.Enabled = false;
-            BTNsave.Enabled = false;
-            BTNupdate.Enabled = true;
-            BTNcancel.Enabled = true;
-
-            lastpokemonid = Convert.ToInt32(TXTpokemonid.Text);
-            lastorder = Convert.ToInt32(TXTorder.Text);
-            lastplayerid = Convert.ToInt32(TXTplayerid.Text);
+                lastpokemonid = Convert.ToInt32(TXTpokemonid.Text);
+                lastorder = Convert.ToInt32(TXTorder.Text);
+                lastplayerid = Convert.ToInt32(TXTplayerid.Text);
+            }
         }
 
         private void BTNupdate_Click(object sender, EventArgs e)

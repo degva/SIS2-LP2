@@ -21,7 +21,7 @@ namespace AccesoDatos
             {
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                string sql = $"INSERT INTO POKEMON (NAME,LIFE,ATTACK_PTS,DEFFENSE_PTS,TYPE,DELETED)values('{pok.Name}','{pok.Life}', '{pok.Attack_pts}' , '{pok.Defense_pts}' , '{pok.Type}' , '{pok.Deleted}')";
+                string sql = $"INSERT INTO POKEMON (ID,NAME,LIFE,ATTACK_PTS,DEFFENSE_PTS,TYPE,DELETED)values('{pok.Id}','{pok.Name}','{pok.Life}', '{pok.Attack_pts}' , '{pok.Defense_pts}' , '{pok.Type}' , '{pok.Deleted}')";
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();

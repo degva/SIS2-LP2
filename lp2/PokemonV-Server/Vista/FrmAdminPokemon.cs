@@ -95,13 +95,16 @@ namespace Vista
 
         private void BTNdelete_Click(object sender, EventArgs e)
         {
-            int id = (int)DGVpokemon.CurrentRow.Cells["ID"].Value;
+            if (DGVpokemon.Rows.Count > 1)
+            {
+                int id = (int)DGVpokemon.CurrentRow.Cells["ID"].Value;
 
-            PokemonDA pokemonDA = new PokemonDA();
-            pokemonDA.deletePokemon(id);
+                PokemonDA pokemonDA = new PokemonDA();
+                pokemonDA.deletePokemon(id);
 
-            load();
-            inicio();
+                load();
+                inicio();
+            }
         }
 
         private void BTNcancel_Click(object sender, EventArgs e)
@@ -111,35 +114,39 @@ namespace Vista
 
         private void BTNrecover_Click(object sender, EventArgs e)
         {
-            string CADname = (string)DGVpokemon.CurrentRow.Cells["NAME"].Value;
-            int life = (int)DGVpokemon.CurrentRow.Cells["LIFE"].Value;
-            int attackpts = (int)DGVpokemon.CurrentRow.Cells["ATTACK_PTS"].Value;
-            int deffensepts = (int)DGVpokemon.CurrentRow.Cells["DEFFENSE_PTS"].Value;
-            string CADtype = (string)DGVpokemon.CurrentRow.Cells["TYPE"].Value;
-            int id = (int)DGVpokemon.CurrentRow.Cells["ID"].Value;
+            if (DGVpokemon.Rows.Count > 1)
+            {
+
+                string CADname = (string)DGVpokemon.CurrentRow.Cells["NAME"].Value;
+                int life = (int)DGVpokemon.CurrentRow.Cells["LIFE"].Value;
+                int attackpts = (int)DGVpokemon.CurrentRow.Cells["ATTACK_PTS"].Value;
+                int deffensepts = (int)DGVpokemon.CurrentRow.Cells["DEFFENSE_PTS"].Value;
+                string CADtype = (string)DGVpokemon.CurrentRow.Cells["TYPE"].Value;
+                int id = (int)DGVpokemon.CurrentRow.Cells["ID"].Value;
 
 
-            TXTname.Text = CADname;
-            TXTattackpts.Text = attackpts.ToString();
-            TXTdeffensepts.Text = deffensepts.ToString();
-            TXTlife.Text = life.ToString();
-            CMBtype.Text = CADtype;
-            TXTid.Text = id.ToString();
+                TXTname.Text = CADname;
+                TXTattackpts.Text = attackpts.ToString();
+                TXTdeffensepts.Text = deffensepts.ToString();
+                TXTlife.Text = life.ToString();
+                CMBtype.Text = CADtype;
+                TXTid.Text = id.ToString();
 
 
-            TXTattackpts.Enabled = true;
-            TXTname.Enabled = true;
-            TXTdeffensepts.Enabled = true;
-            TXTlife.Enabled = true;
-            CMBtype.Enabled = true;
-            TXTid.Enabled = true;
+                TXTattackpts.Enabled = true;
+                TXTname.Enabled = true;
+                TXTdeffensepts.Enabled = true;
+                TXTlife.Enabled = true;
+                CMBtype.Enabled = true;
 
-            BTNdelete.Enabled = false;
-            BTNrecover.Enabled = false;
-            BTNnew.Enabled = false;
-            BTNsave.Enabled = false;
-            BTNupdate.Enabled = true;
-            BTNcancel.Enabled = true;
+
+                BTNdelete.Enabled = false;
+                BTNrecover.Enabled = false;
+                BTNnew.Enabled = false;
+                BTNsave.Enabled = false;
+                BTNupdate.Enabled = true;
+                BTNcancel.Enabled = true;
+            }
         }
 
         private void BTNupdate_Click(object sender, EventArgs e)
@@ -174,40 +181,6 @@ namespace Vista
                 MessageBox.Show("Life points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-
-
-
-            if (TXTid.Text.Trim() == "")
-            {
-                MessageBox.Show("Must enter an id", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            try
-            {
-                Int32.Parse(TXTid.Text);
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show("Must enter a number for id ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if ((Convert.ToInt32(TXTid.Text)) < 1)
-            {
-                MessageBox.Show("ID can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            PokemonDA adminPOK = new PokemonDA();
-            if (adminPOK.verifyID(Convert.ToInt32(TXTid.Text)) == 1)
-            {
-                MessageBox.Show("That id has been registered ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-
-
 
 
 
@@ -399,7 +372,7 @@ namespace Vista
                 MessageBox.Show("Must enter a number for deffense points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if ((Convert.ToInt32(TXTdeffensepts.Text)) > 99)
+            if ((Convert.ToInt32(TXTdeffensepts.Text)) < 1)
             {
                 MessageBox.Show("Deffense points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -434,7 +407,8 @@ namespace Vista
                     tipo = TypeofPokemon.Earth;
                 }
 
-                Pokemon pokemon = new Pokemon(Convert.ToInt32(TXTattackpts.Text), Convert.ToInt32(TXTdeffensepts.Text), Convert.ToInt32(TXTlife.Text), TXTname.Text, tipo,0); ;
+                Pokemon pokemon = new Pokemon(Convert.ToInt32(TXTattackpts.Text), Convert.ToInt32(TXTdeffensepts.Text), Convert.ToInt32(TXTlife.Text), TXTname.Text, tipo,0);
+                pokemon.Id = Convert.ToInt32(TXTid.Text);
 
                 PokemonDA pokemonDA = new PokemonDA();
                 if ((pokemonDA.verifyRepeatName2(pokemon)) == 1)

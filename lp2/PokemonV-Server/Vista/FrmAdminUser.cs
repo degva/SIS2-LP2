@@ -110,15 +110,17 @@ namespace Vista
 
         private void BTNdelete_Click(object sender, EventArgs e)
         {
+            if (DGVadmin.Rows.Count > 1)
+            {
+                string cadena = (string)DGVadmin.CurrentRow.Cells["USERNAME"].Value;
 
-            string cadena = (string)DGVadmin.CurrentRow.Cells["USERNAME"].Value;
+                PlayerDA playerDA = new PlayerDA();
+                playerDA.deletePlayer(cadena);
 
-            PlayerDA playerDA = new PlayerDA();
-            playerDA.deletePlayer(cadena);
+                load();
 
-            load();
-
-            inicio();
+                inicio();
+            }
         }
 
         private void BTNsave_Click(object sender, EventArgs e)
@@ -228,29 +230,31 @@ namespace Vista
 
         private void BTNupdate_Click(object sender, EventArgs e)
         {
-            string CADname = (string)DGVadmin.CurrentRow.Cells["NAME"].Value;
-            string CADusername = (string)DGVadmin.CurrentRow.Cells["USERNAME"].Value;
-            string CADpassword = (string)DGVadmin.CurrentRow.Cells["PASSWORD"].Value;
-            string CADemail = (string)DGVadmin.CurrentRow.Cells["EMAIL"].Value;
+            if (DGVadmin.Rows.Count > 1)
+            {
+                string CADname = (string)DGVadmin.CurrentRow.Cells["NAME"].Value;
+                string CADusername = (string)DGVadmin.CurrentRow.Cells["USERNAME"].Value;
+                string CADpassword = (string)DGVadmin.CurrentRow.Cells["PASSWORD"].Value;
+                string CADemail = (string)DGVadmin.CurrentRow.Cells["EMAIL"].Value;
 
-            TXTname.Text = CADname;
-            TXTusername.Text = CADusername;
-            TXTpassword.Text = CADpassword;
-            TXTemail.Text = CADemail;
+                TXTname.Text = CADname;
+                TXTusername.Text = CADusername;
+                TXTpassword.Text = CADpassword;
+                TXTemail.Text = CADemail;
 
-            TXTemail.Enabled = true;
-            TXTname.Enabled = true;
-            TXTpassword.Enabled = true;
-            TXTusername.Enabled = true;
+                TXTemail.Enabled = true;
+                TXTname.Enabled = true;
+                TXTpassword.Enabled = true;
+                TXTusername.Enabled = true;
 
-            BTNdelete.Enabled = false;
-            BTNrecover.Enabled = false;
-            BTNnew.Enabled = false;
-            BTNsave.Enabled = false;
-            BTNupdate.Enabled = true;
-            BTNcancel.Enabled = true;
+                BTNdelete.Enabled = false;
+                BTNrecover.Enabled = false;
+                BTNnew.Enabled = false;
+                BTNsave.Enabled = false;
+                BTNupdate.Enabled = true;
+                BTNcancel.Enabled = true;
 
-
+            }
 
         }
 

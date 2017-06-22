@@ -84,40 +84,44 @@ namespace Vista
 
         private void BTNdelete_Click(object sender, EventArgs e)
         {
-            int iditem = (int)DGVplayerxitem.CurrentRow.Cells["ITEM_ID"].Value;
-            int idplayer = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_USER_ID"].Value;
+            if (DGVplayerxitem.Rows.Count > 1)
+            {
+                int iditem = (int)DGVplayerxitem.CurrentRow.Cells["ITEM_ID"].Value;
+                int idplayer = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_USER_ID"].Value;
 
-            PlayersItemDA playersItem = new PlayersItemDA();
-            playersItem.deleteItemOfPlayer(iditem, idplayer);
+                PlayersItemDA playersItem = new PlayersItemDA();
+                playersItem.deleteItemOfPlayer(iditem, idplayer);
 
-            load();
-            init();
+                load();
+                init();
+            }
         }
 
-        
 
         private void BTNrecover_Click(object sender, EventArgs e)
         {
-            int playerid = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_USER_ID"].Value;
-            int itemid = (int)DGVplayerxitem.CurrentRow.Cells["ITEM_ID"].Value;
-            
-            TXTitemid.Text = itemid.ToString();
-            TXTplayerid.Text = playerid.ToString();
+            if (DGVplayerxitem.Rows.Count > 1)
+            {
+                int playerid = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_USER_ID"].Value;
+                int itemid = (int)DGVplayerxitem.CurrentRow.Cells["ITEM_ID"].Value;
 
-            TXTitemid.Enabled = true;
-            TXTplayerid.Enabled = true;
+                TXTitemid.Text = itemid.ToString();
+                TXTplayerid.Text = playerid.ToString();
 
-            BTNdelete.Enabled = false;
-            BTNrecover.Enabled = false;
-            BTNnew.Enabled = false;
-            BTNsave.Enabled = false;
-            BTNupdate.Enabled = true;
-            BTNcancel.Enabled = true;
+                TXTitemid.Enabled = true;
+                TXTplayerid.Enabled = true;
 
-            lastitemid = Convert.ToInt32(TXTitemid.Text);
-            lastplayerid = Convert.ToInt32(TXTplayerid.Text);
+                BTNdelete.Enabled = false;
+                BTNrecover.Enabled = false;
+                BTNnew.Enabled = false;
+                BTNsave.Enabled = false;
+                BTNupdate.Enabled = true;
+                BTNcancel.Enabled = true;
+
+                lastitemid = Convert.ToInt32(TXTitemid.Text);
+                lastplayerid = Convert.ToInt32(TXTplayerid.Text);
+            }
         }
-
         
 
         private void BTNupdate_Click(object sender, EventArgs e)

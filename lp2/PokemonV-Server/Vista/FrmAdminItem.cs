@@ -97,55 +97,64 @@ namespace Vista
 
         private void BTNrecover_Click(object sender, EventArgs e)
         {
-            string CADname = (string)DGVitem.CurrentRow.Cells["NAME"].Value;
-            string CADdescription = (string)DGVitem.CurrentRow.Cells["DESCRIPTION"].Value;
-            string CADtype = (string)DGVitem.CurrentRow.Cells["ITEM_TYPE"].Value;
-
-
-            TXTname.Text = CADname;
-            TXTdescription.Text = CADdescription;
-            CMBtype.Text = CADtype;
-
-            if(CADtype == "Potion")
+            if (DGVitem.Rows.Count > 1)
             {
-                TXThp.Text = ((int)DGVitem.CurrentRow.Cells["HP"].Value).ToString();
-                TXThp.Enabled = true;
+
+
+                string CADname = (string)DGVitem.CurrentRow.Cells["NAME"].Value;
+                string CADdescription = (string)DGVitem.CurrentRow.Cells["DESCRIPTION"].Value;
+                string CADtype = (string)DGVitem.CurrentRow.Cells["ITEM_TYPE"].Value;
+
+
+                TXTname.Text = CADname;
+                TXTdescription.Text = CADdescription;
+                CMBtype.Text = CADtype;
+
+                if (CADtype == "Potion")
+                {
+                    TXThp.Text = ((int)DGVitem.CurrentRow.Cells["HP"].Value).ToString();
+                    TXThp.Enabled = true;
+                }
+                else if (CADtype == "Pokeball")
+                {
+                    TXTcatchprob.Text = ((int)DGVitem.CurrentRow.Cells["CATCH_PROB"].Value).ToString();
+                    TXTcatchprob.Enabled = true;
+                }
+                else if (CADtype == "Repellent")
+                {
+                    TXTsteps.Text = ((int)DGVitem.CurrentRow.Cells["STEPS"].Value).ToString();
+                    TXTsteps.Enabled = true;
+                }
+
+
+
+
+                TXTname.Enabled = true;
+                TXTdescription.Enabled = true;
+                CMBtype.Enabled = true;
+
+                BTNdelete.Enabled = false;
+                BTNrecover.Enabled = false;
+                BTNnew.Enabled = false;
+                BTNsave.Enabled = false;
+                BTNupdate.Enabled = true;
+                BTNcancel.Enabled = true;
+
             }
-            else if (CADtype == "Pokeball")
-            {
-                TXTcatchprob.Text = ((int)DGVitem.CurrentRow.Cells["CATCH_PROB"].Value).ToString();
-                TXTcatchprob.Enabled = true;
-            }
-            else if (CADtype == "Repellent")
-            {
-                TXTsteps.Text = ((int)DGVitem.CurrentRow.Cells["STEPS"].Value).ToString();
-                TXTsteps.Enabled = true;
-            }
-
-
-
-            
-            TXTname.Enabled = true;
-            TXTdescription.Enabled = true;
-            CMBtype.Enabled = true;
-
-            BTNdelete.Enabled = false;
-            BTNrecover.Enabled = false;
-            BTNnew.Enabled = false;
-            BTNsave.Enabled = false;
-            BTNupdate.Enabled = true;
-            BTNcancel.Enabled = true;
         }
 
         private void BTNdelete_Click(object sender, EventArgs e)
         {
-            int id = (int)DGVitem.CurrentRow.Cells["ID"].Value;
+            if (DGVitem.Rows.Count > 1)
+            {
+                int id = (int)DGVitem.CurrentRow.Cells["ID"].Value;
 
-            ItemDA itemda = new ItemDA();
-            itemda.deleteItem(id);
+                ItemDA itemda = new ItemDA();
+                itemda.deleteItem(id);
 
-            load();
-            init();
+                load();
+                init();
+            }
         }
 
         private void BTNsave_Click(object sender, EventArgs e)
