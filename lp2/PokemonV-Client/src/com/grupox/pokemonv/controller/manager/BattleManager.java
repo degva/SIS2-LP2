@@ -2,6 +2,7 @@ package com.grupox.pokemonv.controller.manager;
 
 import com.grupox.pokemonv.controller.*;
 import com.grupox.pokemonv.controller.menu.BattleMenu;
+import com.grupox.pokemonv.controller.menu.TypeAttackMenuP1;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.Renderable;
@@ -31,7 +32,7 @@ public class BattleManager extends Renderable {
     }
 
     public enum State {
-        P1_IDLE, P1_ATTACK, P1_BAG, P1_GIVEUP, P2_IDLE, P2_ATTACK, P2_BAG, P2_GIVEUP
+        P1_IDLE, P1_ATTACK_FIRST,P1_ATTACK_SECOND, P1_BAG, P1_GIVEUP, P2_IDLE, P2_ATTACK, P2_BAG, P2_GIVEUP, TYPE_ATTACK_MENU
     };
     private State state;
     private Player player;
@@ -43,7 +44,7 @@ public class BattleManager extends Renderable {
     private String rutaAni2 = "res/battle/bulb_back3.png";
     private String rutaAniOp1 = "res/battle/pika_front2.png";
     private String rutaAniOp2 = "res/battle/pika_front3.png";
-    
+
     private String nombrePokPlayer1;
     private String nombrePokPlayer2;
     private final String rutaOpcion = "res/battle/fondoOpciones.png";
@@ -91,10 +92,18 @@ public class BattleManager extends Renderable {
     private int numTicks = 0;
 
     private BattleMenu menu;
+    private TypeAttackMenuP1 attackMenu1;
+//    private TypeAttackMenuP2;
+//    private TypeAttackMenuP3;
+//    private TypeAttackMenuP4;
+//    private TypeAttackMenuP5;
     private FileReader lector;
     private BufferedReader entrada;
     private String response;
     private boolean endBattle = false;
+
+    private int typeAttack = 0;
+    int idPok1, idPok2;
 
     public BattleManager(Game game) {
         //Loading the buffered images
@@ -113,8 +122,8 @@ public class BattleManager extends Renderable {
     }
 
     public void establishRoutes(Pokemon pok1, Pokemon pok2) {
-        int idPok1 = pok1.id;
-        int idPok2 = pok2.id;
+        idPok1 = pok1.id;
+        idPok2 = pok2.id;
 
         route1 = mapPokemons.get(idPok1).get(0);
         route2 = mapPokemons.get(idPok2).get(3);
@@ -140,6 +149,7 @@ public class BattleManager extends Renderable {
         }
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset, game);
+        attackMenu1 = new TypeAttackMenuP1(input,420,Game.WIDTH/3,game);
         vidaPok1 = vidaPok2 = 140;
         loadBattleAnimation();
         atk = animations.get(findAnimation("attack"));
@@ -192,7 +202,23 @@ public class BattleManager extends Renderable {
                 currSprite = idle.getCurrSprite();
                 currSprite2 = idleP2.getCurrSprite();
                 break;
-            case P1_ATTACK:
+            case TYPE_ATTACK_MENU:
+                switch (idPok1) {
+                    case 1:
+                        //attackMenu1.tick();
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 7:
+                        attackMenu1.tick();
+                        break;
+                }
+                break;
+            case P1_ATTACK_FIRST:
                 //vidaPok2 -= 20; Corregir el automatico descuento de vida
                 currSprite = atk.getCurrSprite();
                 currSprite2 = idleP2.getCurrSprite();
@@ -201,11 +227,28 @@ public class BattleManager extends Renderable {
                     System.out.println("Usuario 1 realizo un ataque");
                     numTicks = 0;
                     vidaPok2 -= 20;
-                    if (vidaPok2==0) endBattle=true;
+                    if (vidaPok2 == 0) {
+                        endBattle = true;
+                    }
                 }
                 break;
+            case P1_ATTACK_SECOND:
+               //Only the animations changes
+                currSprite = atk.getCurrSprite();
+                currSprite2 = idleP2.getCurrSprite();
+                if (numTicks == NUM_TICKS_WAIT) {
+                    state = State.P2_IDLE;
+                    System.out.println("Usuario 1 realizo un ataque");
+                    numTicks = 0;
+                    vidaPok2 -= 20;
+                    if (vidaPok2 == 0) {
+                        endBattle = true;
+                    }
+                }
+                break;
+                
             case P1_BAG:
-                endBattle=true;
+                endBattle = true;
                 break;
             case P1_GIVEUP:
                 currSprite = idle.getCurrSprite();
@@ -241,12 +284,14 @@ public class BattleManager extends Renderable {
                     state = State.P1_IDLE;
                     System.out.println("Usuario 2 realizo un ataque");
                     vidaPok1 -= 20;
-                    if (vidaPok1==0) endBattle=true;
+                    if (vidaPok1 == 0) {
+                        endBattle = true;
+                    }
                     numTicks = 0;
                 }
                 break;
             case P2_BAG:
-                endBattle=true;
+                endBattle = true;
                 break;
             case P2_GIVEUP:
                 currSprite = idle.getCurrSprite();
@@ -257,7 +302,10 @@ public class BattleManager extends Renderable {
                 break;
         }
 
-        if ((state == State.P1_ATTACK) && (game.getNumTicks() == 58)) {
+        if ((state == State.P1_ATTACK_FIRST) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
+        if ((state == State.P1_ATTACK_SECOND) && (game.getNumTicks() == 58)) {
             numTicks++;
         }
         if ((state == State.P2_ATTACK) && (game.getNumTicks() == 58)) {
@@ -303,14 +351,30 @@ public class BattleManager extends Renderable {
                 menu.render(g);
                 Font.getInstance().drawString("CHOOSE ONE OPTION", g, 30, 475);
                 break;
-            case P1_ATTACK:
-                if(!endBattle)Font.getInstance().drawString("YOU ARE ATTACKING...", g, 30, 475);
-                else Font.getInstance().drawString("YOU WON THE MATCH", g, 30, 475);
-                
+            case TYPE_ATTACK_MENU:
+                //g.drawImage(fondoOpcion, 450 - 100, 425, 350 + 100, 171, null);
+                //menu.render(g);
+                g.drawImage(fondoOpcion, 0, 425, 350 + 200, 171, null);
+                attackMenu1.render(g);
+                Font.getInstance().drawString("CHOOSE YOUR", g, 570, 460);
+                Font.getInstance().drawString("ATTACK", g, 570, 525);
+                break;
+            case P1_ATTACK_FIRST:
+                if (!endBattle) {
+                    Font.getInstance().drawString("YOU ARE ATTACKING...", g, 30, 475);
+                } else {
+                    Font.getInstance().drawString("YOU WON THE MATCH", g, 30, 475);
+                }
+                break;
+            case P1_ATTACK_SECOND:
+                if (!endBattle) {
+                    Font.getInstance().drawString("YOU ARE ATTACKING ATTACK2...", g, 30, 475);
+                } else {
+                    Font.getInstance().drawString("YOU WON THE MATCH ATTACK2...", g, 30, 475);
+                }
                 break;
             case P1_BAG:
                 Font.getInstance().drawString("YOU USED THE BAG", g, 30, 475);
-                
                 break;
             case P1_GIVEUP:
                 Font.getInstance().drawString("YOU RAN AWAY, LOSING THE BATTLE", g, 30, 475);
@@ -318,13 +382,15 @@ public class BattleManager extends Renderable {
             case P2_IDLE:
                 break;
             case P2_ATTACK:
-                if(!endBattle)Font.getInstance().drawString("YOUR OPONENT IS ATTACKING...", g, 30, 475);
-                else Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
-                
+                if (!endBattle) {
+                    Font.getInstance().drawString("YOUR OPONENT IS ATTACKING...", g, 30, 475);
+                } else {
+                    Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
+                }
                 break;
             case P2_BAG:
                 Font.getInstance().drawString("HE USED THE BAG", g, 30, 475);
-                
+
                 break;
             case P2_GIVEUP:
                 Font.getInstance().drawString("YOU WON THE MATCH, THE OTHER PLAYER LEFT", g, 30, 475);
@@ -410,4 +476,13 @@ public class BattleManager extends Renderable {
         mapPokemons.put(4, rutasPOK4); // ID:4->Charmander
         mapPokemons.put(7, rutasPOK7); // ID:7->Squirtle
     }
+
+    public int getTypeAttack() {
+        return typeAttack;
+    }
+
+    public void setTypeAttack(int typeAttack) {
+        this.typeAttack = typeAttack;
+    }
+
 }
