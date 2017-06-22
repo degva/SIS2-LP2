@@ -45,6 +45,7 @@ namespace AccesoDatos
                 if(newidplayer == lastidplayer)
                 {
 
+                    connection = new Connection();
                     MySqlCommand cmd = new MySqlCommand();
                     string sql = "SELECT * FROM PLAYER_X_POKEMON WHERE PLAYER_USER_ID =" + character + newidplayer + character + "AND ORDER_POKEMON = " + character + neworder + character;
                     cmd.Connection = connection.conn;
@@ -53,26 +54,66 @@ namespace AccesoDatos
 
                     if (reader.HasRows)
                     {
-                        
+
+                        connection = new Connection();
+                        MySqlCommand cmd2 = new MySqlCommand();
+                        string sql2 = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + character + lastidpokemon + character + ", ORDER_POKEMON = " + character + lastorder + character + ", PLAYER_USER_ID = "
+                            + character + lastidplayer + character
+                        + "where PLAYER_USER_ID = " + character + newidplayer + character
+                        + "AND ORDER_POKEMON = " + character + neworder + character;
+
+                        cmd2.Connection = connection.conn;
+                        cmd2.CommandText = sql2;
+                        cmd2.ExecuteNonQuery();
+
                     }
                     else
                     {
-                        MySqlCommand cmd1 = new MySqlCommand();
-                        string sql1 = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + character + newidpokemon + character + ", ORDER_POKEMON = " + character + neworder + character + ", PLAYER_USER_ID = "
+                        
+                    }
+                    connection = new Connection();
+                    MySqlCommand cmd1 = new MySqlCommand();
+                    string sql1 = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + character + newidpokemon + character + ", ORDER_POKEMON = " + character + neworder + character + ", PLAYER_USER_ID = "
+                        + character + newidplayer + character
+                    + "where PLAYER_USER_ID = " + character + lastidplayer + character + "AND POKEMON_ID = " + character + lastidpokemon + character
+                    + "AND ORDER_POKEMON = " + character + lastorder + character;
+
+                    cmd1.Connection = connection.conn;
+                    cmd1.CommandText = sql1;
+                    cmd1.ExecuteNonQuery();
+
+                }
+                else if(newidplayer != lastidplayer)
+                {
+
+                    connection = new Connection();
+                    MySqlCommand cmd3 = new MySqlCommand();
+                    string sql3 = "SELECT * FROM PLAYER_X_POKEMON WHERE PLAYER_USER_ID =" + character + newidplayer + character + "AND ORDER_POKEMON = " + character + neworder + character;
+                    cmd3.Connection = connection.conn;
+                    cmd3.CommandText = sql3;
+                    MySqlDataReader reader = cmd3.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        connection = new Connection();
+                        MySqlCommand cmd4 = new MySqlCommand();
+                        string sql4 = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + character + newidpokemon + character + ", ORDER_POKEMON = " + character + neworder + character + ", PLAYER_USER_ID = "
                             + character + newidplayer + character
                         + "where PLAYER_USER_ID = " + character + lastidplayer + character + "AND POKEMON_ID = " + character + lastidpokemon + character
                         + "AND ORDER_POKEMON = " + character + lastorder + character;
 
-                        cmd1.Connection = connection.conn;
-                        cmd1.CommandText = sql1;
-                        cmd1.ExecuteNonQuery();
+                        cmd4.Connection = connection.conn;
+                        cmd4.CommandText = sql4;
+                        cmd4.ExecuteNonQuery();
                     }
-                }else if(newidplayer != lastidplayer)
-                {
 
                 }
 
-                
+
                 connection.closeConnection();
                 return 1;
             }
