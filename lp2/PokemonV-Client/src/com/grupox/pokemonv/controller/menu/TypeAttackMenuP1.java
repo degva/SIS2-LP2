@@ -1,11 +1,8 @@
 package com.grupox.pokemonv.controller.menu;
 
-import com.grupox.pokemonv.controller.Font;
 import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.controller.manager.BattleManager;
-import com.grupox.pokemonv.controller.menu.SingleColumnMenu;
-import com.grupox.pokemonv.model.Player;
 
 public class TypeAttackMenuP1 extends DoubleColumnBattle {
 
