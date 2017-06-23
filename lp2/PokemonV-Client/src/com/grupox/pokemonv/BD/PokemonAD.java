@@ -39,7 +39,8 @@ public class PokemonAD {
             Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282gx","inf282gx","m8h53r9A6xBfeOe6");
             System.out.println("la conexion se ha realizado");
             Statement sentencia = con.createStatement();
-            String query =  "SELECT distinct p.ID, p.NAME, p.TYPE, p.ATTACK_PTS, p.DEFFENSE_PTS, p.LIFE \n" +
+            //cambiar esto!
+            String query =  "SELECT distinct p.ID, p.NAME, p.TYPE, p.ATTACK1_NAME, p.ATTACK1_PTS, p.DEFFENSE_PTS, p.LIFE \n" +
                             "FROM inf282gx.PLAYER_X_POKEMON pp, inf282gx.POKEMON p \n" +
                             "where pp.PLAYER_USER_ID = "+String.valueOf(idUser)+" AND p.DELETED = 0 AND pp.POKEMON_ID = p.ID\n"
                             + "order by pp.ORDER_POKEMON ";
@@ -50,11 +51,12 @@ public class PokemonAD {
                 String id = rs.getString("ID");
                 String name = rs.getString("NAME");
                 String type = rs.getString("TYPE");
-                String attack_pts = rs.getString("ATTACK_PTS");
+                String attack_name = rs.getString("ATTACK1_NAME");
+                String attack_pts = rs.getString("ATTACK1_PTS");
                 String defense_pts = rs.getString("DEFFENSE_PTS");
                 String life = rs.getString("LIFE");
 
-                System.out.println(id+" "+attack_pts+" "+defense_pts+" "+name+" "+life+" "+type);
+                System.out.println(id+" "+attack_name+" "+attack_pts+" "+defense_pts+" "+name+" "+life+" "+type);
                 Pokemon pok = new Pokemon(Integer.parseInt(id), Integer.parseInt(attack_pts), Integer.parseInt(defense_pts),Integer.parseInt(life), name, tipoE);
                 listaPokemones.add(pok);
             }
@@ -62,7 +64,7 @@ public class PokemonAD {
             System.out.println(e.getMessage());
         }
     }
-    
+    //ya no va!
     public void intercambiarDA(Pokemon pokA, Pokemon pokB, int idUser){
         try{
         //registrar el driver

@@ -4,7 +4,7 @@ import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.model.Tile;
 import java.awt.Graphics2D;
 
-public class QuantityMenu extends SingleColumnMenu{
+public abstract class QuantityMenu extends SingleColumnMenu{
     
     public QuantityMenu(InputHandler input, int topOffset, int rightOffset) {
         super(input, topOffset, rightOffset);
