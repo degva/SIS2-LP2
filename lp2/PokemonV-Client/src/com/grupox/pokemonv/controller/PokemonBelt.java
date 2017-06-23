@@ -276,7 +276,7 @@ public class PokemonBelt {
         int x=80, y=50;
         //Font.getInstance().drawString(pok.getName(), g, x-2*spriteWidthOut, y);
         Font.getInstance().drawString(pok.getName(), g, x,y);
-        Font.getInstance().drawString("ATTACK: "+ Double.toString(pok.getAttack_pts()),g, x, y+70);
+        Font.getInstance().drawString("ATTACK: "+ Double.toString(pok.getAttack1_pts()),g, x, y+70);
         Font.getInstance().drawString("DEFENSE: "+ Double.toString(pok.getDefense_pts()), g, x, y +2*70);
         Font.getInstance().drawString("LIFE: "+ Double.toString(pok.getLife()), g, x, y +3*70);
         Font.getInstance().drawString("TYPE: "+pok.getType().toString(), g, x, y +4*70);

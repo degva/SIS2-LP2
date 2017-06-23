@@ -86,7 +86,7 @@ public class BattleManager extends Renderable {
     private BufferedImage imgForAnimP2_Normal2;
     private BufferedImage fondoOpcion;
     private int NUM_TICKS_WAIT = 2;
-
+    
     private int vidaPok1;
     private int vidaPok2;
     private Animation attackAnimP1Normal;
@@ -99,10 +99,7 @@ public class BattleManager extends Renderable {
 
     private BattleMenu menu;
     private TypeAttackMenuP1 attackMenu1;
-//    private TypeAttackMenuP2;
-//    private TypeAttackMenuP3;
-//    private TypeAttackMenuP4;
-//    private TypeAttackMenuP5;
+    private String attack1_name,attack2_name;
     private FileReader lector;
     private BufferedReader entrada;
     private String response;
@@ -151,6 +148,8 @@ public class BattleManager extends Renderable {
     public void startBattle(Player p1, Player p2) {
         this.player = p1;
         input = p1.getInput();
+        attack1_name = p1.getPokemons().get(0).getAttack1_name();
+        attack2_name = p1.getPokemons().get(0).getAttack2_name();
         establishRoutes(p1.getPokemons().get(0), p2.getPokemons().get(0)); //Obtiene el primer pokemon de cada uno
         try {
             imgPokemonStatic_P1 = ImageIO.read(new File(rutaP1_StaticPok));
@@ -171,7 +170,7 @@ public class BattleManager extends Renderable {
         }
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset, game);
-        attackMenu1 = new TypeAttackMenuP1(input,420,Game.WIDTH/3,game);
+        attackMenu1 = new TypeAttackMenuP1(input,420,Game.WIDTH/3,attack1_name,attack2_name,game);
         vidaPok1 = vidaPok2 = 140;
         loadBattleAnimation();
         attackAnimP1Normal = animations.get(findAnimation("attack"));
@@ -394,14 +393,14 @@ public class BattleManager extends Renderable {
                 break;
             case P1_ATTACK_FIRST:
                 if (!endBattle) {
-                    Font.getInstance().drawString("YOU ARE ATTACKING...", g, 30, 475);
+                    Font.getInstance().drawString(nombrePokPlayer1+" USED "+attack1_name, g, 30, 475);
                 } else {
                     Font.getInstance().drawString("YOU WON THE MATCH", g, 30, 475);
                 }
                 break;
             case P1_ATTACK_SECOND:
                 if (!endBattle) {
-                    Font.getInstance().drawString("YOU ARE ATTACKING ATTACK2...", g, 30, 475);
+                    Font.getInstance().drawString(nombrePokPlayer1+" USED "+attack2_name, g, 30, 475);
                 } else {
                     Font.getInstance().drawString("YOU WON THE MATCH ATTACK2...", g, 30, 475);
                 }
@@ -416,7 +415,7 @@ public class BattleManager extends Renderable {
                 break;
             case P2_ATTACK:
                 if (!endBattle) {
-                    Font.getInstance().drawString("YOUR OPONENT IS ATTACKING...", g, 30, 475);
+                    Font.getInstance().drawString(nombrePokPlayer2 + " IS ATTACKING..", g, 30, 475);
                 } else {
                     Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
                 }

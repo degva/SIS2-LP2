@@ -11,13 +11,16 @@ public class TypeAttackMenuP1 extends DoubleColumnBattle {
     private final int radipAttackIndex, otherAttackIndex;
 
     /* Constructors */
-    public TypeAttackMenuP1(InputHandler input, int topOffset, int rightOffset, Game game) {
+    public TypeAttackMenuP1(InputHandler input, int topOffset, int rightOffset,String attack1_name,String attack2_name, Game game) {
         super(input, topOffset, rightOffset);
         //BULBASAUR
         this.game = game;
 
-        radipAttackIndex = this.addItem("Rapid Attack");
-        otherAttackIndex = this.addItem("Vine Whip");
+//        radipAttackIndex = this.addItem("Rapid Attack");
+//        otherAttackIndex = this.addItem("Vine Whip");
+
+        radipAttackIndex = this.addItem(attack1_name);
+        otherAttackIndex = this.addItem(attack2_name);
     }
 
     /* Methods */
