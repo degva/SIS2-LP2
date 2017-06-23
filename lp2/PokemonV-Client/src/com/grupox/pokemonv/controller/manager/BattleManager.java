@@ -26,8 +26,9 @@ public class BattleManager extends Renderable {
     public void render(Graphics2D g, int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     public enum State {
-        P1_IDLE, P1_ATTACK_FIRST,P1_ATTACK_SECOND, P1_BAG, P1_GIVEUP, P2_IDLE, P2_ATTACK, P2_BAG, P2_GIVEUP, TYPE_ATTACK_MENU
+        P1_IDLE, P1_ATTACK_FIRST, P1_ATTACK_SECOND, P1_BAG, P1_GIVEUP, P2_IDLE, P2_ATTACK_FIRST,P2_ATTACK_SECOND, P2_BAG, P2_GIVEUP, TYPE_ATTACK_MENU
     };
     private State state;
     private Player player;
@@ -44,6 +45,11 @@ public class BattleManager extends Renderable {
     private String rutaP1_Super2;
     private String rutaP1_Super3;
     private String rutaP1_Super4;
+
+    private String rutaP2_Super1;
+    private String rutaP2_Super2;
+    private String rutaP2_Super3;
+    private String rutaP2_Super4;
 
     private String nombrePokPlayer1;
     private String nombrePokPlayer2;
@@ -76,30 +82,37 @@ public class BattleManager extends Renderable {
     private BufferedImage imgBackgroundBattle;
     private BufferedImage imgBackgroundHP1;
     private BufferedImage imgBackgroundHP2;
+    
     private BufferedImage imgForAnimP1_Normal1;
     private BufferedImage imgForAnimP1_Normal2;
     private BufferedImage imgForAnimP1_Super1;
     private BufferedImage imgForAnimP1_Super2;
     private BufferedImage imgForAnimP1_Super3;
     private BufferedImage imgForAnimP1_Super4;
+
     private BufferedImage imgForAnimP2_Normal1;
     private BufferedImage imgForAnimP2_Normal2;
+    private BufferedImage imgForAnimP2_Super1;
+    private BufferedImage imgForAnimP2_Super2;
+    private BufferedImage imgForAnimP2_Super3;
+    private BufferedImage imgForAnimP2_Super4;
+    
     private BufferedImage fondoOpcion;
     private int NUM_TICKS_WAIT = 2;
-    
+
     private int vidaPok1;
     private int vidaPok2;
     private Animation attackAnimP1Normal;
     private Animation attackAnimP1Super;
     private Animation idle;
     private Animation attackAnimP2Normal;
-    private Animation attackAnimP2Second;
+    private Animation attackAnimP2Super;
     private Animation idleP2;
     private int numTicks = 0;
 
     private BattleMenu menu;
     private TypeAttackMenuP1 attackMenu1;
-    private String attack1_name,attack2_name;
+    private String attack1_name, attack2_name;
     private FileReader lector;
     private BufferedReader entrada;
     private String response;
@@ -138,11 +151,15 @@ public class BattleManager extends Renderable {
         rutaP1_Super2 = mapPokemons.get(idPok1).get(4);
         rutaP1_Super3 = mapPokemons.get(idPok1).get(5);
         rutaP1_Super4 = mapPokemons.get(idPok1).get(6);
-        
+
         //Rutas de las imagenes para las animaciones: Normal ataque,Player 2
         rutaP2_Normal1 = mapPokemons.get(idPok2).get(8);
         rutaP2_Normal2 = mapPokemons.get(idPok2).get(9);
         //FALTAN LAS RUTAS DE LAS DEMAS ANIMACIONES
+        rutaP2_Super1 = mapPokemons.get(idPok2).get(10);
+        rutaP2_Super2 = mapPokemons.get(idPok2).get(11);
+        rutaP2_Super3 = mapPokemons.get(idPok2).get(12);
+        rutaP2_Super4 = mapPokemons.get(idPok2).get(13);
     }
 
     public void startBattle(Player p1, Player p2) {
@@ -154,38 +171,45 @@ public class BattleManager extends Renderable {
         try {
             imgPokemonStatic_P1 = ImageIO.read(new File(rutaP1_StaticPok));
             imgPokemonStatic_P2 = ImageIO.read(new File(rutaP2_StaticPok));
-            
+
             imgForAnimP1_Normal1 = ImageIO.read(new File(rutaP1_Normal1));
             imgForAnimP1_Normal2 = ImageIO.read(new File(rutaP1_Normal2));
-            
+
             imgForAnimP1_Super1 = ImageIO.read(new File(rutaP1_Super1));
             imgForAnimP1_Super2 = ImageIO.read(new File(rutaP1_Super2));
             imgForAnimP1_Super3 = ImageIO.read(new File(rutaP1_Super3));
             imgForAnimP1_Super4 = ImageIO.read(new File(rutaP1_Super4));
-            
-            //FALTA LEER LAS IMAGENES PARA ANIMACION SUPER DEL SEGUNDO JUGADOR
+
             imgForAnimP2_Normal1 = ImageIO.read(new File(rutaP2_Normal1));
             imgForAnimP2_Normal2 = ImageIO.read(new File(rutaP2_Normal2));
+            
+            imgForAnimP2_Super1 = ImageIO.read(new File(rutaP2_Super1));
+            imgForAnimP2_Super2 = ImageIO.read(new File(rutaP2_Super2));
+            imgForAnimP2_Super3 = ImageIO.read(new File(rutaP2_Super3));
+            imgForAnimP2_Super4 = ImageIO.read(new File(rutaP2_Super4));
         } catch (Exception exp) {
         }
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset, game);
-        attackMenu1 = new TypeAttackMenuP1(input,420,Game.WIDTH/3,attack1_name,attack2_name,game);
+        attackMenu1 = new TypeAttackMenuP1(input, 420, Game.WIDTH / 3, attack1_name, attack2_name, game);
         vidaPok1 = vidaPok2 = 140;
         loadBattleAnimation();
         attackAnimP1Normal = animations.get(findAnimation("attack"));
         attackAnimP1Super = animations.get(findAnimation("attackSuper"));
-        
+
         attackAnimP2Normal = animations.get(findAnimation("attackP2"));
+        attackAnimP2Super = animations.get(findAnimation("attackSuper2"));
+        
         idle = animations.get(findAnimation("idlePok1"));
         idleP2 = animations.get(findAnimation("idleP2"));
         nombrePokPlayer1 = p1.getPokemons().get(0).getName();
         nombrePokPlayer2 = p2.getPokemons().get(0).getName();
         attackAnimP1Normal.play();
         attackAnimP1Super.play();
-        
+
         attackAnimP2Normal.play();
-        
+        attackAnimP2Super.play();
+
         idle.play();
         idleP2.play();
     }
@@ -209,7 +233,7 @@ public class BattleManager extends Renderable {
         ArrayList<BufferedImage> idleP2 = new ArrayList<>();
         idleP2.add(imgPokemonStatic_P2);
         Animation idleAnimationP2 = new Animation("idleP2", idleP2, movePeriod);
-        
+
         ArrayList<BufferedImage> attackSuperImagesP1 = new ArrayList<>();
         attackSuperImagesP1.add(imgForAnimP1_Super1);
         attackSuperImagesP1.add(imgForAnimP1_Super2);
@@ -217,11 +241,19 @@ public class BattleManager extends Renderable {
         attackSuperImagesP1.add(imgForAnimP1_Super4);
         Animation attackSuperAnimationP1 = new Animation("attackSuper", attackSuperImagesP1, movePeriod);
         
+        ArrayList<BufferedImage> attackSuperImagesP2 = new ArrayList<>();
+        attackSuperImagesP2.add(imgForAnimP2_Super1);
+        attackSuperImagesP2.add(imgForAnimP2_Super2);
+        attackSuperImagesP2.add(imgForAnimP2_Super3);
+        attackSuperImagesP2.add(imgForAnimP2_Super4);
+        Animation attackSuperAnimationP2 = new Animation("attackSuper2", attackSuperImagesP2, movePeriod);
+
         animations.add(idleAnimation);
         animations.add(attackAnimation);
         animations.add(attackAnimationP2);
         animations.add(idleAnimationP2);
         animations.add(attackSuperAnimationP1);
+        animations.add(attackSuperAnimationP2);
     }
 
     public void inicializeTicks() {
@@ -236,20 +268,7 @@ public class BattleManager extends Renderable {
                 currSprite2 = idleP2.getCurrSprite();
                 break;
             case TYPE_ATTACK_MENU:
-                switch (idPok1) {
-                    case 1:
-                        attackMenu1.tick();
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 7:
-                        attackMenu1.tick();
-                        break;
-                }
+                attackMenu1.tick();
                 break;
             case P1_ATTACK_FIRST:
                 //vidaPok2 -= 20; Corregir el automatico descuento de vida
@@ -265,7 +284,7 @@ public class BattleManager extends Renderable {
                 }
                 break;
             case P1_ATTACK_SECOND:
-               //Only the animations changes
+                //Only the animations changes
                 currSprite = attackAnimP1Super.getCurrSprite();
                 currSprite2 = idleP2.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT) {
@@ -278,7 +297,6 @@ public class BattleManager extends Renderable {
                     }
                 }
                 break;
-                
             case P1_BAG:
                 endBattle = true;
                 break;
@@ -295,9 +313,12 @@ public class BattleManager extends Renderable {
                 currSprite2 = idleP2.getCurrSprite();
                 response = getOtherResponse();
                 if (response != null) {
-                    if (response.equals("atacar")) {
-                        state = State.P2_ATTACK;
-                    } else if (response.equals("huir")) {
+                    if (response.equals("atacar1")) {
+                        state = State.P2_ATTACK_FIRST;
+                    } else if (response.equals("atacar2")){
+                        state = State.P2_ATTACK_SECOND;
+                    }
+                    else if (response.equals("huir")) {
                         System.out.println("El usuario 2 realizo HUIR");
                         state = State.P2_GIVEUP;
                         numTicks = 0;
@@ -308,13 +329,26 @@ public class BattleManager extends Renderable {
                     }
                 }
                 break;
-            case P2_ATTACK:
+            case P2_ATTACK_FIRST:
                 currSprite = idle.getCurrSprite();
                 currSprite2 = attackAnimP2Normal.getCurrSprite();
                 ;
                 if (numTicks == NUM_TICKS_WAIT) { //Luego de 4 ticks, reiniciar el temporizador
                     state = State.P1_IDLE;
                     System.out.println("Usuario 2 realizo un ataque");
+                    vidaPok1 -= 20;
+                    if (vidaPok1 == 0) {
+                        endBattle = true;
+                    }
+                    numTicks = 0;
+                }
+                break;
+            case P2_ATTACK_SECOND:
+                currSprite = idle.getCurrSprite();
+                currSprite2 = attackAnimP2Super.getCurrSprite();
+                if (numTicks == NUM_TICKS_WAIT) { //Luego de 4 ticks, reiniciar el temporizador
+                    state = State.P1_IDLE;
+                     System.out.println("Usuario 2 realizo un ataque");
                     vidaPok1 -= 20;
                     if (vidaPok1 == 0) {
                         endBattle = true;
@@ -340,7 +374,10 @@ public class BattleManager extends Renderable {
         if ((state == State.P1_ATTACK_SECOND) && (game.getNumTicks() == 58)) {
             numTicks++;
         }
-        if ((state == State.P2_ATTACK) && (game.getNumTicks() == 58)) {
+        if ((state == State.P2_ATTACK_FIRST) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
+        if ((state == State.P2_ATTACK_SECOND) && (game.getNumTicks() == 58)) {
             numTicks++;
         }
         if ((state == State.P1_GIVEUP) && (game.getNumTicks() == 58)) {
@@ -384,8 +421,6 @@ public class BattleManager extends Renderable {
                 Font.getInstance().drawString("CHOOSE ONE OPTION", g, 30, 475);
                 break;
             case TYPE_ATTACK_MENU:
-                //g.drawImage(fondoOpcion, 450 - 100, 425, 350 + 100, 171, null);
-                //menu.render(g);
                 g.drawImage(fondoOpcion, 0, 425, 350 + 200, 171, null);
                 attackMenu1.render(g);
                 Font.getInstance().drawString("CHOOSE YOUR", g, 570, 460);
@@ -393,14 +428,14 @@ public class BattleManager extends Renderable {
                 break;
             case P1_ATTACK_FIRST:
                 if (!endBattle) {
-                    Font.getInstance().drawString(nombrePokPlayer1+" USED "+attack1_name, g, 30, 475);
+                    Font.getInstance().drawString(nombrePokPlayer1 + " USED " + attack1_name, g, 30, 475);
                 } else {
                     Font.getInstance().drawString("YOU WON THE MATCH", g, 30, 475);
                 }
                 break;
             case P1_ATTACK_SECOND:
                 if (!endBattle) {
-                    Font.getInstance().drawString(nombrePokPlayer1+" USED "+attack2_name, g, 30, 475);
+                    Font.getInstance().drawString(nombrePokPlayer1 + " USED " + attack2_name, g, 30, 475);
                 } else {
                     Font.getInstance().drawString("YOU WON THE MATCH ATTACK2...", g, 30, 475);
                 }
@@ -413,16 +448,22 @@ public class BattleManager extends Renderable {
                 break;
             case P2_IDLE:
                 break;
-            case P2_ATTACK:
+            case P2_ATTACK_FIRST:
                 if (!endBattle) {
                     Font.getInstance().drawString(nombrePokPlayer2 + " IS ATTACKING..", g, 30, 475);
                 } else {
                     Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
                 }
                 break;
+            case P2_ATTACK_SECOND:
+                if (!endBattle) {
+                    Font.getInstance().drawString(nombrePokPlayer2 + " IS ATTACKING SUPER2", g, 30, 475);
+                } else {
+                    Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
+                }
+                break;
             case P2_BAG:
                 Font.getInstance().drawString("HE USED THE BAG", g, 30, 475);
-
                 break;
             case P2_GIVEUP:
                 Font.getInstance().drawString("YOU WON THE MATCH, THE OTHER PLAYER LEFT", g, 30, 475);
@@ -477,34 +518,70 @@ public class BattleManager extends Renderable {
         rutasPOK1.add("res/battle/bulb_front1.png");
         rutasPOK1.add("res/battle/bulb_front2.png");
         rutasPOK1.add("res/battle/bulb_front3.png");
+        rutasPOK1.add("res/battle/bulb_front4.png");
+        rutasPOK1.add("res/battle/bulb_front5.png");
+        rutasPOK1.add("res/battle/bulb_front6.png");
+        rutasPOK1.add("res/battle/bulb_front7.png");
 
         rutasPOK2.add("res/battle/pika_back1.png");
         rutasPOK2.add("res/battle/pika_back2.png");
         rutasPOK2.add("res/battle/pika_back3.png");
+        rutasPOK2.add("res/battle/pika_back4.png");
+        rutasPOK2.add("res/battle/pika_back5.png");
+        rutasPOK2.add("res/battle/pika_back6.png");
+        rutasPOK2.add("res/battle/pika_back7.png");
         rutasPOK2.add("res/battle/pika_front1.png");
         rutasPOK2.add("res/battle/pika_front2.png");
         rutasPOK2.add("res/battle/pika_front3.png");
+        rutasPOK2.add("res/battle/pika_front4.png");
+        rutasPOK2.add("res/battle/pika_front5.png");
+        rutasPOK2.add("res/battle/pika_front6.png");
+        rutasPOK2.add("res/battle/pika_front7.png");
 
         rutasPOK3.add("res/battle/butt_back1.png");
         rutasPOK3.add("res/battle/butt_back2.png");
         rutasPOK3.add("res/battle/butt_back3.png");
+        rutasPOK3.add("res/battle/butt_back4.png");
+        rutasPOK3.add("res/battle/butt_back5.png");
+        rutasPOK3.add("res/battle/butt_back6.png");
+        rutasPOK3.add("res/battle/butt_back7.png");
         rutasPOK3.add("res/battle/butt_front1.png");
         rutasPOK3.add("res/battle/butt_front2.png");
         rutasPOK3.add("res/battle/butt_front3.png");
+        rutasPOK3.add("res/battle/butt_front4.png");
+        rutasPOK3.add("res/battle/butt_front5.png");
+        rutasPOK3.add("res/battle/butt_front6.png");
+        rutasPOK3.add("res/battle/butt_front7.png");
 
         rutasPOK4.add("res/battle/char_back1.png");
         rutasPOK4.add("res/battle/char_back2.png");
         rutasPOK4.add("res/battle/char_back3.png");
+        rutasPOK4.add("res/battle/char_back4.png");
+        rutasPOK4.add("res/battle/char_back5.png");
+        rutasPOK4.add("res/battle/char_back6.png");
+        rutasPOK4.add("res/battle/char_back7.png");
         rutasPOK4.add("res/battle/char_front1.png");
         rutasPOK4.add("res/battle/char_front2.png");
         rutasPOK4.add("res/battle/char_front3.png");
+        rutasPOK4.add("res/battle/char_front4.png");
+        rutasPOK4.add("res/battle/char_front5.png");
+        rutasPOK4.add("res/battle/char_front6.png");
+        rutasPOK4.add("res/battle/char_front7.png");
 
         rutasPOK7.add("res/battle/sq_back1.png");
         rutasPOK7.add("res/battle/sq_back2.png");
         rutasPOK7.add("res/battle/sq_back3.png");
+        rutasPOK7.add("res/battle/sq_back4.png");
+        rutasPOK7.add("res/battle/sq_back5.png");
+        rutasPOK7.add("res/battle/sq_back6.png");
+        rutasPOK7.add("res/battle/sq_back7.png");
         rutasPOK7.add("res/battle/sq_front1.png");
         rutasPOK7.add("res/battle/sq_front2.png");
         rutasPOK7.add("res/battle/sq_front3.png");
+        rutasPOK7.add("res/battle/sq_front4.png");
+        rutasPOK7.add("res/battle/sq_front5.png");
+        rutasPOK7.add("res/battle/sq_front6.png");
+        rutasPOK7.add("res/battle/sq_front7.png");
 
         mapPokemons.put(1, rutasPOK1); // ID:1->Bulbasaur
         mapPokemons.put(2, rutasPOK2); // ID:2->Pikachu
