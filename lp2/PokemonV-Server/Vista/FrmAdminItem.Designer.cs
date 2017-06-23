@@ -33,12 +33,10 @@
             this.LBLtype = new System.Windows.Forms.Label();
             this.TXTname = new System.Windows.Forms.TextBox();
             this.LBLname = new System.Windows.Forms.Label();
-            this.TXTsteps = new System.Windows.Forms.TextBox();
             this.TXTcatchprob = new System.Windows.Forms.TextBox();
             this.TXTdescription = new System.Windows.Forms.TextBox();
             this.LBLcatchprob = new System.Windows.Forms.Label();
             this.LBLdescription = new System.Windows.Forms.Label();
-            this.LBLsteps = new System.Windows.Forms.Label();
             this.TXThp = new System.Windows.Forms.TextBox();
             this.LBLhp = new System.Windows.Forms.Label();
             this.BTNcancel = new System.Windows.Forms.Button();
@@ -65,7 +63,6 @@
             this.CMBtype.FormattingEnabled = true;
             this.CMBtype.Items.AddRange(new object[] {
             "Potion",
-            "Repellent",
             "Pokeball"});
             this.CMBtype.Location = new System.Drawing.Point(203, 196);
             this.CMBtype.Name = "CMBtype";
@@ -94,6 +91,7 @@
             // LBLname
             // 
             this.LBLname.AutoSize = true;
+            this.LBLname.BackColor = System.Drawing.SystemColors.Menu;
             this.LBLname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLname.Location = new System.Drawing.Point(38, 29);
             this.LBLname.Name = "LBLname";
@@ -101,18 +99,10 @@
             this.LBLname.TabIndex = 31;
             this.LBLname.Text = "Name";
             // 
-            // TXTsteps
-            // 
-            this.TXTsteps.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTsteps.Location = new System.Drawing.Point(203, 257);
-            this.TXTsteps.Name = "TXTsteps";
-            this.TXTsteps.Size = new System.Drawing.Size(190, 21);
-            this.TXTsteps.TabIndex = 30;
-            // 
             // TXTcatchprob
             // 
             this.TXTcatchprob.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTcatchprob.Location = new System.Drawing.Point(203, 315);
+            this.TXTcatchprob.Location = new System.Drawing.Point(203, 255);
             this.TXTcatchprob.Name = "TXTcatchprob";
             this.TXTcatchprob.Size = new System.Drawing.Size(190, 21);
             this.TXTcatchprob.TabIndex = 29;
@@ -130,7 +120,7 @@
             // 
             this.LBLcatchprob.AutoSize = true;
             this.LBLcatchprob.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLcatchprob.Location = new System.Drawing.Point(38, 315);
+            this.LBLcatchprob.Location = new System.Drawing.Point(38, 255);
             this.LBLcatchprob.Name = "LBLcatchprob";
             this.LBLcatchprob.Size = new System.Drawing.Size(144, 20);
             this.LBLcatchprob.TabIndex = 27;
@@ -146,20 +136,10 @@
             this.LBLdescription.TabIndex = 26;
             this.LBLdescription.Text = "Description";
             // 
-            // LBLsteps
-            // 
-            this.LBLsteps.AutoSize = true;
-            this.LBLsteps.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLsteps.Location = new System.Drawing.Point(38, 255);
-            this.LBLsteps.Name = "LBLsteps";
-            this.LBLsteps.Size = new System.Drawing.Size(56, 20);
-            this.LBLsteps.TabIndex = 25;
-            this.LBLsteps.Text = "Steps";
-            // 
             // TXThp
             // 
             this.TXThp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXThp.Location = new System.Drawing.Point(203, 372);
+            this.TXThp.Location = new System.Drawing.Point(203, 312);
             this.TXThp.Name = "TXThp";
             this.TXThp.Size = new System.Drawing.Size(190, 21);
             this.TXThp.TabIndex = 36;
@@ -168,7 +148,7 @@
             // 
             this.LBLhp.AutoSize = true;
             this.LBLhp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLhp.Location = new System.Drawing.Point(38, 372);
+            this.LBLhp.Location = new System.Drawing.Point(38, 312);
             this.LBLhp.Name = "LBLhp";
             this.LBLhp.Size = new System.Drawing.Size(33, 20);
             this.LBLhp.TabIndex = 35;
@@ -257,12 +237,10 @@
             this.Controls.Add(this.LBLtype);
             this.Controls.Add(this.TXTname);
             this.Controls.Add(this.LBLname);
-            this.Controls.Add(this.TXTsteps);
             this.Controls.Add(this.TXTcatchprob);
             this.Controls.Add(this.TXTdescription);
             this.Controls.Add(this.LBLcatchprob);
             this.Controls.Add(this.LBLdescription);
-            this.Controls.Add(this.LBLsteps);
             this.Controls.Add(this.DGVitem);
             this.Name = "FrmAdminItem";
             this.Text = "Admin Item";
@@ -279,12 +257,10 @@
         private System.Windows.Forms.Label LBLtype;
         private System.Windows.Forms.TextBox TXTname;
         private System.Windows.Forms.Label LBLname;
-        private System.Windows.Forms.TextBox TXTsteps;
         private System.Windows.Forms.TextBox TXTcatchprob;
         private System.Windows.Forms.TextBox TXTdescription;
         private System.Windows.Forms.Label LBLcatchprob;
         private System.Windows.Forms.Label LBLdescription;
-        private System.Windows.Forms.Label LBLsteps;
         private System.Windows.Forms.TextBox TXThp;
         private System.Windows.Forms.Label LBLhp;
         private System.Windows.Forms.Button BTNcancel;

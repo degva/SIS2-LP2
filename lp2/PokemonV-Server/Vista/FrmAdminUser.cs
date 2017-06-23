@@ -55,11 +55,11 @@ namespace Vista
 
                 connection.Open();
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,USERNAME,PASSWORD,EMAIL FROM USER WHERE DELETED = 0  AND ISADMIN = 0", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,USERNAME,PASSWORD,EMAIL FROM PLAYER WHERE DELETED = 0  AND ISADMIN = 0", connection);
 
                 DataSet ds = new DataSet();
-                adapter.Fill(ds, "USER");
-                DGVadmin.DataSource = ds.Tables["USER"];
+                adapter.Fill(ds, "PLAYER");
+                DGVadmin.DataSource = ds.Tables["PLAYER"];
 
                 connection.Close();
             }

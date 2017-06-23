@@ -55,25 +55,7 @@ namespace AccesoDatos
 
         }
 
-        public int addItem3(Repellent repel)
-        {
-            try
-            {
-                Connection connection = new Connection();
-                MySqlCommand cmd = new MySqlCommand();
-                string sql = $"INSERT INTO ITEM (NAME,DESCRIPTION,ITEM_TYPE,STEPS,DELETED)values('{repel.Name}','{repel.Description}', '{repel.Type}' , '{repel.Steps}' , '{0}')";
-                cmd.Connection = connection.conn;
-                cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
-                connection.closeConnection();
-                return 1;
-            }
-            catch (Exception ex)
-            {
-                return 0;
-            }
-
-        }
+        
 
 
         public int verifyRepeatName2(Item item)
@@ -169,7 +151,7 @@ namespace AccesoDatos
                 char character = '"';
                 string sql = "UPDATE ITEM SET NAME = " + character + pok.Name + character + ", DESCRIPTION = " + character + pok.Description + character
                     + ", ITEM_TYPE = " + character + pok.Type + character + ", CATCH_PROB = " + character + pok.Catch_probability + character
-                    + ",STEPS = " + character + null + character + ",HP = " + character + null + character 
+                    + ",HP = " + character + null + character 
                 + "where ID = " + character + id + character;
 
                 cmd.Connection = connection.conn;
@@ -193,32 +175,7 @@ namespace AccesoDatos
                 char character = '"';
                 string sql = "UPDATE ITEM SET NAME = " + character + pot.Name + character + ", DESCRIPTION = " + character + pot.Description + character
                     + ", ITEM_TYPE = " + character + pot.Type + character + ", HP = " + character + pot.HealthPoints + character
-                    + ",STEPS = " + character + null + character + ",CATCH_PROB = " + character + null + character
-                + "where ID = " + character + id + character;
-
-                cmd.Connection = connection.conn;
-                cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
-                connection.closeConnection();
-                return 1;
-            }
-            catch (Exception ex)
-            {
-                return 0;
-            }
-        }
-
-
-        public int updateItem3(Repellent repel, int id)
-        {
-            try
-            {
-                Connection connection = new Connection();
-                MySqlCommand cmd = new MySqlCommand();
-                char character = '"';
-                string sql = "UPDATE ITEM SET NAME = " + character + repel.Name + character + ", DESCRIPTION = " + character + repel.Description + character
-                    + ", ITEM_TYPE = " + character + repel.Type + character + ", STEPS = " + character + repel.Steps + character
-                    + ",CATCH_PROB = " + character + null + character + ",HP = " + character + null + character
+                    + ",CATCH_PROB = " + character + null + character
                 + "where ID = " + character + id + character;
 
                 cmd.Connection = connection.conn;

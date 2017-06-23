@@ -22,7 +22,7 @@ namespace AccesoDatos
             {
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                string sql = $"INSERT INTO USER (NAME,USERNAME,PASSWORD,EMAIL,DELETED,ISADMIN)values('{play.Name}','{play.Username}', '{play.Password}' , '{play.Email}' , '{play.Deleted}'  , '{play.IsAdmin}')";
+                string sql = $"INSERT INTO PLAYER (NAME,USERNAME,PASSWORD,EMAIL,DELETED,ISADMIN)values('{play.Name}','{play.Username}', '{play.Password}' , '{play.Email}' , '{play.Deleted}'  , '{play.IsAdmin}')";
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -46,7 +46,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 string character = "'";
-                string sql1 = "SELECT * FROM USER WHERE USERNAME=" + character + play.Username + character;
+                string sql1 = "SELECT * FROM PLAYER WHERE USERNAME=" + character + play.Username + character;
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql1;
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -82,7 +82,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "UPDATE USER SET DELETED = '1' "
+                string sql = "UPDATE PLAYER SET DELETED = '1' "
                 + "where USERNAME = " + character + cadena + character ;
                 
                 cmd.Connection = connection.conn;
@@ -107,7 +107,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "UPDATE USER SET USERNAME = " + character + play.Username + character + ", PASSWORD = " + character + play.Password + character 
+                string sql = "UPDATE PLAYER SET USERNAME = " + character + play.Username + character + ", PASSWORD = " + character + play.Password + character 
                     + ", EMAIL = " + character + play.Email + character  + ", NAME = " +character + play.Name + character 
                 + "where ID = " + character + id + character;
 
@@ -131,7 +131,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "SELECT * FROM USER WHERE USERNAME=" + character + play.Username + character + "AND ID <> " + character + id + character ;
+                string sql = "SELECT * FROM PLAYER WHERE USERNAME=" + character + play.Username + character + "AND ID <> " + character + id + character ;
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -162,7 +162,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "SELECT * FROM USER WHERE USERNAME =" + character + play.Username + character;
+                string sql = "SELECT * FROM PLAYER WHERE USERNAME =" + character + play.Username + character;
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -192,7 +192,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "SELECT * FROM USER WHERE EMAIL = " + character + play.Email + character;
+                string sql = "SELECT * FROM PLAYER WHERE EMAIL = " + character + play.Email + character;
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -222,7 +222,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "SELECT * FROM USER WHERE EMAIL = " + character + play.Email + character + "AND ID <> " + character + id + character ;
+                string sql = "SELECT * FROM PLAYER WHERE EMAIL = " + character + play.Email + character + "AND ID <> " + character + id + character ;
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -253,7 +253,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "SELECT * FROM USER WHERE ID =" + character + id + character +  "AND   ISADMIN = " + character + 0 + character;
+                string sql = "SELECT * FROM PLAYER WHERE ID =" + character + id + character +  "AND   ISADMIN = " + character + 0 + character;
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();

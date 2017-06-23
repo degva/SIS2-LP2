@@ -207,7 +207,10 @@ namespace Vista
             {
                 PlayersPokemonDA playersPokDA = new PlayersPokemonDA();
                 
-                playersPokDA.updatePlayersPokemon(Convert.ToInt32(TXTpokemonid.Text), Convert.ToInt32(TXTorder.Text), Convert.ToInt32(TXTplayerid.Text) , lastpokemonid, lastplayerid, lastorder);
+                if(playersPokDA.updatePlayersPokemon(Convert.ToInt32(TXTpokemonid.Text), Convert.ToInt32(TXTorder.Text), Convert.ToInt32(TXTplayerid.Text) , lastpokemonid, lastplayerid, lastorder) == 0)
+                {
+                    MessageBox.Show("You can't do that change", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
                 load();
                 inicio();
