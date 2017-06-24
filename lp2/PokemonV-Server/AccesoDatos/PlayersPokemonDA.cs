@@ -57,7 +57,7 @@ namespace AccesoDatos
 
                         connection = new Connection();
                         MySqlCommand cmd2 = new MySqlCommand();
-                        string sql2 = "UPDATE PLAYER_X_POKEMON SET POKEMON_ID = " + character + lastidpokemon + character + ", ORDER_POKEMON = " + character + lastorder + character + ", PLAYER_USER_ID = "
+                        string sql2 = "UPDATE PLAYER_X_POKEMON SET ORDER_POKEMON = " + character + lastorder + character + ", PLAYER_USER_ID = "
                             + character + lastidplayer + character
                         + "where PLAYER_USER_ID = " + character + newidplayer + character
                         + "AND ORDER_POKEMON = " + character + neworder + character;

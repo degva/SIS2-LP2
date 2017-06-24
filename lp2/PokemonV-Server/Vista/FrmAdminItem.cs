@@ -22,6 +22,17 @@ namespace Vista
             load();
             init();
 
+
+            Bitmap image = new Bitmap(Application.StartupPath + @"\imagen\fondoFrm.jpg");
+            this.BackgroundImage = image;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+            LBLname.BackColor = Color.Transparent;
+            LBLcatchprob.BackColor = Color.Transparent;
+            LBLdescription.BackColor = Color.Transparent;
+            LBLhp.BackColor = Color.Transparent;
+            LBLtype.BackColor = Color.Transparent;
+
         }
 
 
@@ -33,7 +44,7 @@ namespace Vista
 
                 connection.Open();
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,DESCRIPTION,ITEM_TYPE,STEPS,CATCH_PROB,HP FROM ITEM WHERE DELETED = 0 ", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,DESCRIPTION,ITEM_TYPE,CATCH_PROB,HP FROM ITEM WHERE DELETED = 0 ", connection);
 
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "ITEM");
@@ -53,7 +64,7 @@ namespace Vista
             TXTdescription.Enabled = false;
             TXThp.Enabled = false;
             TXTname.Enabled = false;
-            TXTsteps.Enabled = false;
+        
             CMBtype.Enabled = false;
 
             BTNdelete.Enabled = true;
@@ -68,8 +79,7 @@ namespace Vista
             TXTcatchprob.Text = "";
             TXTdescription.Text = "";
             TXThp.Text = "";
-            TXTsteps.Text = "";
-
+          
 
         }
 
@@ -80,7 +90,7 @@ namespace Vista
             TXTdescription.Enabled = true;
             TXThp.Enabled = true;
             TXTcatchprob.Enabled = true;
-            TXTsteps.Enabled = true;
+         
 
             BTNnew.Enabled = false;
             BTNrecover.Enabled = false;
@@ -120,11 +130,7 @@ namespace Vista
                     TXTcatchprob.Text = ((int)DGVitem.CurrentRow.Cells["CATCH_PROB"].Value).ToString();
                     TXTcatchprob.Enabled = true;
                 }
-                else if (CADtype == "Repellent")
-                {
-                    TXTsteps.Text = ((int)DGVitem.CurrentRow.Cells["STEPS"].Value).ToString();
-                    TXTsteps.Enabled = true;
-                }
+                
 
 
 
@@ -174,30 +180,7 @@ namespace Vista
             }
 
 
-            if (  ( CMBtype.Text == "Repellent"))
-            {
-                if ( (TXTsteps.Text.Trim() == ""))
-                {
-                    MessageBox.Show("Must enter steps", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                try
-                {
-                    Int32.Parse(TXTsteps.Text);
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show("Must enter a number for steps ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                if ((Convert.ToInt32(TXTsteps.Text)) <= 0 )
-                {
-                    MessageBox.Show("Steps can't be 0 or negative", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-            }
+            
 
             if ((CMBtype.Text == "Pokeball"))
             {
@@ -286,25 +269,7 @@ namespace Vista
 
 
                 }
-                else if (CMBtype.Text == "Repellent")
-                {
-                    typeItem = TypeofItem.Repellent;
-
-                    Repellent repel = new Repellent(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXTsteps.Text));
-
-                    ItemDA itemDA = new ItemDA();
-                    if ((itemDA.verifyRepeatName2(repel)) == 1)
-                    {
-                        MessageBox.Show("That item has already been registered ");
-                    }
-                    else
-                    {
-                        itemDA.addItem3(repel);
-
-                        load();
-                        init();
-                    }
-                }
+                
                 else if (CMBtype.Text == "Potion")
                 {
                     typeItem = TypeofItem.Potion;
@@ -352,30 +317,7 @@ namespace Vista
             }
 
 
-            if ((CMBtype.Text == "Repellent"))
-            {
-                if ((TXTsteps.Text.Trim() == ""))
-                {
-                    MessageBox.Show("Must enter steps", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                try
-                {
-                    Int32.Parse(TXTsteps.Text);
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show("Must enter a number for steps ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                if ((Convert.ToInt32(TXTsteps.Text)) <= 0)
-                {
-                    MessageBox.Show("Steps can't be 0 or negative", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-            }
+            
 
             if ((CMBtype.Text == "Pokeball"))
             {
@@ -464,25 +406,6 @@ namespace Vista
 
 
                 }
-                else if (CMBtype.Text == "Repellent")
-                {
-                    typeItem = TypeofItem.Repellent;
-
-                    Repellent repel = new Repellent(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXTsteps.Text));
-
-                    ItemDA itemDA = new ItemDA();
-                    if ((itemDA.verifyRepeatName(repel,id)) == 1)
-                    {
-                        MessageBox.Show("That item has already been registered ");
-                    }
-                    else
-                    {
-                        itemDA.updateItem3(repel, id);
-
-                        load();
-                        init();
-                    }
-                }
                 else if (CMBtype.Text == "Potion")
                 {
                     typeItem = TypeofItem.Potion;
@@ -512,30 +435,18 @@ namespace Vista
             if (CMBtype.SelectedItem.ToString() == "Potion")
             {
                 TXTcatchprob.Enabled = false;
-                TXTsteps.Enabled = false;
                 TXThp.Enabled = true;
                 TXTcatchprob.Text = "";
-                TXTsteps.Text = "";
-                TXThp.Text = "";
-            }
-
-            if (CMBtype.SelectedItem.ToString() == "Repellent")
-            {
-                TXTcatchprob.Enabled = false;
-                TXThp.Enabled = false;
-                TXTsteps.Enabled = true;
-                TXTcatchprob.Text = "";
-                TXTsteps.Text = "";
+    
                 TXThp.Text = "";
             }
 
             if (CMBtype.SelectedItem.ToString() == "Pokeball")
             {
-                TXTcatchprob.Enabled = false;
-                TXTsteps.Enabled = false;
+                TXThp.Enabled = false;
                 TXTcatchprob.Enabled = true;
                 TXTcatchprob.Text = "";
-                TXTsteps.Text = "";
+        
                 TXThp.Text = "";
             }
         }

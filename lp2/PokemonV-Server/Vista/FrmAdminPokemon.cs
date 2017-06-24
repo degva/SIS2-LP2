@@ -36,7 +36,7 @@ namespace Vista
 
                 connection.Open();
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,LIFE,ATTACK1_PTS,ATTACK1_NAME,ATTACK2_PTS,ATACK2_NAME,DEFFENSE_PTS,TYPE FROM POKEMON WHERE DELETED = 0 ", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,LIFE,ATTACK1_PTS,ATTACK1_NAME,ATTACK2_PTS,ATTACK2_NAME,DEFENSE_PTS,TYPE FROM POKEMON WHERE DELETED = 0 ", connection);
 
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "POKEMON");
@@ -55,7 +55,7 @@ namespace Vista
             TXTattack1pts.Enabled = false;
             TXTname.Enabled = false;
             TXTlife.Enabled = false;
-            TXTdeffensepts.Enabled = false;
+            TXTdefensepts.Enabled = false;
             CMBtype.Enabled = false;
             TXTid.Enabled = false;
             TXTattack1name.Enabled = false;
@@ -72,7 +72,7 @@ namespace Vista
             TXTattack1pts.Text = "";
             TXTname.Text = "";
             TXTlife.Text = "";
-            TXTdeffensepts.Text = "";
+            TXTdefensepts.Text = "";
             CMBtype.Text = "";
             TXTid.Text = "";
             TXTattack1name.Text = "";
@@ -87,7 +87,7 @@ namespace Vista
         {
             TXTattack1pts.Enabled = true;
             TXTname.Enabled = true;
-            TXTdeffensepts.Enabled = true;
+            TXTdefensepts.Enabled = true;
             TXTlife.Enabled = true;
             CMBtype.Enabled = true;
             TXTid.Enabled = true;
@@ -133,7 +133,7 @@ namespace Vista
                 int attack2pts = (int)DGVpokemon.CurrentRow.Cells["ATTACK2_PTS"].Value;
                 string attack1name = (string)DGVpokemon.CurrentRow.Cells["ATTACK1_NAME"].Value;
                 string attack2name = (string)DGVpokemon.CurrentRow.Cells["ATTACK2_NAME"].Value;
-                int deffensepts = (int)DGVpokemon.CurrentRow.Cells["DEFFENSE_PTS"].Value;
+                int deffensepts = (int)DGVpokemon.CurrentRow.Cells["DEFENSE_PTS"].Value;
                 string CADtype = (string)DGVpokemon.CurrentRow.Cells["TYPE"].Value;
                 int id = (int)DGVpokemon.CurrentRow.Cells["ID"].Value;
 
@@ -144,7 +144,7 @@ namespace Vista
                 TXTattack2pts.Text = attack2pts.ToString();
                 TXTattack1name.Text = attack1name;
                 TXTattack2name.Text = attack2name;
-                TXTdeffensepts.Text = deffensepts.ToString();
+                TXTdefensepts.Text = deffensepts.ToString();
                 TXTlife.Text = life.ToString();
                 CMBtype.Text = CADtype;
                 TXTid.Text = id.ToString();
@@ -152,7 +152,7 @@ namespace Vista
 
                 TXTattack1pts.Enabled = true;
                 TXTname.Enabled = true;
-                TXTdeffensepts.Enabled = true;
+                TXTdefensepts.Enabled = true;
                 TXTlife.Enabled = true;
                 CMBtype.Enabled = true;
                 TXTattack1name.Enabled = true;
@@ -262,23 +262,23 @@ namespace Vista
 
 
 
-            if (TXTdeffensepts.Text.Trim() == "")
+            if (TXTdefensepts.Text.Trim() == "")
             {
-                MessageBox.Show("Must enter deffense points", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter defense points", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             try
             {
-                Int32.Parse(TXTdeffensepts.Text);
+                Int32.Parse(TXTdefensepts.Text);
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Must enter a number for deffense points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a number for defense points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if ((Convert.ToInt32(TXTdeffensepts.Text)) < 1)
+            if ((Convert.ToInt32(TXTdefensepts.Text)) < 1)
             {
-                MessageBox.Show("Deffense points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Defense points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -321,7 +321,7 @@ namespace Vista
                     tipo = TypeofPokemon.Earth;
                 }
 
-                Pokemon pokemon = new Pokemon(Convert.ToInt32(TXTattack1pts.Text),TXTattack1name.Text,TXTattack2name.Text, Convert.ToInt32(TXTattack2pts.Text), Convert.ToInt32(TXTdeffensepts.Text),
+                Pokemon pokemon = new Pokemon(Convert.ToInt32(TXTattack1pts.Text),TXTattack1name.Text,TXTattack2name.Text, Convert.ToInt32(TXTattack2pts.Text), Convert.ToInt32(TXTdefensepts.Text),
                                                 Convert.ToInt32(TXTlife.Text),TXTname.Text,tipo,0);
 
                 PokemonDA pokemonDA = new PokemonDA();
@@ -431,23 +431,23 @@ namespace Vista
 
 
 
-            if (TXTdeffensepts.Text.Trim() == "")
+            if (TXTdefensepts.Text.Trim() == "")
             {
-                MessageBox.Show("Must enter deffense points", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter defense points", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             try
             {
-                Int32.Parse(TXTdeffensepts.Text);
+                Int32.Parse(TXTdefensepts.Text);
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Must enter a number for deffense points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a number for defense points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if ((Convert.ToInt32(TXTdeffensepts.Text)) < 1)
+            if ((Convert.ToInt32(TXTdefensepts.Text)) < 1)
             {
-                MessageBox.Show("Deffense points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Defense points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -491,7 +491,7 @@ namespace Vista
                     tipo = TypeofPokemon.Earth;
                 }
 
-                Pokemon pokemon = new Pokemon(Convert.ToInt32(TXTattack1pts.Text), TXTattack1name.Text, TXTattack2name.Text, Convert.ToInt32(TXTattack2pts.Text), Convert.ToInt32(TXTdeffensepts.Text),
+                Pokemon pokemon = new Pokemon(Convert.ToInt32(TXTattack1pts.Text), TXTattack1name.Text, TXTattack2name.Text, Convert.ToInt32(TXTattack2pts.Text), Convert.ToInt32(TXTdefensepts.Text),
                                                 Convert.ToInt32(TXTlife.Text), TXTname.Text, tipo, 0);
                 pokemon.Id = Convert.ToInt32(TXTid.Text);
 

@@ -216,7 +216,7 @@
             this.Controls.Add(this.LBLpassword);
             this.Controls.Add(this.DGVadmin);
             this.Name = "FrmAdminUser";
-            this.Text = "Admin User";
+            this.Text = "Admin Player";
             ((System.ComponentModel.ISupportInitialize)(this.DGVadmin)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -32,12 +32,12 @@
             this.TXTname = new System.Windows.Forms.TextBox();
             this.LBLname = new System.Windows.Forms.Label();
             this.TXTattack1pts = new System.Windows.Forms.TextBox();
-            this.TXTdeffensepts = new System.Windows.Forms.TextBox();
+            this.TXTdefensepts = new System.Windows.Forms.TextBox();
             this.TXTlife = new System.Windows.Forms.TextBox();
-            this.LBLemail = new System.Windows.Forms.Label();
+            this.LBLdefensepts = new System.Windows.Forms.Label();
             this.LBLlife = new System.Windows.Forms.Label();
             this.LBLattack1pts = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LBLtype = new System.Windows.Forms.Label();
             this.CMBtype = new System.Windows.Forms.ComboBox();
             this.BTNcancel = new System.Windows.Forms.Button();
             this.BTNupdate = new System.Windows.Forms.Button();
@@ -90,13 +90,13 @@
             this.TXTattack1pts.Size = new System.Drawing.Size(190, 21);
             this.TXTattack1pts.TabIndex = 20;
             // 
-            // TXTdeffensepts
+            // TXTdefensepts
             // 
-            this.TXTdeffensepts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTdeffensepts.Location = new System.Drawing.Point(177, 381);
-            this.TXTdeffensepts.Name = "TXTdeffensepts";
-            this.TXTdeffensepts.Size = new System.Drawing.Size(190, 21);
-            this.TXTdeffensepts.TabIndex = 19;
+            this.TXTdefensepts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXTdefensepts.Location = new System.Drawing.Point(177, 381);
+            this.TXTdefensepts.Name = "TXTdefensepts";
+            this.TXTdefensepts.Size = new System.Drawing.Size(190, 21);
+            this.TXTdefensepts.TabIndex = 19;
             // 
             // TXTlife
             // 
@@ -106,15 +106,15 @@
             this.TXTlife.Size = new System.Drawing.Size(190, 21);
             this.TXTlife.TabIndex = 18;
             // 
-            // LBLemail
+            // LBLdefensepts
             // 
-            this.LBLemail.AutoSize = true;
-            this.LBLemail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLemail.Location = new System.Drawing.Point(12, 381);
-            this.LBLemail.Name = "LBLemail";
-            this.LBLemail.Size = new System.Drawing.Size(138, 20);
-            this.LBLemail.TabIndex = 17;
-            this.LBLemail.Text = "Deffense Points";
+            this.LBLdefensepts.AutoSize = true;
+            this.LBLdefensepts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLdefensepts.Location = new System.Drawing.Point(12, 381);
+            this.LBLdefensepts.Name = "LBLdefensepts";
+            this.LBLdefensepts.Size = new System.Drawing.Size(132, 20);
+            this.LBLdefensepts.TabIndex = 17;
+            this.LBLdefensepts.Text = "Defense Points";
             // 
             // LBLlife
             // 
@@ -136,15 +136,15 @@
             this.LBLattack1pts.TabIndex = 15;
             this.LBLattack1pts.Text = "Attack1 Points";
             // 
-            // label1
+            // LBLtype
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 432);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 20);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "Type";
+            this.LBLtype.AutoSize = true;
+            this.LBLtype.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLtype.Location = new System.Drawing.Point(12, 432);
+            this.LBLtype.Name = "LBLtype";
+            this.LBLtype.Size = new System.Drawing.Size(47, 20);
+            this.LBLtype.TabIndex = 23;
+            this.LBLtype.Text = "Type";
             // 
             // CMBtype
             // 
@@ -319,13 +319,13 @@
             this.Controls.Add(this.BTNrecover);
             this.Controls.Add(this.BTNnew);
             this.Controls.Add(this.CMBtype);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LBLtype);
             this.Controls.Add(this.TXTname);
             this.Controls.Add(this.LBLname);
             this.Controls.Add(this.TXTattack1pts);
-            this.Controls.Add(this.TXTdeffensepts);
+            this.Controls.Add(this.TXTdefensepts);
             this.Controls.Add(this.TXTlife);
-            this.Controls.Add(this.LBLemail);
+            this.Controls.Add(this.LBLdefensepts);
             this.Controls.Add(this.LBLlife);
             this.Controls.Add(this.LBLattack1pts);
             this.Controls.Add(this.DGVpokemon);
@@ -343,12 +343,12 @@
         private System.Windows.Forms.TextBox TXTname;
         private System.Windows.Forms.Label LBLname;
         private System.Windows.Forms.TextBox TXTattack1pts;
-        private System.Windows.Forms.TextBox TXTdeffensepts;
+        private System.Windows.Forms.TextBox TXTdefensepts;
         private System.Windows.Forms.TextBox TXTlife;
-        private System.Windows.Forms.Label LBLemail;
+        private System.Windows.Forms.Label LBLdefensepts;
         private System.Windows.Forms.Label LBLlife;
         private System.Windows.Forms.Label LBLattack1pts;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LBLtype;
         private System.Windows.Forms.ComboBox CMBtype;
         private System.Windows.Forms.Button BTNcancel;
         private System.Windows.Forms.Button BTNupdate;
