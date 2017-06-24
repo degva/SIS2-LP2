@@ -197,6 +197,7 @@ public abstract class Menu {
         return Game.WIDTH - rightOffset - ( 2 + widthInTiles ) * Tile.spriteWidthOut;
     }
 
+    /* Getters && Setters */
     /**
      * Sets the selectedIndex item to selected. It also deselects the old selectedIndex item.
      */

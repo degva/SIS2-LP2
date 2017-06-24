@@ -5,14 +5,14 @@ public class Pokemon {
     public enum TypeP { Fire, Water, Earth, Wind }
 
     /* Attributes */
-    public int id;
-    public int attack1_pts;
-    public String attack1_name;
-    public int attack2_pts;
-    public String attack2_name;
-    public int defense_pts;
-    public int life;
-    public String name;
+        public int id;
+        public int attack1_pts;
+        public String attack1_name;
+        public int attack2_pts;
+        public String attack2_name;
+        public int defense_pts;
+        public int life;
+        public String name;
     public TypeP type;
     public boolean isSelected;
     
