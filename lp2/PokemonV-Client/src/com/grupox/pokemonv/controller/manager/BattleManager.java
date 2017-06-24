@@ -6,7 +6,7 @@ import com.grupox.pokemonv.controller.menu.TypeAttackMenuP1;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.Renderable;
-import com.grupox.pokemonv.model.User;
+import com.grupox.pokemonv.model.Player;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

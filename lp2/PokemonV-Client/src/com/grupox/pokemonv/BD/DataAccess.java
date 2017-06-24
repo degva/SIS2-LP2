@@ -4,7 +4,9 @@ import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.model.Attack;
 import com.grupox.pokemonv.model.Map;
 import com.grupox.pokemonv.model.Player;
+import com.grupox.pokemonv.model.Pokeball;
 import com.grupox.pokemonv.model.Pokemon;
+import com.grupox.pokemonv.model.Potion;
 import com.grupox.pokemonv.model.Tile;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,10 +55,13 @@ public class DataAccess {
             
             loadTiles(map, player_id , input, con, level);
             
+            closeConnection(con);
+            System.out.println("La conexion se ha cerrado");
             return map;
             
         } catch (SQLException ex) {
             Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getStackTrace());
             return null;
         }
 
@@ -114,7 +119,7 @@ public class DataAccess {
         player.setPokemons(loadPokemons(tile_player_id, con));
         loadItems(player, tile_player_id,con);
         
-        return null;
+        return player;
     }
     
     private ArrayList<Pokemon> loadPokemons(int player_id, Connection con) throws SQLException{
@@ -161,8 +166,8 @@ public class DataAccess {
                         "WHERE pi.ITEM_ID = i.ID AND pi.PLAYER_ID = " + tile_player_id + " AND i.ID = 1) potion ";
         ResultSet rs = st.executeQuery(query);
         
-        float catchProb;
-        int pokQuantity, hp, potQuantity;
+        float catchProb = 0;
+        int pokQuantity = 0, hp = 0, potQuantity = 0;
         while(rs.next()){
             catchProb = rs.getFloat("CATCH_PROB");
             pokQuantity = rs.getInt("POKEBALL_QUANTITY");
@@ -171,8 +176,8 @@ public class DataAccess {
             potQuantity = rs.getInt("POTION_QUANTITY");
             break;
         }
-        //player.setPokeballs(new Pokeball());
-        //player.setPotions(new Potion());
+        player.setPokeballs(new Pokeball(catchProb, pokQuantity));
+        player.setPotions(new Potion(hp, potQuantity));
     }
     
     private Connection openConnection() throws SQLException{

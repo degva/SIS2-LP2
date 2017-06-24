@@ -2,7 +2,7 @@ package com.grupox.pokemonv.BD;
 
 import com.grupox.pokemonv.model.Map;
 import com.grupox.pokemonv.model.Tile;
-import com.grupox.pokemonv.model.User;
+import com.grupox.pokemonv.model.Player;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -71,8 +71,8 @@ public class MapDA {
         }
     }
     
-    private User getUser(int id) throws SQLException{
-        User user = null;
+    private Player getUser(int id) throws SQLException{
+        Player user = null;
         return user;
     }
     

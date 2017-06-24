@@ -7,7 +7,7 @@ package com.grupox.pokemonv.controller;
 
 import com.grupox.pokemonv.controller.menu.PokemonBeltMenu;
 import com.grupox.pokemonv.model.Player;
-import com.grupox.pokemonv.model.User;
+import com.grupox.pokemonv.model.Player;
 import java.awt.Graphics2D;
 
 /**
@@ -16,7 +16,7 @@ import java.awt.Graphics2D;
  */
 public class PokemonBeltManager {
     /* Attributes */
-    private User user; //
+    private Player user; //
     private InputHandler input; //
     private PokemonBelt pokemonBelt;
     private Game game;
@@ -32,7 +32,7 @@ public class PokemonBeltManager {
     public static int indiceB = -1;
     
     /*constructor*/
-    public PokemonBeltManager(User user, Game game){
+    public PokemonBeltManager(Player user, Game game){
         input = user.getInput();
         pokemonBelt = new PokemonBelt((Player)user);
         ind =0;

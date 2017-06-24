@@ -14,7 +14,7 @@ public class Tile extends Renderable {
     
     /* Attributes */
     private Type type;
-    private User user;
+    private Player player;
     private boolean isItemEnabled;
     private Map map;
     private boolean isWalkable;
@@ -23,9 +23,9 @@ public class Tile extends Renderable {
     public static final int spriteHeightOut = 64;   // Height with which is rendered each sprite
     
     /* Constructors */
-    public Tile( Type type, User user, boolean isItemEnabled, Map map ){
+    public Tile( Type type, Player player, boolean isItemEnabled, Map map ){
         this.type = type;
-        this.user = user;
+        this.player = player;
         this.isItemEnabled = isItemEnabled;
         this.map = map;
         
@@ -159,13 +159,13 @@ public class Tile extends Renderable {
     }
     
     public boolean containsUser(){
-        return this.user != null;
+        return this.player != null;
     }
     
     public void render( Graphics2D g, int x, int y ){
         g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
-        if( user != null ){
-            user.render( g, x, y );
+        if( player != null ){
+            player.render( g, x, y );
         }
     }
     
@@ -351,11 +351,11 @@ public class Tile extends Renderable {
         this.type = type;
     }
 
-    public User getUser() {
-        return user;
+    public Player getPlayer() {
+        return player;
     }
-    public void setUser( User user ) {
-        this.user = user;
+    public void setPlayer( Player player ) {
+        this.player = player;
     }
 
     public boolean isIsItemEnabled() {
@@ -375,6 +375,4 @@ public class Tile extends Renderable {
     public boolean isIsWalkable() {
         return isWalkable;
     }
-    
-    
 }

@@ -1,7 +1,7 @@
 package com.grupox.pokemonv.controller;
 
 import com.grupox.pokemonv.model.Player;
-import com.grupox.pokemonv.model.User;
+import com.grupox.pokemonv.model.Player;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -36,7 +36,7 @@ public class Game extends Canvas implements Runnable {
     private MapManager mapManager;
     private BagManager bagManager;
     private BattleManager battleManager;
-    private Player user;
+    private Player player;
     private Player enemy;
     private static State state;
     private PokemonBeltManager pokemonBeltManager;
@@ -54,38 +54,38 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(input);
 
         // Initialization
-        user = new Player(input);
-        user.setUser_id(1);
+        player = new Player(input);
+        player.setId(1);
         
-        mapManager = new MapManager(user, this);
-        pokemonBeltManager = new PokemonBeltManager(user, this);
-        bagManager = new BagManager((Player) user, this);
+        mapManager = new MapManager(player, this);
+        pokemonBeltManager = new PokemonBeltManager(player, this);
+        bagManager = new BagManager((Player) player, this);
         battleManager = new BattleManager(this);
         //battleManager = new BattleManager(this);
         state = State.MAP;
         
         enemy = new Player(null);
-        enemy.setUser_id(2);
+        enemy.setId(2);
         
         // TEST: SET PLAYER POSITION
         Tile tile = mapManager.getMap().getGrid()[0][0];
-        tile.setUser(user);
-        user.setTile(tile);
+        tile.setPlayer(player);
+        player.setTile(tile);
         
         // TEST: SET ENEMY POSITION
         tile = mapManager.getMap().getGrid()[4][4];
-        tile.setUser(enemy);
+        tile.setPlayer(enemy);
         enemy.setTile(tile);
         
         // HARDCODED
-        user.getPokemons().add(new Pokemon(4, 10, "RAPID ATTACK", 20, "LANZAHOJAS", 20, 120, "Bulbasaur", Pokemon.TypeP.Wind, true));
+        //player.getPokemons().add(new Pokemon(4, 10, "RAPID ATTACK", 20, "LANZAHOJAS", 20, 120, "Bulbasaur", Pokemon.TypeP.Wind, true));
         //user.getPokemons().add(new Pokemon(1,10,10,10,"Squirtle", Pokemon.TypeP.Earth));
-        user.getPokemons().add(new Pokemon(4,30,20,46,"Charmander", Pokemon.TypeP.Fire));
-        user.getPokemons().add(new Pokemon(1,10,20,30,"Bulbasaur", Pokemon.TypeP.Earth));
-        user.getPokemons().add(new Pokemon(12,60,22,44,"Butterfree", Pokemon.TypeP.Earth));
-        user.getPokemons().add(new Pokemon(7,10,10,10,"Squirtle5", Pokemon.TypeP.Earth));
-        user.getPokemons().add(new Pokemon(1,10,10,10,"Carlos2", Pokemon.TypeP.Earth));
-        enemy.getPokemons().add(new Pokemon(2,10,10,10,"Bulbasaur", Pokemon.TypeP.Earth));
+//        player.getPokemons().add(new Pokemon(4,30,20,46,"Charmander", Pokemon.TypeP.Fire));
+//        player.getPokemons().add(new Pokemon(1,10,20,30,"Bulbasaur", Pokemon.TypeP.Earth));
+//        player.getPokemons().add(new Pokemon(12,60,22,44,"Butterfree", Pokemon.TypeP.Earth));
+//        player.getPokemons().add(new Pokemon(7,10,10,10,"Squirtle5", Pokemon.TypeP.Earth));
+//        player.getPokemons().add(new Pokemon(1,10,10,10,"Carlos2", Pokemon.TypeP.Earth));
+//        enemy.getPokemons().add(new Pokemon(2,10,10,10,"Bulbasaur", Pokemon.TypeP.Earth));
     }
 
     /* Methods */
