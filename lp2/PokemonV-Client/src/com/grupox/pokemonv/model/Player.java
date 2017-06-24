@@ -6,10 +6,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Player extends User{
+    /* Enum declaration */
+    public enum NPC_TYPE { MARIA, KEVIN, ASH };
+    
     /* Attributes */
-    private int experience;
-    private int level;
     private ArrayList<Pokemon> pokemons;
+    private NPC_TYPE npcType;
+    private Pokeball pokeballs;
+    private Potion potions;
     
     /* Constructors */
     public Player( InputHandler input ){
@@ -17,41 +21,72 @@ public class Player extends User{
         
         pokemons = new ArrayList<>();
         
-        experience = 0;
-        level = 0;
     }
     
     /* Methods */
+    public static NPC_TYPE getNpcType(int i){
+        NPC_TYPE type = null;
+        
+        switch (i){
+            case 1:
+                type = NPC_TYPE.KEVIN;
+                break;
+            case 2:
+                type = NPC_TYPE.MARIA;
+                break;
+            case 3:
+            default:
+                type = NPC_TYPE.ASH;
+                break;
+        }
+        return type;
+    }
     
-    /*
-    catchPokemon()
-    catchItem()
-    requestBattle()
-    acceptBattle()
-    isInBattle()
-    */
+    public static int getIndexNpcType(NPC_TYPE type){
+        int index = 0;
+        switch (type){
+            case KEVIN:
+                index = 1;
+                break;
+            case MARIA:
+                index = 2;
+                break;
+            case ASH:
+            default:
+                index = 3;
+                break;
+        }
+        return index;
+    }
     
     /* Getters & Setters */
 
-    //letura de pokemones
-    public void setPokemnons(){
-        //pokemons = ;
+    public Pokeball getPokeballs() {
+        return pokeballs;
     }
-    
-    public int getExperience() {
-        return experience;
-    }
-    public void setExperience( int experience ) {
-        this.experience = experience;
+    public void setPokeballs(Pokeball pokeballs) {
+        this.pokeballs = pokeballs;
     }
 
-    public int getLevel() {
-        return level;
+    public Potion getPotions() {
+        return potions;
     }
-    public void setLevel( int level ) {
-        this.level = level;
+    public void setPotions(Potion potions) {
+        this.potions = potions;
+    }
+
+    public void setPokemons(ArrayList<Pokemon> pokemons) {
+        this.pokemons = pokemons;
     }
     public ArrayList<Pokemon> getPokemons() {
         return pokemons;
     }
+
+    public NPC_TYPE getNpcType() {
+        return npcType;
+    }
+    public void setNpcType(NPC_TYPE npcType) {
+        this.npcType = npcType;
+    }
+    
 }

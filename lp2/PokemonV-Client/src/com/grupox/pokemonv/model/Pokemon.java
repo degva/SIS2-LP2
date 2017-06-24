@@ -10,6 +10,10 @@ public class Pokemon {
         public String attack1_name;
         public int attack2_pts;
         public String attack2_name;
+        
+        public Attack attack1;
+        public Attack attack2;
+        
         public int defense_pts;
         public int life;
         public String name;
@@ -33,6 +37,17 @@ public class Pokemon {
         this.attack1_name = attack1_name;
         this.attack2_pts = attack2_pts;
         this.attack2_name = attack2_name;
+        this.defense_pts = defense_pts;
+        this.life = life;
+        this.name = name;
+        this.type = type;
+        this.isSelected = isSelected;
+    }
+    
+    public Pokemon(int id, Attack attack1, Attack attack2 , int defense_pts, int life, String name, TypeP type, boolean isSelected) {
+        this.id = id;
+        this.attack1 = attack1;
+        this.attack2 = attack2;
         this.defense_pts = defense_pts;
         this.life = life;
         this.name = name;
@@ -121,6 +136,20 @@ public class Pokemon {
         this.isSelected = isSelected;
     }
 
+    public Attack getAttack1() {
+        return attack1;
+    }
+    public void setAttack1(Attack attack1) {
+        this.attack1 = attack1;
+    }
 
+    public Attack getAttack2() {
+        return attack2;
+    }
+    public void setAttack2(Attack attack2) {
+        this.attack2 = attack2;
+    }
+
+    
 }
 

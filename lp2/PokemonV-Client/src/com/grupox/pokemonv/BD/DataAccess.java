@@ -1,0 +1,185 @@
+package com.grupox.pokemonv.BD;
+
+import com.grupox.pokemonv.controller.InputHandler;
+import com.grupox.pokemonv.model.Attack;
+import com.grupox.pokemonv.model.Map;
+import com.grupox.pokemonv.model.Player;
+import com.grupox.pokemonv.model.Pokemon;
+import com.grupox.pokemonv.model.Tile;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class DataAccess {
+    /* Attributes */
+    private final String HOSTNAME = "quilla.lab.inf.pucp.edu.pe";
+    private final String USER = "inf282gx";
+    private final String BD = "inf282gx";
+    private final String PASSWORD = "m8h53r9A6xBfeOe6";
+    
+    /* Constructor */
+    public DataAccess(){
+    }
+    
+    /* Methods */
+    
+    /**
+     * Returns a map with everything inside loaded.
+     */
+    public Map loadMap(int level, int player_id, InputHandler input){
+        if (level != 1) return null;
+        
+        try {
+            Map map = new Map();
+            
+            Connection con = openConnection();
+            
+            Statement st = con.createStatement();
+            String query = "SELECT * FROM MAP WHERE ID = " + level;
+            ResultSet rs = st.executeQuery(query);
+
+            while(rs.next()){
+                map.setHeight(rs.getInt("height"));
+                map.setWidth(rs.getInt("width"));
+                map.setProbPokemon(rs.getFloat("prob_pokemon"));
+                map.setProbItem(rs.getFloat("prob_item"));
+                break;
+            }
+            
+            loadTiles(map, player_id , input, con, level);
+            
+            return map;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+        
+    }
+    
+    private void loadTiles(Map map, int player_id, InputHandler input, Connection con, int level) throws SQLException{
+        map.setGrid( new Tile[map.getWidth()][map.getHeight()] );
+        
+        Statement st = con.createStatement();
+        String query = "SELECT * FROM TILE WHERE MAP_ID=" + level;
+        ResultSet rs = st.executeQuery(query);
+
+        while(rs.next()){
+            // Read
+            int type = rs.getInt("TYPE");
+            int tile_player_id = rs.getInt("PLAYER_ID");
+            boolean item_enabled = rs.getBoolean("item_enabled");
+            int x = rs.getInt("X");
+            int y = rs.getInt("Y");
+            
+            // Set
+            map.getGrid()[x][y] = new Tile(Tile.getType(type), loadPlayer(tile_player_id, player_id, input, con), item_enabled, map);
+        }
+    }
+    
+    private Player loadPlayer(int tile_player_id, int logged_player_id, InputHandler input, Connection con) throws SQLException{
+        if(tile_player_id == 0) return null;
+        
+        Statement st = con.createStatement();
+        String query = "SELECT * FROM PLAYER WHERE ID=" + tile_player_id;
+        ResultSet rs = st.executeQuery(query);
+        
+        Player.NPC_TYPE npcType = null;
+        int defeatDialog;
+        int battleDialog;
+        while(rs.next()){
+            npcType = Player.getNpcType(rs.getInt("NPC_TYPE"));
+            defeatDialog = rs.getInt("DEFEAT_DIALOG");
+            battleDialog = rs.getInt("BATTLE_DIALOG");
+            break;
+        }
+        
+        // load dialogs
+        
+        Player player;
+        if(tile_player_id == logged_player_id){
+            player = new Player(input);
+        }else{
+            player = new Player(null);
+        }
+        player.setNpcType(npcType);
+        // setDialog
+        
+        player.setPokemons(loadPokemons(tile_player_id, con));
+        loadItems(player, tile_player_id,con);
+        
+        return null;
+    }
+    
+    private ArrayList<Pokemon> loadPokemons(int player_id, Connection con) throws SQLException{
+        
+        Statement sentencia = con.createStatement();
+        String query =  "SELECT distinct p.ID, p.NAME, p.TYPE, p.DEFENSE_PTS, p.LIFE ,a1.NAME as NAME1, a1.POINTS as POINTS1, a2.NAME as NAME2, a2.POINTS as POINTS2 " + 
+                        "FROM inf282gx.PLAYER_X_POKEMON pp, inf282gx.POKEMON p , inf282gx.ATTACK a1, inf282gx.ATTACK a2 " +
+                        "where pp.PLAYER_ID = "+player_id+ "AND p.DELETED = 0 AND pp.DELETED = 0 AND pp.POKEMON_ID = p.ID AND a1.ID = p.ATTACK_1_ID AND a2.ID = p.ATTACK_2_ID " +
+                        "order by pp.ORDER_POKEMON ";
+
+        ResultSet rs = sentencia.executeQuery(query);
+        
+        ArrayList<Pokemon> listaPokemones = new ArrayList<Pokemon>();
+        while(rs.next()){
+
+            int id = rs.getInt("ID");
+            String name = rs.getString("NAME");
+            String type = rs.getString("TYPE");
+            String attack1_name = rs.getString("NAME1");
+            int attack1_pts = rs.getInt("POINTS1");
+            String attack2_name = rs.getString("NAME2");
+            int attack2_pts = rs.getInt("POINTS2");
+            int defense_pts = rs.getInt("DEFENSE_PTS");
+            int life = rs.getInt("LIFE");
+            
+            Pokemon pok = new Pokemon(id, new Attack(attack1_name, attack1_pts), new Attack(attack2_name, attack2_pts),
+                                        defense_pts,life, name, Pokemon.TypeP.Earth, false);
+            listaPokemones.add(pok);
+        }
+
+        return listaPokemones;
+    }
+    
+    private void loadItems(Player player, int tile_player_id, Connection con) throws SQLException{
+        Statement st = con.createStatement();
+        String query = "SELECT *" +
+                        "FROM(" +
+                        "SELECT distinct i.CATCH_PROB, pi.QUANTITY AS POKEBALL_QUANTITY " +
+                        "FROM inf282gx.PLAYER_X_ITEM pi, inf282gx.ITEM i " +
+                        "WHERE pi.ITEM_ID = i.ID AND pi.PLAYER_ID =" + tile_player_id + " AND i.ID = 2) pokeball, " +
+                        "(" +
+                        "SELECT distinct i.HP, pi.QUANTITY AS POTION_QUANTITY " +
+                        "FROM inf282gx.PLAYER_X_ITEM pi, inf282gx.ITEM i " +
+                        "WHERE pi.ITEM_ID = i.ID AND pi.PLAYER_ID = " + tile_player_id + " AND i.ID = 1) potion ";
+        ResultSet rs = st.executeQuery(query);
+        
+        float catchProb;
+        int pokQuantity, hp, potQuantity;
+        while(rs.next()){
+            catchProb = rs.getFloat("CATCH_PROB");
+            pokQuantity = rs.getInt("POKEBALL_QUANTITY");
+            
+            hp = rs.getInt("HP");
+            potQuantity = rs.getInt("POTION_QUANTITY");
+            break;
+        }
+        //player.setPokeballs(new Pokeball());
+        //player.setPotions(new Potion());
+    }
+    
+    private Connection openConnection() throws SQLException{
+        return DriverManager.getConnection("jdbc:mysql://" + HOSTNAME + "/" + BD, USER, PASSWORD);
+    }
+    
+    private void closeConnection(Connection con) throws SQLException{
+        con.close();
+    }
+}

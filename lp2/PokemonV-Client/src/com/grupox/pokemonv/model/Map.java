@@ -18,6 +18,7 @@ public class Map {
     private final int TILES_IN_WIDTH = (int)Math.ceil( (double)Game.WIDTH / Tile.spriteWidthOut);
     private final int TILES_IN_HEIGHT = (int)Math.ceil( (double)Game.HEIGHT / Tile.spriteHeightOut);
     private float probPokemon;
+    private float probItem;
     
     /* Constructors */
     public Map(){
@@ -320,5 +321,20 @@ public class Map {
     public int getWidth() {
         return width;
     }
+
+    public float getProbPokemon() {
+        return probPokemon;
+    }
+    public void setProbPokemon(float probPokemon) {
+        this.probPokemon = probPokemon;
+    }
+
+    public float getProbItem() {
+        return probItem;
+    }
+    public void setProbItem(float probItem) {
+        this.probItem = probItem;
+    }
+    
     
 }
