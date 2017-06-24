@@ -1,2 +1,5 @@
 /lp2/PokemonV-Client/build/
 /lp2/PokemonV-Client/dist/
+/lp2/PokemonV-Server/Vista/obj/
+/lp2/PokemonV-Server/AccesoDatos/obj/
+/lp2/PokemonV-Server/Entidades/obj/
