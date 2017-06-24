@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    public enum TypeofItem { Potion, Pokeball, Repellent };
     public class Item
     {
-        public enum TypeofItem { Potion, Pokeball, Repellent};
+        
         public Item(string name, string description, TypeofItem typePoke)
         {
             this.name = name;
@@ -16,6 +17,8 @@ namespace Entidades
             this.type = typePoke;
         }
 
+
+        
         protected string name;
         public string Name
         {
@@ -32,7 +35,7 @@ namespace Entidades
 
         public TypeofItem Type { get => type; set => type = value; }
 
-        protected TypeofItem type;
+        private TypeofItem type;
 
     }
 }

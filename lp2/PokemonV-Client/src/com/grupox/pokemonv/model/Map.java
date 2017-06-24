@@ -17,6 +17,7 @@ public class Map {
     private int width = 8;    // NUMBER OF CELLS
     private final int TILES_IN_WIDTH = (int)Math.ceil( (double)Game.WIDTH / Tile.spriteWidthOut);
     private final int TILES_IN_HEIGHT = (int)Math.ceil( (double)Game.HEIGHT / Tile.spriteHeightOut);
+    private float probPokemon;
     
     /* Constructors */
     public Map(){
@@ -214,7 +215,7 @@ public class Map {
                 return false;
         }
         
-        if( !nextTile.containsUser() && nextTile.isWalkable() ){
+        if( !nextTile.containsUser() && nextTile.isIsWalkable() ){
             user.getTile().setUser( null ); // Current tile
             user.setTile(nextTile);
             nextTile.setUser( user );
@@ -257,12 +258,6 @@ public class Map {
         else
             return null;
     }
-    
-    /*
-    public void downloadMap(){
-      ???????  
-    }
-    */
     
     public void render( Graphics2D g, User user){
         // Render only if in screen.

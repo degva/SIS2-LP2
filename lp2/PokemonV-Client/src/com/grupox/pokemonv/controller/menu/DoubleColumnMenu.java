@@ -5,7 +5,7 @@ import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.model.Tile;
 import java.awt.Graphics2D;
 
-public class DoubleColumnMenu extends BatallaMenu{
+public class DoubleColumnMenu extends Menu{
     
     /* Attributes */
     private int leftColumnMaxLen;

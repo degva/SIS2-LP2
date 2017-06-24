@@ -17,7 +17,7 @@ public class Tile extends Renderable {
     private User user;
     private boolean isItemEnabled;
     private Map map;
-    private boolean walkable;
+    private boolean isWalkable;
     
     public static final int spriteWidthOut = 64;    // Width with which is rendered each sprite
     public static final int spriteHeightOut = 64;   // Height with which is rendered each sprite
@@ -29,7 +29,7 @@ public class Tile extends Renderable {
         this.isItemEnabled = isItemEnabled;
         this.map = map;
         
-        walkable = detWalkable();
+        isWalkable = determinateWalkable();
         loadSprite();
     }
     
@@ -38,11 +38,14 @@ public class Tile extends Renderable {
         return this.user != null;
     }
     
-    public boolean isSolid(){
-        return this.type != Type.SND01;
+    public void render( Graphics2D g, int x, int y ){
+        g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
+        if( user != null ){
+            user.render( g, x, y );
+        }
     }
     
-    public void loadSprite(){
+    private void loadSprite(){
         int x,y;
         switch ( type ){
             case FLR01:
@@ -203,16 +206,9 @@ public class Tile extends Renderable {
         }
         sprite = SpriteSheet.getInstance().getSubImage( x, y );
     }
-    
-    public void render( Graphics2D g, int x, int y ){
-        g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
-        if( user != null ){
-            user.render( g, x, y );
-        }
-    }
-    
+
     // Determinate walkable
-    private boolean detWalkable(){
+    private boolean determinateWalkable(){
         if( type == Type.TRG01 || type == Type.TRG02 || type == Type.TRG03 || 
             type == Type.HO101 || type == Type.HO102 || type == Type.HO103 ||
             type == Type.HO104 || type == Type.HO105 || type == Type.HO106 ||
@@ -252,8 +248,8 @@ public class Tile extends Renderable {
         this.map = map;
     }
 
-    public boolean isWalkable() {
-        return walkable;
+    public boolean isIsWalkable() {
+        return isWalkable;
     }
     
     

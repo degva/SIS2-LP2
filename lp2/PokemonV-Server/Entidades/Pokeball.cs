@@ -8,7 +8,7 @@ namespace Entidades
 {
     public class Pokeball : Item
     {
-        public Pokeball(string name, string descrip, TypeofItem type, double catch_probability)
+        public Pokeball(string name, string descrip, TypeofItem type, int catch_probability)
             : base(name, descrip,type)
         {
             this.catch_probability = catch_probability;
@@ -19,8 +19,8 @@ namespace Entidades
 
         }
 
-        protected double catch_probability;
-        public double Catch_probability
+        protected int catch_probability;
+        public int Catch_probability
         {
             get { return catch_probability; }
             set { catch_probability = value; }

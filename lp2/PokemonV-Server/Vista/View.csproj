@@ -61,6 +61,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmAdminEverything.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdminEverything.Designer.cs">
+      <DependentUpon>FrmAdminEverything.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdminItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdminItem.Designer.cs">
+      <DependentUpon>FrmAdminItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdminPlayerxItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdminPlayerxItem.Designer.cs">
+      <DependentUpon>FrmAdminPlayerxItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAdminPlayerxPokemon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +111,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmAdminEverything.resx">
+      <DependentUpon>FrmAdminEverything.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAdminItem.resx">
+      <DependentUpon>FrmAdminItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAdminPlayerxItem.resx">
+      <DependentUpon>FrmAdminPlayerxItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAdminPlayerxPokemon.resx">
       <DependentUpon>FrmAdminPlayerxPokemon.cs</DependentUpon>
     </EmbeddedResource>

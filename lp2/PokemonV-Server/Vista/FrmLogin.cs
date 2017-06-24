@@ -34,34 +34,42 @@ namespace Vista
         {
             int flag = 1;
 
-            AdminDA con = new AdminDA();
+            AdminDA admin = new AdminDA();
 
             if (TXTusername.Text.Contains(" "))
             {
-                MessageBox.Show("No se permiten espacios en el nombre de usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Spaces are not allowed in the username", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
             if (TXTpassword.Text.Contains(" "))
             {
-                MessageBox.Show("No se permiten espacios en la contraseña", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Spaces are not allowed in the password", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
             if(flag == 1)
             {
-                if ((con.verifyLogin(TXTusername.Text, TXTpassword.Text) == 1))
+                if ((admin.verifyLogin(TXTusername.Text, TXTpassword.Text) == 1))
                 {
+                    FrmAdminEverything form = new FrmAdminEverything();
+                    form.StartPosition = FormStartPosition.Manual;
+                    form.Location = new Point(this.Location.X, this.Location.Y);
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
 
-                    MessageBox.Show("Login satisfactorio");
+                    }
+                    else
+                    {
 
-                    //aqui se abriria la ventana del juego
+                    }
 
-                    this.Close();
+                    TXTpassword.Text = "";
+                    TXTusername.Text = "";
                 }
                 else
                 {
-                    MessageBox.Show("Usuario y/o contraseña incorrectas");
+                    MessageBox.Show("Wrong username or password");
                 }
             }
         }
@@ -109,13 +117,13 @@ namespace Vista
 
                 if (TXTusername.Text.Contains(" "))
                 {
-                    MessageBox.Show("No se permiten espacios en el nombre de usuario", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Spaces are not allowed in the username", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     flag = 0;
                 }
 
                 if (TXTpassword.Text.Contains(" "))
                 {
-                    MessageBox.Show("No se permiten espacios en la contraseña", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Spaces are not allowed in the password", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     flag = 0;
                 }
 
@@ -124,15 +132,24 @@ namespace Vista
                     if ((con.verifyLogin(TXTusername.Text, TXTpassword.Text) == 1))
                     {
 
-                        MessageBox.Show("Login satisfactorio");
+                        FrmAdminEverything form = new FrmAdminEverything();
+                        form.StartPosition = FormStartPosition.Manual;
+                        form.Location = new Point(this.Location.X, this.Location.Y);
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
 
-                        //aqui se abriria la ventana del juego
+                        }
+                        else
+                        {
 
-                        this.Close();
+                        }
+
+                        TXTpassword.Text = "";
+                        TXTusername.Text = "";
                     }
                     else
                     {
-                        MessageBox.Show("Usuario y/o contraseña incorrectas");
+                        MessageBox.Show("Wrong username or password");
                     }
                 }
             }

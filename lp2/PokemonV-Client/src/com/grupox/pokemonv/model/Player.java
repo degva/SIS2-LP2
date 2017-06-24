@@ -33,6 +33,11 @@ public class Player extends User{
     
     /* Getters & Setters */
 
+    //letura de pokemones
+    public void setPokemnons(){
+        //pokemons = ;
+    }
+    
     public int getExperience() {
         return experience;
     }
