@@ -14,6 +14,8 @@ public class SpriteSheet {
     
     private BufferedImage spriteSheet;
     private final String route = "res/sprites/sheet.png";
+    private BufferedImage dialogFrame;
+    private final String dialogRoute = "res/sprites/frameCursor.png";
     
     private final int spriteWidthIn = 16;  // Width of each sprite in the sheet
     private final int spriteHeightIn = 16; // Height of each sprite in the sheet
@@ -26,6 +28,7 @@ public class SpriteSheet {
         // ImageIO could case IOException
         try {
             spriteSheet = ImageIO.read( new File( route ) );
+            dialogFrame = ImageIO.read( new File( dialogRoute ) );
         } catch ( IOException ex ) {
             Logger.getLogger( SpriteSheet.class.getName() ).log( Level.SEVERE, null, ex );
         }
@@ -47,5 +50,8 @@ public class SpriteSheet {
     public BufferedImage getSubFont( int x, int row ){
         return spriteSheet.getSubimage( fontWidthIn * x, ( spriteHeightIn + 1 ) * 26 + 1 + fontWidthIn * row, fontWidthIn, fontHeightIn );
     }
-
+    
+    public BufferedImage getDialogFrame(){
+        return dialogFrame;
+    }
 }

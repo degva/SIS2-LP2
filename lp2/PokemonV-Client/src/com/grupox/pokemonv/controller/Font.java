@@ -51,6 +51,7 @@ public class Font {
         for( int i = 0; i < msg.length(); i++ ){
             // Get the x position in the spritesheet of the message's i char
             ix = alphabet.indexOf( msg.charAt( i ) );
+            if(ix == -1) continue;
             
             // Determine whether the char is in the first or second row
             row = ix > lastChar ? 1 : 0;

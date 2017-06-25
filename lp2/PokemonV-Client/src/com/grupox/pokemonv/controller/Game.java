@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import com.grupox.pokemonv.controller.manager.*;
+import com.grupox.pokemonv.model.Dialog;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.SpriteSheet;
 import com.grupox.pokemonv.model.Tile;
@@ -42,11 +43,12 @@ public class Game extends Canvas implements Runnable {
     private static State state;
     private PokemonBeltManager pokemonBeltManager;
 
+    private Dialog dialog;
     /* Constructors */
     public Game() {
         // Main loop
         running = false;
-        
+        dialog = new Dialog("El profesor Freddy deberia darnos 20 por hacer un pokemon!");
         // Keyboard
         input = new InputHandler();
         this.addKeyListener(input);
@@ -179,7 +181,7 @@ public class Game extends Canvas implements Runnable {
                 bagManager.render(g);
                 break;
         }
-
+        dialog.render(g);
         // Finally, show the contents in g and destroy it
         strategy.show();
         g.dispose();
