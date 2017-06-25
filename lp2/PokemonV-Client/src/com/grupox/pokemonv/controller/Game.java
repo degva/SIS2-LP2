@@ -10,6 +10,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import com.grupox.pokemonv.controller.manager.*;
 import com.grupox.pokemonv.model.Pokemon;
+import com.grupox.pokemonv.model.SpriteSheet;
 import com.grupox.pokemonv.model.Tile;
 
 public class Game extends Canvas implements Runnable {
@@ -38,7 +39,6 @@ public class Game extends Canvas implements Runnable {
     private BagManager bagManager;
     private BattleManager battleManager;
     private Player player;
-    private Player enemy;
     private static State state;
     private PokemonBeltManager pokemonBeltManager;
 
@@ -58,24 +58,9 @@ public class Game extends Canvas implements Runnable {
         battleManager = new BattleManager(this);
         
         state = State.MAP;
-        
-        // TEST
-//        //enemy = new Player(null);
-//        //enemy.setId(2);
-//        
-//        // TEST: SET PLAYER POSITION
-//        Tile tile = mapManager.getMap().getGrid()[0][0];
-//        tile.setPlayer(player);
-//        player.setTile(tile);
-//        
-//        // TEST: SET ENEMY POSITION
-//        tile = mapManager.getMap().getGrid()[4][4];
-//        tile.setPlayer(enemy);
-//        enemy.setTile(tile);
-//        
-        // HARDCODED
-        //player.getPokemons().add(new Pokemon(4, 10, "RAPID ATTACK", 20, "LANZAHOJAS", 20, 120, "Bulbasaur", Pokemon.TypeP.Wind, true));
-        //user.getPokemons().add(new Pokemon(1,10,10,10,"Squirtle", Pokemon.TypeP.Earth));
+             
+//        HARDCODED
+//        player.getPokemons().add(new Pokemon(4, 10, "RAPID ATTACK", 20, "LANZAHOJAS", 20, 120, "Bulbasaur", Pokemon.TypeP.Wind, true));
 //        player.getPokemons().add(new Pokemon(4,30,20,46,"Charmander", Pokemon.TypeP.Fire));
 //        player.getPokemons().add(new Pokemon(1,10,20,30,"Bulbasaur", Pokemon.TypeP.Earth));
 //        player.getPokemons().add(new Pokemon(12,60,22,44,"Butterfree", Pokemon.TypeP.Earth));
@@ -108,6 +93,7 @@ public class Game extends Canvas implements Runnable {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        frame.setIconImage(SpriteSheet.getInstance().getSubImage(7, 0));
 
         // Needed to render
         this.createBufferStrategy(2);
