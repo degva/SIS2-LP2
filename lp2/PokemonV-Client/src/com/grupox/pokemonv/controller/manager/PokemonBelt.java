@@ -57,28 +57,9 @@ public class PokemonBelt {
         this.player = player;
 //        this.map = map;
         //como aun no tengo el ID del usuario
-        pokAD = new PokemonAD();
+        //pokAD = new PokemonAD();
         //listaPokemones = player.getPokemons();
-        listaPokemones = player.getPokemons();//.getListaPokemones(4);
-        
-//        Pokemon.TypeP tipoE = Pokemon.TypeP.Earth;
-//        Pokemon.TypeP tipoF = Pokemon.TypeP.Fire;
-//        Pokemon.TypeP tipoWa = Pokemon.TypeP.Water;
-//        Pokemon.TypeP tipoWi = Pokemon.TypeP.Wind;
-//        Pokemon pok1 = new Pokemon(1,10,20,30,"Bulbasaur",tipoE);
-//        Pokemon pok2 = new Pokemon(4,30,20,46,"Charmander",tipoF);
-//        Pokemon pok3 = new Pokemon(7,50,10,30,"Squirtle",tipoWa);
-//        Pokemon pok4 = new Pokemon(12,60,22,44,"Butterfree",tipoWi);
-//        Pokemon pok5 = new Pokemon(12,60,22,44,"Butterfree2",tipoWi);
-//        Pokemon pok6 = new Pokemon(12,60,22,44,"Butterfree3",tipoWi);
-//        listaPokemones.add(pok1);
-//        listaPokemones.add(pok2);
-//        listaPokemones.add(pok3);
-//        listaPokemones.add(pok4);
-//        listaPokemones.add(pok5);
-//        listaPokemones.add(pok6);
-        
-        
+        listaPokemones = player.getPokemons();
         // Boards
         borders = new BufferedImage[9];
         iniBorders();
@@ -106,7 +87,6 @@ public class PokemonBelt {
     }
     
     public void render(Graphics2D g, int ind, boolean presionado){
-        
         
         g.setColor( Color.orange );
         g.fillRect( 0, 0, WIDTH, HEIGHT );
@@ -278,9 +258,10 @@ public class PokemonBelt {
         int x=80, y=50;
         //Font.getInstance().drawString(pok.getName(), g, x-2*spriteWidthOut, y);
         Font.getInstance().drawString(pok.getName(), g, x,y);
-        Font.getInstance().drawString("ATTACK: "+ Double.toString(pok.getAttack1_pts()),g, x, y+70);
-        Font.getInstance().drawString("DEFENSE: "+ Double.toString(pok.getDefense_pts()), g, x, y +2*70);
-        Font.getInstance().drawString("LIFE: "+ Double.toString(pok.getLife()), g, x, y +3*70);
+        
+        Font.getInstance().drawString("ATTACK: "+ Integer.toString(pok.getAttack1().getPoints()),g, x, y+70);
+        Font.getInstance().drawString("DEFENSE: "+ Integer.toString(pok.getDefense_pts()), g, x, y +2*70);
+        Font.getInstance().drawString("LIFE: "+ Integer.toString(pok.getLife()), g, x, y +3*70);
         Font.getInstance().drawString("TYPE: "+pok.getType().toString(), g, x, y +4*70);
         
         BufferedImage spriteSheet= new BufferedImage(96, 96, BufferedImage.TYPE_INT_RGB);
@@ -311,7 +292,8 @@ public class PokemonBelt {
     public void intercambiar(int A, int B){
         Pokemon pokA= listaPokemones.get(A);
         Pokemon pokB= listaPokemones.get(B);
-        pokAD.intercambiarDA(pokA,pokB,4);
-        listaPokemones = pokAD.getListaPokemones(4);
+        
+        listaPokemones.set(B, pokA);
+        listaPokemones.set(A, pokB);
     }
 }

@@ -45,12 +45,12 @@ public class MapManager {
         // Listen to input and set the inner state
         if( state == State.MOVING && input.menu.isFirstPressed ){
             // Set first element as selected
-              menu.setSelectedItem( 0 );
-            
+            menu.setSelectedItem( 0 );            
             state = State.MENU;
         }else if( state == State.MOVING && input.action.isFirstPressed ){
             enemy = map.tryBattle(player, player.getDirection());
             if(enemy != null){
+                System.out.println(player.getPokemons().get(0).getName());
                 if(enemy.getCanBattle()){
                     dialog = enemy.getBattleDialog();
                     setState(State.BATTLE_DIALOG);

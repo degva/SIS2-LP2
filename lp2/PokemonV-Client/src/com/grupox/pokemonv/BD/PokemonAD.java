@@ -56,7 +56,7 @@ public class PokemonAD {
                 String defense_pts = rs.getString("DEFFENSE_PTS");
                 String life = rs.getString("LIFE");
 
-                System.out.println(id+" "+attack_name+" "+attack_pts+" "+defense_pts+" "+name+" "+life+" "+type);
+                //System.out.println(id+" "+attack_name+" "+attack_pts+" "+defense_pts+" "+name+" "+life+" "+type);
                 Pokemon pok = new Pokemon(Integer.parseInt(id), Integer.parseInt(attack_pts), Integer.parseInt(defense_pts),Integer.parseInt(life), name, tipoE);
                 listaPokemones.add(pok);
             }

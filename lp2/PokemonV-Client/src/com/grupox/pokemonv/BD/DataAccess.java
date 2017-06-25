@@ -140,6 +140,8 @@ public class DataAccess {
         ResultSet rs = sentencia.executeQuery(query);
         
         ArrayList<Pokemon> listaPokemones = new ArrayList<Pokemon>();
+        
+        Pokemon.TypeP typeP = Pokemon.TypeP.Electric;
         while(rs.next()){
 
             int id = rs.getInt("ID");
@@ -152,11 +154,17 @@ public class DataAccess {
             int defense_pts = rs.getInt("DEFENSE_PTS");
             int life = rs.getInt("LIFE");
             
+            //para seleccionar el tipo de pokemon
+            if(type.compareTo("Earth")==0) typeP = Pokemon.TypeP.Earth;
+            if(type.compareTo("Water")==0 ) typeP = Pokemon.TypeP.Water;
+            if(type.compareTo("Fire")==0 ) typeP = Pokemon.TypeP.Fire;
+            if(type.compareTo("Wind")==0 ) typeP = Pokemon.TypeP.Wind;
+            if(type.compareTo("Electric")==0 ) typeP = Pokemon.TypeP.Electric;
+            
             Pokemon pok = new Pokemon(id, new Attack(attack1_name, attack1_pts), new Attack(attack2_name, attack2_pts),
-                                        defense_pts,life, name, Pokemon.TypeP.Earth, false);
+                                        defense_pts,life, name, typeP, false);
             listaPokemones.add(pok);
         }
-
         return listaPokemones;
     }
     
