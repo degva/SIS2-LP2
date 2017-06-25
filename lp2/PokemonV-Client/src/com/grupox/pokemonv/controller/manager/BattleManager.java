@@ -165,8 +165,8 @@ public class BattleManager extends Renderable {
     public void startBattle(Player p1, Player p2) {
         this.player = p1;
         input = p1.getInput();
-        attack1_name = p1.getPokemons().get(0).getAttack1_name();
-        attack2_name = p1.getPokemons().get(0).getAttack2_name();
+//        attack1_name = p1.getPokemons().get(0).getAttack1_name();
+//        attack2_name = p1.getPokemons().get(0).getAttack2_name();
         establishRoutes(p1.getPokemons().get(0), p2.getPokemons().get(0)); //Obtiene el primer pokemon de cada uno
         try {
             imgPokemonStatic_P1 = ImageIO.read(new File(rutaP1_StaticPok));
