@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grupox.pokemonv.controller;
+package com.grupox.pokemonv.controller.manager;
 
+import com.grupox.pokemonv.controller.Game;
+import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.controller.menu.PokemonBeltMenu;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Player;

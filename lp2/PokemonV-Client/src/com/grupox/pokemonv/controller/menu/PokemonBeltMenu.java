@@ -10,8 +10,8 @@ import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.controller.manager.MapManager;
 import com.grupox.pokemonv.controller.menu.SingleColumnMenu;
-import com.grupox.pokemonv.controller.PokemonBeltManager;
-import com.grupox.pokemonv.controller.PokemonBelt;
+import com.grupox.pokemonv.controller.manager.PokemonBeltManager;
+import com.grupox.pokemonv.controller.manager.PokemonBelt;
 
 /**
  *

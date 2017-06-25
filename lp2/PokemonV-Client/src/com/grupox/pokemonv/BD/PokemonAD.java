@@ -5,8 +5,8 @@
  */
 package com.grupox.pokemonv.BD;
 
-import static com.grupox.pokemonv.controller.PokemonBeltManager.indiceA;
-import static com.grupox.pokemonv.controller.PokemonBeltManager.indiceB;
+import static com.grupox.pokemonv.controller.manager.PokemonBeltManager.indiceA;
+import static com.grupox.pokemonv.controller.manager.PokemonBeltManager.indiceB;
 import com.grupox.pokemonv.model.Pokemon;
 import java.sql.Connection;
 import java.sql.DriverManager;

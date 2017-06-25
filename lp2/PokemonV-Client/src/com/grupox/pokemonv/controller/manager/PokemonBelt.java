@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.grupox.pokemonv.controller;
+package com.grupox.pokemonv.controller.manager;
 import com.grupox.pokemonv.BD.PokemonAD;
+import com.grupox.pokemonv.controller.Font;
+import com.grupox.pokemonv.controller.Game;
 import static com.grupox.pokemonv.controller.Game.HEIGHT;
 import static com.grupox.pokemonv.controller.Game.WIDTH;
-import static com.grupox.pokemonv.controller.PokemonBeltManager.*;
+import static com.grupox.pokemonv.controller.manager.PokemonBeltManager.*;
 
 
 //añadi esto!

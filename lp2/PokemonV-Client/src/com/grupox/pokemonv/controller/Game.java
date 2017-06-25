@@ -1,5 +1,6 @@
 package com.grupox.pokemonv.controller;
 
+import com.grupox.pokemonv.controller.manager.PokemonBeltManager;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Player;
 import java.awt.Canvas;
