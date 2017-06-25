@@ -43,12 +43,10 @@ public class Game extends Canvas implements Runnable {
     private static State state;
     private PokemonBeltManager pokemonBeltManager;
 
-    private Dialog dialog;
     /* Constructors */
     public Game() {
         // Main loop
         running = false;
-        dialog = new Dialog("El profesor Freddy deberia darnos 20 por hacer un pokemon!");
         // Keyboard
         input = new InputHandler();
         this.addKeyListener(input);
@@ -181,7 +179,6 @@ public class Game extends Canvas implements Runnable {
                 bagManager.render(g);
                 break;
         }
-        dialog.render(g);
         // Finally, show the contents in g and destroy it
         strategy.show();
         g.dispose();

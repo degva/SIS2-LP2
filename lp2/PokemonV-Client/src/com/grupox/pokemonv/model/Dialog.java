@@ -22,21 +22,7 @@ public class Dialog {
     
     /* Constructors */
     public Dialog(String content){
-        this.content = content;
-        this.line1 = "";
-        this.line2 = "";
-        
-        boolean line1Full = false;
-        for(String word : content.split(" ")){
-            if((line1.length() + 1 + word.length()) * Font.fontWidthOut < width - 2 * padding && !line1Full) {
-                line1 = line1.concat(" " + word);
-            }else if((line2.length() + 1 + word.length()) * Font.fontWidthOut < width - 2 * padding){
-                if(!line1Full){
-                    line1Full = true;
-                }
-                line2 = line2.concat(" " + word);
-            }
-        }
+        setContent(content);
         
         if( this.frame == null){
             this.frame = SpriteSheet.getInstance().getDialogFrame();
@@ -56,6 +42,19 @@ public class Dialog {
     }
     public void setContent(String content) {
         this.content = content;
+        this.line1 = "";
+        this.line2 = "";
+        boolean line1Full = false;
+        for(String word : content.split(" ")){
+            if((line1.length() + 1 + word.length()) * Font.fontWidthOut < width - 2 * padding && !line1Full) {
+                line1 = line1.concat(" " + word);
+            }else if((line2.length() + 1 + word.length()) * Font.fontWidthOut < width - 2 * padding){
+                if(!line1Full){
+                    line1Full = true;
+                }
+                line2 = line2.concat(" " + word);
+            }
+        }
     }
     
 }

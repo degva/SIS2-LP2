@@ -21,6 +21,10 @@ public class Player extends Renderable{
     private NPC_TYPE npcType;
     private Pokeball pokeballs;
     private Potion potions;
+    private Dialog battleDialog;
+    private Dialog defeatDialog;
+    
+    private boolean canBattle;
     
     private double now;
     private double lastMove = 0;
@@ -32,6 +36,9 @@ public class Player extends Renderable{
         
         this.input = input;
         direction = Direction.DOWN;
+        canBattle = false;   // @TODO MUST BE FETCHED FROM DATABASE
+        battleDialog = new Dialog("This will be over soon.");           // @TODO MUST BE FETCHED FROM DATABASE
+        defeatDialog = new Dialog("I didn't said who would win...");    // @TODO MUST BE FETCHED FROM DATABASE
         
         if( input == null ){
             getNPCSprite();
@@ -293,13 +300,31 @@ public class Player extends Renderable{
         this.potions = potions;
     }
     
-
     public InputHandler getInput() {
         return input;
     }
     public void setInput( InputHandler input ) {
         this.input = input;
     }
-    
-    
+
+    public boolean getCanBattle() {
+        return canBattle;
+    }
+    public void setCanBattle(boolean canBattle) {
+        this.canBattle = canBattle;
+    }
+
+    public Dialog getBattleDialog() {
+        return battleDialog;
+    }
+    public void setBattleDialog(Dialog battleDialog) {
+        this.battleDialog = battleDialog;
+    }
+
+    public Dialog getDefeatDialog() {
+        return defeatDialog;
+    }
+    public void setDefeatDialog(Dialog defeatDialog) {
+        this.defeatDialog = defeatDialog;
+    }
 }
