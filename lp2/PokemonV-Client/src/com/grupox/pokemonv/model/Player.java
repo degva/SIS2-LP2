@@ -36,7 +36,7 @@ public class Player extends Renderable{
         
         this.input = input;
         direction = Direction.DOWN;
-        canBattle = false;   // @TODO MUST BE FETCHED FROM DATABASE
+        canBattle = true;   // @TODO MUST BE FETCHED FROM DATABASE
         battleDialog = new Dialog("This will be over soon.");           // @TODO MUST BE FETCHED FROM DATABASE
         defeatDialog = new Dialog("I didn't said who would win...");    // @TODO MUST BE FETCHED FROM DATABASE
         

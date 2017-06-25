@@ -26,44 +26,44 @@ public class PokemonAD {
     public PokemonAD(){
         //leerListPokemon(4);
     }
-    public void leerListPokemon(int idUser){
-        listaPokemones = new ArrayList<>();
-        Pokemon.TypeP tipoE = Pokemon.TypeP.Earth;
-        Pokemon.TypeP tipoF = Pokemon.TypeP.Fire;
-        Pokemon.TypeP tipoWa = Pokemon.TypeP.Water;
-        Pokemon.TypeP tipoWi = Pokemon.TypeP.Wind;
-        try{
-            //registrar el driver
-            Class.forName("com.mysql.jdbc.Driver");
-            //establecer la conexion
-            Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282gx","inf282gx","m8h53r9A6xBfeOe6");
-            System.out.println("la conexion se ha realizado");
-            Statement sentencia = con.createStatement();
-            //cambiar esto!
-            String query =  "SELECT distinct p.ID, p.NAME, p.TYPE, p.ATTACK1_NAME, p.ATTACK1_PTS, p.DEFFENSE_PTS, p.LIFE \n" +
-                            "FROM inf282gx.PLAYER_X_POKEMON pp, inf282gx.POKEMON p \n" +
-                            "where pp.PLAYER_USER_ID = "+String.valueOf(idUser)+" AND p.DELETED = 0 AND pp.POKEMON_ID = p.ID\n"
-                            + "order by pp.ORDER_POKEMON ";
-
-            ResultSet rs = sentencia.executeQuery(query);
-            while(rs.next()){
-
-                String id = rs.getString("ID");
-                String name = rs.getString("NAME");
-                String type = rs.getString("TYPE");
-                String attack_name = rs.getString("ATTACK1_NAME");
-                String attack_pts = rs.getString("ATTACK1_PTS");
-                String defense_pts = rs.getString("DEFFENSE_PTS");
-                String life = rs.getString("LIFE");
-
-                //System.out.println(id+" "+attack_name+" "+attack_pts+" "+defense_pts+" "+name+" "+life+" "+type);
-                Pokemon pok = new Pokemon(Integer.parseInt(id), Integer.parseInt(attack_pts), Integer.parseInt(defense_pts),Integer.parseInt(life), name, tipoE);
-                listaPokemones.add(pok);
-            }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
+//    public void leerListPokemon(int idUser){
+//        listaPokemones = new ArrayList<>();
+//        Pokemon.TypeP tipoE = Pokemon.TypeP.Earth;
+//        Pokemon.TypeP tipoF = Pokemon.TypeP.Fire;
+//        Pokemon.TypeP tipoWa = Pokemon.TypeP.Water;
+//        Pokemon.TypeP tipoWi = Pokemon.TypeP.Wind;
+//        try{
+//            //registrar el driver
+//            Class.forName("com.mysql.jdbc.Driver");
+//            //establecer la conexion
+//            Connection con = DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282gx","inf282gx","m8h53r9A6xBfeOe6");
+//            System.out.println("la conexion se ha realizado");
+//            Statement sentencia = con.createStatement();
+//            //cambiar esto!
+//            String query =  "SELECT distinct p.ID, p.NAME, p.TYPE, p.ATTACK1_NAME, p.ATTACK1_PTS, p.DEFFENSE_PTS, p.LIFE \n" +
+//                            "FROM inf282gx.PLAYER_X_POKEMON pp, inf282gx.POKEMON p \n" +
+//                            "where pp.PLAYER_USER_ID = "+String.valueOf(idUser)+" AND p.DELETED = 0 AND pp.POKEMON_ID = p.ID\n"
+//                            + "order by pp.ORDER_POKEMON ";
+//
+//            ResultSet rs = sentencia.executeQuery(query);
+//            while(rs.next()){
+//
+//                String id = rs.getString("ID");
+//                String name = rs.getString("NAME");
+//                String type = rs.getString("TYPE");
+//                String attack_name = rs.getString("ATTACK1_NAME");
+//                String attack_pts = rs.getString("ATTACK1_PTS");
+//                String defense_pts = rs.getString("DEFFENSE_PTS");
+//                String life = rs.getString("LIFE");
+//
+//                //System.out.println(id+" "+attack_name+" "+attack_pts+" "+defense_pts+" "+name+" "+life+" "+type);
+//                Pokemon pok = new Pokemon(Integer.parseInt(id), Integer.parseInt(attack_pts), Integer.parseInt(defense_pts),Integer.parseInt(life), name, tipoE);
+//                listaPokemones.add(pok);
+//            }
+//        }catch(Exception e){
+//            System.out.println(e.getMessage());
+//        }
+//    }
     //ya no va!
     public void intercambiarDA(Pokemon pokA, Pokemon pokB, int idUser){
         try{
@@ -95,7 +95,7 @@ public class PokemonAD {
     
     
     public ArrayList<Pokemon> getListaPokemones(int idUser) {
-        leerListPokemon(idUser);
+        //leerListPokemon(idUser);
         return listaPokemones;
     }
     
