@@ -12,13 +12,13 @@ public class Dialog {
     private String line2;
     private static BufferedImage frame;
     
-    private final int spaceBetweenLines = 30;
-    private final int leftOffset = 20;
+    private static final int spaceBetweenLines = 30;
+    private static final int leftOffset = 20;
     
-    private final int padding = spaceBetweenLines;
-    private final int height = Font.fontHeightOut * 2 + spaceBetweenLines + 2 * padding;
-    private final int topOffset = Game.HEIGHT - height - 10;
-    private final int width = Game.WIDTH - 2 * leftOffset;
+    private static final int padding = spaceBetweenLines;
+    private static final int height = Font.fontHeightOut * 2 + spaceBetweenLines + 2 * padding;
+    private static final int topOffset = Game.HEIGHT - height - 10;
+    private static final int width = Game.WIDTH - 2 * leftOffset;
     
     /* Constructors */
     public Dialog(String content){
