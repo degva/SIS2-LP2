@@ -1,5 +1,6 @@
 package com.grupox.pokemonv.BD;
 
+import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.model.Attack;
 import com.grupox.pokemonv.model.Map;
@@ -33,7 +34,7 @@ public class DataAccess {
     /**
      * Returns a map with everything inside loaded.
      */
-    public Map loadMap(int level, int player_id, InputHandler input){
+    public Map loadMap(int level, int player_id, InputHandler input, Game game){
         if (level != 1) return null;
         
         try {
@@ -53,10 +54,10 @@ public class DataAccess {
                 break;
             }
             
-            loadTiles(map, player_id , input, con, level);
+            loadTiles(map, player_id , input, con, level, game);
             
             closeConnection(con);
-            System.out.println("La conexion se ha cerrado");
+
             return map;
             
         } catch (SQLException ex) {
@@ -68,7 +69,7 @@ public class DataAccess {
         
     }
     
-    private void loadTiles(Map map, int player_id, InputHandler input, Connection con, int level) throws SQLException{
+    private void loadTiles(Map map, int player_id, InputHandler input, Connection con, int level, Game game) throws SQLException{
         map.setGrid( new Tile[map.getWidth()][map.getHeight()] );
         
         Statement st = con.createStatement();
@@ -84,11 +85,14 @@ public class DataAccess {
             int y = rs.getInt("Y");
             
             // Set
-            map.getGrid()[x][y] = new Tile(Tile.getType(type), loadPlayer(tile_player_id, player_id, input, con), item_enabled, map);
+            Tile tile = new Tile(Tile.getType(type), null, item_enabled, map);
+            tile.setPlayer(loadPlayer(tile_player_id, player_id, input, con, tile, game));
+//            map.getGrid()[x][y] = new Tile(Tile.getType(type), loadPlayer(tile_player_id, player_id, input, con, this, game), item_enabled, map);
+            map.getGrid()[x][y] = tile;
         }
     }
     
-    private Player loadPlayer(int tile_player_id, int logged_player_id, InputHandler input, Connection con) throws SQLException{
+    private Player loadPlayer(int tile_player_id, int logged_player_id, InputHandler input, Connection con, Tile tile, Game game) throws SQLException{
         if(tile_player_id == 0) return null;
         
         Statement st = con.createStatement();
@@ -100,8 +104,8 @@ public class DataAccess {
         int battleDialog;
         while(rs.next()){
             npcType = Player.getNpcType(rs.getInt("NPC_TYPE"));
-            defeatDialog = rs.getInt("DEFEAT_DIALOG");
-            battleDialog = rs.getInt("BATTLE_DIALOG");
+            //defeatDialog = rs.getInt("DEFEAT_DIALOG");
+            //battleDialog = rs.getInt("BATTLE_DIALOG");
             break;
         }
         
@@ -110,9 +114,12 @@ public class DataAccess {
         Player player;
         if(tile_player_id == logged_player_id){
             player = new Player(input);
+            game.setPlayer(player);
         }else{
             player = new Player(null);
         }
+        player.setId(tile_player_id);
+        player.setTile(tile);
         player.setNpcType(npcType);
         // setDialog
         
@@ -127,7 +134,7 @@ public class DataAccess {
         Statement sentencia = con.createStatement();
         String query =  "SELECT distinct p.ID, p.NAME, p.TYPE, p.DEFENSE_PTS, p.LIFE ,a1.NAME as NAME1, a1.POINTS as POINTS1, a2.NAME as NAME2, a2.POINTS as POINTS2 " + 
                         "FROM inf282gx.PLAYER_X_POKEMON pp, inf282gx.POKEMON p , inf282gx.ATTACK a1, inf282gx.ATTACK a2 " +
-                        "where pp.PLAYER_ID = "+player_id+ "AND p.DELETED = 0 AND pp.DELETED = 0 AND pp.POKEMON_ID = p.ID AND a1.ID = p.ATTACK_1_ID AND a2.ID = p.ATTACK_2_ID " +
+                        "where pp.PLAYER_ID = "+player_id+ " AND p.DELETED = 0 AND pp.DELETED = 0 AND pp.POKEMON_ID = p.ID AND a1.ID = p.ATTACK_1_ID AND a2.ID = p.ATTACK_2_ID " +
                         "order by pp.ORDER_POKEMON ";
 
         ResultSet rs = sentencia.executeQuery(query);

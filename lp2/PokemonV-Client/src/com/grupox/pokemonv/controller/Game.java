@@ -45,38 +45,33 @@ public class Game extends Canvas implements Runnable {
     public Game() {
         // Main loop
         running = false;
-
-        // UI
-        initUI();
-
+        
         // Keyboard
         input = new InputHandler();
         this.addKeyListener(input);
 
         // Initialization
-        player = new Player(input);
-        player.setId(1);
-        
-        mapManager = new MapManager(player, this);
+        mapManager = new MapManager(this);
         pokemonBeltManager = new PokemonBeltManager(player, this);
-        bagManager = new BagManager((Player) player, this);
+        bagManager = new BagManager( player, this);
         battleManager = new BattleManager(this);
-        //battleManager = new BattleManager(this);
+        
         state = State.MAP;
         
-        enemy = new Player(null);
-        enemy.setId(2);
-        
-        // TEST: SET PLAYER POSITION
-        Tile tile = mapManager.getMap().getGrid()[0][0];
-        tile.setPlayer(player);
-        player.setTile(tile);
-        
-        // TEST: SET ENEMY POSITION
-        tile = mapManager.getMap().getGrid()[4][4];
-        tile.setPlayer(enemy);
-        enemy.setTile(tile);
-        
+        // TEST
+//        //enemy = new Player(null);
+//        //enemy.setId(2);
+//        
+//        // TEST: SET PLAYER POSITION
+//        Tile tile = mapManager.getMap().getGrid()[0][0];
+//        tile.setPlayer(player);
+//        player.setTile(tile);
+//        
+//        // TEST: SET ENEMY POSITION
+//        tile = mapManager.getMap().getGrid()[4][4];
+//        tile.setPlayer(enemy);
+//        enemy.setTile(tile);
+//        
         // HARDCODED
         //player.getPokemons().add(new Pokemon(4, 10, "RAPID ATTACK", 20, "LANZAHOJAS", 20, 120, "Bulbasaur", Pokemon.TypeP.Wind, true));
         //user.getPokemons().add(new Pokemon(1,10,10,10,"Squirtle", Pokemon.TypeP.Earth));
@@ -86,6 +81,9 @@ public class Game extends Canvas implements Runnable {
 //        player.getPokemons().add(new Pokemon(7,10,10,10,"Squirtle5", Pokemon.TypeP.Earth));
 //        player.getPokemons().add(new Pokemon(1,10,10,10,"Carlos2", Pokemon.TypeP.Earth));
 //        enemy.getPokemons().add(new Pokemon(2,10,10,10,"Bulbasaur", Pokemon.TypeP.Earth));
+
+        // UI
+        initUI();
     }
 
     /* Methods */
@@ -224,6 +222,22 @@ public class Game extends Canvas implements Runnable {
     public BagManager getBagManager() {
         return bagManager;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public InputHandler getInput() {
+        return input;
+    }
+    public void setInput(InputHandler input) {
+        this.input = input;
+    }
+    
+    
 
     public static void main(String args[]) {
 //        new Login().setVisible( true );

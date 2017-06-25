@@ -1,12 +1,10 @@
 package com.grupox.pokemonv.controller.manager;
 
 import com.grupox.pokemonv.BD.DataAccess;
-import com.grupox.pokemonv.BD.MapDA;
 import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.controller.menu.MapMenu;
 import com.grupox.pokemonv.model.Map;
-import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Player;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -25,15 +23,13 @@ public class MapManager {
     private State state;
     
     /* Constructors */
-    public MapManager( Player player, Game game ){
-        this.player = player;
+    public MapManager( Game game ){
         this.game = game;
-        input = player.getInput();
+        this.input = game.getInput();
         
-        //MapDA mapDA = new MapDA();
-        //map = mapDA.getMap();
         DataAccess da = new DataAccess();
-        map = da.loadMap(1, 5, input);
+        map = da.loadMap(1, 4, input, game);
+        player = game.getPlayer();
         
         menu = new MapMenu( input, 20, Game.WIDTH / 80, game );
         state = State.MOVING;
@@ -82,7 +78,6 @@ public class MapManager {
     }
     
     /* Getters && Setters */
-
     public State getState() {
         return state;
     }
@@ -93,5 +88,4 @@ public class MapManager {
     public Map getMap() {
         return map;
     }
-    
 }
