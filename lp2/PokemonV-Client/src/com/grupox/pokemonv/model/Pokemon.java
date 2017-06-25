@@ -2,7 +2,7 @@ package com.grupox.pokemonv.model;
 
 public class Pokemon {
     /* Enum declaration */
-    public enum TypeP { Fire, Water, Earth, Wind }
+    public enum TypeP { Fire, Water, Earth, Wind, Electric }
 
     /* Attributes */
         public int id;
