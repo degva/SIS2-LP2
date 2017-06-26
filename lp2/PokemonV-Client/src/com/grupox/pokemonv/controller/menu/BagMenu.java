@@ -1,41 +1,55 @@
 package com.grupox.pokemonv.controller.menu;
 
 import com.grupox.pokemonv.controller.Game;
+import com.grupox.pokemonv.controller.manager.BattleManager;
 import com.grupox.pokemonv.model.Player;
 
 public class BagMenu extends QuantityMenu {
-    
+
     /* Attributes */
     private Game game;
     private Player player;
-    
+    private final int pokeballsIndex, potionsIndex, closeIndex;
+
     /* Constructors */
-    public BagMenu( Player player, int topOffset, int rightOffset, Game game ) {
-        super( player.getInput(), topOffset, rightOffset );
-        
+    public BagMenu(Player player, int topOffset, int rightOffset, Game game) {
+        super(player.getInput(), topOffset, rightOffset);
+
         this.player = player;
         this.game = game;
-        
-        this.addItem( player.getPokeballs().getName(), player.getPokeballs().getQuantity() );
-        this.addItem( player.getPotions().getName(), player.getPotions().getQuantity());
-        this.addItem( "Close" );
+
+        pokeballsIndex = this.addItem(player.getPokeballs().getName(), player.getPokeballs().getQuantity());
+        potionsIndex = this.addItem(player.getPotions().getName(), player.getPotions().getQuantity());
+        closeIndex = this.addItem("Close");
     }
-    
+
     /* Methods */
     @Override
-    public void tick(){
+    public void tick() {
         super.tick();
-        
-        if( Game.getState() == Game.State.BAG ){
-            if( input.action.isFirstPressed && !items.isEmpty() ){
-                if( items.get( selectedIndex ).getDescription().equals( "Close" ) ){
-                    game.setState( Game.State.MAP );
+
+        if (Game.getState() == Game.State.BAG) {
+            if (input.action.isFirstPressed && !items.isEmpty()) {
+                if (items.get(selectedIndex).getDescription().equals("Close")) {
+                    game.setState(Game.State.MAP);
                 }
-            }else if ( input.back.isFirstPressed ){
-                game.setState( Game.State.MAP );
+            } else if (input.back.isFirstPressed) {
+                game.setState(Game.State.MAP);
             }
-        }else if( Game.getState() == Game.State.BATTLE ){
-            //
+        } else if (Game.getState() == Game.State.BATTLE) {
+            if (input.action.isFirstPressed && this.selectedIndex > -1) {
+                if (selectedIndex == pokeballsIndex) {
+                    game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
+                    int dis = player.getPokeballs().getQuantity()-1;
+                    player.getPokeballs().setQuantity(dis);
+                } else if (selectedIndex == potionsIndex) {
+                    game.getBattleManager().setState(BattleManager.State.P1_HEAL);
+                    int dis = player.getPotions().getQuantity();
+                    player.getPotions().setQuantity(dis);
+                } else if (selectedIndex == closeIndex) {
+                    game.getBattleManager().setState(BattleManager.State.P1_IDLE);
+                }
+            }
         }
     }
 }

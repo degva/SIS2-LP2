@@ -29,7 +29,7 @@ public class BattleMenu extends DoubleColumnBattle {
             if (selectedIndex == attackIndex) {
                 game.getBattleManager().setState(BattleManager.State.TYPE_ATTACK_MENU);
             } else if (selectedIndex == bagIndex) {
-                game.getBattleManager().setState(BattleManager.State.P1_BAG);
+                game.getBattleManager().setState(BattleManager.State.BAG_MENU);
             } else if (selectedIndex == giveUpIndex) {
                 game.getBattleManager().setState(BattleManager.State.P1_GIVEUP);
                 game.getBattleManager().inicializeTicks();
