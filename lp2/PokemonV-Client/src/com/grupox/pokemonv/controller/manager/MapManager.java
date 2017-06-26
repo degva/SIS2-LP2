@@ -114,4 +114,12 @@ public class MapManager {
     public Map getMap() {
         return map;
     }
+
+    public Dialog getDialog() {
+        return dialog;
+    }
+    public void setDialog(Dialog dialog) {
+        this.dialog = dialog;
+    }
+    
 }

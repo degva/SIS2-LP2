@@ -16,6 +16,7 @@ public class Tile extends Renderable {
     private Type type;
     private Player player;
     private boolean isItemEnabled;
+    private boolean isPokemonSpawner;
     private Map map;
     private boolean isWalkable;
     
@@ -30,6 +31,7 @@ public class Tile extends Renderable {
         this.map = map;
         
         isWalkable = determinateWalkable();
+        isPokemonSpawner = determinatePokemonSpawner();
         loadSprite();
     }
     
@@ -343,6 +345,15 @@ public class Tile extends Renderable {
         return true;
     }
     
+    private boolean determinatePokemonSpawner(){
+        if( type == Type.GRA00 || type == Type.GRA01 || type == Type.GRA02 || type == Type.GRA03 || 
+            type == Type.GRA04 || type == Type.GRA05 || type == Type.GRA06 || type == Type.GRA07 ||
+            type == Type.GRA08 || type == Type.GRA09 ){
+            return true;
+        }
+        return false;
+    }
+    
     /* Getters & Setters */
     public Type getType() {
         return type;
@@ -358,7 +369,7 @@ public class Tile extends Renderable {
         this.player = player;
     }
 
-    public boolean isIsItemEnabled() {
+    public boolean getIsItemEnabled() {
         return isItemEnabled;
     }
     public void setIsItemEnabled( boolean isItemEnabled ) {
@@ -372,7 +383,16 @@ public class Tile extends Renderable {
         this.map = map;
     }
 
-    public boolean isIsWalkable() {
+    public boolean getIsWalkable() {
         return isWalkable;
     }
+
+    public boolean getIsPokemonSpawner() {
+        return isPokemonSpawner;
+    }
+
+    public void setIsPokemonSpawner(boolean isPokemonSpawner) {
+        this.isPokemonSpawner = isPokemonSpawner;
+    }
+    
 }

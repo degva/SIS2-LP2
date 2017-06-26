@@ -1,5 +1,6 @@
 package com.grupox.pokemonv.controller;
 
+import com.grupox.pokemonv.BD.DataAccess;
 import com.grupox.pokemonv.controller.manager.PokemonBeltManager;
 import com.grupox.pokemonv.model.Player;
 import java.awt.Canvas;
@@ -8,7 +9,9 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import com.grupox.pokemonv.controller.manager.*;
+import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.SpriteSheet;
+import java.util.ArrayList;
 
 public class Game extends Canvas implements Runnable {
 
@@ -38,16 +41,19 @@ public class Game extends Canvas implements Runnable {
     private Player player;
     private static State state;
     private PokemonBeltManager pokemonBeltManager;
+    private ArrayList<Pokemon> allPokemons;
 
     /* Constructors */
     public Game() {
         // Main loop
         running = false;
+        
         // Keyboard
         input = new InputHandler();
         this.addKeyListener(input);
 
         // Initialization
+        allPokemons = new DataAccess().loadAllPokemons();
         mapManager = new MapManager(this);
         pokemonBeltManager = new PokemonBeltManager(player, this);
         bagManager = new BagManager( player, this);
@@ -228,6 +234,13 @@ public class Game extends Canvas implements Runnable {
     }
     public void setInput(InputHandler input) {
         this.input = input;
+    }
+
+    public ArrayList<Pokemon> getAllPokemons() {
+        return allPokemons;
+    }
+    public void setAllPokemons(ArrayList<Pokemon> allPokemons) {
+        this.allPokemons = allPokemons;
     }
     
     
