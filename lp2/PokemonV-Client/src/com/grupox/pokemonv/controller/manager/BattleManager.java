@@ -37,14 +37,13 @@ public class BattleManager extends Renderable {
     private State state;
     private Player player;
     private Player player2;
-    private BufferedImage currSprite2;
     private String rutaP1_StaticPok;
     private String rutaP2_StaticPok;
     private String rutaP1_Normal1;
     private String rutaP1_Normal2;
     private String rutaP2_Normal1;
     private String rutaP2_Normal2;
-
+    private ArrayList<String> rutasP1_HEAL;
     private String rutaP1_Super1;
     private String rutaP1_Super2;
     private String rutaP1_Super3;
@@ -70,6 +69,7 @@ public class BattleManager extends Renderable {
     private final String rutaFondo = "res/battle/fondoBatalla.png";
     private final String rutaHP1 = "res/battle/hpPrincipal.png";
     private final String rutaHP2 = "res/battle/hpOpuesto.png";
+    private final String rutaImgHeal = "res/battle/heal.png";
     private boolean attack = false;
     private final int fondoAncho = 800;
     private final int fondoAlto = 600;
@@ -101,6 +101,8 @@ public class BattleManager extends Renderable {
     private BufferedImage imgForAnimP2_Super3;
     private BufferedImage imgForAnimP2_Super4;
 
+    private BufferedImage imgHeal;
+
     private BufferedImage fondoOpcion;
     private int NUM_TICKS_WAIT = 2;
 
@@ -112,6 +114,8 @@ public class BattleManager extends Renderable {
     private Animation attackAnimP2Normal;
     private Animation attackAnimP2Super;
     private Animation idleP2;
+    private Animation healAnimation1;
+    private Animation healAnimation2;
     private int numTicks = 0;
 
     private BattleMenu menu;
@@ -136,6 +140,7 @@ public class BattleManager extends Renderable {
             imgBackgroundBattle = ImageIO.read(new File(rutaFondo));
             fondoOpcion = ImageIO.read(new File(rutaOpcion));
             imgBackgroundHP1 = ImageIO.read(new File(rutaHP1));
+            imgHeal = ImageIO.read(new File(rutaImgHeal));
             imgBackgroundHP2 = ImageIO.read(new File(rutaHP2));
             lector = new FileReader("res/battle/other1.txt");
         } catch (Exception exp) {
@@ -219,6 +224,9 @@ public class BattleManager extends Renderable {
 
         idle = animations.get(findAnimation("idlePok1"));
         idleP2 = animations.get(findAnimation("idleP2"));
+
+        healAnimation1 = animations.get(findAnimation("heal1"));
+        healAnimation2 = animations.get(findAnimation("heal2"));
         nombrePokPlayer1 = p1.getPokemons().get(0).getName();
         nombrePokPlayer2 = p2.getPokemons().get(0).getName();
         attackAnimP1Normal.play();
@@ -226,6 +234,8 @@ public class BattleManager extends Renderable {
 
         attackAnimP2Normal.play();
         attackAnimP2Super.play();
+        healAnimation1.play();
+        healAnimation2.play();
 
         idle.play();
         idleP2.play();
@@ -241,6 +251,16 @@ public class BattleManager extends Renderable {
         ArrayList<BufferedImage> idlePok1 = new ArrayList<>();
         idlePok1.add(imgPokemonStatic_P1);
         Animation idleAnimation = new Animation("idlePok1", idlePok1, movePeriod);
+
+        ArrayList<BufferedImage> healPok1 = new ArrayList<>();
+        healPok1.add(imgPokemonStatic_P1);
+        healPok1.add(imgHeal);
+        Animation healAnimation_first = new Animation("heal1", healPok1, movePeriod);
+
+        ArrayList<BufferedImage> healPok2 = new ArrayList<>();
+        healPok2.add(imgPokemonStatic_P2);
+        healPok2.add(imgHeal);
+        Animation healAnimation_second = new Animation("heal2", healPok2, movePeriod);
 
         ArrayList<BufferedImage> attackImagesP2 = new ArrayList<>();
         attackImagesP2.add(imgForAnimP2_Normal1);
@@ -271,6 +291,8 @@ public class BattleManager extends Renderable {
         animations.add(idleAnimationP2);
         animations.add(attackSuperAnimationP1);
         animations.add(attackSuperAnimationP2);
+        animations.add(healAnimation_first);
+        animations.add(healAnimation_second);
     }
 
     public void inicializeTicks() {
@@ -283,8 +305,18 @@ public class BattleManager extends Renderable {
                 bagMenu.tick();
                 break;
             case P1_HEAL:
+                currSprite = healAnimation1.getCurrSprite();
+                currSprite2 = idleP2.getCurrSprite();
+                if (numTicks == NUM_TICKS_WAIT) {
+                    state = State.P2_IDLE;
+                }
                 break;
             case P2_HEAL:
+                currSprite = idle.getCurrSprite();
+                currSprite2 = healAnimation2.getCurrSprite();
+                if (numTicks == NUM_TICKS_WAIT) {
+                    state = State.P2_IDLE;
+                }
                 break;
             case P1_CAPTURE:
                 break;
@@ -432,6 +464,12 @@ public class BattleManager extends Renderable {
         if ((state == State.P2_DEAD) && (game.getNumTicks() == 58)) {
             numTicks++;
         }
+        if ((state == State.P1_HEAL) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
+        if ((state == State.P2_HEAL) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
         if (endBattle) {
             game.setState(Game.State.MAP);
             endBattle = false;
@@ -478,6 +516,12 @@ public class BattleManager extends Renderable {
 
         //g.fillRect(330,180,230,10);
         switch (state) {
+            case P1_HEAL:
+                break;
+            case P2_HEAL:
+                break;
+            case P1_CAPTURE:
+                break;
             case P1_IDLE:
                 g.drawImage(fondoOpcion, 450 - 100, 425, 350 + 100, 171, null);
                 menu.render(g);
@@ -491,6 +535,7 @@ public class BattleManager extends Renderable {
                 break;
             case BAG_MENU:
                 bagMenu.render(g);
+                Font.getInstance().drawString("CHOOSE WISELY..", g, 30, 475);
                 break;
             case P1_ATTACK_FIRST:
                 if (!endBattle) {
@@ -586,6 +631,7 @@ public class BattleManager extends Renderable {
         rutasPOK1.add("res/battle/bulb_front5.png");
         rutasPOK1.add("res/battle/bulb_front6.png");
         rutasPOK1.add("res/battle/bulb_front7.png");
+        // rutasPOK1.add("res/battle/heal.png");
 
         rutasPOK2.add("res/battle/pika_back1.png");
         rutasPOK2.add("res/battle/pika_back2.png");
@@ -601,6 +647,7 @@ public class BattleManager extends Renderable {
         rutasPOK2.add("res/battle/pika_front5.png");
         rutasPOK2.add("res/battle/pika_front6.png");
         rutasPOK2.add("res/battle/pika_front7.png");
+        //  rutasPOK2.add("res/battle/heal.png");
 
         rutasPOK3.add("res/battle/butt_back1.png");
         rutasPOK3.add("res/battle/butt_back2.png");
@@ -616,6 +663,7 @@ public class BattleManager extends Renderable {
         rutasPOK3.add("res/battle/butt_front5.png");
         rutasPOK3.add("res/battle/butt_front6.png");
         rutasPOK3.add("res/battle/butt_front7.png");
+        //rutasPOK3.add("res/battle/heal.png");
 
         rutasPOK4.add("res/battle/char_back1.png");
         rutasPOK4.add("res/battle/char_back2.png");
@@ -631,6 +679,7 @@ public class BattleManager extends Renderable {
         rutasPOK4.add("res/battle/char_front5.png");
         rutasPOK4.add("res/battle/char_front6.png");
         rutasPOK4.add("res/battle/char_front7.png");
+        // rutasPOK4.add("res/battle/heal.png");
 
         rutasPOK7.add("res/battle/sq_back1.png");
         rutasPOK7.add("res/battle/sq_back2.png");
@@ -646,6 +695,7 @@ public class BattleManager extends Renderable {
         rutasPOK7.add("res/battle/sq_front5.png");
         rutasPOK7.add("res/battle/sq_front6.png");
         rutasPOK7.add("res/battle/sq_front7.png");
+        //rutasPOK7.add("res/battle/heal.png");
 
         mapPokemons.put(1, rutasPOK1); // ID:1->Bulbasaur
         mapPokemons.put(2, rutasPOK2); // ID:2->Pikachu
