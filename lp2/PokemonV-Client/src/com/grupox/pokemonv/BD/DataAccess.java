@@ -3,6 +3,7 @@ package com.grupox.pokemonv.BD;
 import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.model.Attack;
+import com.grupox.pokemonv.model.Dialog;
 import com.grupox.pokemonv.model.Map;
 import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Pokeball;
@@ -96,20 +97,23 @@ public class DataAccess {
         if(tile_player_id == 0) return null;
         
         Statement st = con.createStatement();
-        String query = "SELECT * FROM PLAYER WHERE ID=" + tile_player_id;
+        String query = "SELECT p.*, dBattle.CONTENT AS BATTLE_CONTENT, dDefeat.CONTENT AS DEFEAT_CONTENT " + 
+                       "FROM PLAYER p, DIALOG dBattle, DIALOG dDefeat " +
+                       " WHERE p.ID=" + tile_player_id + " AND p.BATTLE_DIALOG_ID = dBattle.ID and " +
+                       " p.DEFEAT_DIALOG_ID = dDefeat.ID";
         ResultSet rs = st.executeQuery(query);
         
         Player.NPC_TYPE npcType = null;
-        int defeatDialog;
-        int battleDialog;
+        String defeatDialog = "";
+        String battleDialog = "";
+        boolean canBattle = false;
         while(rs.next()){
             npcType = Player.getNpcType(rs.getInt("NPC_TYPE"));
-            //defeatDialog = rs.getInt("DEFEAT_DIALOG");
-            //battleDialog = rs.getInt("BATTLE_DIALOG");
+            defeatDialog = rs.getString("DEFEAT_CONTENT");
+            battleDialog = rs.getString("BATTLE_CONTENT");
+            canBattle = rs.getBoolean("CAN_BATTLE");
             break;
         }
-        
-        // load dialogs
         
         Player player;
         if(tile_player_id == logged_player_id){
@@ -121,7 +125,9 @@ public class DataAccess {
         player.setId(tile_player_id);
         player.setTile(tile);
         player.setNpcType(npcType);
-        // setDialog
+        player.setBattleDialog(new Dialog(battleDialog));
+        player.setDefeatDialog(new Dialog(defeatDialog));
+        player.setCanBattle(canBattle);
         
         player.setPokemons(loadPokemons(tile_player_id, con));
         loadItems(player, tile_player_id,con);

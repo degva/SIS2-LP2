@@ -26,6 +26,7 @@ public class PokemonAD {
     public PokemonAD(){
         //leerListPokemon(4);
     }
+
 //    public void leerListPokemon(int idUser){
 //        listaPokemones = new ArrayList<>();
 //        Pokemon.TypeP tipoE = Pokemon.TypeP.Earth;
