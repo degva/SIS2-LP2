@@ -1,7 +1,10 @@
 package com.grupox.pokemonv.model;
 
 import com.grupox.pokemonv.controller.Game;
+import com.grupox.pokemonv.controller.manager.MapManager;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Map {
     /* Attributes */
@@ -12,6 +15,7 @@ public class Map {
     private final int TILES_IN_HEIGHT = (int)Math.ceil( (double)Game.HEIGHT / Tile.spriteHeightOut);
     private float probPokemon;
     private float probItem;
+    private Game game;
     
     /* Constructors */
     public Map(){}
@@ -19,6 +23,19 @@ public class Map {
     /* Methods */
     // Tries to set the player of the next tile according to the direction. Returns whether successful or not.
     public boolean tryMove( Player player, Renderable.Direction direction ){
+        // Try to create a pokemon
+        if(player.getTile().getIsPokemonSpawner()){
+            if(tryAppearPokemon(player)){
+                return false;
+            }
+        }
+        
+        if(player.getTile().getIsItemEnabled()){
+            if(tryAppearItem(player)){
+                return false;
+            } 
+        }
+        
         int[] pos = getPosPlayer(player );
         int i = pos[0], j = pos[1];
         
@@ -46,7 +63,7 @@ public class Map {
                 return false;
         }
         
-        if( !nextTile.containsUser() && nextTile.isIsWalkable() ){
+        if( !nextTile.containsUser() && nextTile.getIsWalkable() ){
             player.getTile().setPlayer( null ); // Current tile
             player.setTile(nextTile);
             nextTile.setPlayer(player );
@@ -124,6 +141,35 @@ public class Map {
         return pos;
     }
     
+    private boolean tryAppearPokemon(Player player){
+        Random random = new Random();
+        if( random.nextFloat() <= probPokemon){
+            ArrayList<Pokemon> list = game.getAllPokemons();
+            Pokemon pok = list.get(random.nextInt(list.size()));
+            //game.getBattleManager().startBattle(player, pok);
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean tryAppearItem(Player player){
+        Random random = new Random();
+        if( random.nextFloat() <= probItem){
+            String dialog;
+            if(random.nextFloat() <= 50){
+                player.getPokeballs().setQuantity(player.getPokeballs().getQuantity() + 1); // Increase pokeball
+                dialog = "You have found a pokeball!";
+            }else{
+                player.getPotions().setQuantity(player.getPotions().getQuantity() + 1); // Increase potions
+                dialog = "You have found a potion!";
+            }
+            game.getMapManager().getDialog().setContent(dialog);
+            game.getMapManager().setState(MapManager.State.DEFEAT_DIALOG);
+            return true;
+        }
+        return false;
+    }
+    
     /* Getters & Setters */
     public Tile[][] getGrid() {
         return grid;
@@ -158,5 +204,12 @@ public class Map {
     }
     public void setProbItem(float probItem) {
         this.probItem = probItem;
-    } 
+    }
+
+    public Game getGame() {
+        return game;
+    }
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }

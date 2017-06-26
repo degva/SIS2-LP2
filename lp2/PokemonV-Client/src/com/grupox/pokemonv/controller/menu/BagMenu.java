@@ -27,7 +27,9 @@ public class BagMenu extends QuantityMenu {
     @Override
     public void tick() {
         super.tick();
-
+        
+        updateQuantities();
+        
         if (Game.getState() == Game.State.BAG) {
             if (input.action.isFirstPressed && !items.isEmpty()) {
                 if (items.get(selectedIndex).getDescription().equals("Close")) {
@@ -51,5 +53,13 @@ public class BagMenu extends QuantityMenu {
                 }
             }
         }
+    }
+    
+    private void updateQuantities(){
+        QuantityMenuItem item = (QuantityMenuItem)items.get(pokeballsIndex);
+        item.setQuantity(player.getPokeballs().getQuantity());
+        
+        item = (QuantityMenuItem)items.get(potionsIndex);
+        item.setQuantity(player.getPotions().getQuantity());
     }
 }

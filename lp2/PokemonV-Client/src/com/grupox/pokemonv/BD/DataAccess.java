@@ -52,6 +52,7 @@ public class DataAccess {
                 map.setWidth(rs.getInt("width"));
                 map.setProbPokemon(rs.getFloat("prob_pokemon"));
                 map.setProbItem(rs.getFloat("prob_item"));
+                map.setGame(game);
                 break;
             }
             
@@ -66,8 +67,30 @@ public class DataAccess {
             System.out.println(ex.getStackTrace());
             return null;
         }
+    }
+    
+    public ArrayList<Pokemon> loadAllPokemons(){
+        ArrayList<Pokemon> list = new ArrayList<>();
+        try{
+            Connection con = openConnection();
+            
+            Statement st = con.createStatement();
+            String query = "SELECT p.*, a1.NAME AS NAME1, a1.POINTS AS POINTS1, a2.NAME AS NAME2, a2.POINTS AS POINTS2 " +
+                           "FROM POKEMON p, ATTACK a1, ATTACK a2 WHERE p.DELETED=0 " + 
+                           " AND p.ATTACK_1_ID = a1.ID AND p.ATTACK_2_ID = a2.ID";
+            ResultSet rs = st.executeQuery(query);
 
-        
+            while(rs.next()){
+                Pokemon pk = readPokemon(rs);
+                list.add(pk);
+            }
+            
+            closeConnection(con);
+            
+        }catch(Exception ex){
+            System.out.println(ex.getStackTrace());
+        }
+        return list;
     }
     
     private void loadTiles(Map map, int player_id, InputHandler input, Connection con, int level, Game game) throws SQLException{
@@ -149,27 +172,7 @@ public class DataAccess {
         
         Pokemon.TypeP typeP = Pokemon.TypeP.Electric;
         while(rs.next()){
-
-            int id = rs.getInt("ID");
-            String name = rs.getString("NAME");
-            String type = rs.getString("TYPE");
-            String attack1_name = rs.getString("NAME1");
-            int attack1_pts = rs.getInt("POINTS1");
-            String attack2_name = rs.getString("NAME2");
-            int attack2_pts = rs.getInt("POINTS2");
-            int defense_pts = rs.getInt("DEFENSE_PTS");
-            int life = rs.getInt("LIFE");
-            
-            //para seleccionar el tipo de pokemon
-            if(type.compareTo("Earth")==0) typeP = Pokemon.TypeP.Earth;
-            if(type.compareTo("Water")==0 ) typeP = Pokemon.TypeP.Water;
-            if(type.compareTo("Fire")==0 ) typeP = Pokemon.TypeP.Fire;
-            if(type.compareTo("Wind")==0 ) typeP = Pokemon.TypeP.Wind;
-            if(type.compareTo("Electric")==0 ) typeP = Pokemon.TypeP.Electric;
-            
-            Pokemon pok = new Pokemon(id, new Attack(attack1_name, attack1_pts), new Attack(attack2_name, attack2_pts),
-                                        defense_pts,life, name, typeP, false);
-            listaPokemones.add(pok);
+            listaPokemones.add(readPokemon(rs));
         }
         return listaPokemones;
     }
@@ -199,6 +202,29 @@ public class DataAccess {
         }
         player.setPokeballs(new Pokeball(catchProb, pokQuantity));
         player.setPotions(new Potion(hp, potQuantity));
+    }
+    
+    private Pokemon readPokemon(ResultSet rs) throws SQLException{
+        Pokemon.TypeP typeP = Pokemon.TypeP.Electric;
+        int id = rs.getInt("ID");
+        String name = rs.getString("NAME");
+        String type = rs.getString("TYPE");
+        String attack1_name = rs.getString("NAME1");
+        int attack1_pts = rs.getInt("POINTS1");
+        String attack2_name = rs.getString("NAME2");
+        int attack2_pts = rs.getInt("POINTS2");
+        int defense_pts = rs.getInt("DEFENSE_PTS");
+        int life = rs.getInt("LIFE");
+
+        //para seleccionar el tipo de pokemon
+        if(type.compareTo("Earth")==0) typeP = Pokemon.TypeP.Earth;
+        if(type.compareTo("Water")==0 ) typeP = Pokemon.TypeP.Water;
+        if(type.compareTo("Fire")==0 ) typeP = Pokemon.TypeP.Fire;
+        if(type.compareTo("Wind")==0 ) typeP = Pokemon.TypeP.Wind;
+        if(type.compareTo("Electric")==0 ) typeP = Pokemon.TypeP.Electric;
+
+        return new Pokemon(id, new Attack(attack1_name, attack1_pts), new Attack(attack2_name, attack2_pts),
+                                    defense_pts,life, name, typeP, false);
     }
     
     private Connection openConnection() throws SQLException{

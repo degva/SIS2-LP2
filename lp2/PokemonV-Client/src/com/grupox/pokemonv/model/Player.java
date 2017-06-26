@@ -63,8 +63,9 @@ public class Player extends Renderable{
                 currSprite = walkTop.getCurrSprite();
                 direction = Direction.UP;
                 
-                tile.getMap().tryMove( this, Direction.UP );
-                lastMove = now;
+                if(tile.getMap().tryMove( this, Direction.UP )){
+                    lastMove = now;
+                }
             }else if( input.down.isPressed && !input.up.isPressed ){
                 
                 // Animate
@@ -76,8 +77,9 @@ public class Player extends Renderable{
                 currSprite = walkDown.getCurrSprite();
                 direction = Direction.DOWN;
                 
-                tile.getMap().tryMove( this, Direction.DOWN );
-                lastMove = now;
+                if(tile.getMap().tryMove( this, Direction.DOWN )){
+                    lastMove = now;
+                }
             }else if( input.left.isPressed && !input.right.isPressed ){
                 
                 // Animate
@@ -89,8 +91,9 @@ public class Player extends Renderable{
                 currSprite = walkLeft.getCurrSprite();
                 direction = Direction.LEFT;
                 
-                tile.getMap().tryMove( this, Direction.LEFT );
-                lastMove = now;
+                if(tile.getMap().tryMove( this, Direction.LEFT )){
+                    lastMove = now;
+                }
             }else if( input.right.isPressed && !input.left.isPressed ){
                 
                 // Animate
@@ -102,8 +105,9 @@ public class Player extends Renderable{
                 currSprite = walkRight.getCurrSprite();
                 direction = Direction.RIGHT;
                 
-                tile.getMap().tryMove( this, Direction.RIGHT );
-                lastMove = now;
+                if(tile.getMap().tryMove( this, Direction.RIGHT )){
+                    lastMove = now;
+                }
             }else if( !input.up.isPressed && !input.down.isPressed && !input.left.isPressed && !input.right.isPressed){
                 //stopAnimations();
                 Animation anim;
