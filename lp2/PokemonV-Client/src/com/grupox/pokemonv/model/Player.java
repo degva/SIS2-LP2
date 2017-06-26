@@ -1,6 +1,7 @@
 package com.grupox.pokemonv.model;
 
 import com.grupox.pokemonv.controller.Animation;
+import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import java.awt.Graphics2D;
 import static com.grupox.pokemonv.model.Tile.spriteWidthOut;

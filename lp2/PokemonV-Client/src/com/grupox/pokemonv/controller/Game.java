@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import com.grupox.pokemonv.controller.manager.*;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.SpriteSheet;
+import com.grupox.pokemonv.model.Tile;
 import java.util.ArrayList;
 
 public class Game extends Canvas implements Runnable {
@@ -47,7 +48,7 @@ public class Game extends Canvas implements Runnable {
     public Game() {
         // Main loop
         running = false;
-        
+        System.out.println(Tile.Type.valueOf(Tile.Type.FLR02.name()) == Tile.Type.FLR02);
         // Keyboard
         input = new InputHandler();
         this.addKeyListener(input);

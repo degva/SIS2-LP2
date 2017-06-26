@@ -12,7 +12,19 @@ public class Tile extends Renderable {
         GRA00, GRA01, GRA02, GRA03, GRA04, GRA05, GRA06, GRA07, GRA08, GRA09, GRA10,    // GRASS XX
         SND01, SND02, SND03, SND04, SND05, SND06, SND07, SND08, SND09,  // SAND XX
         TRG01, TRG02, TRG03,  // TREE GRASS/MOUNTAIN XX
-        HO101, HO102, HO103, HO104, HO105, HO106, HO107, HO108, HO109, HO110, HO111, HO112  //HOUSE_Y XX
+        TRW01, TRW02, TRW03, TRW04, TRW05, TRW06, TRW07, TRW08, TRW09, TRW10, // TREE WALL
+        HO101, HO102, HO103, HO104, HO105, HO106, HO107, HO108, HO109, HO110, HO111, HO112,  //HOUSE_Y XX
+        
+        HO201, HO202, HO203, HO204, HO205, HO206, HO207, HO208, HO209, HO210, HO211, HO212,  // OAK's lab
+        HO213, HO214, HO215, HO216, HO217, HO218, HO219, HO220, HO221, HO222, HO223, HO224,
+        HO225, HO226, HO227, HO228, HO229, HO230,
+        
+        HO301, HO302, HO303, HO304, HO305, HO306, HO307, HO308, HO309, HO310, HO311, HO312,  // Right house
+        HO313, HO314, HO315, HO316, HO317, HO318, HO319, HO320, HO321, HO322, HO323, HO324,
+        HO325,
+        
+        HO401, HO402, HO403, HO404, HO405, HO406,    // Left house, different tiles
+        PAT00  // PATCH OF SAND OUTSIDE HOUSE
     };
     
     /* Attributes */
@@ -204,6 +216,10 @@ public class Tile extends Renderable {
                 x = 4;
                 y = 0;
                 break;
+            case PAT00:
+                x = 27;
+                y = 6;
+                break;
             case SGN01:
                 x = 2;
                 y = 0;
@@ -300,6 +316,36 @@ public class Tile extends Renderable {
                 x = 9;
                 y = 4;
                 break;
+            case TRW01:
+                x = 18;
+                y = 0;
+            case TRW02:
+                x = 19;
+                y = 0;
+            case TRW03:
+                x = 20;
+                y = 0;
+            case TRW04:
+                x = 21;
+                y = 0;
+            case TRW05:
+                x = 18;
+                y = 1;
+            case TRW06:
+                x = 19;
+                y = 1;
+            case TRW07:
+                x = 18;
+                y = 2;
+            case TRW08:
+                x = 19;
+                y = 2;
+            case TRW09:
+                x = 20;
+                y = 2;
+            case TRW10:
+                x = 21;
+                y = 2;
             case HO101:
                 x = 6;
                 y = 8;
@@ -348,6 +394,219 @@ public class Tile extends Renderable {
                 x = 9;
                 y = 10;
                 break;                
+            case HO201:
+                x = 24;
+                y = 1;
+                break;
+            case HO202:
+                x = 25;
+                y = 1;
+                break;
+            case HO203:
+                x = 26;
+                y = 1;
+                break;
+            case HO204:
+                x = 27;
+                y = 1;
+                break;
+            case HO205:
+                x = 28;
+                y = 1;
+                break;
+            case HO206:
+                x = 29;
+                y = 1;
+                break;
+            case HO207:
+                x = 24;
+                y = 2;
+                break;
+            case HO208:
+                x = 25;
+                y = 2;
+                break;
+            case HO209:
+                x = 26;
+                y = 2;
+                break;
+            case HO210:
+                x = 27;
+                y = 2;
+                break;
+            case HO211:
+                x = 28;
+                y = 2;
+                break;
+            case HO212:
+                x = 29;
+                y = 2;
+                break;
+            case HO213:
+                x = 24;
+                y = 3;
+                break;
+            case HO214:
+                x = 25;
+                y = 3;
+                break;
+            case HO215:
+                x = 26;
+                y = 3;
+                break;
+            case HO216:
+                x = 27;
+                y = 3;
+                break;
+            case HO217:
+                x = 28;
+                y = 3;
+                break;
+            case HO218:
+                x = 29;
+                y = 3;
+                break;
+            case HO219:
+                x = 24;
+                y = 4;
+                break;
+            case HO220:
+                x = 25;
+                y = 4;
+                break;
+            case HO221:
+                x = 26;
+                y = 4;
+                break;
+            case HO222:
+                x = 27;
+                y = 4;
+                break;
+            case HO223:
+                x = 28;
+                y = 4;
+                break;
+            case HO224:
+                x = 29;
+                y = 4;
+                break;
+            case HO225:
+                x = 24;
+                y = 5;
+                break;
+            case HO226:
+                x = 25;
+                y = 5;
+                break;
+            case HO227:
+                x = 26;
+                y = 5;
+                break;
+            case HO228:
+                x = 27;
+                y = 5;
+                break;
+            case HO229:
+                x = 28;
+                y = 5;
+                break;
+            case HO230:
+                x = 29;
+                y = 5;
+                break;
+            case HO301:
+                x = 30;
+                y = 1;
+            case HO302:
+                x = 31;
+                y = 1;
+            case HO303:
+                x = 32;
+                y = 1;
+            case HO304:
+                x = 33;
+                y = 1;
+            case HO305:
+                x = 34;
+                y = 1;
+            case HO306:
+                x = 30;
+                y = 2;
+            case HO307:
+                x = 31;
+                y = 2;
+            case HO308:
+                x = 32;
+                y = 2;
+            case HO309:
+                x = 33;
+                y = 2;
+            case HO310:
+                x = 34;
+                y = 2;
+            case HO311:
+                x = 30;
+                y = 3;
+            case HO312:
+                x = 31;
+                y = 3;
+            case HO313:
+                x = 32;
+                y = 3;
+            case HO314:
+                x = 33;
+                y = 3;
+            case HO315:
+                x = 34;
+                y = 3;
+            case HO316:
+                x = 30;
+                y = 4;
+            case HO317:
+                x = 31;
+                y = 4;
+            case HO318:
+                x = 32;
+                y = 4;
+            case HO319:
+                x = 33;
+                y = 4;
+            case HO320:
+                x = 34;
+                y = 4;
+            case HO321:
+                x = 30;
+                y = 5;
+            case HO322:
+                x = 31;
+                y = 5;
+            case HO323:
+                x = 32;
+                y = 5;
+            case HO324:
+                x = 33;
+                y = 5;
+            case HO325:
+                x = 34;
+                y = 5;
+            case HO401:
+                x = 30;
+                y = 9;
+            case HO402:
+                x = 32;
+                y = 9;
+            case HO403:
+                x = 34;
+                y = 9;
+            case HO404:
+                x = 30;
+                y = 10;
+            case HO405:
+                x = 32;
+                y = 10;
+            case HO406:
+                x = 34;
+                y = 10;
             default:
                 x = 1;
                 y = 0;

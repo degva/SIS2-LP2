@@ -78,17 +78,6 @@ public class PokemonBelt {
         borders[6] = SpriteSheet.getInstance().getSubImage(15, 24);
         borders[7] = SpriteSheet.getInstance().getSubImage(16, 24);
         borders[8] = SpriteSheet.getInstance().getSubImage(17, 24);
-//        borders[0] = SpriteSheet.getInstance().getSubImage(16, 64);
-//        borders[1] = SpriteSheet.getInstance().getSubImage(17, 64);
-//        borders[2] = SpriteSheet.getInstance().getSubImage(18, 64);
-//        
-//        borders[3] = SpriteSheet.getInstance().getSubImage(16, 65);
-//        borders[4] = SpriteSheet.getInstance().getSubImage(17, 65);
-//        borders[5] = SpriteSheet.getInstance().getSubImage(18, 65);
-//        
-//        borders[6] = SpriteSheet.getInstance().getSubImage(16, 66);
-//        borders[7] = SpriteSheet.getInstance().getSubImage(17, 66);
-//        borders[8] = SpriteSheet.getInstance().getSubImage(18, 66);
     }
     
     
