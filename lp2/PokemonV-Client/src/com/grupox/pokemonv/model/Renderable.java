@@ -46,5 +46,7 @@ public abstract class Renderable {
     public Direction getDirection() {
         return direction;
     }
-    // No need to give others objects the possibility to set my direction
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
 }

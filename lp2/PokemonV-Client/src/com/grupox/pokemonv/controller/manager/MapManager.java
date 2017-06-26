@@ -7,6 +7,7 @@ import com.grupox.pokemonv.controller.menu.MapMenu;
 import com.grupox.pokemonv.model.Dialog;
 import com.grupox.pokemonv.model.Map;
 import com.grupox.pokemonv.model.Player;
+import com.grupox.pokemonv.model.Renderable;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -49,8 +50,8 @@ public class MapManager {
             state = State.MENU;
         }else if( state == State.MOVING && input.action.isFirstPressed ){
             enemy = map.tryBattle(player, player.getDirection());
+            player.setDirection(Renderable.Direction.UP);
             if(enemy != null){
-                System.out.println(player.getPokemons().get(0).getName());
                 if(enemy.getCanBattle()){
                     dialog = enemy.getBattleDialog();
                     setState(State.BATTLE_DIALOG);

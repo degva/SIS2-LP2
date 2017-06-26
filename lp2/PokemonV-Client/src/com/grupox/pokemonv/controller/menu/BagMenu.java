@@ -16,8 +16,8 @@ public class BagMenu extends QuantityMenu {
         this.player = player;
         this.game = game;
         
-        this.addItem( "Pokeball", 15 );
-        this.addItem( "Potion", 1);
+        this.addItem( player.getPokeballs().getName(), player.getPokeballs().getQuantity() );
+        this.addItem( player.getPotions().getName(), player.getPotions().getQuantity());
         this.addItem( "Close" );
     }
     
@@ -26,12 +26,18 @@ public class BagMenu extends QuantityMenu {
     public void tick(){
         super.tick();
         
-        if( input.action.isFirstPressed && !items.isEmpty() ){
-            if( items.get( selectedIndex ).getDescription().equals( "Close" ) ){
+        if( Game.getState() == Game.State.MAP ){
+            if( input.action.isFirstPressed && !items.isEmpty() ){
+                if( items.get( selectedIndex ).getDescription().equals( "Close" ) ){
+                    game.setState( Game.State.MAP );
+                }
+            }else if ( input.back.isFirstPressed ){
                 game.setState( Game.State.MAP );
             }
-        }else if ( input.back.isFirstPressed ){
-            game.setState( Game.State.MAP );
+        }else if( Game.getState() == Game.State.BATTLE ){
+            // Go get them Kevin
+            // game.getBattleManager().usePotion()
+            // player.getPotions().setQuantity(getQuantity()--)
         }
     }
 }
