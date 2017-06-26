@@ -1,12 +1,13 @@
 package com.grupox.pokemonv.model;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Tile extends Renderable {
     // Enum declaration
     public enum Type { /*GRASS, SAND, ROCK*/
         FLR01, FLR02, FLR03, SGN01, // FLOWER XX, SIGN XX
-        GRA00, GRA01, GRA02, GRA03, GRA04, GRA05, GRA06, GRA07, GRA08, GRA09,    // GRASS XX
+        GRA00, GRA01, GRA02, GRA03, GRA04, GRA05, GRA06, GRA07, GRA08, GRA09, GRA10,    // GRASS XX
         SND01, SND02, SND03, SND04, SND05, SND06, SND07, SND08, SND09,  // SAND XX
         TRG01, TRG02, TRG03,  // TREE GRASS/MOUNTAIN XX
         HO101, HO102, HO103, HO104, HO105, HO106, HO107, HO108, HO109, HO110, HO111, HO112  //HOUSE_Y XX
@@ -19,6 +20,8 @@ public class Tile extends Renderable {
     private boolean isPokemonSpawner;
     private Map map;
     private boolean isWalkable;
+    
+    private BufferedImage highGrass;
     
     public static final int spriteWidthOut = 64;    // Width with which is rendered each sprite
     public static final int spriteHeightOut = 64;   // Height with which is rendered each sprite
@@ -153,6 +156,9 @@ public class Tile extends Renderable {
             case 38:
                 type = Tile.Type.HO112;
                 break;
+            case 39:
+                type = Tile.Type.GRA10;
+                break;
             default:
                 type = Tile.Type.FLR01;
                 break;
@@ -168,6 +174,9 @@ public class Tile extends Renderable {
         g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
         if( player != null ){
             player.render( g, x, y );
+        }
+        if(type == Tile.Type.GRA10){
+            g.drawImage(highGrass, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
         }
     }
     
@@ -229,6 +238,10 @@ public class Tile extends Renderable {
             case GRA09:
                 x = 7;
                 y = 6;
+                break;
+            case GRA10:
+                x = 9;
+                y = 0;
                 break;
             case SND01:
                 x = 7;
@@ -331,6 +344,7 @@ public class Tile extends Renderable {
                 y = 0;
         }
         sprite = SpriteSheet.getInstance().getSubImage( x, y );
+        highGrass = SpriteSheet.getInstance().getSubImage(8, 0);
     }
 
     // Determinate walkable
@@ -346,12 +360,7 @@ public class Tile extends Renderable {
     }
     
     private boolean determinatePokemonSpawner(){
-        if( type == Type.GRA00 || type == Type.GRA01 || type == Type.GRA02 || type == Type.GRA03 || 
-            type == Type.GRA04 || type == Type.GRA05 || type == Type.GRA06 || type == Type.GRA07 ||
-            type == Type.GRA08 || type == Type.GRA09 ){
-            return true;
-        }
-        return false;
+        return type == Type.GRA10;
     }
     
     /* Getters & Setters */

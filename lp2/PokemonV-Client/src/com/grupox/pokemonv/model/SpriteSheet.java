@@ -48,7 +48,7 @@ public class SpriteSheet {
     }
     
     public BufferedImage getSubFont( int x, int row ){
-        return spriteSheet.getSubimage( fontWidthIn * x, ( spriteHeightIn + 1 ) * 26 + 1 + fontWidthIn * row, fontWidthIn, fontHeightIn );
+        return spriteSheet.getSubimage( fontWidthIn * x, ( spriteHeightIn + 1 ) * 26 + 1 + fontHeightIn * row, fontWidthIn, fontHeightIn );
     }
     
     public BufferedImage getDialogFrame(){
