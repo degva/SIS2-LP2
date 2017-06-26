@@ -4,7 +4,6 @@ import com.grupox.pokemonv.controller.*;
 import com.grupox.pokemonv.controller.menu.BagMenu;
 import com.grupox.pokemonv.controller.menu.BattleMenu;
 import com.grupox.pokemonv.controller.menu.TypeAttackMenuP1;
-import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.Renderable;
 import com.grupox.pokemonv.model.Player;
@@ -25,62 +24,35 @@ public class BattleManager extends Renderable {
 
     private InputHandler input;
     private Game game;
-
-    @Override
-    public void render(Graphics2D g, int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public enum State {
-        P1_IDLE, P1_ATTACK_FIRST, P1_ATTACK_SECOND, P1_BAG, P1_GIVEUP,
-        P2_IDLE, P2_ATTACK_FIRST, P2_ATTACK_SECOND, P2_BAG, P2_GIVEUP,
-        P1_DEAD, P2_DEAD, P1_HEAL, P2_HEAL, P1_CAPTURE,
-        TYPE_ATTACK_MENU, BAG_MENU
-    };
     private State state;
     private Player player;
     private Player player2;
+    HashMap<Integer, ArrayList<String>> mapPokemons;
+    
     private String rutaP1_StaticPok;
     private String rutaP2_StaticPok;
     private String rutaP1_Normal1;
     private String rutaP1_Normal2;
     private String rutaP2_Normal1;
     private String rutaP2_Normal2;
-    private ArrayList<String> rutasP1_HEAL;
-    private String rutaP1_Super1;
-    private String rutaP1_Super2;
-    private String rutaP1_Super3;
-    private String rutaP1_Super4;
-
-    private String rutaP2_Super1;
-    private String rutaP2_Super2;
-    private String rutaP2_Super3;
-    private String rutaP2_Super4;
+    
+    private ArrayList<String> rutasP1_Super;
+    private ArrayList<String> rutasP2_Super;
 
     private String nombrePokPlayer1;
     private String nombrePokPlayer2;
+    
     private final String rutaOpcion = "res/battle/fondoOpciones.png";
-    HashMap<Integer, ArrayList<String>> mapPokemons;
-    ArrayList<String> rutasPOK1;
-    ArrayList<String> rutasPOK2;
-    ArrayList<String> rutasPOK3;
-    ArrayList<String> rutasPOK4;
-    ArrayList<String> rutasPOK7;
-    //key: ID POKEMON
-    //value:RutasFront 0,1,2 , RutasBack = 3,4,5
-
     private final String rutaFondo = "res/battle/fondoBatalla.png";
     private final String rutaHP1 = "res/battle/hpPrincipal.png";
     private final String rutaHP2 = "res/battle/hpOpuesto.png";
     private final String rutaImgHeal = "res/battle/heal.png";
-    private boolean attack = false;
+    
     private final int fondoAncho = 800;
     private final int fondoAlto = 600;
-    private final int pokAncho1 = 150; // 130
-    private final int pokAncho2 = 150;
-    private final int pokAlto1 = 150; // 100
-    private final int pokAlto2 = 150;
-    private final int topOffset = 390;   // px
+    private final int pokAncho = 150;
+    private final int pokAlto = 150;
+    private final int topOffset = 390;
     private final int rightOffset = Game.WIDTH / 1000;
     private final double movePeriod = 0.2;
 
@@ -89,27 +61,19 @@ public class BattleManager extends Renderable {
     private BufferedImage imgBackgroundBattle;
     private BufferedImage imgBackgroundHP1;
     private BufferedImage imgBackgroundHP2;
-
+    private BufferedImage fondoOpcion;
+    private BufferedImage imgHeal;
+     
     private BufferedImage imgForAnimP1_Normal1;
     private BufferedImage imgForAnimP1_Normal2;
-    private BufferedImage imgForAnimP1_Super1;
-    private BufferedImage imgForAnimP1_Super2;
-    private BufferedImage imgForAnimP1_Super3;
-    private BufferedImage imgForAnimP1_Super4;
-
     private BufferedImage imgForAnimP2_Normal1;
     private BufferedImage imgForAnimP2_Normal2;
-    private BufferedImage imgForAnimP2_Super1;
-    private BufferedImage imgForAnimP2_Super2;
-    private BufferedImage imgForAnimP2_Super3;
-    private BufferedImage imgForAnimP2_Super4;
-
-    private BufferedImage imgHeal;
+   
     private ArrayList<BufferedImage> captureImages;
-
-    private BufferedImage fondoOpcion;
-    private int NUM_TICKS_WAIT = 2;
-
+    private ArrayList<BufferedImage> imgsForAnimP1_Super;
+    private ArrayList<BufferedImage> imgsForAnimP2_Super;
+    
+    /*IMPORTANT STUFF*/
     private int initialLifePok1, initialLifePok2;
     private int vidaPok1, vidaPok2, danio1_Pok1, danio2_Pok1, danio1_Pok2, danio2_Pok2;
     private Animation attackAnimP1Normal;
@@ -122,28 +86,27 @@ public class BattleManager extends Renderable {
     private Animation healAnimation2;
     private Animation captureAnimation;
     private int numTicks = 0;
-
+    private int NUM_TICKS_WAIT = 2;
+    /*END*/
+    
     private BattleMenu menu;
-    private TypeAttackMenuP1 attackMenu1;
+    private TypeAttackMenuP1 attackMenu;
     private BagMenu bagMenu;
     private String attack1_name, attack2_name, attack1_P2name, attack2_P2name;
     private FileReader lector;
     private BufferedReader entrada;
     private String response;
     private boolean endBattle = false;
-
-    private int typeAttack = 0;
-    int idPok1, idPok2;
+    private int idPok1, idPok2;
     private int healEffect = 0;
-
-    public int getHealEffect() {
-        return healEffect;
-    }
-
-    public void setHealEffect(int healEffect) {
-        this.healEffect = healEffect;
-    }
-
+    
+    public enum State {
+        P1_IDLE, P1_ATTACK_FIRST, P1_ATTACK_SECOND, P1_BAG, P1_GIVEUP,
+        P2_IDLE, P2_ATTACK_FIRST, P2_ATTACK_SECOND, P2_BAG, P2_GIVEUP,
+        P1_DEAD, P2_DEAD, P1_HEAL, P2_HEAL, P1_CAPTURE,
+        TYPE_ATTACK_MENU, BAG_MENU
+    };
+    
     public BattleManager(Game game) {
         //Loading the buffered images
         super();
@@ -171,19 +134,16 @@ public class BattleManager extends Renderable {
         rutaP1_Normal1 = mapPokemons.get(idPok1).get(1);
         rutaP1_Normal2 = mapPokemons.get(idPok1).get(2);
         //Rutas de las imagenes para las animaciones: Super ataque, Player 1
-        rutaP1_Super1 = mapPokemons.get(idPok1).get(3);
-        rutaP1_Super2 = mapPokemons.get(idPok1).get(4);
-        rutaP1_Super3 = mapPokemons.get(idPok1).get(5);
-        rutaP1_Super4 = mapPokemons.get(idPok1).get(6);
-
+        rutasP1_Super = new ArrayList<>();
+        for (int i=3;i<=6;i++)
+            rutasP1_Super.add(mapPokemons.get(idPok1).get(i));
         //Rutas de las imagenes para las animaciones: Normal ataque,Player 2
         rutaP2_Normal1 = mapPokemons.get(idPok2).get(8);
         rutaP2_Normal2 = mapPokemons.get(idPok2).get(9);
-        //FALTAN LAS RUTAS DE LAS DEMAS ANIMACIONES
-        rutaP2_Super1 = mapPokemons.get(idPok2).get(10);
-        rutaP2_Super2 = mapPokemons.get(idPok2).get(11);
-        rutaP2_Super3 = mapPokemons.get(idPok2).get(12);
-        rutaP2_Super4 = mapPokemons.get(idPok2).get(13);
+        
+        rutasP2_Super = new ArrayList<>();
+        for (int i=3+7;i<=6+7;i++)
+            rutasP2_Super.add(mapPokemons.get(idPok2).get(i));
     }
 
     public void startBattle(Player p1, Player p2) {
@@ -209,23 +169,21 @@ public class BattleManager extends Renderable {
             imgForAnimP1_Normal1 = ImageIO.read(new File(rutaP1_Normal1));
             imgForAnimP1_Normal2 = ImageIO.read(new File(rutaP1_Normal2));
 
-            imgForAnimP1_Super1 = ImageIO.read(new File(rutaP1_Super1));
-            imgForAnimP1_Super2 = ImageIO.read(new File(rutaP1_Super2));
-            imgForAnimP1_Super3 = ImageIO.read(new File(rutaP1_Super3));
-            imgForAnimP1_Super4 = ImageIO.read(new File(rutaP1_Super4));
+            //for (int i =0;i<4;i++)
+            imgsForAnimP1_Super = new ArrayList<>();
+            for (int i=0;i<4;i++)
+            imgsForAnimP1_Super.add(ImageIO.read(new File(rutasP1_Super.get(i)))) ;
 
             imgForAnimP2_Normal1 = ImageIO.read(new File(rutaP2_Normal1));
             imgForAnimP2_Normal2 = ImageIO.read(new File(rutaP2_Normal2));
-
-            imgForAnimP2_Super1 = ImageIO.read(new File(rutaP2_Super1));
-            imgForAnimP2_Super2 = ImageIO.read(new File(rutaP2_Super2));
-            imgForAnimP2_Super3 = ImageIO.read(new File(rutaP2_Super3));
-            imgForAnimP2_Super4 = ImageIO.read(new File(rutaP2_Super4));
+            imgsForAnimP2_Super = new ArrayList<>();
+             for (int i=0;i<4;i++)
+            imgsForAnimP2_Super.add(ImageIO.read(new File(rutasP2_Super.get(i)))) ;
         } catch (Exception exp) {
         }
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset, game);
-        attackMenu1 = new TypeAttackMenuP1(input, 420, Game.WIDTH / 3, attack1_name, attack2_name, game);
+        attackMenu = new TypeAttackMenuP1(input, 420, Game.WIDTH / 3, attack1_name, attack2_name, game);
         bagMenu = new BagMenu(player, 20, rightOffset, game);
         captureImages = new ArrayList<>();
         loadCaptureAnimation();
@@ -302,17 +260,13 @@ public class BattleManager extends Renderable {
         Animation idleAnimationP2 = new Animation("idleP2", idleP2, movePeriod);
 
         ArrayList<BufferedImage> attackSuperImagesP1 = new ArrayList<>();
-        attackSuperImagesP1.add(imgForAnimP1_Super1);
-        attackSuperImagesP1.add(imgForAnimP1_Super2);
-        attackSuperImagesP1.add(imgForAnimP1_Super3);
-        attackSuperImagesP1.add(imgForAnimP1_Super4);
+        for (int i=0;i<4;i++)
+            attackSuperImagesP1.add(imgsForAnimP1_Super.get(i));
         Animation attackSuperAnimationP1 = new Animation("attackSuper", attackSuperImagesP1, movePeriod);
 
         ArrayList<BufferedImage> attackSuperImagesP2 = new ArrayList<>();
-        attackSuperImagesP2.add(imgForAnimP2_Super1);
-        attackSuperImagesP2.add(imgForAnimP2_Super2);
-        attackSuperImagesP2.add(imgForAnimP2_Super3);
-        attackSuperImagesP2.add(imgForAnimP2_Super4);
+        for (int i=0;i<4;i++)
+            attackSuperImagesP2.add(imgsForAnimP2_Super.get(i));
         Animation attackSuperAnimationP2 = new Animation("attackSuper2", attackSuperImagesP2, movePeriod);
 
         animations.add(idleAnimation);
@@ -323,13 +277,6 @@ public class BattleManager extends Renderable {
         animations.add(attackSuperAnimationP2);
         animations.add(healAnimation_first);
         animations.add(healAnimation_second);
-    }
-
-    public void inicializeTicks() {
-        numTicks = 0;
-    }
-    public void setInitialSpriteForBattle(){
-        currSprite = imgForAnimP1_Normal1;
     }
     public void tick() {
         switch (state) {
@@ -382,7 +329,7 @@ public class BattleManager extends Renderable {
                 currSprite2 = idleP2.getCurrSprite();
                 break;
             case TYPE_ATTACK_MENU:
-                attackMenu1.tick();
+                attackMenu.tick();
                 break;
             case P1_ATTACK_FIRST:
                 //vidaPok2 -= 20; Corregir el automatico descuento de vida
@@ -497,7 +444,7 @@ public class BattleManager extends Renderable {
                 }
                 break;
         }
-
+        
         if ((state == State.P1_ATTACK_FIRST) && (game.getNumTicks() == 58)) {
             numTicks++;
         }
@@ -555,16 +502,14 @@ public class BattleManager extends Renderable {
     }
 
     public void render(Graphics2D g) {
-
         g.drawImage(imgBackgroundBattle, 0, 0, fondoAncho, fondoAlto, null);
-        
         if (state == State.P1_CAPTURE){
             g.drawImage(currSprite, 0, 0, 800, 600, null);
-            g.drawImage(imgForAnimP1_Normal1, 130, 290, pokAncho1, pokAlto1, null);   
+            g.drawImage(imgForAnimP1_Normal1, 130, 290, pokAncho, pokAlto, null);   
         }
         else
-            g.drawImage(currSprite, 130, 290, pokAncho1, pokAlto1, null);   
-        g.drawImage(currSprite2, 480, 85, pokAncho2, pokAlto2, null);
+            g.drawImage(currSprite, 130, 290, pokAncho, pokAlto, null);   
+        g.drawImage(currSprite2, 480, 85, pokAncho, pokAlto, null);
         g.setColor(Color.green);
         g.fillRect(480, 208 + 125, 140, 20);
         g.setColor(Color.red);
@@ -581,7 +526,6 @@ public class BattleManager extends Renderable {
         g.drawImage(imgBackgroundHP2, 60, 30 + 75, 280, 110, null);
         Font.getInstance().drawString(nombrePokPlayer2, g, 120, 40 + 75);
 
-        //g.fillRect(330,180,230,10);
         switch (state) {
             case P1_HEAL:
                 break;
@@ -597,7 +541,7 @@ public class BattleManager extends Renderable {
                 break;
             case TYPE_ATTACK_MENU:
                 g.drawImage(fondoOpcion, 0, 425, 350 + 200, 171, null);
-                attackMenu1.render(g);
+                attackMenu.render(g);
                 Font.getInstance().drawString("CHOOSE YOUR", g, 570, 460);
                 Font.getInstance().drawString("ATTACK", g, 570, 525);
                 break;
@@ -632,9 +576,8 @@ public class BattleManager extends Renderable {
                 }
                 break;
             case P2_ATTACK_SECOND:
-                if (!endBattle) {
+                if (!endBattle) 
                     Font.getInstance().drawString(nombrePokPlayer2 + " USED " + attack2_P2name, g, 30, 475);
-                }
                 break;
             case P2_BAG:
                 Font.getInstance().drawString("HE USED THE BAG", g, 30, 475);
@@ -669,101 +612,38 @@ public class BattleManager extends Renderable {
         return null;
     }
 
-    public boolean getAttack() {
-        return attack;
-    }
-
-    public void setAttack(boolean b) {
-        attack = b;
-    }
-
     public void linkRoutes() {
         mapPokemons = new HashMap<Integer, ArrayList<String>>();
-        rutasPOK1 = new ArrayList<String>();
-        rutasPOK2 = new ArrayList<String>();
-        rutasPOK3 = new ArrayList<String>();
-        rutasPOK4 = new ArrayList<String>();
-        rutasPOK7 = new ArrayList<String>();
-
-        rutasPOK1.add("res/battle/bulb_back1.png");
-        rutasPOK1.add("res/battle/bulb_back2.png");
-        rutasPOK1.add("res/battle/bulb_back3.png");
-        rutasPOK1.add("res/battle/bulb_back4.png");
-        rutasPOK1.add("res/battle/bulb_back5.png");
-        rutasPOK1.add("res/battle/bulb_back6.png");
-        rutasPOK1.add("res/battle/bulb_back7.png");
-        rutasPOK1.add("res/battle/bulb_front1.png");
-        rutasPOK1.add("res/battle/bulb_front2.png");
-        rutasPOK1.add("res/battle/bulb_front3.png");
-        rutasPOK1.add("res/battle/bulb_front4.png");
-        rutasPOK1.add("res/battle/bulb_front5.png");
-        rutasPOK1.add("res/battle/bulb_front6.png");
-        rutasPOK1.add("res/battle/bulb_front7.png");
-        // rutasPOK1.add("res/battle/heal.png");
-
-        rutasPOK2.add("res/battle/pika_back1.png");
-        rutasPOK2.add("res/battle/pika_back2.png");
-        rutasPOK2.add("res/battle/pika_back3.png");
-        rutasPOK2.add("res/battle/pika_back4.png");
-        rutasPOK2.add("res/battle/pika_back5.png");
-        rutasPOK2.add("res/battle/pika_back6.png");
-        rutasPOK2.add("res/battle/pika_back7.png");
-        rutasPOK2.add("res/battle/pika_front1.png");
-        rutasPOK2.add("res/battle/pika_front2.png");
-        rutasPOK2.add("res/battle/pika_front3.png");
-        rutasPOK2.add("res/battle/pika_front4.png");
-        rutasPOK2.add("res/battle/pika_front5.png");
-        rutasPOK2.add("res/battle/pika_front6.png");
-        rutasPOK2.add("res/battle/pika_front7.png");
-        //  rutasPOK2.add("res/battle/heal.png");
-
-        rutasPOK3.add("res/battle/butt_back1.png");
-        rutasPOK3.add("res/battle/butt_back2.png");
-        rutasPOK3.add("res/battle/butt_back3.png");
-        rutasPOK3.add("res/battle/butt_back4.png");
-        rutasPOK3.add("res/battle/butt_back5.png");
-        rutasPOK3.add("res/battle/butt_back6.png");
-        rutasPOK3.add("res/battle/butt_back7.png");
-        rutasPOK3.add("res/battle/butt_front1.png");
-        rutasPOK3.add("res/battle/butt_front2.png");
-        rutasPOK3.add("res/battle/butt_front3.png");
-        rutasPOK3.add("res/battle/butt_front4.png");
-        rutasPOK3.add("res/battle/butt_front5.png");
-        rutasPOK3.add("res/battle/butt_front6.png");
-        rutasPOK3.add("res/battle/butt_front7.png");
-        //rutasPOK3.add("res/battle/heal.png");
-
-        rutasPOK4.add("res/battle/char_back1.png");
-        rutasPOK4.add("res/battle/char_back2.png");
-        rutasPOK4.add("res/battle/char_back3.png");
-        rutasPOK4.add("res/battle/char_back4.png");
-        rutasPOK4.add("res/battle/char_back5.png");
-        rutasPOK4.add("res/battle/char_back6.png");
-        rutasPOK4.add("res/battle/char_back7.png");
-        rutasPOK4.add("res/battle/char_front1.png");
-        rutasPOK4.add("res/battle/char_front2.png");
-        rutasPOK4.add("res/battle/char_front3.png");
-        rutasPOK4.add("res/battle/char_front4.png");
-        rutasPOK4.add("res/battle/char_front5.png");
-        rutasPOK4.add("res/battle/char_front6.png");
-        rutasPOK4.add("res/battle/char_front7.png");
-        // rutasPOK4.add("res/battle/heal.png");
-
-        rutasPOK7.add("res/battle/sq_back1.png");
-        rutasPOK7.add("res/battle/sq_back2.png");
-        rutasPOK7.add("res/battle/sq_back3.png");
-        rutasPOK7.add("res/battle/sq_back4.png");
-        rutasPOK7.add("res/battle/sq_back5.png");
-        rutasPOK7.add("res/battle/sq_back6.png");
-        rutasPOK7.add("res/battle/sq_back7.png");
-        rutasPOK7.add("res/battle/sq_front1.png");
-        rutasPOK7.add("res/battle/sq_front2.png");
-        rutasPOK7.add("res/battle/sq_front3.png");
-        rutasPOK7.add("res/battle/sq_front4.png");
-        rutasPOK7.add("res/battle/sq_front5.png");
-        rutasPOK7.add("res/battle/sq_front6.png");
-        rutasPOK7.add("res/battle/sq_front7.png");
-        //rutasPOK7.add("res/battle/heal.png");
+        ArrayList<String> rutasPOK1 = new ArrayList<>();
+        ArrayList<String> rutasPOK2 = new ArrayList<>();
+        ArrayList<String> rutasPOK3 = new ArrayList<>();
+        ArrayList<String> rutasPOK4 = new ArrayList<>();
+        ArrayList<String> rutasPOK7 = new ArrayList<>();
+        /*BULBASAUR*/
+        for (int i =1;i<=7;i++)
+            rutasPOK1.add("res/battle/bulb_back"+Integer.toString(i)+".png");
+        for (int i =1;i<=7;i++)
+            rutasPOK1.add("res/battle/bulb_front"+Integer.toString(i)+".png");
+        /*PIKACHU*/
+        for (int i =1;i<=7;i++)
+            rutasPOK2.add("res/battle/pika_back"+Integer.toString(i)+".png");
+        for (int i =1;i<=7;i++)
+            rutasPOK2.add("res/battle/pika_front"+Integer.toString(i)+".png");
+        /*BUTTERFREE*/
+        for (int i =1;i<=7;i++)
+            rutasPOK3.add("res/battle/butt_back"+Integer.toString(i)+".png");
+        for (int i =1;i<=7;i++)
+            rutasPOK3.add("res/battle/butt_front"+Integer.toString(i)+".png");
+        /*CHARMANDER*/
+        for (int i =1;i<=7;i++)
+            rutasPOK4.add("res/battle/char_back"+Integer.toString(i)+".png");
+        for (int i =1;i<=7;i++)
+            rutasPOK4.add("res/battle/char_front"+Integer.toString(i)+".png");
+        /*SQUIRTLE*/
+        for (int i =1;i<=7;i++)
+            rutasPOK7.add("res/battle/sq_back"+Integer.toString(i)+".png");
+        for (int i =1;i<=7;i++)
+            rutasPOK7.add("res/battle/sq_front"+Integer.toString(i)+".png");
 
         mapPokemons.put(1, rutasPOK1); // ID:1->Bulbasaur
         mapPokemons.put(2, rutasPOK2); // ID:2->Pikachu
@@ -771,13 +651,23 @@ public class BattleManager extends Renderable {
         mapPokemons.put(4, rutasPOK4); // ID:4->Charmander
         mapPokemons.put(7, rutasPOK7); // ID:7->Squirtle
     }
+    /*Setters and Getters*/
 
-    public int getTypeAttack() {
-        return typeAttack;
+    public int getHealEffect() {
+        return healEffect;
     }
 
-    public void setTypeAttack(int typeAttack) {
-        this.typeAttack = typeAttack;
+    public void setHealEffect(int healEffect) {
+        this.healEffect = healEffect;
     }
-
+    public void inicializeTicks() {
+        numTicks = 0;
+    }
+    public void setInitialSpriteForBattle(){
+        currSprite = imgForAnimP1_Normal1;
+    }
+    @Override
+    public void render(Graphics2D g, int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
 }
