@@ -42,12 +42,15 @@ public class BagMenu extends QuantityMenu {
             if (input.action.isFirstPressed && this.selectedIndex > -1) {
                 if (selectedIndex == pokeballsIndex) {
                     game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
+                    game.getBattleManager().setInitialSpriteForBattle();
                     int dis = player.getPokeballs().getQuantity()-1;
                     player.getPokeballs().setQuantity(dis);
                 } else if (selectedIndex == potionsIndex) {
                     game.getBattleManager().setState(BattleManager.State.P1_HEAL);
                     int dis = player.getPotions().getQuantity();
+                    int effect = player.getPotions().getHp();
                     player.getPotions().setQuantity(dis);
+                    game.getBattleManager().setHealEffect(effect);
                 } else if (selectedIndex == closeIndex) {
                     game.getBattleManager().setState(BattleManager.State.P1_IDLE);
                 }
