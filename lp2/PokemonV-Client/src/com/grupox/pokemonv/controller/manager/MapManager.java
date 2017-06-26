@@ -44,6 +44,8 @@ public class MapManager {
     public void tick(){
         
         // Listen to input and set the inner state
+        map.tick();
+        
         if( state == State.MOVING && input.menu.isFirstPressed ){
             // Set first element as selected
             menu.setSelectedItem( 0 );            

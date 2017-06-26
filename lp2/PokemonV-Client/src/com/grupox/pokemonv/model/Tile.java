@@ -1,7 +1,9 @@
 package com.grupox.pokemonv.model;
 
+import com.grupox.pokemonv.controller.Animation;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Tile extends Renderable {
     // Enum declaration
@@ -36,6 +38,7 @@ public class Tile extends Renderable {
         isWalkable = determinateWalkable();
         isPokemonSpawner = determinatePokemonSpawner();
         loadSprite();
+        loadAnimations();
     }
     
     /* Methods */
@@ -166,8 +169,10 @@ public class Tile extends Renderable {
         return type;
     }
     
-    public boolean containsUser(){
-        return this.player != null;
+    public void tick(){
+        if(type == Type.FLR01 || type == Type.FLR02){
+            sprite = animations.get(findAnimation("idle")).getCurrSprite();
+        }
     }
     
     public void render( Graphics2D g, int x, int y ){
@@ -178,6 +183,10 @@ public class Tile extends Renderable {
         if(type == Tile.Type.GRA10){
             g.drawImage(highGrass, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
         }
+    }
+    
+    public boolean containsUser(){
+        return this.player != null;
     }
     
     private void loadSprite(){
@@ -347,6 +356,30 @@ public class Tile extends Renderable {
         highGrass = SpriteSheet.getInstance().getSubImage(8, 0);
     }
 
+    private void loadAnimations(){
+        if(type == Type.FLR01){
+            ArrayList<BufferedImage> animation = new ArrayList<BufferedImage>();
+            BufferedImage idle1 = SpriteSheet.getInstance().getSubImage(10, 0);
+            animation.add(idle1);
+            BufferedImage idle2 = SpriteSheet.getInstance().getSubImage(11, 0);
+            animation.add(idle2);
+            Animation idle = new Animation("idle", animation, 1);
+            idle.play();
+            
+            animations.add(idle);
+        }else if(type == Type.FLR02){
+            ArrayList<BufferedImage> animation = new ArrayList<BufferedImage>();
+            BufferedImage idle1 = SpriteSheet.getInstance().getSubImage(13, 0);
+            animation.add(idle1);
+            BufferedImage idle2 = SpriteSheet.getInstance().getSubImage(14, 0);
+            animation.add(idle2);
+            Animation idle = new Animation("idle", animation, 1);
+            idle.play();
+            
+            animations.add(idle);
+        }
+    }
+    
     // Determinate walkable
     private boolean determinateWalkable(){
         if( type == Type.TRG01 || type == Type.TRG02 || type == Type.TRG03 || 

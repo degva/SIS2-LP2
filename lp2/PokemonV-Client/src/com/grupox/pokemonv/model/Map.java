@@ -21,6 +21,14 @@ public class Map {
     public Map(){}
     
     /* Methods */
+    public void tick(){
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
+                grid[i][j].tick();
+            }
+        }
+    }
+    
     // Tries to set the player of the next tile according to the direction. Returns whether successful or not.
     public boolean tryMove( Player player, Renderable.Direction direction ){
         // Try to create a pokemon
