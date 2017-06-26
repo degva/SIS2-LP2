@@ -24,12 +24,10 @@ public class Sound {
             AudioInputStream aIn = AudioSystem.getAudioInputStream(new File(mapRoute));
             mapClip = AudioSystem.getClip();
             mapClip.open(aIn);
-            mapClip.setLoopPoints(0, -1);
             
             aIn = AudioSystem.getAudioInputStream(new File(battleRoute));
             battleClip = AudioSystem.getClip();
             battleClip.open(aIn);
-            battleClip.setLoopPoints(0, -1);
         } catch (Exception ex) {
             Logger.getLogger(Sound.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -46,10 +44,10 @@ public class Sound {
     public void start(AUDIO audio){
         switch(audio){
             case BATTLE:
-                battleClip.start();
+                battleClip.loop(Clip.LOOP_CONTINUOUSLY);
                 break;
             case MAP:
-                mapClip.start();
+                mapClip.loop(Clip.LOOP_CONTINUOUSLY);
                 break;
         }
     }

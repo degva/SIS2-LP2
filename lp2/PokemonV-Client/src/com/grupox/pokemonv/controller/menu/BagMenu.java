@@ -35,9 +35,7 @@ public class BagMenu extends QuantityMenu {
                 game.setState( Game.State.MAP );
             }
         }else if( Game.getState() == Game.State.BATTLE ){
-            // Go get them Kevin
-            // game.getBattleManager().usePotion()
-            // player.getPotions().setQuantity(getQuantity()--)
+            //
         }
     }
 }
