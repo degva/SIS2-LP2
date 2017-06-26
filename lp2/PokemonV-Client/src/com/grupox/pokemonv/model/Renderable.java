@@ -15,6 +15,7 @@ public abstract class Renderable {
     
     protected ArrayList<Animation> animations;
     protected BufferedImage currSprite;
+    protected BufferedImage currSprite2;
     
     /* Constructors */
     public Renderable(){
