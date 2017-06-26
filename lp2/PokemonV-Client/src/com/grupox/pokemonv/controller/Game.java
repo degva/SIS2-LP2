@@ -2,17 +2,13 @@ package com.grupox.pokemonv.controller;
 
 import com.grupox.pokemonv.controller.manager.PokemonBeltManager;
 import com.grupox.pokemonv.model.Player;
-import com.grupox.pokemonv.model.Player;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import com.grupox.pokemonv.controller.manager.*;
-import com.grupox.pokemonv.model.Dialog;
-import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.SpriteSheet;
-import com.grupox.pokemonv.model.Tile;
 
 public class Game extends Canvas implements Runnable {
 
@@ -56,8 +52,7 @@ public class Game extends Canvas implements Runnable {
         pokemonBeltManager = new PokemonBeltManager(player, this);
         bagManager = new BagManager( player, this);
         battleManager = new BattleManager(this);
-        
-        state = State.MAP;
+        setState(State.MAP);
              
 //        HARDCODED
 //        player.getPokemons().add(new Pokemon(4, 10, "RAPID ATTACK", 20, "LANZAHOJAS", 20, 120, "Bulbasaur", Pokemon.TypeP.Wind, true));
@@ -190,6 +185,18 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void setState(State newState) {
+        switch (newState){
+            case BATTLE:
+                Sound.getInstance().stop(Sound.AUDIO.MAP);
+                Sound.getInstance().start(Sound.AUDIO.BATTLE);
+                break;
+            case MAP:
+                Sound.getInstance().stop(Sound.AUDIO.BATTLE);
+                Sound.getInstance().start(Sound.AUDIO.MAP);
+                break;
+            default:
+                break;
+        }
         state = newState;
     }
 
