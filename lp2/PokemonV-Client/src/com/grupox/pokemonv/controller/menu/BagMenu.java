@@ -26,7 +26,7 @@ public class BagMenu extends QuantityMenu {
     public void tick(){
         super.tick();
         
-        if( Game.getState() == Game.State.MAP ){
+        if( Game.getState() == Game.State.BAG ){
             if( input.action.isFirstPressed && !items.isEmpty() ){
                 if( items.get( selectedIndex ).getDescription().equals( "Close" ) ){
                     game.setState( Game.State.MAP );
