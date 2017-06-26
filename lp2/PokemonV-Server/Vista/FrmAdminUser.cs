@@ -185,7 +185,10 @@ namespace Vista
                 TXTpassword.Text = TXTpassword.Text.Trim();
                 TXTusername.Text = TXTusername.Text.Trim();
 
-                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text, 0, 0);
+                Random rnd = new Random();
+                int a = rnd.Next(1, 3);
+
+                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text, 0, 0,a);
 
                 PlayerDA playerDA = new PlayerDA();
                 if ((playerDA.verifyRepeatUsername(player)) == 1)
@@ -199,7 +202,6 @@ namespace Vista
                 else
                 {
                     playerDA.addPlayer(player);
-                    playerDA.addPlayer2(player);
                     MessageBox.Show("New player has been added");
                     this.DialogResult = DialogResult.OK;
 
@@ -325,7 +327,10 @@ namespace Vista
                 TXTpassword.Text = TXTpassword.Text.Trim();
                 TXTusername.Text = TXTusername.Text.Trim();
 
-                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0, 0);
+
+                Random rnd = new Random();
+                int a = rnd.Next(1, 3);
+                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0, 0,a);
 
                 PlayerDA playerDA = new PlayerDA();
                 if((playerDA.verifyRepeatUsername2(player, id)) == 1)

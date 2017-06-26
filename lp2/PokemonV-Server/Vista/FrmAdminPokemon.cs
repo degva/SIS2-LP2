@@ -36,7 +36,7 @@ namespace Vista
 
                 connection.Open();
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,LIFE,ATTACK1_PTS,ATTACK1_NAME,ATTACK2_PTS,ATTACK2_NAME,DEFENSE_PTS,TYPE FROM POKEMON WHERE DELETED = 0 ", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,LIFE,DEFENSE_PTS,TYPE, ATTACK_1_ID, ATTACK_2_ID FROM POKEMON WHERE DELETED = 0 ", connection);
 
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "POKEMON");
@@ -52,15 +52,14 @@ namespace Vista
 
         public void inicio()
         {
-            TXTattack1pts.Enabled = false;
+        
             TXTname.Enabled = false;
             TXTlife.Enabled = false;
             TXTdefensepts.Enabled = false;
             CMBtype.Enabled = false;
             TXTid.Enabled = false;
-            TXTattack1name.Enabled = false;
-            TXTattack2name.Enabled = false;
-            TXTattack2pts.Enabled = false;
+            TXTattack1id.Enabled = false;
+            TXTattack2id.Enabled = false;
 
             BTNdelete.Enabled = true;
             BTNrecover.Enabled = true;
@@ -69,15 +68,14 @@ namespace Vista
             BTNupdate.Enabled = false;
             BTNcancel.Enabled = false;
 
-            TXTattack1pts.Text = "";
+            
             TXTname.Text = "";
             TXTlife.Text = "";
             TXTdefensepts.Text = "";
             CMBtype.Text = "";
             TXTid.Text = "";
-            TXTattack1name.Text = "";
-            TXTattack2name.Text = "";
-            TXTattack2pts.Text = "";
+            TXTattack1id.Text = "";
+            TXTattack2id.Text = "";
 
 
         }
@@ -85,15 +83,14 @@ namespace Vista
 
         private void BTNnew_Click(object sender, EventArgs e)
         {
-            TXTattack1pts.Enabled = true;
+            
             TXTname.Enabled = true;
             TXTdefensepts.Enabled = true;
             TXTlife.Enabled = true;
             CMBtype.Enabled = true;
             TXTid.Enabled = true;
-            TXTattack1name.Enabled = true;
-            TXTattack2name.Enabled = true;
-            TXTattack2pts.Enabled = true;
+            TXTattack2id.Enabled = true;
+            TXTattack1id.Enabled = true;
 
             BTNnew.Enabled = false;
             BTNrecover.Enabled = false;
@@ -129,10 +126,8 @@ namespace Vista
 
                 string CADname = (string)DGVpokemon.CurrentRow.Cells["NAME"].Value;
                 int life = (int)DGVpokemon.CurrentRow.Cells["LIFE"].Value;
-                int attack1pts = (int)DGVpokemon.CurrentRow.Cells["ATTACK1_PTS"].Value;
-                int attack2pts = (int)DGVpokemon.CurrentRow.Cells["ATTACK2_PTS"].Value;
-                string attack1name = (string)DGVpokemon.CurrentRow.Cells["ATTACK1_NAME"].Value;
-                string attack2name = (string)DGVpokemon.CurrentRow.Cells["ATTACK2_NAME"].Value;
+                int attack1id = (int)DGVpokemon.CurrentRow.Cells["ATTACK_1_ID"].Value;
+                int attack2id = (int)DGVpokemon.CurrentRow.Cells["ATTACK_2_ID"].Value;
                 int deffensepts = (int)DGVpokemon.CurrentRow.Cells["DEFENSE_PTS"].Value;
                 string CADtype = (string)DGVpokemon.CurrentRow.Cells["TYPE"].Value;
                 int id = (int)DGVpokemon.CurrentRow.Cells["ID"].Value;
@@ -140,24 +135,21 @@ namespace Vista
 
 
                 TXTname.Text = CADname;
-                TXTattack1pts.Text = attack1pts.ToString();
-                TXTattack2pts.Text = attack2pts.ToString();
-                TXTattack1name.Text = attack1name;
-                TXTattack2name.Text = attack2name;
+                TXTattack1id.Text = attack1id.ToString();
+                TXTattack2id.Text = attack2id.ToString();
                 TXTdefensepts.Text = deffensepts.ToString();
                 TXTlife.Text = life.ToString();
                 CMBtype.Text = CADtype;
                 TXTid.Text = id.ToString();
 
 
-                TXTattack1pts.Enabled = true;
+                
                 TXTname.Enabled = true;
                 TXTdefensepts.Enabled = true;
                 TXTlife.Enabled = true;
                 CMBtype.Enabled = true;
-                TXTattack1name.Enabled = true;
-                TXTattack2name.Enabled = true;
-                TXTattack2pts.Enabled = true;
+                TXTattack1id.Enabled = true;
+                TXTattack2id.Enabled = true;
 
 
 
@@ -183,17 +175,6 @@ namespace Vista
                 flag = 0;
             }
 
-            if (TXTattack1name.Text.Trim() == "")
-            {
-                MessageBox.Show("Must enter an attack1 name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
-
-            if (TXTattack2name.Text.Trim() == "")
-            {
-                MessageBox.Show("Must enter an attack2 name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
 
             if (TXTlife.Text.Trim() == "")
             {
@@ -217,49 +198,51 @@ namespace Vista
 
 
 
-            if (TXTattack1pts.Text.Trim() == "")
+            if (TXTattack1id.Text.Trim() == "")
             {
-                MessageBox.Show("Must enter attack1 points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter attack1 ID", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             try
             {
-                Int32.Parse(TXTattack1pts.Text);
+                Int32.Parse(TXTattack1id.Text);
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Must enter a number for attack1 points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            if ((Convert.ToInt32(TXTattack1pts.Text)) < 1)
-            {
-                MessageBox.Show("Attack1 points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a number for attack1 ID ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-
-
-            if (TXTattack2pts.Text.Trim() == "")
+            AttackDA attackadmin = new AttackDA();
+            if ((attackadmin.verifyID(Convert.ToInt32(TXTattack1id.Text)) != 1))
             {
-                MessageBox.Show("Must enter attack2 points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Attack1 ID doesn't exist ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+
+            if (TXTattack2id.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter attack2 ID ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             try
             {
-                Int32.Parse(TXTattack2pts.Text);
+                Int32.Parse(TXTattack2id.Text);
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Must enter a number for attack2 points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a number for attack2 ID ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if ((Convert.ToInt32(TXTattack2pts.Text)) < 1)
+
+            AttackDA attackadmin2 = new AttackDA();
+            if ((attackadmin2.verifyID(Convert.ToInt32(TXTattack2id.Text)) != 1))
             {
-                MessageBox.Show("Attack2 points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Attack2 ID doesn't exist ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-
 
 
             if (TXTdefensepts.Text.Trim() == "")
@@ -289,17 +272,7 @@ namespace Vista
                 flag = 0;
             }
 
-            if ((TXTattack1name.Text.Contains('"')) )
-            {
-                MessageBox.Show("Quotation marks are not allowed in the attack1 name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
-
-            if ((TXTattack2name.Text.Contains('"')))
-            {
-                MessageBox.Show("Quotation marks are not allowed in the attack2 name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
+           
 
 
             if (flag == 1)
@@ -321,8 +294,9 @@ namespace Vista
                     tipo = TypeofPokemon.Earth;
                 }
 
-                Pokemon pokemon = new Pokemon(Convert.ToInt32(TXTattack1pts.Text),TXTattack1name.Text,TXTattack2name.Text, Convert.ToInt32(TXTattack2pts.Text), Convert.ToInt32(TXTdefensepts.Text),
-                                                Convert.ToInt32(TXTlife.Text),TXTname.Text,tipo,0);
+                Pokemon pokemon = new Pokemon(TXTname.Text, Convert.ToInt32(TXTlife.Text),
+                                                Convert.ToInt32(TXTdefensepts.Text),tipo, Convert.ToInt32(TXTattack1id.Text),
+                                                Convert.ToInt32(TXTattack2id.Text), 0);
 
                 PokemonDA pokemonDA = new PokemonDA();
                 if ((pokemonDA.verifyRepeatName(pokemon, id )) == 1)
@@ -334,7 +308,6 @@ namespace Vista
                     pokemonDA.updatePokemon(pokemon, id);
 
                     load();
-
                     inicio();
                 }
 
@@ -352,17 +325,6 @@ namespace Vista
                 flag = 0;
             }
 
-            if (TXTattack1name.Text.Trim() == "")
-            {
-                MessageBox.Show("Must enter an attack1 name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
-
-            if (TXTattack2name.Text.Trim() == "")
-            {
-                MessageBox.Show("Must enter an attack2 name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
 
             if (TXTlife.Text.Trim() == "")
             {
@@ -385,49 +347,51 @@ namespace Vista
             }
 
 
-
-            if (TXTattack1pts.Text.Trim() == "")
+            if (TXTattack1id.Text.Trim() == "")
             {
-                MessageBox.Show("Must enter attack1 points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter attack1 ID", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             try
             {
-                Int32.Parse(TXTattack1pts.Text);
+                Int32.Parse(TXTattack1id.Text);
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Must enter a number for attack1 points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            if ((Convert.ToInt32(TXTattack1pts.Text)) < 1)
-            {
-                MessageBox.Show("Attack1 points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a number for attack1 ID ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-
-
-            if (TXTattack2pts.Text.Trim() == "")
+            AttackDA attackadmin = new AttackDA();
+            if ((attackadmin.verifyID(Convert.ToInt32(TXTattack1id.Text)) != 1))
             {
-                MessageBox.Show("Must enter attack2 points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Attack1 ID doesn't exist ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+
+            if (TXTattack2id.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter attack2 ID ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             try
             {
-                Int32.Parse(TXTattack2pts.Text);
+                Int32.Parse(TXTattack2id.Text);
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Must enter a number for attack2 points ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            if ((Convert.ToInt32(TXTattack2pts.Text)) < 1)
-            {
-                MessageBox.Show("Attack2 points can't be less than 1", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Must enter a number for attack2 ID ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
+            AttackDA attackadmin2 = new AttackDA();
+            if ((attackadmin2.verifyID(Convert.ToInt32(TXTattack2id.Text)) != 1))
+            {
+                MessageBox.Show("Attack2 ID doesn't exist ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
 
 
@@ -458,17 +422,7 @@ namespace Vista
                 flag = 0;
             }
 
-            if ((TXTattack1name.Text.Contains('"')))
-            {
-                MessageBox.Show("Quotation marks are not allowed in the attack1 name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
-
-            if ((TXTattack2name.Text.Contains('"')))
-            {
-                MessageBox.Show("Quotation marks are not allowed in the attack2 name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
+            
 
 
             if (flag == 1)
@@ -491,8 +445,10 @@ namespace Vista
                     tipo = TypeofPokemon.Earth;
                 }
 
-                Pokemon pokemon = new Pokemon(Convert.ToInt32(TXTattack1pts.Text), TXTattack1name.Text, TXTattack2name.Text, Convert.ToInt32(TXTattack2pts.Text), Convert.ToInt32(TXTdefensepts.Text),
-                                                Convert.ToInt32(TXTlife.Text), TXTname.Text, tipo, 0);
+                Pokemon pokemon = new Pokemon(TXTname.Text, Convert.ToInt32(TXTlife.Text),
+                                                Convert.ToInt32(TXTdefensepts.Text), tipo, Convert.ToInt32(TXTattack1id.Text),
+                                                Convert.ToInt32(TXTattack2id.Text), 0);
+
                 pokemon.Id = Convert.ToInt32(TXTid.Text);
 
                 PokemonDA pokemonDA = new PokemonDA();

@@ -10,10 +10,10 @@ namespace Entidades
     public class Item
     {
         
-        public Item(string name, string description, TypeofItem typePoke)
+        public Item(string name, TypeofItem typePoke, int deleted)
         {
+            this.deleted = deleted;
             this.name = name;
-            this.description = description;
             this.type = typePoke;
         }
 
@@ -26,16 +26,12 @@ namespace Entidades
             set { name = value; }
         }
 
-        protected string description;
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
-        }
 
         public TypeofItem Type { get => type; set => type = value; }
+        public int Deleted { get => deleted; set => deleted = value; }
 
         private TypeofItem type;
 
+        private int deleted;
     }
 }

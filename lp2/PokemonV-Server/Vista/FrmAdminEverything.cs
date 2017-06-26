@@ -76,5 +76,35 @@ namespace Vista
 
             }
         }
+
+        private void BTNpalyersitem_Click(object sender, EventArgs e)
+        {
+            FrmAdminPlayerxItem form = new FrmAdminPlayerxItem();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X, this.Location.Y);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void BTNmanageattack_Click(object sender, EventArgs e)
+        {
+            FrmAdminAttack form = new FrmAdminAttack();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X, this.Location.Y);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
     }
 }

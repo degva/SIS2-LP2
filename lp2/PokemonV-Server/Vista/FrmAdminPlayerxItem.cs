@@ -33,7 +33,7 @@ namespace Vista
 
                 connection.Open();
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT PLAYER_USER_ID,ITEM_ID FROM PLAYER_X_ITEM WHERE DELETED = 0 ", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT PLAYER_ID,ITEM_ID,QUANTITY FROM PLAYER_X_ITEM WHERE QUANTITY > 0 ", connection);
 
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "PLAYER_X_ITEM");
@@ -51,6 +51,7 @@ namespace Vista
         {
             TXTitemid.Enabled = false;
             TXTplayerid.Enabled = false;
+            TXTquantity.Enabled = false;
 
             BTNdelete.Enabled = true;
             BTNrecover.Enabled = true;
@@ -61,6 +62,7 @@ namespace Vista
 
             TXTitemid.Text = "";
             TXTplayerid.Text = "";
+            TXTquantity.Text = "";
 
         }
 
@@ -68,6 +70,7 @@ namespace Vista
         {
             TXTitemid.Enabled = true;
             TXTplayerid.Enabled = true;
+            TXTquantity.Enabled = true;
 
             BTNnew.Enabled = false;
             BTNrecover.Enabled = false;
@@ -87,7 +90,7 @@ namespace Vista
             if (DGVplayerxitem.Rows.Count > 1)
             {
                 int iditem = (int)DGVplayerxitem.CurrentRow.Cells["ITEM_ID"].Value;
-                int idplayer = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_USER_ID"].Value;
+                int idplayer = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_ID"].Value;
 
                 PlayersItemDA playersItem = new PlayersItemDA();
                 playersItem.deleteItemOfPlayer(iditem, idplayer);
@@ -102,14 +105,18 @@ namespace Vista
         {
             if (DGVplayerxitem.Rows.Count > 1)
             {
-                int playerid = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_USER_ID"].Value;
+                int playerid = (int)DGVplayerxitem.CurrentRow.Cells["PLAYER_ID"].Value;
                 int itemid = (int)DGVplayerxitem.CurrentRow.Cells["ITEM_ID"].Value;
+                int quantity = (int)DGVplayerxitem.CurrentRow.Cells["QUANTITY"].Value;
+
 
                 TXTitemid.Text = itemid.ToString();
                 TXTplayerid.Text = playerid.ToString();
+                TXTquantity.Text = quantity.ToString();
 
-                TXTitemid.Enabled = true;
-                TXTplayerid.Enabled = true;
+                TXTitemid.Enabled = false;
+                TXTplayerid.Enabled = false;
+                TXTquantity.Enabled = true;
 
                 BTNdelete.Enabled = false;
                 BTNrecover.Enabled = false;
@@ -177,12 +184,35 @@ namespace Vista
             }
 
 
+            if (TXTquantity.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter a quantity", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                Int32.Parse(TXTquantity.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Must enter a number for quantity", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (Convert.ToInt32(TXTquantity.Text) < 1)
+            {
+                MessageBox.Show("Put a higher number ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
 
             if (flag == 1)
             {
                 PlayersItemDA playersItemDA = new PlayersItemDA();
 
-                playersItemDA.updatePlayersItem(Convert.ToInt32(TXTitemid.Text),Convert.ToInt32(TXTplayerid.Text), lastitemid, lastplayerid);
+                 playersItemDA.updatePlayersItem(Convert.ToInt32(TXTitemid.Text), Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTquantity.Text), lastitemid, lastplayerid);
+                
+
 
                 load();
                 init();
@@ -245,11 +275,42 @@ namespace Vista
                 return;
             }
 
+            if (TXTquantity.Text.Trim() == "")
+            {
+                MessageBox.Show("Must enter a quantity", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                Int32.Parse(TXTquantity.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Must enter a number for quantity", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (Convert.ToInt32(TXTquantity.Text) < 1)
+            {
+                MessageBox.Show("Put a higher number ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
 
             if (flag == 1)
             {
                 PlayersItemDA playersItemDA = new PlayersItemDA();
-                playersItemDA.addPlayersItem(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTitemid.Text));
+
+
+                if ((playersItemDA.exist(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTitemid.Text))) == 1)
+                {
+                    MessageBox.Show("The player already has that item");
+                }
+                else
+                {
+                    playersItemDA.addPlayersItem(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTitemid.Text), Convert.ToInt32(TXTquantity.Text));
+                }
 
                 load();
                 init();

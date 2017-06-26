@@ -10,6 +10,7 @@ namespace AccesoDatos
 {
     public class ItemDA
     {
+
         public ItemDA()
         {
 
@@ -21,7 +22,7 @@ namespace AccesoDatos
             {
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                string sql = $"INSERT INTO ITEM (NAME,DESCRIPTION,ITEM_TYPE,CATCH_PROB,DELETED)values('{pokeball.Name}','{pokeball.Description}', '{pokeball.Type}' , '{pokeball.Catch_probability}' , '{0}')";
+                string sql = $"INSERT INTO ITEM (NAME,ITEM_TYPE,CATCH_PROB,DELETED)values('{pokeball.Name}', '{pokeball.Type}' , '{pokeball.Catch_probability}' , '{pokeball.Deleted}')";
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -41,7 +42,7 @@ namespace AccesoDatos
             {
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                string sql = $"INSERT INTO ITEM (NAME,DESCRIPTION,ITEM_TYPE,HP,DELETED)values('{pot.Name}','{pot.Description}', '{pot.Type}' , '{pot.HealthPoints}' , '{0}')";
+                string sql = $"INSERT INTO ITEM (NAME,ITEM_TYPE,HP,DELETED)values('{pot.Name}', '{pot.Type}' , '{pot.HealthPoints}' , '{pot.Deleted}')";
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -96,9 +97,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "UPDATE ITEM SET DELETED = '1' "
-                + "where ID = " + character + id + character;
-
+                string sql = "UPDATE ITEM SET DELETED = '1' " + "where ID = " + character + id + character;
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -149,7 +148,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "UPDATE ITEM SET NAME = " + character + pok.Name + character + ", DESCRIPTION = " + character + pok.Description + character
+                string sql = "UPDATE ITEM SET NAME = " + character + pok.Name + character
                     + ", ITEM_TYPE = " + character + pok.Type + character + ", CATCH_PROB = " + character + pok.Catch_probability + character
                     + ",HP = " + character + null + character 
                 + "where ID = " + character + id + character;
@@ -173,7 +172,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "UPDATE ITEM SET NAME = " + character + pot.Name + character + ", DESCRIPTION = " + character + pot.Description + character
+                string sql = "UPDATE ITEM SET NAME = " + character + pot.Name + character
                     + ", ITEM_TYPE = " + character + pot.Type + character + ", HP = " + character + pot.HealthPoints + character
                     + ",CATCH_PROB = " + character + null + character
                 + "where ID = " + character + id + character;
