@@ -28,7 +28,10 @@ public class BattleManager extends Renderable {
     }
 
     public enum State {
-        P1_IDLE, P1_ATTACK_FIRST, P1_ATTACK_SECOND, P1_BAG, P1_GIVEUP, P2_IDLE, P2_ATTACK_FIRST,P2_ATTACK_SECOND, P2_BAG, P2_GIVEUP, TYPE_ATTACK_MENU
+        P1_IDLE, P1_ATTACK_FIRST, P1_ATTACK_SECOND, P1_BAG, P1_GIVEUP,
+        P2_IDLE, P2_ATTACK_FIRST, P2_ATTACK_SECOND, P2_BAG, P2_GIVEUP,
+        P1_DEAD, P2_DEAD,
+        TYPE_ATTACK_MENU
     };
     private State state;
     private Player player;
@@ -82,7 +85,7 @@ public class BattleManager extends Renderable {
     private BufferedImage imgBackgroundBattle;
     private BufferedImage imgBackgroundHP1;
     private BufferedImage imgBackgroundHP2;
-    
+
     private BufferedImage imgForAnimP1_Normal1;
     private BufferedImage imgForAnimP1_Normal2;
     private BufferedImage imgForAnimP1_Super1;
@@ -96,12 +99,12 @@ public class BattleManager extends Renderable {
     private BufferedImage imgForAnimP2_Super2;
     private BufferedImage imgForAnimP2_Super3;
     private BufferedImage imgForAnimP2_Super4;
-    
+
     private BufferedImage fondoOpcion;
     private int NUM_TICKS_WAIT = 2;
 
-    private int vidaPok1;
-    private int vidaPok2;
+    private int initialLifePok1, initialLifePok2;
+    private int vidaPok1, vidaPok2, danio1_Pok1, danio2_Pok1, danio1_Pok2, danio2_Pok2;
     private Animation attackAnimP1Normal;
     private Animation attackAnimP1Super;
     private Animation idle;
@@ -112,7 +115,7 @@ public class BattleManager extends Renderable {
 
     private BattleMenu menu;
     private TypeAttackMenuP1 attackMenu1;
-    private String attack1_name, attack2_name;
+    private String attack1_name, attack2_name, attack1_P2name, attack2_P2name;
     private FileReader lector;
     private BufferedReader entrada;
     private String response;
@@ -120,6 +123,7 @@ public class BattleManager extends Renderable {
 
     private int typeAttack = 0;
     int idPok1, idPok2;
+    private boolean lastLife = false;
 
     public BattleManager(Game game) {
         //Loading the buffered images
@@ -163,10 +167,19 @@ public class BattleManager extends Renderable {
     }
 
     public void startBattle(Player p1, Player p2) {
-        this.player = p1;
+        player = p1;
         input = p1.getInput();
         attack1_name = p1.getPokemons().get(0).getAttack1().getName();
         attack2_name = p1.getPokemons().get(0).getAttack2().getName();
+        initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
+        danio1_Pok1 = p1.getPokemons().get(0).getAttack1().getPoints();
+        danio2_Pok1 = p1.getPokemons().get(0).getAttack2().getPoints();
+
+        attack1_P2name = p2.getPokemons().get(0).getAttack1().getName();
+        attack2_P2name = p2.getPokemons().get(0).getAttack2().getName();
+        initialLifePok2 = vidaPok2 = p2.getPokemons().get(0).getLife();
+        danio1_Pok2 = p2.getPokemons().get(0).getAttack1().getPoints();
+        danio2_Pok2 = p2.getPokemons().get(0).getAttack2().getPoints();
         establishRoutes(p1.getPokemons().get(0), p2.getPokemons().get(0)); //Obtiene el primer pokemon de cada uno
         try {
             imgPokemonStatic_P1 = ImageIO.read(new File(rutaP1_StaticPok));
@@ -182,7 +195,7 @@ public class BattleManager extends Renderable {
 
             imgForAnimP2_Normal1 = ImageIO.read(new File(rutaP2_Normal1));
             imgForAnimP2_Normal2 = ImageIO.read(new File(rutaP2_Normal2));
-            
+
             imgForAnimP2_Super1 = ImageIO.read(new File(rutaP2_Super1));
             imgForAnimP2_Super2 = ImageIO.read(new File(rutaP2_Super2));
             imgForAnimP2_Super3 = ImageIO.read(new File(rutaP2_Super3));
@@ -192,14 +205,14 @@ public class BattleManager extends Renderable {
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset, game);
         attackMenu1 = new TypeAttackMenuP1(input, 420, Game.WIDTH / 3, attack1_name, attack2_name, game);
-        vidaPok1 = vidaPok2 = 140;
+
         loadBattleAnimation();
         attackAnimP1Normal = animations.get(findAnimation("attack"));
         attackAnimP1Super = animations.get(findAnimation("attackSuper"));
 
         attackAnimP2Normal = animations.get(findAnimation("attackP2"));
         attackAnimP2Super = animations.get(findAnimation("attackSuper2"));
-        
+
         idle = animations.get(findAnimation("idlePok1"));
         idleP2 = animations.get(findAnimation("idleP2"));
         nombrePokPlayer1 = p1.getPokemons().get(0).getName();
@@ -240,7 +253,7 @@ public class BattleManager extends Renderable {
         attackSuperImagesP1.add(imgForAnimP1_Super3);
         attackSuperImagesP1.add(imgForAnimP1_Super4);
         Animation attackSuperAnimationP1 = new Animation("attackSuper", attackSuperImagesP1, movePeriod);
-        
+
         ArrayList<BufferedImage> attackSuperImagesP2 = new ArrayList<>();
         attackSuperImagesP2.add(imgForAnimP2_Super1);
         attackSuperImagesP2.add(imgForAnimP2_Super2);
@@ -277,9 +290,10 @@ public class BattleManager extends Renderable {
                 if (numTicks == NUM_TICKS_WAIT) {
                     state = State.P2_IDLE;
                     numTicks = 0;
-                    vidaPok2 -= 20;
-                    if (vidaPok2 == 0) {
-                        endBattle = true;
+                    vidaPok2 -= danio1_Pok1;
+                    if (vidaPok2 <= 0) {
+                        state = State.P2_DEAD;
+                        player.setCanBattle(false);
                     }
                 }
                 break;
@@ -291,10 +305,25 @@ public class BattleManager extends Renderable {
                     state = State.P2_IDLE;
                     System.out.println("Usuario 1 realizo un ataque");
                     numTicks = 0;
-                    vidaPok2 -= 20;
-                    if (vidaPok2 == 0) {
-                        endBattle = true;
+                    vidaPok2 -= danio2_Pok1;
+                    if (vidaPok2 <= 0) {
+                        state = State.P2_DEAD;
+                        player.setCanBattle(false);
                     }
+                }
+                break;
+            case P1_DEAD:
+                currSprite = idle.getCurrSprite();
+                currSprite2 = idleP2.getCurrSprite();
+                if (numTicks == NUM_TICKS_WAIT) {
+                    endBattle = true;
+                }
+                break;
+            case P2_DEAD:
+                currSprite = idle.getCurrSprite();
+                currSprite2 = idleP2.getCurrSprite();
+                if (numTicks == NUM_TICKS_WAIT) {
+                    endBattle = true;
                 }
                 break;
             case P1_BAG:
@@ -315,10 +344,9 @@ public class BattleManager extends Renderable {
                 if (response != null) {
                     if (response.equals("atacar1")) {
                         state = State.P2_ATTACK_FIRST;
-                    } else if (response.equals("atacar2")){
+                    } else if (response.equals("atacar2")) {
                         state = State.P2_ATTACK_SECOND;
-                    }
-                    else if (response.equals("huir")) {
+                    } else if (response.equals("huir")) {
                         System.out.println("El usuario 2 realizo HUIR");
                         state = State.P2_GIVEUP;
                         numTicks = 0;
@@ -332,15 +360,14 @@ public class BattleManager extends Renderable {
             case P2_ATTACK_FIRST:
                 currSprite = idle.getCurrSprite();
                 currSprite2 = attackAnimP2Normal.getCurrSprite();
-                ;
                 if (numTicks == NUM_TICKS_WAIT) { //Luego de 4 ticks, reiniciar el temporizador
                     state = State.P1_IDLE;
                     System.out.println("Usuario 2 realizo un ataque");
-                    vidaPok1 -= 20;
-                    if (vidaPok1 == 0) {
-                        endBattle = true;
-                    }
+                    vidaPok1 -= danio1_Pok2;
                     numTicks = 0;
+                    if (vidaPok1 <= 0) {
+                        state = State.P1_DEAD;
+                    }
                 }
                 break;
             case P2_ATTACK_SECOND:
@@ -348,12 +375,12 @@ public class BattleManager extends Renderable {
                 currSprite2 = attackAnimP2Super.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT) { //Luego de 4 ticks, reiniciar el temporizador
                     state = State.P1_IDLE;
-                     System.out.println("Usuario 2 realizo un ataque");
-                    vidaPok1 -= 20;
-                    if (vidaPok1 == 0) {
-                        endBattle = true;
-                    }
+                    System.out.println("Usuario 2 realizo un ataque");
+                    vidaPok1 -= danio2_Pok2;
                     numTicks = 0;
+                    if (vidaPok1 <= 0) {
+                        state = State.P1_DEAD;
+                    }
                 }
                 break;
             case P2_BAG:
@@ -386,6 +413,12 @@ public class BattleManager extends Renderable {
         if ((state == State.P2_GIVEUP) && (game.getNumTicks() == 58)) {
             numTicks++;
         }
+        if ((state == State.P1_DEAD) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
+        if ((state == State.P2_DEAD) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
         if (endBattle) {
             game.setState(Game.State.MAP);
             endBattle = false;
@@ -393,24 +426,41 @@ public class BattleManager extends Renderable {
         }
     }
 
+    private int getRespectiveLife(int pok, int curLife, int reference) {
+        int initial;
+        if (pok == 1) {
+            initial = initialLifePok1;
+        } else {
+            initial = initialLifePok2;
+        }
+        if (curLife <= 0) {
+            return reference;
+        }
+        int rest = (reference * curLife) / initial;
+        int result = reference - rest;
+        return result;
+    }
+
     public void render(Graphics2D g) {
+
         g.drawImage(imgBackgroundBattle, 0, 0, fondoAncho, fondoAlto, null);
 
         g.drawImage(currSprite, 130, 290, pokAncho1, pokAlto1, null);
         g.drawImage(currSprite2, 480, 85, pokAncho2, pokAlto2, null);
-        g.setColor(Color.red);
-        g.fillRect(480, 208 + 125, 140, 20);
         g.setColor(Color.green);
-        g.fillRect(480, 208 + 125, vidaPok1, 20);
+        g.fillRect(480, 208 + 125, 140, 20);
+        g.setColor(Color.red);
+        g.fillRect(480, 208 + 125, getRespectiveLife(1, vidaPok1, 140), 20);
+
         g.drawImage(imgBackgroundHP1, 360, 145 + 125, 280, 110, null);
         Font.getInstance().drawString(nombrePokPlayer1, g, 450, 160 + 125);
-
-        g.setColor(Color.red);
-        g.fillRect(165, 85 + 75, 140, 20);
+        
         g.setColor(Color.green);
-        g.fillRect(165, 85 + 75, vidaPok2, 20);
-        g.drawImage(imgBackgroundHP2, 60, 30 + 75, 280, 110, null);
+        g.fillRect(165, 85 + 75, 140, 20);
+        g.setColor(Color.red);
+        g.fillRect(165, 85 + 75, getRespectiveLife(2, vidaPok2, 140), 20);
 
+        g.drawImage(imgBackgroundHP2, 60, 30 + 75, 280, 110, null);
         Font.getInstance().drawString(nombrePokPlayer2, g, 120, 40 + 75);
 
         //g.fillRect(330,180,230,10);
@@ -427,18 +477,12 @@ public class BattleManager extends Renderable {
                 Font.getInstance().drawString("ATTACK", g, 570, 525);
                 break;
             case P1_ATTACK_FIRST:
-                if (!endBattle) {
+                if (!endBattle)
                     Font.getInstance().drawString(nombrePokPlayer1 + " USED " + attack1_name, g, 30, 475);
-                } else {
-                    Font.getInstance().drawString("YOU WON THE MATCH", g, 30, 475);
-                }
                 break;
             case P1_ATTACK_SECOND:
-                if (!endBattle) {
+                if (!endBattle)
                     Font.getInstance().drawString(nombrePokPlayer1 + " USED " + attack2_name, g, 30, 475);
-                } else {
-                    Font.getInstance().drawString("YOU WON THE MATCH ATTACK2...", g, 30, 475);
-                }
                 break;
             case P1_BAG:
                 Font.getInstance().drawString("YOU USED THE BAG", g, 30, 475);
@@ -446,21 +490,18 @@ public class BattleManager extends Renderable {
             case P1_GIVEUP:
                 Font.getInstance().drawString("YOU RAN AWAY, LOSING THE BATTLE", g, 30, 475);
                 break;
+            case P1_DEAD:
+                Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
+                break;
             case P2_IDLE:
                 break;
             case P2_ATTACK_FIRST:
-                if (!endBattle) {
-                    Font.getInstance().drawString(nombrePokPlayer2 + " IS ATTACKING..", g, 30, 475);
-                } else {
-                    Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
-                }
+                if (!endBattle)
+                    Font.getInstance().drawString(nombrePokPlayer2 + " USED " + attack1_P2name, g, 30, 475);
                 break;
             case P2_ATTACK_SECOND:
-                if (!endBattle) {
-                    Font.getInstance().drawString(nombrePokPlayer2 + " IS ATTACKING SUPER2", g, 30, 475);
-                } else {
-                    Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
-                }
+                if (!endBattle)
+                    Font.getInstance().drawString(nombrePokPlayer2 + " USED " + attack2_P2name, g, 30, 475);
                 break;
             case P2_BAG:
                 Font.getInstance().drawString("HE USED THE BAG", g, 30, 475);
@@ -468,6 +509,9 @@ public class BattleManager extends Renderable {
             case P2_GIVEUP:
                 Font.getInstance().drawString("YOU WON THE MATCH, THE OTHER PLAYER LEFT", g, 30, 475);
                 break;
+            case P2_DEAD:
+                 Font.getInstance().drawString("YOU WIN THE MATCH!", g, 30, 475);
+                 break;
         }
     }
 
