@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmAdminAttack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdminAttack.Designer.cs">
+      <DependentUpon>FrmAdminAttack.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAdminEverything.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmAdminAttack.resx">
+      <DependentUpon>FrmAdminAttack.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAdminEverything.resx">
       <DependentUpon>FrmAdminEverything.cs</DependentUpon>
     </EmbeddedResource>

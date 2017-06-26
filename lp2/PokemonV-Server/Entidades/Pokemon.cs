@@ -9,17 +9,15 @@ namespace Entidades
     public enum TypeofPokemon { Fire, Water, Earth, Wind };
     public class Pokemon
     {
-        public Pokemon(int attack1_pts,string attack1_name, string attack2_name, int attack2_pts, int defense_pts, int life, string name, TypeofPokemon type, int deleted)
-        {
-            this.attack1_pts = attack1_pts;
-            this.attack1_name = attack1_name;
-            this.attack2_pts = attack2_pts;
-            this.attack2_name = attack2_name;
+        public Pokemon(string name, int life, int defense_pts, TypeofPokemon type, int attack1id, int attack2id, int deleted )
+        {   
             this.defense_pts = defense_pts;
             this.life = life;
             this.name = name;
             this.type = type;
-            this.Deleted = deleted;
+            this.attack1_id = attack1id;
+            this.attack2_id = attack2id;
+            this.deleted = deleted;
         }
 
         public void attack(Pokemon pokemon)
@@ -39,12 +37,8 @@ namespace Entidades
             get { return id; }
             set { id = value; }
         }
-        private int attack1_pts;
-        public int Attack_pts
-        {
-            get { return attack1_pts; }
-            set { attack1_pts = value; }
-        }
+        
+       
         private int defense_pts;
         public int Defense_pts
         {
@@ -71,14 +65,11 @@ namespace Entidades
         }
 
         public int Deleted { get => deleted; set => deleted = value; }
-        public int Attack2_pts { get => attack2_pts; set => attack2_pts = value; }
-        public string Attack1_name { get => attack1_name; set => attack1_name = value; }
-        public string Attack2_name { get => attack2_name; set => attack2_name = value; }
+        public int Attack1_id { get => attack1_id; set => attack1_id = value; }
+        public int Attack2_id { get => attack2_id; set => attack2_id = value; }
 
+        int attack1_id;
+        int attack2_id;
         private int deleted;
-
-        private int attack2_pts;
-        private string attack1_name;
-        private string attack2_name;
     }
 }

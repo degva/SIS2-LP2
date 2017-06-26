@@ -39,6 +39,8 @@
             this.BTNsave = new System.Windows.Forms.Button();
             this.BTNrecover = new System.Windows.Forms.Button();
             this.BTNnew = new System.Windows.Forms.Button();
+            this.TXTquantity = new System.Windows.Forms.TextBox();
+            this.LBLquantity = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGVplayerxitem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,13 +49,13 @@
             this.DGVplayerxitem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVplayerxitem.Location = new System.Drawing.Point(410, 44);
             this.DGVplayerxitem.Name = "DGVplayerxitem";
-            this.DGVplayerxitem.Size = new System.Drawing.Size(467, 274);
+            this.DGVplayerxitem.Size = new System.Drawing.Size(350, 274);
             this.DGVplayerxitem.TabIndex = 0;
             // 
             // TXTitemid
             // 
             this.TXTitemid.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTitemid.Location = new System.Drawing.Point(177, 180);
+            this.TXTitemid.Location = new System.Drawing.Point(177, 147);
             this.TXTitemid.Name = "TXTitemid";
             this.TXTitemid.Size = new System.Drawing.Size(190, 21);
             this.TXTitemid.TabIndex = 24;
@@ -61,7 +63,7 @@
             // TXTplayerid
             // 
             this.TXTplayerid.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTplayerid.Location = new System.Drawing.Point(177, 105);
+            this.TXTplayerid.Location = new System.Drawing.Point(177, 76);
             this.TXTplayerid.Name = "TXTplayerid";
             this.TXTplayerid.Size = new System.Drawing.Size(190, 21);
             this.TXTplayerid.TabIndex = 23;
@@ -70,7 +72,7 @@
             // 
             this.LBLplayerid.AutoSize = true;
             this.LBLplayerid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLplayerid.Location = new System.Drawing.Point(12, 105);
+            this.LBLplayerid.Location = new System.Drawing.Point(12, 76);
             this.LBLplayerid.Name = "LBLplayerid";
             this.LBLplayerid.Size = new System.Drawing.Size(82, 20);
             this.LBLplayerid.TabIndex = 22;
@@ -80,7 +82,7 @@
             // 
             this.LBLitemid.AutoSize = true;
             this.LBLitemid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBLitemid.Location = new System.Drawing.Point(12, 178);
+            this.LBLitemid.Location = new System.Drawing.Point(12, 145);
             this.LBLitemid.Name = "LBLitemid";
             this.LBLitemid.Size = new System.Drawing.Size(69, 20);
             this.LBLitemid.TabIndex = 21;
@@ -152,11 +154,31 @@
             this.BTNnew.UseVisualStyleBackColor = true;
             this.BTNnew.Click += new System.EventHandler(this.BTNnew_Click);
             // 
+            // TXTquantity
+            // 
+            this.TXTquantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXTquantity.Location = new System.Drawing.Point(177, 211);
+            this.TXTquantity.Name = "TXTquantity";
+            this.TXTquantity.Size = new System.Drawing.Size(190, 21);
+            this.TXTquantity.TabIndex = 38;
+            // 
+            // LBLquantity
+            // 
+            this.LBLquantity.AutoSize = true;
+            this.LBLquantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLquantity.Location = new System.Drawing.Point(12, 209);
+            this.LBLquantity.Name = "LBLquantity";
+            this.LBLquantity.Size = new System.Drawing.Size(76, 20);
+            this.LBLquantity.TabIndex = 37;
+            this.LBLquantity.Text = "Quantity";
+            // 
             // FrmAdminPlayerxItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(889, 566);
+            this.ClientSize = new System.Drawing.Size(769, 566);
+            this.Controls.Add(this.TXTquantity);
+            this.Controls.Add(this.LBLquantity);
             this.Controls.Add(this.BTNcancel);
             this.Controls.Add(this.BTNupdate);
             this.Controls.Add(this.BTNdelete);
@@ -189,5 +211,7 @@
         private System.Windows.Forms.Button BTNsave;
         private System.Windows.Forms.Button BTNrecover;
         private System.Windows.Forms.Button BTNnew;
+        private System.Windows.Forms.TextBox TXTquantity;
+        private System.Windows.Forms.Label LBLquantity;
     }
 }

@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttackDA.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="ItemDA.cs" />
     <Compile Include="MapDA.cs" />

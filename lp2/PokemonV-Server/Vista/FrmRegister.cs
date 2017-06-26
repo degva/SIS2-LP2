@@ -119,7 +119,9 @@ namespace Vista
                 TXTpassword.Text = TXTpassword.Text.Trim();
                 TXTusername.Text = TXTusername.Text.Trim();
 
-                admin = new Admin(TXTusername.Text, TXTpassword.Text,TXTname.Text,TXTemail.Text,0, 1);
+                Random rnd = new Random();
+                int a = rnd.Next(1, 3);
+                admin = new Admin(TXTusername.Text, TXTpassword.Text,TXTname.Text,TXTemail.Text,0, 1,a);
                 AdminDA AdminDA = new AdminDA();
                 if ((AdminDA.verifyRepeatUsername(admin)) == 1)
                 {
@@ -132,7 +134,6 @@ namespace Vista
                 else
                 {
                     AdminDA.addAdmin(admin);
-                    AdminDA.addAdmin2(admin);
                     MessageBox.Show("You're registered");
                     this.DialogResult = DialogResult.OK;
                 }
@@ -222,7 +223,9 @@ namespace Vista
                     TXTpassword.Text = TXTpassword.Text.Trim();
                     TXTusername.Text = TXTusername.Text.Trim();
 
-                    admin = new Admin(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0,1);
+                    Random rnd = new Random();
+                    int a = rnd.Next(1, 3);
+                    admin = new Admin(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0,1,a);
                     AdminDA playerDA = new AdminDA();
                     if ((playerDA.verifyRepeatUsername(admin)) == 1)
                     {

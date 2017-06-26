@@ -9,7 +9,7 @@ namespace Entidades
 {
     public class Player : User
     {
-        public Player(string username, string password, string name, string email, int deleted, int isAdmin) : base(username, password, name, email, deleted, isAdmin) { }
+        public Player(string username, string password, string name, string email, int deleted, int isAdmin, int npc) : base(username, password, name, email, deleted, isAdmin, npc) { }
 
         public bool catchPokemon()
         {

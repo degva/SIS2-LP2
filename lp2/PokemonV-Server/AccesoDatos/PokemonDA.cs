@@ -21,7 +21,7 @@ namespace AccesoDatos
             {
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                string sql = $"INSERT INTO POKEMON (ID,NAME,LIFE,ATTACK_PTS,DEFENSE_PTS,TYPE,DELETED)values('{pok.Id}','{pok.Name}','{pok.Life}', '{pok.Attack_pts}' , '{pok.Defense_pts}' , '{pok.Type}' , '{pok.Deleted}')";
+                string sql = $"INSERT INTO POKEMON (ID,NAME,LIFE,DEFENSE_PTS,ATTACK_1_ID, ATTACK_2_ID,TYPE,DELETED)values('{pok.Id}','{pok.Name}','{pok.Life}', '{pok.Defense_pts}' , '{pok.Attack1_id}' , '{pok.Attack2_id}', '{pok.Type}' , '{pok.Deleted}')";
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -96,9 +96,9 @@ namespace AccesoDatos
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
                 string sql = "UPDATE POKEMON SET NAME = " + character + pok.Name+ character + ", LIFE = " + character + pok.Life + character
-                    + ", ATTACK_PTS = " + character + pok.Attack_pts + character + ", DEFENSE_PTS = " + character + pok.Defense_pts + character
-                    + ",TYPE = " + character + pok.Type + character 
-                + "where ID = " + character + id + character;
+                   + ", DEFENSE_PTS = " + character + pok.Defense_pts + character + ", ATTACK_1_ID = " + character + pok.Attack1_id + character
+                   + ", ATTACK_2_ID = " + character + pok.Attack2_id+ character + ", TYPE = " + character + pok.Type + character 
+                   + "where ID = " + character + id + character;
 
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;

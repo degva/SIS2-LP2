@@ -8,8 +8,8 @@ namespace Entidades
 {
     public class Potion : Item
     {
-        public Potion(string name, string descrip,TypeofItem type, int points)
-            : base(name, descrip,type)
+        public Potion(string name,TypeofItem type, int deleted,  int points)
+            : base(name,type, deleted)
         {
             this.healthPoints = points;
         }

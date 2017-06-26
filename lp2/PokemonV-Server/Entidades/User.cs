@@ -10,14 +10,15 @@ namespace Entidades
     public enum Direction { Up, Down, Right, Left };
     public abstract class User
     {
-        public User(string username, string password, string name, string email, int deleted, int isAdmin)
+        public User(string username, string password, string name, string email, int deleted, int isAdmin, int npc)
         {
             this.username = username;
             this.password = password;
             this.name = name;
             this.email = email;
-            this.Deleted = deleted;
+            this.deleted = deleted;
             this.isAdmin = isAdmin;
+            this.npc_type = npc;
         }
 
         public bool move()
@@ -97,8 +98,10 @@ namespace Entidades
         
         public int IsAdmin { get => isAdmin; set => isAdmin = value; }
         public int Deleted { get => deleted; set => deleted = value; }
+        public int Npc_type { get => npc_type; set => npc_type = value; }
 
         protected int isAdmin;
 
+        protected int npc_type;
     }
 }

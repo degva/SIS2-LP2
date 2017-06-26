@@ -60,7 +60,7 @@ namespace Vista
 
                 connection.Open();
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT PLAYER_USER_ID, POKEMON_ID, ORDER_POKEMON FROM PLAYER_X_POKEMON WHERE DELETED = 0 ", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT PLAYER_ID, POKEMON_ID, ORDER_POKEMON FROM PLAYER_X_POKEMON WHERE DELETED = 0 ", connection);
 
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "PLAYER_X_POKEMON");
@@ -80,10 +80,11 @@ namespace Vista
             if (DGVpokemons.Rows.Count > 1)
             {
                 int idpokemon = (int)DGVpokemons.CurrentRow.Cells["POKEMON_ID"].Value;
-                int idplayer = (int)DGVpokemons.CurrentRow.Cells["PLAYER_USER_ID"].Value;
+                int idplayer = (int)DGVpokemons.CurrentRow.Cells["PLAYER_ID"].Value;
+                int order = (int)DGVpokemons.CurrentRow.Cells["ORDER_POKEMON"].Value;
 
                 PlayersPokemonDA playersPokemon = new PlayersPokemonDA();
-                playersPokemon.deletePokemonOfPlayer(idpokemon, idplayer);
+                playersPokemon.deletePokemonOfPlayer(idpokemon, idplayer, order);
 
                 load();
                 inicio();
@@ -95,7 +96,7 @@ namespace Vista
 
             if (DGVpokemons.Rows.Count > 1)
             {
-                int playerid = (int)DGVpokemons.CurrentRow.Cells["PLAYER_USER_ID"].Value;
+                int playerid = (int)DGVpokemons.CurrentRow.Cells["PLAYER_ID"].Value;
                 int pokemonid = (int)DGVpokemons.CurrentRow.Cells["POKEMON_ID"].Value;
                 int order = (int)DGVpokemons.CurrentRow.Cells["ORDER_POKEMON"].Value;
 
@@ -206,11 +207,16 @@ namespace Vista
             if (flag == 1)
             {
                 PlayersPokemonDA playersPokDA = new PlayersPokemonDA();
-                
-                if(playersPokDA.updatePlayersPokemon(Convert.ToInt32(TXTpokemonid.Text), Convert.ToInt32(TXTorder.Text), Convert.ToInt32(TXTplayerid.Text) , lastpokemonid, lastplayerid, lastorder) == 0)
+
+                if (playersPokDA.updatePlayersPokemon(Convert.ToInt32(TXTpokemonid.Text), Convert.ToInt32(TXTorder.Text), Convert.ToInt32(TXTplayerid.Text), lastpokemonid, lastplayerid, lastorder) == 0)
                 {
                     MessageBox.Show("You can't do that change", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                
+
+
+
+                
 
                 load();
                 inicio();
@@ -319,7 +325,18 @@ namespace Vista
             {
                 PlayersPokemonDA playersPokDA = new PlayersPokemonDA();
 
-                playersPokDA.addPlayersPokemon(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTpokemonid.Text), Convert.ToInt32(TXTorder.Text));
+                int deleted = 0;
+
+                if ((playersPokDA.exist(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTpokemonid.Text))) == 1)
+                {
+                    MessageBox.Show("The player already has that pokemon");
+                }
+                else
+                {
+                    playersPokDA.addPlayersPokemon(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTpokemonid.Text), Convert.ToInt32(TXTorder.Text), deleted);
+
+                }
+
 
                 load();
                 inicio();

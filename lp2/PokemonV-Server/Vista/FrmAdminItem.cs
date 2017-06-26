@@ -22,14 +22,8 @@ namespace Vista
             load();
             init();
 
-
-            Bitmap image = new Bitmap(Application.StartupPath + @"\imagen\fondoFrm.jpg");
-            this.BackgroundImage = image;
-            this.BackgroundImageLayout = ImageLayout.Stretch;
-
             LBLname.BackColor = Color.Transparent;
             LBLcatchprob.BackColor = Color.Transparent;
-            LBLdescription.BackColor = Color.Transparent;
             LBLhp.BackColor = Color.Transparent;
             LBLtype.BackColor = Color.Transparent;
 
@@ -44,7 +38,7 @@ namespace Vista
 
                 connection.Open();
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,DESCRIPTION,ITEM_TYPE,CATCH_PROB,HP FROM ITEM WHERE DELETED = 0 ", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID,NAME,ITEM_TYPE,CATCH_PROB,HP FROM ITEM WHERE DELETED = 0 ", connection);
 
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "ITEM");
@@ -61,7 +55,6 @@ namespace Vista
         public void init()
         {
             TXTcatchprob.Enabled = false;
-            TXTdescription.Enabled = false;
             TXThp.Enabled = false;
             TXTname.Enabled = false;
         
@@ -77,7 +70,6 @@ namespace Vista
             
             TXTname.Text = "";
             TXTcatchprob.Text = "";
-            TXTdescription.Text = "";
             TXThp.Text = "";
           
 
@@ -87,7 +79,6 @@ namespace Vista
         {
             TXTname.Enabled = true;
             CMBtype.Enabled = true;
-            TXTdescription.Enabled = true;
             TXThp.Enabled = true;
             TXTcatchprob.Enabled = true;
          
@@ -112,12 +103,10 @@ namespace Vista
 
 
                 string CADname = (string)DGVitem.CurrentRow.Cells["NAME"].Value;
-                string CADdescription = (string)DGVitem.CurrentRow.Cells["DESCRIPTION"].Value;
                 string CADtype = (string)DGVitem.CurrentRow.Cells["ITEM_TYPE"].Value;
 
 
                 TXTname.Text = CADname;
-                TXTdescription.Text = CADdescription;
                 CMBtype.Text = CADtype;
 
                 if (CADtype == "Potion")
@@ -132,11 +121,7 @@ namespace Vista
                 }
                 
 
-
-
-
                 TXTname.Enabled = true;
-                TXTdescription.Enabled = true;
                 CMBtype.Enabled = true;
 
                 BTNdelete.Enabled = false;
@@ -173,14 +158,6 @@ namespace Vista
                 flag = 0;
             }
 
-            if (TXTdescription.Text.Trim() == "")
-            {
-                MessageBox.Show("Must enter a description", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
-
-
-            
 
             if ((CMBtype.Text == "Pokeball"))
             {
@@ -234,9 +211,9 @@ namespace Vista
             }
 
 
-            if ( (TXTname.Text.Contains('"')) || (TXTdescription.Text.Contains('"')))
+            if ( TXTname.Text.Contains('"'))
             {
-                MessageBox.Show("Quotation marks are not allowed in the name and description ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Quotation marks are not allowed in the name ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
@@ -251,8 +228,8 @@ namespace Vista
                 {
                     typeItem = TypeofItem.Pokeball;
 
-
-                    Pokeball poke = new Pokeball (TXTname.Text,TXTdescription.Text, typeItem, Convert.ToInt32(TXTcatchprob.Text));
+                    int deleted = 0;
+                    Pokeball poke = new Pokeball (TXTname.Text, typeItem,deleted, Convert.ToInt32(TXTcatchprob.Text));
 
                     ItemDA itemDA= new ItemDA();
                     if ((itemDA.verifyRepeatName2(poke)) == 1)
@@ -274,7 +251,8 @@ namespace Vista
                 {
                     typeItem = TypeofItem.Potion;
 
-                    Potion pot = new Potion(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXThp.Text));
+                    int deleted = 0;
+                    Potion pot = new Potion(TXTname.Text, typeItem, deleted, Convert.ToInt32(TXThp.Text));
 
                     ItemDA itemDA = new ItemDA();
                     if ((itemDA.verifyRepeatName2(pot)) == 1)
@@ -310,12 +288,6 @@ namespace Vista
                 flag = 0;
             }
 
-            if (TXTdescription.Text.Trim() == "")
-            {
-                MessageBox.Show("Must enter a description", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                flag = 0;
-            }
-
 
             
 
@@ -371,9 +343,9 @@ namespace Vista
             }
 
 
-            if ((TXTname.Text.Contains('"')) || (TXTdescription.Text.Contains('"')))
+            if (TXTname.Text.Contains('"'))
             {
-                MessageBox.Show("Quotation marks are not allowed in the name and description ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Quotation marks are not allowed in the name ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 flag = 0;
             }
 
@@ -388,8 +360,8 @@ namespace Vista
                 {
                     typeItem = TypeofItem.Pokeball;
 
-
-                    Pokeball poke = new Pokeball(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXTcatchprob.Text));
+                    int deleted = 0;
+                    Pokeball poke = new Pokeball(TXTname.Text, typeItem,deleted, Convert.ToInt32(TXTcatchprob.Text));
 
                     ItemDA itemDA = new ItemDA();
                     if ((itemDA.verifyRepeatName(poke,id)) == 1)
@@ -410,7 +382,8 @@ namespace Vista
                 {
                     typeItem = TypeofItem.Potion;
 
-                    Potion pot = new Potion(TXTname.Text, TXTdescription.Text, typeItem, Convert.ToInt32(TXThp.Text));
+                    int deleted = 0;
+                    Potion pot = new Potion(TXTname.Text, typeItem,deleted, Convert.ToInt32(TXThp.Text));
 
                     ItemDA itemDA = new ItemDA();
                     if ((itemDA.verifyRepeatName(pot,id)) == 1)
@@ -437,7 +410,6 @@ namespace Vista
                 TXTcatchprob.Enabled = false;
                 TXThp.Enabled = true;
                 TXTcatchprob.Text = "";
-    
                 TXThp.Text = "";
             }
 
@@ -446,7 +418,6 @@ namespace Vista
                 TXThp.Enabled = false;
                 TXTcatchprob.Enabled = true;
                 TXTcatchprob.Text = "";
-        
                 TXThp.Text = "";
             }
         }
