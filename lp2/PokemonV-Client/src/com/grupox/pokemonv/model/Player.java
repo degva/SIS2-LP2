@@ -50,10 +50,6 @@ public class Player extends Renderable{
     /* Methods */
     public void tick(){
         // Check movement
-        
-        System.out.println(tile.getType());
-        
-        
         now = System.nanoTime();
         if( input != null && now - lastMove > movePeriod * 1000000000 ){
             if( input.up.isPressed && !input.down.isPressed ){

@@ -27,7 +27,7 @@ namespace AccesoDatos
             cmd.Connection = connection.conn;
 
             // Create map
-            string sql = $"INSERT INTO MAP (ID, WIDTH,HEIGHT, PROB_POKEMON, PROB_ITEM)values('{1}','{width}','{height}','{0}', '{0.02}')";
+            string sql = $"INSERT INTO MAP (ID, WIDTH,HEIGHT, PROB_POKEMON, PROB_ITEM)values('{1}','{width}','{height}','{0.2}', '{0.02}')";
             cmd.CommandText = sql;
             cmd.ExecuteNonQuery();
 

@@ -108,7 +108,6 @@ public class DataAccess {
             int x = rs.getInt("X");
             int y = rs.getInt("Y");
             if(type.equals("TRW01")){
-                System.out.println('t');
             }
             // Set
             Tile tile = new Tile(Tile.Type.valueOf(type), null, item_enabled, map);
