@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Player extends Renderable{
     /* Enum declaration */
-    public enum NPC_TYPE { MARIA, KEVIN, ASH};
+    public enum NPC_TYPE { PLAYER, WOMAN01, MAN01, MAN02, MAN03, WOMAN02};
     
     /* Attributes */
     private int id;
@@ -31,20 +31,22 @@ public class Player extends Renderable{
     private double lastMove = 0;
     private final double movePeriod = 0.2;
     
+    private BufferedImage leftIdle;
+    private BufferedImage rightIdle;
+    private BufferedImage upIdle;
+    private BufferedImage downIdle;
+    
+    
     /* Constructors */
     public Player( InputHandler input ){
         super();
         
         this.input = input;
         direction = Direction.DOWN;
-//        canBattle = true;   // @TODO MUST BE FETCHED FROM DATABASE
-//        battleDialog = new Dialog("This will be over soon.");           // @TODO MUST BE FETCHED FROM DATABASE
-//        defeatDialog = new Dialog("I didn't said who would win...");    // @TODO MUST BE FETCHED FROM DATABASE
         
-        if( input == null ){
-            getNPCSprite();
+        if( input != null ){
+            loadAnimations();
         }
-        loadAnimations();
     }
     
     /* Methods */
@@ -133,46 +135,26 @@ public class Player extends Renderable{
     
     public void render( Graphics2D g, int x, int y ){
         if(input == null){
+            // Render for NPC
+            switch(direction){
+                case DOWN:
+                    sprite = downIdle;
+                    break;
+                case LEFT:
+                    sprite = leftIdle;
+                    break;
+                case RIGHT:
+                    sprite = rightIdle;
+                    break;
+                case UP:
+                    sprite = upIdle;
+                    break;
+            }
             g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
         }else{
             g.drawImage(currSprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
         }
-    }
-    
-    public static Player.NPC_TYPE getNpcType(int i){
-        Player.NPC_TYPE type = null;
-        
-        switch (i){
-            case 1:
-                type = Player.NPC_TYPE.KEVIN;
-                break;
-            case 2:
-                type = Player.NPC_TYPE.MARIA;
-                break;
-            case 3:
-            default:
-                type = Player.NPC_TYPE.ASH;
-                break;
-        }
-        return type;
-    }
-    
-    public static int getIndexNpcType(Player.NPC_TYPE type){
-        int index = 0;
-        switch (type){
-            case KEVIN:
-                index = 1;
-                break;
-            case MARIA:
-                index = 2;
-                break;
-            case ASH:
-            default:
-                index = 3;
-                break;
-        }
-        return index;
-    }
+    }    
     
     private void loadAnimations(){
         SpriteSheet spriteSheet = SpriteSheet.getInstance();
@@ -242,23 +224,46 @@ public class Player extends Renderable{
     }
     
     private void getNPCSprite(){
-        switch ( direction ){
-            case DOWN:
-                this.sprite = SpriteSheet.getInstance().getSubImage(0, 25);
+        switch (npcType){
+            case PLAYER:
+                this.downIdle = SpriteSheet.getInstance().getSubImage(0, 25);
+                this.leftIdle = SpriteSheet.getInstance().getSubImage(1, 25);
+                this.rightIdle = SpriteSheet.getInstance().getSubImage(2, 25);
+                this.upIdle = SpriteSheet.getInstance().getSubImage(3, 25);
                 break;
-            case LEFT:
-                this.sprite = SpriteSheet.getInstance().getSubImage(1, 25);
+            case MAN01:
+                this.downIdle = SpriteSheet.getInstance().getSubImage(18, 6);
+                this.leftIdle = SpriteSheet.getInstance().getSubImage(19, 6);
+                this.rightIdle = SpriteSheet.getInstance().getSubImage(20, 6);
+                this.upIdle = SpriteSheet.getInstance().getSubImage(21, 6);
                 break;
-            case RIGHT:
-                this.sprite = SpriteSheet.getInstance().getSubImage(2, 25);
+            case MAN02:
+                this.downIdle = SpriteSheet.getInstance().getSubImage(18, 7);
+                this.leftIdle = SpriteSheet.getInstance().getSubImage(19, 7);
+                this.rightIdle = SpriteSheet.getInstance().getSubImage(20, 7);
+                this.upIdle = SpriteSheet.getInstance().getSubImage(21, 7);
                 break;
-            case UP:
-                this.sprite = SpriteSheet.getInstance().getSubImage(3, 25);
+            case MAN03:
+                this.downIdle = SpriteSheet.getInstance().getSubImage(18, 8);
+                this.leftIdle = SpriteSheet.getInstance().getSubImage(19, 8);
+                this.rightIdle = SpriteSheet.getInstance().getSubImage(20, 8);
+                this.upIdle = SpriteSheet.getInstance().getSubImage(21, 8);
                 break;
-            default:
-                this.sprite = SpriteSheet.getInstance().getSubImage(0, 25);
+            case WOMAN01:
+                this.downIdle = SpriteSheet.getInstance().getSubImage(18, 9);
+                this.leftIdle = SpriteSheet.getInstance().getSubImage(19, 9);
+                this.rightIdle = SpriteSheet.getInstance().getSubImage(20, 9);
+                this.upIdle = SpriteSheet.getInstance().getSubImage(21, 9);
+                break;
+            case WOMAN02:
+                this.downIdle = SpriteSheet.getInstance().getSubImage(18, 10);
+                this.leftIdle = SpriteSheet.getInstance().getSubImage(19, 10);
+                this.rightIdle = SpriteSheet.getInstance().getSubImage(20, 10);
+                this.upIdle = SpriteSheet.getInstance().getSubImage(21, 10);
                 break;
         }
+        
+        
     }
     
     /* Getters & Setters */
@@ -288,6 +293,8 @@ public class Player extends Renderable{
     }
     public void setNpcType(NPC_TYPE npcType) {
         this.npcType = npcType;
+        System.out.println(this.npcType);
+        getNPCSprite();
     }
 
     public Pokeball getPokeballs() {

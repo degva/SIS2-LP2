@@ -132,13 +132,14 @@ public class DataAccess {
         String battleDialog = "";
         boolean canBattle = false;
         while(rs.next()){
-            npcType = Player.getNpcType(rs.getInt("NPC_TYPE"));
+            npcType = Player.NPC_TYPE.valueOf(rs.getString("NPC_TYPE"));
+            System.out.println("VALUE" + rs.getString("NPC_TYPE"));
             defeatDialog = rs.getString("DEFEAT_CONTENT");
             battleDialog = rs.getString("BATTLE_CONTENT");
             canBattle = rs.getBoolean("CAN_BATTLE");
             break;
         }
-        
+        System.out.println(rs.getString("NPC_TYPE"));
         Player player;
         if(tile_player_id == logged_player_id){
             player = new Player(input);
