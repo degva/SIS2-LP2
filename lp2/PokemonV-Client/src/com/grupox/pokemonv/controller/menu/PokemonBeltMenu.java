@@ -19,7 +19,7 @@ import com.grupox.pokemonv.controller.reporte;
  * @author alulab14
  */
 public class PokemonBeltMenu extends SingleColumnMenu{
-    private final int cancelIndex,ExchangeIndex, closeIndex, ReportIndex;   // Variables to hold MenuItems indexs
+    private final int cancelIndex,ExchangeIndex, closeIndex, Report1Index,Report2Index;   // Variables to hold MenuItems indexs
     private Game game;  // Needed to change state when an option is selected
     private int vez = 0;
 
@@ -31,7 +31,8 @@ public class PokemonBeltMenu extends SingleColumnMenu{
         cancelIndex = this.addItem("Cancel");
         ExchangeIndex = this.addItem("Exchange");
         closeIndex = this.addItem("Back to Menu");
-        ReportIndex = this.addItem("Report");
+        Report1Index = this.addItem("Report1");
+        Report2Index = this.addItem("Report2");
     }
     
     @Override
@@ -57,9 +58,13 @@ public class PokemonBeltMenu extends SingleColumnMenu{
                     vez ++;
                 }
             }
-            else if(selectedIndex == ReportIndex){
+            else if(selectedIndex == Report1Index){
                 reporte rep = new reporte();
                 rep.verReporte();
+            }
+            else if(selectedIndex == Report2Index){
+                reporte rep = new reporte();
+                rep.verReporte2();
             }
         }
     }
