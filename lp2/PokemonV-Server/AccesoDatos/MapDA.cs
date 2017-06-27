@@ -10,7 +10,7 @@ namespace AccesoDatos
 {
     public class MapDA
     {
-        private string route = "res/maps/main.txt";
+        private string route = "res/maps/main2.txt";
         private Connection connection;
 
         private int height=0, width=0;
@@ -27,15 +27,16 @@ namespace AccesoDatos
             cmd.Connection = connection.conn;
 
             // Create map
-            string sql = $"INSERT INTO MAP (ID, WIDTH,HEIGHT)values('{1}','{width}','{height}')";
+            string sql = $"INSERT INTO MAP (ID, WIDTH,HEIGHT, PROB_POKEMON, PROB_ITEM)values('{1}','{width}','{height}','{0}', '{0.02}')";
             cmd.CommandText = sql;
             cmd.ExecuteNonQuery();
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
                     // Insert tile
-                    int tileType = getTileType(tileStrings[j * width + i]);
-                    sql = $"INSERT INTO TILE (TYPE, X,Y,item_enabled,map_id)values('{tileType}', '{i}', '{j}','{true}','{1}')";
+                    //int tileType = getTileType(tileStrings[j * width + i]);
+                    string type = tileStrings[j * width + i];
+                    sql = $"INSERT INTO TILE (TYPE, X,Y,item_enabled,map_id)values('{type}', '{i}', '{j}','{1}','{1}')";
                     cmd.CommandText = sql;
                     cmd.ExecuteNonQuery();
                 }

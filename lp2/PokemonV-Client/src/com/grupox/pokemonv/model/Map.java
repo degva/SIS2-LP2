@@ -164,7 +164,7 @@ public class Map {
         Random random = new Random();
         if( random.nextFloat() <= probItem){
             String dialog;
-            if(random.nextFloat() <= 50){
+            if(random.nextFloat() <= 0.50){
                 player.getPokeballs().setQuantity(player.getPokeballs().getQuantity() + 1); // Increase pokeball
                 dialog = "You have found a pokeball!";
             }else{

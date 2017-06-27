@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccesoDatos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,9 @@ namespace Vista
         [STAThread]
         static void Main()
         {
+            //MapDA mapDA = new MapDA();
+            //mapDA.upload();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmAdminUser());
@@ -25,7 +29,6 @@ namespace Vista
             //Application.Run(new FrmAdminEverything());
             //Application.Run(new FrmAdminItem());
             //Application.Run(new FrmAdminAttack());
-
         }
     }
 }

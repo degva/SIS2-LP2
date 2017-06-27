@@ -102,14 +102,14 @@ public class DataAccess {
 
         while(rs.next()){
             // Read
-            int type = rs.getInt("TYPE");
+            String type = rs.getString("TYPE");
             int tile_player_id = rs.getInt("PLAYER_ID");
             boolean item_enabled = rs.getBoolean("item_enabled");
             int x = rs.getInt("X");
             int y = rs.getInt("Y");
             
             // Set
-            Tile tile = new Tile(Tile.getType(type), null, item_enabled, map);
+            Tile tile = new Tile(Tile.Type.valueOf(type), null, item_enabled, map);
             tile.setPlayer(loadPlayer(tile_player_id, player_id, input, con, tile, game));
 //            map.getGrid()[x][y] = new Tile(Tile.getType(type), loadPlayer(tile_player_id, player_id, input, con, this, game), item_enabled, map);
             map.getGrid()[x][y] = tile;

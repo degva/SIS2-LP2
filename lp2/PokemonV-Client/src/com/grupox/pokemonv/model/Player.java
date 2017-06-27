@@ -49,7 +49,6 @@ public class Player extends Renderable{
     
     /* Methods */
     public void tick(){
-        
         // Check movement
         now = System.nanoTime();
         if( input != null && now - lastMove > movePeriod * 1000000000 ){
