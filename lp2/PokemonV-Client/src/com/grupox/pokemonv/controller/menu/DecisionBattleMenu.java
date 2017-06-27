@@ -33,6 +33,7 @@ public class DecisionBattleMenu extends DoubleColumnBattle{
 
         if (input.action.isFirstPressed && this.selectedIndex > -1) {
             if (selectedIndex == yesIndex) {
+                game.getBattleManager().setInitialSpriteForBattle();
                 game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
             } else if (selectedIndex == noIndex) {
                     game.getBattleManager().setState(BattleManager.State.P2_DEAD);

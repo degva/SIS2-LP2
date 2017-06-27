@@ -443,7 +443,7 @@ public class BattleManager extends Renderable {
             case P1_CAPTURE:
                 currSprite = captureAnimation.getCurrSprite();
                 currSprite2 = idleP2.getCurrSprite();
-                if (numTicks == NUM_TICKS_WAIT+1) {
+                if (numTicks == NUM_TICKS_WAIT) {
                     state = State.POKEMON_CAPTURED;
                     numTicks = 0 ;
                 }
@@ -713,7 +713,7 @@ public class BattleManager extends Renderable {
             case P1_IDLE:
                 g.drawImage(fondoOpcion, 450 - 100, 425, 350 + 100, 171, null);
                 menu.render(g);
-                Font.getInstance().drawString("CHOOSE ONE OPTION", g, 30, 475);
+                Font.getInstance().drawString("WHAT'S YOUR NEXT ACTION ?", g, 30, 475);
                 break;
             case TYPE_ATTACK_MENU:
                 g.drawImage(fondoOpcion, 0, 425, 350 + 200, 171, null);
@@ -736,15 +736,15 @@ public class BattleManager extends Renderable {
                 break;
             case P1_NOT_ENOUGH_POKEBALLS:
                 bagMenu.render(g);
-                Font.getInstance().drawString("YOU DON'T HAVE ANY POKEBALLS", g, 30, 475);
+                Font.getInstance().drawString("YOU DON'T HAVE ANY POKEBALLS. THERE ARE SO MANY AROUND HERE...", g, 30, 475);
                 break;
             case P1_NOT_ENOUGH_POTIONS:
                 bagMenu.render(g);
-                Font.getInstance().drawString("YOU DON'T HAVE ANY POTION", g, 30, 475);
+                Font.getInstance().drawString("YOU DON'T HAVE ANY POTION. LOOK FOR ONE..", g, 30, 475);
                 break;
             case POKEMON_NOT_WEAK:
                 bagMenu.render(g);
-                Font.getInstance().drawString(nombrePokPlayer2 + " IS NOT WEAK ENOUGH", g, 30, 475);
+                Font.getInstance().drawString(nombrePokPlayer2 + " IS NOT WEAK ENOUGH. TRY HARDER..", g, 30, 475);
                 break;
             case P1_ATTACK_FIRST:
                 if (!endBattle) {
@@ -760,10 +760,10 @@ public class BattleManager extends Renderable {
                 Font.getInstance().drawString("YOU USED THE BAG", g, 30, 475);
                 break;
             case P1_GIVEUP:
-                Font.getInstance().drawString("YOU RAN AWAY, LOSING THE BATTLE", g, 30, 475);
+                Font.getInstance().drawString("YOU'VE DECIDED TO LEAVE THE BATTLE.. NOW, RUN", g, 30, 475);
                 break;
             case P1_DEAD:
-                Font.getInstance().drawString("YOU LOSE THE MATCH", g, 30, 475);
+                Font.getInstance().drawString(nombrePokPlayer2+ " DEFEATED YOU..", g, 30, 475);
                 break;
             case P2_IDLE:
                 break;
@@ -777,13 +777,13 @@ public class BattleManager extends Renderable {
                     Font.getInstance().drawString(nombrePokPlayer2 + " USED " + attack2_P2name, g, 30, 475);
                 break;
             case P2_BAG:
-                Font.getInstance().drawString("HE USED THE BAG", g, 30, 475);
+                Font.getInstance().drawString("YOUR OPPONENT HAS JUST USED THE BAG", g, 30, 475);
                 break;
             case P2_GIVEUP:
-                Font.getInstance().drawString("YOU WON THE MATCH, THE OTHER PLAYER LEFT", g, 30, 475);
+                Font.getInstance().drawString("YOUR OPPONENT RAN AWAY, SO.. YOU WON", g, 30, 475);
                 break;
             case P2_DEAD:
-                Font.getInstance().drawString("YOU WIN THE MATCH!", g, 30, 475);
+                Font.getInstance().drawString("YOU'VE DEFEATED "+nombrePokPlayer2 , g, 30, 475);
                 break;
         }
     }
