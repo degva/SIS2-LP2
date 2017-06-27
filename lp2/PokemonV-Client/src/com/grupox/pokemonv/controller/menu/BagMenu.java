@@ -53,8 +53,8 @@ public class BagMenu extends QuantityMenu {
                             int vidaPok2 = game.getBattleManager().getVidaPok2();
                             int danioActual = game.getBattleManager().getRespectiveLife(2, vidaPok2, 140);
                             if (danioActual>=minimoDamage){
-                                game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
                                 game.getBattleManager().setInitialSpriteForBattle();
+                                game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
                                 player.getPokeballs().setQuantity(dis);
                             }
                             else {
