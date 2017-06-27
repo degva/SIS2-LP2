@@ -54,133 +54,6 @@ public class Tile extends Renderable {
     }
     
     /* Methods */
-    public static Type getType(int i){
-        Type type = Tile.Type.FLR01;
-        switch (i){
-            case 1:
-                type = Tile.Type.FLR01;
-                break;
-            case 2:
-                type = Tile.Type.FLR02;
-                break;
-            case 3:
-                type = Tile.Type.FLR03;
-                break;
-            case 4:
-                type = Tile.Type.SGN01;
-                break;
-            case 5:
-                type = Tile.Type.GRA00;
-                break;
-            case 6:
-                type = Tile.Type.GRA01;
-                break;
-            case 7:
-                type = Tile.Type.GRA02;
-                break;
-            case 8:
-                type = Tile.Type.GRA03;
-                break;
-            case 9:
-                type = Tile.Type.GRA04;
-                break;
-            case 10:
-                type = Tile.Type.GRA05;
-                break;
-            case 11:
-                type = Tile.Type.GRA06;
-                break;
-            case 12:
-                type = Tile.Type.GRA07;
-                break;
-            case 13:
-                type = Tile.Type.GRA08;
-                break;
-            case 14:
-                type = Tile.Type.GRA09;
-                break;
-            case 15:
-                type = Tile.Type.SND01;
-                break;
-            case 16:
-                type = Tile.Type.SND02;
-                break;
-            case 17:
-                type = Tile.Type.SND03;
-                break;
-            case 18:
-                type = Tile.Type.SND04;
-                break;
-            case 19:
-                type = Tile.Type.SND05;
-                break;
-            case 20:
-                type = Tile.Type.SND06;
-                break;
-            case 21:
-                type = Tile.Type.SND07;
-                break;
-            case 22:
-                type = Tile.Type.SND08;
-                break;
-            case 23:
-                type = Tile.Type.SND09;
-                break;
-            case 24:
-                type = Tile.Type.TRG01;
-                break;
-            case 25:
-                type = Tile.Type.TRG02;
-                break;
-            case 26:
-                type = Tile.Type.TRG03;
-                break;
-            case 27:
-                type = Tile.Type.HO101;
-                break;
-            case 28:
-                type = Tile.Type.HO102;
-                break;
-            case 29:
-                type = Tile.Type.HO103;
-                break;
-            case 30:
-                type = Tile.Type.HO104;
-                break;
-            case 31:
-                type = Tile.Type.HO105;
-                break;
-            case 32:
-                type = Tile.Type.HO106;
-                break;
-            case 33:
-                type = Tile.Type.HO107;
-                break;
-            case 34:
-                type = Tile.Type.HO108;
-                break;
-            case 35:
-                type = Tile.Type.HO109;
-                break;
-            case 36:
-                type = Tile.Type.HO110;
-                break;
-            case 37:
-                type = Tile.Type.HO111;
-                break;
-            case 38:
-                type = Tile.Type.HO112;
-                break;
-            case 39:
-                type = Tile.Type.GRA10;
-                break;
-            default:
-                type = Tile.Type.FLR01;
-                break;
-        }
-        return type;
-    }
-    
     public void tick(){
         if(type == Type.FLR01 || type == Type.FLR02){
             sprite = animations.get(findAnimation("idle")).getCurrSprite();
@@ -319,33 +192,43 @@ public class Tile extends Renderable {
             case TRW01:
                 x = 18;
                 y = 0;
+                break;
             case TRW02:
                 x = 19;
                 y = 0;
+                break;
             case TRW03:
                 x = 20;
                 y = 0;
+                break;
             case TRW04:
                 x = 21;
                 y = 0;
+                break;
             case TRW05:
                 x = 18;
                 y = 1;
+                break;
             case TRW06:
                 x = 19;
                 y = 1;
+                break;
             case TRW07:
                 x = 18;
                 y = 2;
+                break;
             case TRW08:
                 x = 19;
                 y = 2;
+                break;
             case TRW09:
                 x = 20;
                 y = 2;
+                break;
             case TRW10:
                 x = 21;
                 y = 2;
+                break;
             case HO101:
                 x = 6;
                 y = 8;
@@ -517,96 +400,127 @@ public class Tile extends Renderable {
             case HO301:
                 x = 30;
                 y = 1;
+                break;
             case HO302:
                 x = 31;
                 y = 1;
+                break;
             case HO303:
                 x = 32;
                 y = 1;
+                break;
             case HO304:
                 x = 33;
                 y = 1;
+                break;
             case HO305:
                 x = 34;
                 y = 1;
+                break;
             case HO306:
                 x = 30;
                 y = 2;
+                break;
             case HO307:
                 x = 31;
                 y = 2;
+                break;
             case HO308:
                 x = 32;
                 y = 2;
+                break;
             case HO309:
                 x = 33;
                 y = 2;
+                break;
             case HO310:
                 x = 34;
                 y = 2;
+                break;
             case HO311:
                 x = 30;
                 y = 3;
+                break;
             case HO312:
                 x = 31;
                 y = 3;
+                break;
             case HO313:
                 x = 32;
                 y = 3;
+                break;
             case HO314:
                 x = 33;
                 y = 3;
+                break;
             case HO315:
                 x = 34;
                 y = 3;
+                break;
             case HO316:
                 x = 30;
                 y = 4;
+                break;
             case HO317:
                 x = 31;
                 y = 4;
+                break;
             case HO318:
                 x = 32;
                 y = 4;
+                break;
             case HO319:
                 x = 33;
                 y = 4;
+                break;
             case HO320:
                 x = 34;
                 y = 4;
+                break;
             case HO321:
                 x = 30;
                 y = 5;
+                break;
             case HO322:
                 x = 31;
                 y = 5;
+                break;
             case HO323:
                 x = 32;
                 y = 5;
+                break;
             case HO324:
                 x = 33;
                 y = 5;
+                break;
             case HO325:
                 x = 34;
                 y = 5;
+                break;
             case HO401:
                 x = 30;
                 y = 9;
+                break;
             case HO402:
                 x = 32;
                 y = 9;
+                break;
             case HO403:
                 x = 34;
                 y = 9;
+                break;
             case HO404:
                 x = 30;
                 y = 10;
+                break;
             case HO405:
                 x = 32;
                 y = 10;
+                break;
             case HO406:
                 x = 34;
                 y = 10;
+                break;
             default:
                 x = 1;
                 y = 0;
@@ -641,14 +555,19 @@ public class Tile extends Renderable {
     
     // Determinate walkable
     private boolean determinateWalkable(){
-        if( type == Type.TRG01 || type == Type.TRG02 || type == Type.TRG03 || 
-            type == Type.HO101 || type == Type.HO102 || type == Type.HO103 ||
-            type == Type.HO104 || type == Type.HO105 || type == Type.HO106 ||
-            type == Type.HO107 || type == Type.HO108 || type == Type.HO109 ||
-            type == Type.HO110 || type == Type.HO111 || type == Type.HO112 ){
-            return false;
+//        if( type == Type.TRG01 || type == Type.TRG02 || type == Type.TRG03 || 
+//            type == Type.HO101 || type == Type.HO102 || type == Type.HO103 ||
+//            type == Type.HO104 || type == Type.HO105 || type == Type.HO106 ||
+//            type == Type.HO107 || type == Type.HO108 || type == Type.HO109 ||
+//            type == Type.HO110 || type == Type.HO111 || type == Type.HO112 ){
+//            return false;
+//        }
+//        return true;
+        if( type == Type.GRA00 || type == Type.FLR01 || type == Type.FLR02 || type == Type.PAT00 ||
+            type == Type.GRA10 || type == Type.TRW01 || type == Type.TRW02 ){
+            return true;
         }
-        return true;
+        return false;
     }
     
     private boolean determinatePokemonSpawner(){
