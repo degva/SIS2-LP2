@@ -8,6 +8,7 @@ package com.grupox.pokemonv.controller.menu;
 import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
 import com.grupox.pokemonv.controller.manager.BattleManager;
+import com.grupox.pokemonv.model.Player;
 
 /**
  *
@@ -16,11 +17,13 @@ import com.grupox.pokemonv.controller.manager.BattleManager;
 public class DecisionBattleMenu extends DoubleColumnBattle{
      /* Attributes */
     private Game game;
+    private Player player;
     private final int yesIndex, noIndex;
     /* Constructors */
-    public DecisionBattleMenu(InputHandler input, int topOffset, int rightOffset, Game game) {
-        super(input, topOffset, rightOffset);
+    public DecisionBattleMenu(Player player, int topOffset, int rightOffset, Game game) {
+        super(player.getInput(), topOffset, rightOffset);
         
+        this.player = player;
         this.game = game;
 
         yesIndex = this.addItem("YES");
@@ -33,8 +36,15 @@ public class DecisionBattleMenu extends DoubleColumnBattle{
 
         if (input.action.isFirstPressed && this.selectedIndex > -1) {
             if (selectedIndex == yesIndex) {
-                game.getBattleManager().setInitialSpriteForBattle();
-                game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
+                int dis = player.getPokeballs().getQuantity() - 1;
+                if (dis >= 0) {
+                    game.getBattleManager().setInitialSpriteForBattle();
+                    game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
+                    player.getPokeballs().setQuantity(dis);
+                }else{
+                     game.getBattleManager().setState(BattleManager.State.P2_DEAD);
+                     game.getBattleManager().inicializeTicks();
+                }
             } else if (selectedIndex == noIndex) {
                     game.getBattleManager().setState(BattleManager.State.P2_DEAD);
             } 
