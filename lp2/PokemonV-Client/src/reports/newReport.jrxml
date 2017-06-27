@@ -6,6 +6,7 @@
 	<parameter name="player_id" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT distinct p.ID as ID, p.NAME as NAME, p.TYPE as TYPE, p.DEFENSE_PTS as DEFENSE_PTS , p.LIFE AS LIFE ,a1.NAME as NAME1, a1.POINTS as POINTS1, a2.NAME as NAME2, a2.POINTS as POINTS2  
 FROM inf282gx.PLAYER_X_POKEMON pp, inf282gx.POKEMON p , inf282gx.ATTACK a1, inf282gx.ATTACK a2 
@@ -39,10 +40,6 @@ order by pp.ORDER_POKEMON;]]>
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="79" backcolor="#3399FF" uuid="f5af1ece-1153-4fd3-b866-7f5598a485b8"/>
 			</rectangle>
-			<image>
-				<reportElement x="0" y="2" width="237" height="77" uuid="b3af33c7-d586-4a62-a3f0-904f6ec41288"/>
-				<imageExpression><![CDATA["C:\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\logo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="306" y="33" width="225" height="25" forecolor="#FFFFFF" uuid="6e0584d1-d370-4dcb-8e58-deb257b19cd4"/>
 				<textElement textAlignment="Right">
@@ -50,6 +47,10 @@ order by pp.ORDER_POKEMON;]]>
 				</textElement>
 				<text><![CDATA[LIST OF POKEMONS]]></text>
 			</staticText>
+			<image>
+				<reportElement x="9" y="0" width="187" height="79" uuid="dcc15c9d-1044-4001-939e-368b0baca296"/>
+				<imageExpression><![CDATA["C:\\Users\\alulab14\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -62,7 +63,7 @@ order by pp.ORDER_POKEMON;]]>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[YOU HAVE THIS POKEMONS]]></text>
+				<text><![CDATA[YOU HAVE THESE POKEMONS]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -125,8 +126,8 @@ order by pp.ORDER_POKEMON;]]>
 				<textFieldExpression><![CDATA[$F{NAME1}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="23" y="21" width="17" height="29" uuid="a7c125b5-ca91-4754-8c7b-24b379298047"/>
-				<imageExpression><![CDATA["C:\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\PokeballMini.png"]]></imageExpression>
+				<reportElement x="8" y="16" width="31" height="29" uuid="be0e988b-6444-47a4-a18c-eda5978bd708"/>
+				<imageExpression><![CDATA["C:\\Users\\alulab14\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\PokeballMini.png"]]></imageExpression>
 			</image>
 		</band>
 	</detail>
@@ -143,17 +144,17 @@ order by pp.ORDER_POKEMON;]]>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="362" y="15" width="80" height="20" uuid="ab8e2903-cd12-4ba6-9f86-66c7c148f03e"/>
+				<reportElement x="355" y="12" width="80" height="20" uuid="ab8e2903-cd12-4ba6-9f86-66c7c148f03e"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="442" y="15" width="40" height="20" uuid="2c6ec09c-ef46-4095-94c4-a5931a28e59f"/>
+				<reportElement x="435" y="12" width="40" height="20" uuid="2c6ec09c-ef46-4095-94c4-a5931a28e59f"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="489" y="0" width="59" height="54" uuid="e206ed7c-bf10-4435-a15e-9e16a4abdb7c"/>
-				<imageExpression><![CDATA["C:\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\Togepi.png"]]></imageExpression>
+				<reportElement x="488" y="0" width="55" height="54" uuid="aba86767-95cf-428a-a439-efbb1c84123c"/>
+				<imageExpression><![CDATA["C:\\Users\\alulab14\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\Togepi.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>
