@@ -12,6 +12,7 @@ import com.grupox.pokemonv.controller.manager.*;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.SpriteSheet;
 import com.grupox.pokemonv.model.Tile;
+import com.grupox.pokemonv.view.FrmLogin;
 import java.util.ArrayList;
 
 public class Game extends Canvas implements Runnable {
@@ -57,10 +58,10 @@ public class Game extends Canvas implements Runnable {
         allPokemons = new DataAccess().loadAllPokemons();
         mapManager = new MapManager(this);
         pokemonBeltManager = new PokemonBeltManager(player, this);
-        bagManager = new BagManager( player, this);
+        bagManager = new BagManager(player, this);
         battleManager = new BattleManager(this);
         setState(State.MAP);
-             
+
 //        HARDCODED
 //        player.getPokemons().add(new Pokemon(4, 10, "RAPID ATTACK", 20, "LANZAHOJAS", 20, 120, "Bulbasaur", Pokemon.TypeP.Wind, true));
 //        player.getPokemons().add(new Pokemon(4,30,20,46,"Charmander", Pokemon.TypeP.Fire));
@@ -69,7 +70,6 @@ public class Game extends Canvas implements Runnable {
 //        player.getPokemons().add(new Pokemon(7,10,10,10,"Squirtle5", Pokemon.TypeP.Earth));
 //        player.getPokemons().add(new Pokemon(1,10,10,10,"Carlos2", Pokemon.TypeP.Earth));
 //        enemy.getPokemons().add(new Pokemon(2,10,10,10,"Bulbasaur", Pokemon.TypeP.Earth));
-
         // UI
         initUI();
     }
@@ -192,7 +192,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void setState(State newState) {
-        switch (newState){
+        switch (newState) {
             case BATTLE:
                 Sound.getInstance().stop(Sound.AUDIO.MAP);
                 Sound.getInstance().start(Sound.AUDIO.BATTLE);
@@ -226,6 +226,7 @@ public class Game extends Canvas implements Runnable {
     public Player getPlayer() {
         return player;
     }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -233,6 +234,7 @@ public class Game extends Canvas implements Runnable {
     public InputHandler getInput() {
         return input;
     }
+
     public void setInput(InputHandler input) {
         this.input = input;
     }
@@ -240,20 +242,33 @@ public class Game extends Canvas implements Runnable {
     public ArrayList<Pokemon> getAllPokemons() {
         return allPokemons;
     }
+
     public void setAllPokemons(ArrayList<Pokemon> allPokemons) {
         this.allPokemons = allPokemons;
     }
-    
-    
 
     public static void main(String args[]) {
 //        new Login().setVisible( true );
-        Game game = new Game();
-        game.start();
-        
+//        Game game = new Game();
+//        game.start();
+        FrmLogin frame = new FrmLogin();
+
+        while (true) {
+            if (frame.getA() == 1) {
+                Game game = new Game();
+                game.start();
+                break;
+            }
+            try{
+                Thread.sleep(1000);
+            }catch(Exception exp){
+            
+            }
+        }
 
     }
-    public int getNumTicks(){
+
+    public int getNumTicks() {
         return ticks;
     }
 }

@@ -23,107 +23,38 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="105" max="32767" attributes="0"/>
-              <Component id="BTNregister" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-              <Component id="BTNcancel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="LBLusername" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="LBLpassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="LBLemail" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="TXTemail" pref="113" max="32767" attributes="0"/>
-                  <Component id="TXTusername" max="32767" attributes="0"/>
-                  <Component id="TXTpassword" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" min="-2" pref="832" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="LBLusername" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TXTusername" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="67" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="LBLpassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TXTpassword" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="LBLemail" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TXTemail" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BTNregister" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BTNcancel" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" pref="452" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="BTNregister">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Register"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNregisterActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BTNcancel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Cancel"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="LBLusername">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Username"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="LBLemail">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Email"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="LBLpassword">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Password"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="TXTusername">
-    </Component>
-    <Component class="javax.swing.JTextField" name="TXTemail">
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="TXTpassword">
-    </Component>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/image/pikachu.jpg"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="-70" y="-10" width="900" height="460"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

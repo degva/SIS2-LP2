@@ -234,4 +234,29 @@ public class DataAccess {
     private void closeConnection(Connection con) throws SQLException{
         con.close();
     }
+    
+    public int verifyLogin(String username,String password){
+        
+        
+        char character = '"';
+        String sql= "SELECT * FROM PLAYER WHERE USERNAME = " + character + username + character
+                + " AND PASSWORD = " + character + password + character;
+        
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            ResultSet rs = sentencia.executeQuery(sql);
+            
+            if(rs.next()){
+                return 1;
+            }else {
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
 }
