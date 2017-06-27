@@ -7,6 +7,7 @@ package com.grupox.pokemonv.view;
 
 import com.grupox.pokemonv.BD.DataAccess;
 import com.grupox.pokemonv.controller.Game;
+import com.grupox.pokemonv.model.SpriteSheet;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -23,6 +24,7 @@ public class FrmLogin extends javax.swing.JFrame {
     
     public FrmLogin() {
         initComponents();
+        this.setIconImage(SpriteSheet.getInstance().getSubImage(7, 0));
         this.game = game;
         setVisible(true);
         

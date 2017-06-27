@@ -45,6 +45,8 @@ public class Game extends Canvas implements Runnable {
     private PokemonBeltManager pokemonBeltManager;
     private ArrayList<Pokemon> allPokemons;
 
+    public static int player_id=0;
+    
     /* Constructors */
     public Game() {
         // Main loop

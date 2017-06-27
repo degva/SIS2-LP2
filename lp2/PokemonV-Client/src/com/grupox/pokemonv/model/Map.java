@@ -26,6 +26,11 @@ public class Map {
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 grid[i][j].tick();
+//                if(grid[i][j].containsUser()){
+//                    if(grid[i][j].getPlayer().getId() == 4){
+//                        System.out.println(i + "," + j);
+//                    }
+//                }
             }
         }
     }

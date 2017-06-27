@@ -27,7 +27,7 @@ namespace AccesoDatos
             cmd.Connection = connection.conn;
 
             // Create map
-            string sql = $"INSERT INTO MAP (ID, WIDTH,HEIGHT, PROB_POKEMON, PROB_ITEM)values('{1}','{width}','{height}','{0.2}', '{0.02}')";
+            string sql = $"INSERT INTO MAP (ID, WIDTH,HEIGHT, PROB_POKEMON, PROB_ITEM)values('{1}','{width}','{height}','{0.1}', '{0.02}')";
             cmd.CommandText = sql;
             cmd.ExecuteNonQuery();
 
@@ -36,7 +36,55 @@ namespace AccesoDatos
                     // Insert tile
                     //int tileType = getTileType(tileStrings[j * width + i]);
                     string type = tileStrings[j * width + i];
-                    sql = $"INSERT INTO TILE (TYPE, X,Y,item_enabled,map_id)values('{type}', '{i}', '{j}','{1}','{1}')";
+
+                    if (i == 13 && j == 38)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{4}','{1}','{1}')";
+                    }
+                    else if (i == 11 && j == 31)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{1}','{1}','{1}')";
+                    }
+                    else if (i == 26 && j == 11)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{5}','{1}','{1}')";
+                    }
+                    else if (i == 23 && j == 38) {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{2}','{1}','{1}')";
+                    }
+                    else if (i == 21 && j == 42)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{3}','{1}','{1}')";
+                    }
+                    else if (i == 22 && j == 42)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{10}','{1}','{1}')";
+                    }
+                    else if (i == 12 && j == 17)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{9}','{1}','{1}')";
+                    }
+                    else if (i == 27 && j == 14)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{6}','{1}','{1}')";
+                    }
+                    else if (i == 16 && j == 32)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{7}','{1}','{1}')";
+                    }
+                    else if (i == 16 && j == 45)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{8}','{1}','{1}')";
+                    }
+                    else if (i == 26 && j == 40)
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,player_id,item_enabled,map_id)values('{type}', '{i}', '{j}','{11}','{1}','{1}')";
+                    }
+                    else
+                    {
+                        sql = $"INSERT INTO TILE (TYPE, X,Y,item_enabled,map_id)values('{type}', '{i}', '{j}','{1}','{1}')";
+                    }
+                    
                     cmd.CommandText = sql;
                     cmd.ExecuteNonQuery();
                 }
