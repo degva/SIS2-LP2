@@ -96,7 +96,8 @@ public class BattleManager extends Renderable {
     private TypeAttackMenuP1 attackMenu;
     private BagMenu bagMenu;
     private String attack1_name, attack2_name, attack1_P2name, attack2_P2name;
-    private ArrayList<FileReader> archivos;
+    private ArrayList<FileReader> archivosWild;
+    private ArrayList<FileReader> archivosPlayer;
     private BufferedReader entrada;
     private String response;
     private boolean endBattle = false;
@@ -123,11 +124,12 @@ public class BattleManager extends Renderable {
             imgHeal = ImageIO.read(new File(rutaImgHeal));
             imgCapture = ImageIO.read(new File("res/battle/pokeballMini.png"));
             imgBackgroundHP2 = ImageIO.read(new File(rutaHP2));
-            archivos = new ArrayList<>();
-            archivos.add(new FileReader("res/battle/other1.txt"));
-            archivos.add(new FileReader("res/battle/other2.txt"));
-            archivos.add(new FileReader("res/battle/other3.txt"));
-            archivos.add(new FileReader("res/battle/other4.txt"));
+            archivosWild = new ArrayList<>();
+            archivosPlayer = new ArrayList<>();
+            archivosWild.add(new FileReader("res/battle/other1.txt"));
+            archivosWild.add(new FileReader("res/battle/other2.txt"));
+            archivosPlayer.add(new FileReader("res/battle/other3.txt"));
+            archivosPlayer.add(new FileReader("res/battle/other4.txt"));
         } catch (Exception exp) {
         }
 
@@ -156,13 +158,16 @@ public class BattleManager extends Renderable {
     }
 
     public void startBattle(Player p1, Player p2) {
+        endBattle = false;
         player = p1;
         player2 = p2;
+        numTicks = 0;
         input = p1.getInput();
         battleAgainstPlayer = true;
+        animations.clear();
         Random r = new Random();
-        int selected = r.nextInt(2)+2;
-        entrada = new BufferedReader(archivos.get(selected));
+        int selected = r.nextInt(2);
+        entrada = new BufferedReader(archivosPlayer.get(selected));
         attack1_name = p1.getPokemons().get(0).getAttack1().getName();
         attack2_name = p1.getPokemons().get(0).getAttack2().getName();
         initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
@@ -227,11 +232,14 @@ public class BattleManager extends Renderable {
     }
     public void startBattle(Player p1, Pokemon pokContricante) {
         player = p1;
+        endBattle= false;
+        animations.clear();
+        numTicks = 0;
         input = p1.getInput();
         battleAgainstPlayer = false;
         Random r = new Random();
         int selected = r.nextInt(2);
-        entrada = new BufferedReader(archivos.get(selected));
+        entrada = new BufferedReader(archivosWild.get(selected));
         attack1_name = p1.getPokemons().get(0).getAttack1().getName();
         attack2_name = p1.getPokemons().get(0).getAttack2().getName();
         initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
@@ -412,7 +420,8 @@ public class BattleManager extends Renderable {
                 currSprite2 = imgCapture;
                 if (numTicks == NUM_TICKS_WAIT) {
                     endBattle=true;
-                    player2.setCanBattle(false);
+                    if (battleAgainstPlayer) player2.setCanBattle(false);
+                    //state = State.P1_IDLE;
                 }
                 break;
             case P1_IDLE:
@@ -456,6 +465,7 @@ public class BattleManager extends Renderable {
                 currSprite2 = idleP2.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT) {
                     endBattle = true;
+                    //state = State.P1_IDLE;
                 }
                 break;
             case P2_DEAD:
@@ -463,6 +473,7 @@ public class BattleManager extends Renderable {
                 currSprite2 = idleP2.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT) {
                     endBattle = true;
+                    //state = State.P1_IDLE;
                 }
                 break;
             case P1_BAG:
@@ -473,8 +484,8 @@ public class BattleManager extends Renderable {
                 currSprite2 = idleP2.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT) {
                     endBattle = true;
+                    //state = State.P1_IDLE;
                 }
-                //state = State.FIRSTLEFT;
                 break;
             case P2_IDLE:
                 currSprite = idle.getCurrSprite();
@@ -532,6 +543,7 @@ public class BattleManager extends Renderable {
                 currSprite2 = idleP2.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT) {
                     endBattle = true;
+                    //state = State.P1_IDLE;
                 }
                 break;
         }
@@ -577,6 +589,11 @@ public class BattleManager extends Renderable {
             game.setState(Game.State.MAP);
             endBattle = false;
             state = State.P1_IDLE;
+            try{
+                entrada.close();
+            }catch(Exception exp){
+                System.out.println("El archivo no se cerro correctamente");
+            }
         }
     }
 
@@ -633,7 +650,7 @@ public class BattleManager extends Renderable {
             case P2_HEAL:
                 break;
             case P1_CAPTURE:
-                Font.getInstance().drawString("YOU ARE CAPTURING"+nombrePokPlayer2, g, 30, 475);
+                Font.getInstance().drawString("YOU ARE CAPTURING "+nombrePokPlayer2, g, 30, 475);
                 break;
             case POKEMON_CAPTURED:
                 Font.getInstance().drawString("YOU'VE CAPTURED " + nombrePokPlayer2, g, 30, 475);
@@ -711,9 +728,8 @@ public class BattleManager extends Renderable {
                 return aux;
             }
         } catch (Exception exp) {
-
         }
-        return null;
+        return "atacar2";
     }
 
     public void linkRoutes() {
