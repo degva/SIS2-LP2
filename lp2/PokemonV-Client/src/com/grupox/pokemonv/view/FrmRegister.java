@@ -1,21 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.grupox.pokemonv.view;
 
-import com.grupox.pokemonv.model.Player;
-import javax.swing.JOptionPane;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
-
+/**
+ *
+ * @author alulab14
+ */
 public class FrmRegister extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmRegister
      */
-    Player player;
     public FrmRegister() {
         initComponents();
-        setVisible(true);
-        setResizable(false);
-        setTitle("Registro");
-        setLocation(1000, 350);
     }
 
     /**
@@ -27,151 +27,21 @@ public class FrmRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BTNregister = new javax.swing.JButton();
-        BTNcancel = new javax.swing.JButton();
-        LBLusername = new javax.swing.JLabel();
-        LBLemail = new javax.swing.JLabel();
-        LBLpassword = new javax.swing.JLabel();
-        TXTusername = new javax.swing.JTextField();
-        TXTemail = new javax.swing.JTextField();
-        TXTpassword = new javax.swing.JPasswordField();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        BTNregister.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        BTNregister.setText("Register");
-        BTNregister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNregisterActionPerformed(evt);
-            }
-        });
-
-        BTNcancel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        BTNcancel.setText("Cancel");
-
-        LBLusername.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        LBLusername.setText("Username");
-
-        LBLemail.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        LBLemail.setText("Email");
-
-        LBLpassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        LBLpassword.setText("Password");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
-                .addComponent(BTNregister)
-                .addGap(60, 60, 60)
-                .addComponent(BTNcancel)
-                .addGap(81, 81, 81))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LBLusername)
-                    .addComponent(LBLpassword)
-                    .addComponent(LBLemail))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TXTemail, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                    .addComponent(TXTusername)
-                    .addComponent(TXTpassword))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 673, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LBLusername)
-                    .addComponent(TXTusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LBLpassword)
-                    .addComponent(TXTpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LBLemail)
-                    .addComponent(TXTemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(94, 94, 94)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNregister)
-                    .addComponent(BTNcancel))
-                .addGap(60, 60, 60))
+            .addGap(0, 520, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    private int verifyemail(String cad)
-        {
-            String cad5 = "@pucp.pe";
-            String cad1 = "@pucp.edu.pe";
-            String cad2 = "@gmail.com";
-            String cad3 = "@hotmail.com";
-            String cad4 = "@outlook.com";
-            
-            if ((cad.contains(cad1)) || (cad.contains(cad2)) || (cad.contains(cad3)) || 
-                    (cad.contains(cad4)) || (cad.contains(cad5))){
-                return 1;
-            }else 
-                return 0;
-            
-        }
-    
-    
-    private void BTNregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNregisterActionPerformed
-        int flag = 1, flag2 = 1;
-
-            
-            if (TXTusername.getText() == "")
-            {
-                JOptionPane.showMessageDialog(null, " Ingresa un usuario");
-                flag = 0;
-            }
-
-            if (TXTpassword.getText() == "")
-            {
-                JOptionPane.showMessageDialog(null, " Ingresa una contraseña");
-                flag = 0;
-            }
-            
-            if (TXTemail.getText() == "")
-            {
-                JOptionPane.showMessageDialog(null, " Ingresa un email");
-                flag = 0;
-                flag2 = 0;
-            }
-            
-            if (flag2 == 1) {
-                if (verifyemail(TXTemail.getText()) == 0)
-                {
-                    JOptionPane.showMessageDialog(null, " Debe ingresar un correo valido");
-                    flag = 0;
-                }
-            }
-//            
-//            if (flag == 1)
-//            {
-//
-//                player = new Player(null);
-//                
-//                UsuarioDA playerDA = new UsuarioDA();
-//                if ((playerDA.verificarRepetido(player)) == 1)
-//                {
-//                    JOptionPane.showMessageDialog(null, " Este nombre de usuario ya esta registrado");
-//                }else{
-//                        playerDA.agregarUsuario(player);
-//                        JOptionPane.showMessageDialog(null, " Registro exitoso");
-//                        
-//                }
-//            }
-            
-    }//GEN-LAST:event_BTNregisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,13 +79,5 @@ public class FrmRegister extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNcancel;
-    private javax.swing.JButton BTNregister;
-    private javax.swing.JLabel LBLemail;
-    private javax.swing.JLabel LBLpassword;
-    private javax.swing.JLabel LBLusername;
-    private javax.swing.JTextField TXTemail;
-    private javax.swing.JPasswordField TXTpassword;
-    private javax.swing.JTextField TXTusername;
     // End of variables declaration//GEN-END:variables
 }

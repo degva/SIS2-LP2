@@ -12,6 +12,7 @@ import com.grupox.pokemonv.controller.manager.*;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.SpriteSheet;
 import com.grupox.pokemonv.model.Tile;
+import com.grupox.pokemonv.view.FrmLogin;
 import java.util.ArrayList;
 
 public class Game extends Canvas implements Runnable {
@@ -248,10 +249,10 @@ public class Game extends Canvas implements Runnable {
 
     public static void main(String args[]) {
 //        new Login().setVisible( true );
-        Game game = new Game();
-        game.start();
-        
-
+//        Game game = new Game();
+//        game.start();
+          FrmLogin frame = new FrmLogin();
+         
     }
     public int getNumTicks(){
         return ticks;

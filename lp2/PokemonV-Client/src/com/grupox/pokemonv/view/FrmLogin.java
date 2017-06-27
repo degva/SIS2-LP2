@@ -1,21 +1,62 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.grupox.pokemonv.view;
 
+import com.grupox.pokemonv.BD.DataAccess;
+import com.grupox.pokemonv.controller.Game;
+import static javax.swing.JOptionPane.showMessageDialog;
+
+/**
+ *
+ * @author alulab14
+ */
 public class FrmLogin extends javax.swing.JFrame {
 
-    public static boolean done;
     /**
      * Creates new form FrmLogin
      */
     public FrmLogin() {
         initComponents();
-        done = false;
-        //setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        
         setVisible(true);
-        setResizable(false);
+        
         setTitle("Login");
-        setLocation(550, 350);
+        setLocation(550,350);
     }
-
+    
+    
+    public boolean camposValidos(){
+        
+        if(TXTusername.getText().equals("")){
+            showMessageDialog(null, "Must enter an username");
+            return false;
+        }else if(TXTpassword.getText().equals("")){
+            showMessageDialog(null, "Must enter a password");
+            return false;
+        }else if(TXTusername.getText().equals(" ") || 
+                TXTpassword.getText().equals(" ") || TXTusername.getText().equals('"') || 
+                TXTpassword.getText().equals('"') )
+        {
+            showMessageDialog(null, "");
+            return false;
+        }
+        return true;
+    }
+    
+    public void logueo(){
+        if(!camposValidos()) return ;
+        DataAccess playeradmin = new DataAccess();
+        
+        if(playeradmin.verifyLogin(TXTusername.getText(), TXTpassword.getText()) == 1){
+            Game gamepokemon = new Game();
+            gamepokemon.start();
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,100 +66,70 @@ public class FrmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        LBLusername = new javax.swing.JLabel();
-        LBLpassword = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         BTNlogin = new javax.swing.JButton();
-        TXTpassword = new javax.swing.JPasswordField();
-        TXTusername = new javax.swing.JTextField();
         BTNregister = new javax.swing.JButton();
-
-        jLabel1.setText("jLabel1");
+        TXTusername = new javax.swing.JTextField();
+        TXTpassword = new javax.swing.JPasswordField();
+        LBLpassword = new javax.swing.JLabel();
+        LBLusername = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        LBLusername.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        LBLusername.setText("Username");
+        jPanel1.setLayout(null);
 
-        LBLpassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        LBLpassword.setText("Password");
-
-        BTNlogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BTNlogin.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         BTNlogin.setText("Login");
         BTNlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNloginActionPerformed(evt);
             }
         });
+        jPanel1.add(BTNlogin);
+        BTNlogin.setBounds(180, 300, 90, 30);
 
-        TXTusername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXTusernameActionPerformed(evt);
-            }
-        });
-
-        BTNregister.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BTNregister.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         BTNregister.setText("Register");
-        BTNregister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNregisterActionPerformed(evt);
-            }
-        });
+        jPanel1.add(BTNregister);
+        BTNregister.setBounds(390, 300, 110, 30);
+
+        TXTusername.setToolTipText("");
+        jPanel1.add(TXTusername);
+        TXTusername.setBounds(310, 220, 130, 20);
+        jPanel1.add(TXTpassword);
+        TXTpassword.setBounds(310, 260, 130, 20);
+
+        LBLpassword.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        LBLpassword.setText("Password");
+        jPanel1.add(LBLpassword);
+        LBLpassword.setBounds(170, 260, 90, 20);
+
+        LBLusername.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        LBLusername.setText("Username");
+        jPanel1.add(LBLusername);
+        LBLusername.setBounds(170, 220, 90, 20);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/fondo.png"))); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 710, 380);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LBLusername)
-                            .addComponent(LBLpassword))
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TXTpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TXTusername, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(BTNlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)
-                        .addComponent(BTNregister, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(209, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LBLusername)
-                    .addComponent(TXTusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TXTpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LBLpassword))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTNregister, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TXTusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTusernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TXTusernameActionPerformed
-
-    private void BTNregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNregisterActionPerformed
-        FrmRegister regis = new FrmRegister();
-        regis.setVisible(true);
-    }//GEN-LAST:event_BTNregisterActionPerformed
-
     private void BTNloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNloginActionPerformed
-        // TODO add your handling code here:
+        logueo();
     }//GEN-LAST:event_BTNloginActionPerformed
 
     /**
@@ -164,5 +175,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField TXTpassword;
     private javax.swing.JTextField TXTusername;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
