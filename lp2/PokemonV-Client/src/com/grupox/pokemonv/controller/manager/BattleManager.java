@@ -55,6 +55,9 @@ public class BattleManager extends Renderable {
     private int pokAlto = 150;
     private final int topOffset = 390;
     private final int rightOffset = Game.WIDTH / 1000;
+    private final int topOffsetAttack = 390;
+    private final int rightOffsetAttack = Game.WIDTH/2;
+    
     private final double movePeriod = 0.2;
 
     private BufferedImage imgPokemonStatic_P1;
@@ -104,11 +107,14 @@ public class BattleManager extends Renderable {
     private boolean battleAgainstPlayer;
     private int idPok1, idPok2;
     private int healEffect = 0;
-    
+    private boolean alreadyHealed = false;
+
+
     public enum State {
         P1_IDLE, P1_ATTACK_FIRST, P1_ATTACK_SECOND, P1_BAG, P1_GIVEUP,
         P2_IDLE, P2_ATTACK_FIRST, P2_ATTACK_SECOND, P2_BAG, P2_GIVEUP,
         P1_DEAD, P2_DEAD, P1_HEAL, P2_HEAL, P1_CAPTURE,POKEMON_CAPTURED,
+        P1_ALREADY_HEALED,
         TYPE_ATTACK_MENU, BAG_MENU
     };
     
@@ -201,7 +207,7 @@ public class BattleManager extends Renderable {
         }
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset, game);
-        attackMenu = new TypeAttackMenuP1(input, 420, Game.WIDTH / 3, attack1_name, attack2_name, game);
+        attackMenu = new TypeAttackMenuP1(input, topOffsetAttack, rightOffsetAttack, attack1_name, attack2_name, game);
         bagMenu = new BagMenu(player, 20, rightOffset,battleAgainstPlayer, game);
         captureImages = new ArrayList<>();
         loadCaptureAnimation();
@@ -275,7 +281,7 @@ public class BattleManager extends Renderable {
         }
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset, game);
-        attackMenu = new TypeAttackMenuP1(input, 420, Game.WIDTH / 3, attack1_name, attack2_name, game);
+        attackMenu = new TypeAttackMenuP1(input, topOffsetAttack, rightOffsetAttack, attack1_name, attack2_name, game);
         bagMenu = new BagMenu(player, 20, rightOffset,battleAgainstPlayer, game);
         captureImages = new ArrayList<>();
         loadCaptureAnimation();
@@ -373,7 +379,15 @@ public class BattleManager extends Renderable {
     public void tick() {
         switch (state) {
             case BAG_MENU:
+                if (vidaPok1==initialLifePok1)
+                    alreadyHealed = true;
+                else alreadyHealed = false;
                 bagMenu.tick();
+                break;
+            case P1_ALREADY_HEALED:
+                if (numTicks == NUM_TICKS_WAIT-1) {
+                    state = State.BAG_MENU;
+                }
                 break;
             case P1_HEAL:
                 currSprite = healAnimation1.getCurrSprite();
@@ -584,6 +598,9 @@ public class BattleManager extends Renderable {
         if ((state == State.POKEMON_CAPTURED) && (game.getNumTicks() == 58)) {
             numTicks++;
         }
+        if ((state == State.P1_ALREADY_HEALED) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
         
         if (endBattle) {
             game.setState(Game.State.MAP);
@@ -669,6 +686,10 @@ public class BattleManager extends Renderable {
             case BAG_MENU:
                 bagMenu.render(g);
                 Font.getInstance().drawString("CHOOSE WISELY..", g, 30, 475);
+                break;
+            case P1_ALREADY_HEALED:
+                bagMenu.render(g);
+                Font.getInstance().drawString("YOU'RE ALREADY HEALED..", g, 30, 475);
                 break;
             case P1_ATTACK_FIRST:
                 if (!endBattle) {
@@ -786,6 +807,14 @@ public class BattleManager extends Renderable {
     public void setInitialSpriteForBattle(){
         currSprite = imgForAnimP1_Normal1;
     }
+    public boolean isAlreadyHealed() {
+        return alreadyHealed;
+    }
+
+    public void setAlreadyHealed(boolean alreadyHealed) {
+        this.alreadyHealed = alreadyHealed;
+    }
+    
     @Override
     public void render(Graphics2D g, int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); 

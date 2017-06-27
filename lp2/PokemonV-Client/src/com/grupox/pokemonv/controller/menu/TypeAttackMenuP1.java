@@ -9,6 +9,7 @@ public class TypeAttackMenuP1 extends DoubleColumnBattle {
     /* Attributes */
     private Game game;
     private final int radipAttackIndex, otherAttackIndex;
+    private final int closeIndex;
 
     /* Constructors */
     public TypeAttackMenuP1(InputHandler input, int topOffset, int rightOffset,String attack1_name,String attack2_name, Game game) {
@@ -21,6 +22,7 @@ public class TypeAttackMenuP1 extends DoubleColumnBattle {
 
         radipAttackIndex = this.addItem(attack1_name);
         otherAttackIndex = this.addItem(attack2_name);
+        closeIndex = this.addItem("Close");
     }
 
     /* Methods */
@@ -32,6 +34,9 @@ public class TypeAttackMenuP1 extends DoubleColumnBattle {
                 game.getBattleManager().setState(BattleManager.State.P1_ATTACK_FIRST);
             } else if (selectedIndex == otherAttackIndex) {
                 game.getBattleManager().setState(BattleManager.State.P1_ATTACK_SECOND);
+            } 
+            else if (selectedIndex == closeIndex) {
+                game.getBattleManager().setState(BattleManager.State.P1_IDLE);
             }
         }
     }

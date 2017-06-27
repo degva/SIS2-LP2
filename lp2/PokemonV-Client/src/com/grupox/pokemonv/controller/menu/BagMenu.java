@@ -50,11 +50,19 @@ public class BagMenu extends QuantityMenu {
                         player.getPokeballs().setQuantity(dis);
                     }
                 } else if (selectedIndex == potionsIndex) {
-                    game.getBattleManager().setState(BattleManager.State.P1_HEAL);
-                    int dis = player.getPotions().getQuantity();
-                    int effect = player.getPotions().getHp();
-                    player.getPotions().setQuantity(dis);
-                    game.getBattleManager().setHealEffect(effect);
+                    if (!game.getBattleManager().isAlreadyHealed()) {
+                        int dis = player.getPotions().getQuantity() - 1;
+                        if (dis>=0){
+                            game.getBattleManager().setState(BattleManager.State.P1_HEAL);
+                            int effect = player.getPotions().getHp();
+                            player.getPotions().setQuantity(dis);
+                            game.getBattleManager().setHealEffect(effect);
+                        }
+                    }
+                    else {
+                        game.getBattleManager().setState(BattleManager.State.P1_ALREADY_HEALED);
+                        game.getBattleManager().inicializeTicks();
+                    }
                 } else if (selectedIndex == closeIndex) {
                     game.getBattleManager().setState(BattleManager.State.P1_IDLE);
                 }
