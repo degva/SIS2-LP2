@@ -261,4 +261,21 @@ public class DataAccess {
         }
         
     }
+    
+    public void updateData(int level, int player_id, InputHandler input, Game game){
+        try{
+            Connection con = openConnection();
+            String query =  "UPDATE inf282gx.MAP SET height="+
+                            " WHERE ID="+String.valueOf(level)+
+                            " and POKEMON_ID=";
+            Statement sentencia = con.prepareStatement(query);
+            int n = sentencia.executeUpdate(query);
+            
+        }
+        catch(Exception e){
+            
+        }
+    }
+    
+    
 }
