@@ -24,7 +24,9 @@ public class Tile extends Renderable {
         HO325,
         
         HO401, HO402, HO403, HO404, HO405, HO406,    // Left house, different tiles
-        PAT00  // PATCH OF SAND OUTSIDE HOUSE
+        PAT00,  // PATCH OF SAND OUTSIDE HOUSE
+        
+        EBA01, EBA02, EBA03, EBA04, EBA05   // Earth barriers
     };
     
     /* Attributes */
@@ -526,6 +528,26 @@ public class Tile extends Renderable {
             case HO406:
                 x = 34;
                 y = 10;
+                break;
+            case EBA01:
+                x = 21;
+                y = 4;
+                break;
+            case EBA02:
+                x = 22;
+                y = 4;
+                break;
+            case EBA03:
+                x = 23;
+                y = 4;
+                break;
+            case EBA04:
+                x = 22;
+                y = 5;
+                break;
+            case EBA05:
+                x = 23;
+                y = 5;
                 break;
             default:
                 x = 0;
