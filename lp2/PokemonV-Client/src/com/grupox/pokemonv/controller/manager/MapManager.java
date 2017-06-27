@@ -33,7 +33,7 @@ public class MapManager {
         this.dialog = new Dialog("");
         
         DataAccess da = new DataAccess();
-        map = da.loadMap(1, 4, input, game);
+        map = da.loadMap(1, Game.player_id, input, game);
         player = game.getPlayer();
         
         menu = new MapMenu( input, 20, Game.WIDTH / 80, game );
@@ -52,9 +52,9 @@ public class MapManager {
             state = State.MENU;
         }else if( state == State.MOVING && input.action.isFirstPressed ){
             enemy = map.tryBattle(player, player.getDirection());
-            enemy.setDirection(map.getDirectionFacingPlayer(player, enemy));
             if(enemy != null){
                 if(enemy.getCanBattle()){
+                    enemy.setDirection(map.getDirectionFacingPlayer(player, enemy));
                     dialog = enemy.getBattleDialog();
                     setState(State.BATTLE_DIALOG);
                 }else{

@@ -9,6 +9,8 @@ import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Pokeball;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.Potion;
+import com.grupox.pokemonv.model.Renderable;
+import com.grupox.pokemonv.model.Renderable.Direction;
 import com.grupox.pokemonv.model.Tile;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -131,15 +133,19 @@ public class DataAccess {
         String defeatDialog = "";
         String battleDialog = "";
         boolean canBattle = false;
+        Direction dir = Direction.DOWN;
         while(rs.next()){
             npcType = Player.NPC_TYPE.valueOf(rs.getString("NPC_TYPE"));
-            System.out.println("VALUE" + rs.getString("NPC_TYPE"));
             defeatDialog = rs.getString("DEFEAT_CONTENT");
             battleDialog = rs.getString("BATTLE_CONTENT");
             canBattle = rs.getBoolean("CAN_BATTLE");
+            dir = Direction.valueOf(rs.getString("DIRECTION"));
             break;
         }
-        System.out.println(rs.getString("NPC_TYPE"));
+        // I only want one player
+        if(npcType == Player.NPC_TYPE.PLAYER && tile_player_id != logged_player_id){
+            return null;
+        }
         Player player;
         if(tile_player_id == logged_player_id){
             player = new Player(input);
@@ -153,6 +159,7 @@ public class DataAccess {
         player.setBattleDialog(new Dialog(battleDialog));
         player.setDefeatDialog(new Dialog(defeatDialog));
         player.setCanBattle(canBattle);
+        player.setDirection(dir);
         
         player.setPokemons(loadPokemons(tile_player_id, con));
         loadItems(player, tile_player_id,con);
@@ -250,6 +257,7 @@ public class DataAccess {
             ResultSet rs = sentencia.executeQuery(sql);
             
             if(rs.next()){
+                Game.player_id = rs.getInt("id");
                 return 1;
             }else {
                 return 0;

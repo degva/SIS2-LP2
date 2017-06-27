@@ -5,6 +5,8 @@
  */
 package com.grupox.pokemonv.view;
 
+import com.grupox.pokemonv.model.SpriteSheet;
+
 /**
  *
  * @author alulab14
@@ -16,6 +18,7 @@ public class FrmRegister extends javax.swing.JFrame {
      */
     public FrmRegister() {
         initComponents();
+        this.setIconImage(SpriteSheet.getInstance().getSubImage(7, 0));
     }
 
     /**

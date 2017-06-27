@@ -293,7 +293,6 @@ public class Player extends Renderable{
     }
     public void setNpcType(NPC_TYPE npcType) {
         this.npcType = npcType;
-        System.out.println(this.npcType);
         getNPCSprite();
     }
 
