@@ -91,6 +91,7 @@ public class BattleManager extends Renderable {
     private Animation healAnimation1;
     private Animation healAnimation2;
     private Animation captureAnimation;
+    private Pokemon pokLoad;
     //private Animation endCaptureAnimation;
     private int numTicks = 0;
     private int NUM_TICKS_WAIT = 2;
@@ -182,7 +183,9 @@ public class BattleManager extends Renderable {
         initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
         danio1_Pok1 = p1.getPokemons().get(0).getAttack1().getPoints();
         danio2_Pok1 = p1.getPokemons().get(0).getAttack2().getPoints();
-
+        
+        pokLoad = p2.getPokemons().get(0);
+        
         attack1_P2name = p2.getPokemons().get(0).getAttack1().getName();
         attack2_P2name = p2.getPokemons().get(0).getAttack2().getName();
         initialLifePok2 = vidaPok2 = p2.getPokemons().get(0).getLife();
@@ -254,7 +257,9 @@ public class BattleManager extends Renderable {
         initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
         danio1_Pok1 = p1.getPokemons().get(0).getAttack1().getPoints();
         danio2_Pok1 = p1.getPokemons().get(0).getAttack2().getPoints();
-
+        
+        pokLoad =pokContricante;
+        
         attack1_P2name = pokContricante.getAttack1().getName();
         System.out.println(attack1_P2name);
         System.out.println(pokContricante.getName());
@@ -445,6 +450,7 @@ public class BattleManager extends Renderable {
                 currSprite2 = idleP2.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT) {
                     state = State.POKEMON_CAPTURED;
+                    player.getPokemons().add(pokLoad);
                     numTicks = 0 ;
                 }
                 break;
