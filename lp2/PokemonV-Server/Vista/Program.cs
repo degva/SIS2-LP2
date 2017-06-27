@@ -16,8 +16,8 @@ namespace Vista
         [STAThread]
         static void Main()
         {
-            MapDA mapDA = new MapDA();
-            mapDA.upload();
+            //MapDA mapDA = new MapDA();
+            //mapDA.upload();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
