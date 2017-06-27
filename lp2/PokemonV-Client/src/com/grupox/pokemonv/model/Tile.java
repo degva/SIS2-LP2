@@ -65,7 +65,7 @@ public class Tile extends Renderable {
         if( player != null ){
             player.render( g, x, y );
         }
-        if(type == Tile.Type.GRA10){
+        if(type == Tile.Type.GRA10 || type == Tile.Type.TRW03 || type == Tile.Type.TRW04){
             g.drawImage(highGrass, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
         }
     }
@@ -140,6 +140,7 @@ public class Tile extends Renderable {
             case GRA10:
                 x = 9;
                 y = 0;
+                highGrass = SpriteSheet.getInstance().getSubImage(8, 0);
                 break;
             case SND01:
                 x = 7;
@@ -190,20 +191,23 @@ public class Tile extends Renderable {
                 y = 4;
                 break;
             case TRW01:
-                x = 18;
-                y = 0;
+                x = -1;
+                y = -1;
+                System.out.println("hi");
                 break;
             case TRW02:
-                x = 19;
-                y = 0;
+                x = -1;
+                y = -1;
                 break;
             case TRW03:
                 x = 20;
                 y = 0;
+                highGrass = SpriteSheet.getInstance().getSubImage(22, 1);
                 break;
             case TRW04:
                 x = 21;
                 y = 0;
+                highGrass = SpriteSheet.getInstance().getSubImage(23, 1);
                 break;
             case TRW05:
                 x = 18;
@@ -522,11 +526,10 @@ public class Tile extends Renderable {
                 y = 10;
                 break;
             default:
-                x = 1;
+                x = 0;
                 y = 0;
         }
         sprite = SpriteSheet.getInstance().getSubImage( x, y );
-        highGrass = SpriteSheet.getInstance().getSubImage(8, 0);
     }
 
     private void loadAnimations(){

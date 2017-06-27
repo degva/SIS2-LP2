@@ -107,7 +107,9 @@ public class DataAccess {
             boolean item_enabled = rs.getBoolean("item_enabled");
             int x = rs.getInt("X");
             int y = rs.getInt("Y");
-            
+            if(type.equals("TRW01")){
+                System.out.println('t');
+            }
             // Set
             Tile tile = new Tile(Tile.Type.valueOf(type), null, item_enabled, map);
             tile.setPlayer(loadPlayer(tile_player_id, player_id, input, con, tile, game));
