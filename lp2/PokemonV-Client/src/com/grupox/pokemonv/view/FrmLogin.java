@@ -18,6 +18,8 @@ public class FrmLogin extends javax.swing.JFrame {
     /**
      * Creates new form FrmLogin
      */
+    private int a = 0;
+    
     public FrmLogin() {
         initComponents();
         
@@ -51,8 +53,7 @@ public class FrmLogin extends javax.swing.JFrame {
         DataAccess playeradmin = new DataAccess();
         
         if(playeradmin.verifyLogin(TXTusername.getText(), TXTpassword.getText()) == 1){
-            Game gamepokemon = new Game();
-            gamepokemon.start();
+            setA(1);
         }
         
     }
@@ -177,4 +178,18 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the a
+     */
+    public int getA() {
+        return a;
+    }
+
+    /**
+     * @param a the a to set
+     */
+    public void setA(int a) {
+        this.a = a;
+    }
 }
