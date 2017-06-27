@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -95,7 +96,7 @@ public class BattleManager extends Renderable {
     private TypeAttackMenuP1 attackMenu;
     private BagMenu bagMenu;
     private String attack1_name, attack2_name, attack1_P2name, attack2_P2name;
-    private FileReader lector;
+    private ArrayList<FileReader> archivos;
     private BufferedReader entrada;
     private String response;
     private boolean endBattle = false;
@@ -122,10 +123,14 @@ public class BattleManager extends Renderable {
             imgHeal = ImageIO.read(new File(rutaImgHeal));
             imgCapture = ImageIO.read(new File("res/battle/pokeballMini.png"));
             imgBackgroundHP2 = ImageIO.read(new File(rutaHP2));
-            lector = new FileReader("res/battle/other1.txt");
+            archivos = new ArrayList<>();
+            archivos.add(new FileReader("res/battle/other1.txt"));
+            archivos.add(new FileReader("res/battle/other2.txt"));
+            archivos.add(new FileReader("res/battle/other3.txt"));
+            archivos.add(new FileReader("res/battle/other4.txt"));
         } catch (Exception exp) {
         }
-        entrada = new BufferedReader(lector);
+
     }
 
     public void establishRoutes(Pokemon pok1, Pokemon pok2) {
@@ -155,6 +160,9 @@ public class BattleManager extends Renderable {
         player2 = p2;
         input = p1.getInput();
         battleAgainstPlayer = true;
+        Random r = new Random();
+        int selected = r.nextInt(2)+2;
+        entrada = new BufferedReader(archivos.get(selected));
         attack1_name = p1.getPokemons().get(0).getAttack1().getName();
         attack2_name = p1.getPokemons().get(0).getAttack2().getName();
         initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
@@ -221,6 +229,9 @@ public class BattleManager extends Renderable {
         player = p1;
         input = p1.getInput();
         battleAgainstPlayer = false;
+        Random r = new Random();
+        int selected = r.nextInt(2);
+        entrada = new BufferedReader(archivos.get(selected));
         attack1_name = p1.getPokemons().get(0).getAttack1().getName();
         attack2_name = p1.getPokemons().get(0).getAttack2().getName();
         initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
@@ -228,6 +239,8 @@ public class BattleManager extends Renderable {
         danio2_Pok1 = p1.getPokemons().get(0).getAttack2().getPoints();
 
         attack1_P2name = pokContricante.getAttack1().getName();
+        System.out.println(attack1_P2name);
+        System.out.println(pokContricante.getName());
         attack2_P2name = pokContricante.getAttack2().getName();
         initialLifePok2 = vidaPok2 = pokContricante.getLife();
         danio1_Pok2 = pokContricante.getAttack1().getPoints();
@@ -419,7 +432,7 @@ public class BattleManager extends Renderable {
                     vidaPok2 -= danio1_Pok1;
                     if (vidaPok2 <= 0) {
                         state = State.P2_DEAD;
-                        player2.setCanBattle(false);
+                        if (battleAgainstPlayer) player2.setCanBattle(false);
                     }
                 }
                 break;
@@ -434,7 +447,7 @@ public class BattleManager extends Renderable {
                     vidaPok2 -= danio2_Pok1;
                     if (vidaPok2 <= 0) {
                         state = State.P2_DEAD;
-                        player2.setCanBattle(false);
+                         if (battleAgainstPlayer) player2.setCanBattle(false);
                     }
                 }
                 break;
@@ -477,7 +490,7 @@ public class BattleManager extends Renderable {
                         state = State.P2_GIVEUP;
                         numTicks = 0;
                         //game.setState(Game.State.MAP); //Finaliza la batalla pokemon
-                    } else if (response.equals("mochila")) {
+                    } else if (response.equals("curarse")) {
                         System.out.println("El usuario 2 usó MOCHILA");
                         state = State.P2_HEAL;
                         numTicks = 0;
@@ -599,20 +612,20 @@ public class BattleManager extends Renderable {
         }
         
         g.setColor(Color.green);
-        g.fillRect(480, 208 + 125, 140, 20);
+        g.fillRect(480+50, 208 + 125, 140, 20);
         g.setColor(Color.red);
-        g.fillRect(480, 208 + 125, getRespectiveLife(1, vidaPok1, 140), 20);
+        g.fillRect(480+50, 208 + 125, getRespectiveLife(1, vidaPok1, 140), 20);
 
-        g.drawImage(imgBackgroundHP1, 360, 145 + 125, 280, 110, null);
-        Font.getInstance().drawString(nombrePokPlayer1, g, 450, 160 + 125);
+        g.drawImage(imgBackgroundHP1, 360+50, 145 + 125, 280, 110, null);
+        Font.getInstance().drawString(nombrePokPlayer1, g, 450+50, 160 + 125);
         
         g.setColor(Color.green);
-        g.fillRect(165, 85 + 75, 140, 20);
+        g.fillRect(165, 85 + 55, 140, 20);
         g.setColor(Color.red);
-        g.fillRect(165, 85 + 75, getRespectiveLife(2, vidaPok2, 140), 20);
+        g.fillRect(165, 85 + 55, getRespectiveLife(2, vidaPok2, 140), 20);
 
-        g.drawImage(imgBackgroundHP2, 60, 30 + 75, 280, 110, null);
-        Font.getInstance().drawString(nombrePokPlayer2, g, 120, 40 + 75);
+        g.drawImage(imgBackgroundHP2, 60, 30 + 55, 280, 110, null);
+        Font.getInstance().drawString(nombrePokPlayer2, g, 120, 40 + 55);
 
         switch (state) {
             case P1_HEAL:

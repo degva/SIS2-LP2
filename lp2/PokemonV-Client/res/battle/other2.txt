@@ -1,3 +1,5 @@
-atacar
-mochila
+atacar2
+atacar1
+atacar2
+atacar1
 huir

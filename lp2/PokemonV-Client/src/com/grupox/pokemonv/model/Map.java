@@ -154,7 +154,8 @@ public class Map {
         if( random.nextFloat() <= probPokemon){
             ArrayList<Pokemon> list = game.getAllPokemons();
             Pokemon pok = list.get(random.nextInt(list.size()));
-            //game.getBattleManager().startBattle(player, pok);
+            Game.setState(Game.State.BATTLE);
+            game.getBattleManager().startBattle(player, pok);
             return true;
         }
         return false;

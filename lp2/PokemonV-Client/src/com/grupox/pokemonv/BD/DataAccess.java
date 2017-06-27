@@ -77,7 +77,7 @@ public class DataAccess {
             Statement st = con.createStatement();
             String query = "SELECT p.*, a1.NAME AS NAME1, a1.POINTS AS POINTS1, a2.NAME AS NAME2, a2.POINTS AS POINTS2 " +
                            "FROM POKEMON p, ATTACK a1, ATTACK a2 WHERE p.DELETED=0 " + 
-                           " AND p.ATTACK_1_ID = a1.ID AND p.ATTACK_2_ID = a2.ID";
+                           " AND p.ATTACK_1_ID = a1.ID AND p.ATTACK_2_ID = a2.ID AND p.ID != 5 AND p.ID!=6";
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()){
