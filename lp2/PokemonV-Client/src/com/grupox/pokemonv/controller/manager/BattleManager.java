@@ -50,8 +50,8 @@ public class BattleManager extends Renderable {
     
     private final int fondoAncho = 800;
     private final int fondoAlto = 600;
-    private final int pokAncho = 150;
-    private final int pokAlto = 150;
+    private int pokAncho = 150;
+    private int pokAlto = 150;
     private final int topOffset = 390;
     private final int rightOffset = Game.WIDTH / 1000;
     private final double movePeriod = 0.2;
@@ -63,6 +63,7 @@ public class BattleManager extends Renderable {
     private BufferedImage imgBackgroundHP2;
     private BufferedImage fondoOpcion;
     private BufferedImage imgHeal;
+    private BufferedImage imgCapture;
      
     private BufferedImage imgForAnimP1_Normal1;
     private BufferedImage imgForAnimP1_Normal2;
@@ -85,6 +86,7 @@ public class BattleManager extends Renderable {
     private Animation healAnimation1;
     private Animation healAnimation2;
     private Animation captureAnimation;
+    //private Animation endCaptureAnimation;
     private int numTicks = 0;
     private int NUM_TICKS_WAIT = 2;
     /*END*/
@@ -103,7 +105,7 @@ public class BattleManager extends Renderable {
     public enum State {
         P1_IDLE, P1_ATTACK_FIRST, P1_ATTACK_SECOND, P1_BAG, P1_GIVEUP,
         P2_IDLE, P2_ATTACK_FIRST, P2_ATTACK_SECOND, P2_BAG, P2_GIVEUP,
-        P1_DEAD, P2_DEAD, P1_HEAL, P2_HEAL, P1_CAPTURE,
+        P1_DEAD, P2_DEAD, P1_HEAL, P2_HEAL, P1_CAPTURE,POKEMON_CAPTURED,
         TYPE_ATTACK_MENU, BAG_MENU
     };
     
@@ -117,6 +119,7 @@ public class BattleManager extends Renderable {
             fondoOpcion = ImageIO.read(new File(rutaOpcion));
             imgBackgroundHP1 = ImageIO.read(new File(rutaHP1));
             imgHeal = ImageIO.read(new File(rutaImgHeal));
+            imgCapture = ImageIO.read(new File("res/battle/pokeballMini.png"));
             imgBackgroundHP2 = ImageIO.read(new File(rutaHP2));
             lector = new FileReader("res/battle/other1.txt");
         } catch (Exception exp) {
@@ -201,19 +204,82 @@ public class BattleManager extends Renderable {
         healAnimation2 = animations.get(findAnimation("heal2"));
         nombrePokPlayer1 = p1.getPokemons().get(0).getName();
         nombrePokPlayer2 = p2.getPokemons().get(0).getName();
+        
         attackAnimP1Normal.play();
         attackAnimP1Super.play();
-
         attackAnimP2Normal.play();
         attackAnimP2Super.play();
         healAnimation1.play();
         healAnimation2.play();
         captureAnimation.play();
-
         idle.play();
         idleP2.play();
     }
+    public void startBattle(Player p1, Pokemon pokContricante) {
+        player = p1;
+        input = p1.getInput();
+        attack1_name = p1.getPokemons().get(0).getAttack1().getName();
+        attack2_name = p1.getPokemons().get(0).getAttack2().getName();
+        initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
+        danio1_Pok1 = p1.getPokemons().get(0).getAttack1().getPoints();
+        danio2_Pok1 = p1.getPokemons().get(0).getAttack2().getPoints();
 
+        attack1_P2name = pokContricante.getAttack1().getName();
+        attack2_P2name = pokContricante.getAttack2().getName();
+        initialLifePok2 = vidaPok2 = pokContricante.getLife();
+        danio1_Pok2 = pokContricante.getAttack1().getPoints();
+        danio2_Pok2 = pokContricante.getAttack2().getPoints();
+        establishRoutes(p1.getPokemons().get(0), pokContricante); //Obtiene el primer pokemon de cada uno
+        try {
+            imgPokemonStatic_P1 = ImageIO.read(new File(rutaP1_StaticPok));
+            imgPokemonStatic_P2 = ImageIO.read(new File(rutaP2_StaticPok));
+
+            imgForAnimP1_Normal1 = ImageIO.read(new File(rutaP1_Normal1));
+            imgForAnimP1_Normal2 = ImageIO.read(new File(rutaP1_Normal2));
+
+            //for (int i =0;i<4;i++)
+            imgsForAnimP1_Super = new ArrayList<>();
+            for (int i=0;i<4;i++){
+                imgsForAnimP1_Super.add(ImageIO.read(new File(rutasP1_Super.get(i)))) ;
+            }
+            imgForAnimP2_Normal1 = ImageIO.read(new File(rutaP2_Normal1));
+            imgForAnimP2_Normal2 = ImageIO.read(new File(rutaP2_Normal2));
+            imgsForAnimP2_Super = new ArrayList<>();
+             for (int i=0;i<4;i++)
+            imgsForAnimP2_Super.add(ImageIO.read(new File(rutasP2_Super.get(i)))) ;
+        } catch (Exception exp) {
+        }
+        state = State.P1_IDLE;
+        menu = new BattleMenu(input, topOffset, rightOffset, game);
+        attackMenu = new TypeAttackMenuP1(input, 420, Game.WIDTH / 3, attack1_name, attack2_name, game);
+        bagMenu = new BagMenu(player, 20, rightOffset, game);
+        captureImages = new ArrayList<>();
+        loadCaptureAnimation();
+        loadBattleAnimation();
+        attackAnimP1Normal = animations.get(findAnimation("attack"));
+        attackAnimP1Super = animations.get(findAnimation("attackSuper"));
+
+        attackAnimP2Normal = animations.get(findAnimation("attackP2"));
+        attackAnimP2Super = animations.get(findAnimation("attackSuper2"));
+
+        idle = animations.get(findAnimation("idlePok1"));
+        idleP2 = animations.get(findAnimation("idleP2"));
+
+        healAnimation1 = animations.get(findAnimation("heal1"));
+        healAnimation2 = animations.get(findAnimation("heal2"));
+        nombrePokPlayer1 = p1.getPokemons().get(0).getName();
+        nombrePokPlayer2 = pokContricante.getName();
+        
+        attackAnimP1Normal.play();
+        attackAnimP1Super.play();
+        attackAnimP2Normal.play();
+        attackAnimP2Super.play();
+        healAnimation1.play();
+        healAnimation2.play();
+        captureAnimation.play();
+        idle.play();
+        idleP2.play();
+    }
     public void loadCaptureAnimation() {
         String a;
         try {
@@ -222,11 +288,13 @@ public class BattleManager extends Renderable {
                 BufferedImage img = ImageIO.read(new File("res/battle/pokeball" + a + ".png"));
                 captureImages.add(img);
             }
+            //BufferedImage 
         } catch (IOException ex) {
             Logger.getLogger(BattleManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         captureAnimation = new Animation("capture", captureImages, movePeriod);
         animations.add(captureAnimation);
+        
     }
 
     public void loadBattleAnimation() {
@@ -319,6 +387,15 @@ public class BattleManager extends Renderable {
                 currSprite = captureAnimation.getCurrSprite();
                 currSprite2 = idleP2.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT+1) {
+                    state = State.POKEMON_CAPTURED;
+                    numTicks = 0 ;
+                }
+                break;
+            case POKEMON_CAPTURED:
+                currSprite = imgPokemonStatic_P1;
+                currSprite2 = imgCapture;
+                //currSprite2 = //idleP2.getCurrSprite();
+                if (numTicks == NUM_TICKS_WAIT) {
                     endBattle=true;
                     player2.setCanBattle(false);
                 }
@@ -332,7 +409,6 @@ public class BattleManager extends Renderable {
                 attackMenu.tick();
                 break;
             case P1_ATTACK_FIRST:
-                //vidaPok2 -= 20; Corregir el automatico descuento de vida
                 currSprite = attackAnimP1Normal.getCurrSprite();
                 currSprite2 = idleP2.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT) {
@@ -478,6 +554,9 @@ public class BattleManager extends Renderable {
         if ((state == State.P1_CAPTURE) && (game.getNumTicks() == 58)) {
             numTicks++;
         }
+        if ((state == State.POKEMON_CAPTURED) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
         
         if (endBattle) {
             game.setState(Game.State.MAP);
@@ -504,12 +583,19 @@ public class BattleManager extends Renderable {
     public void render(Graphics2D g) {
         g.drawImage(imgBackgroundBattle, 0, 0, fondoAncho, fondoAlto, null);
         if (state == State.P1_CAPTURE){
+            g.drawImage(imgForAnimP1_Normal1, 130, 290, pokAncho, pokAlto, null);
             g.drawImage(currSprite, 0, 0, 800, 600, null);
-            g.drawImage(imgForAnimP1_Normal1, 130, 290, pokAncho, pokAlto, null);   
+            g.drawImage(currSprite2, 480, 85, pokAncho, pokAlto, null);
         }
-        else
-            g.drawImage(currSprite, 130, 290, pokAncho, pokAlto, null);   
-        g.drawImage(currSprite2, 480, 85, pokAncho, pokAlto, null);
+        else if (state == State.POKEMON_CAPTURED){
+            g.drawImage(currSprite, 130, 290, pokAncho, pokAlto, null);  
+            g.drawImage(currSprite2, 500, 120, 72, 61, null);
+        }
+        else{
+             g.drawImage(currSprite, 130, 290, pokAncho, pokAlto, null);   
+             g.drawImage(currSprite2, 480, 85, pokAncho, pokAlto, null);
+        }
+        
         g.setColor(Color.green);
         g.fillRect(480, 208 + 125, 140, 20);
         g.setColor(Color.red);
@@ -532,7 +618,10 @@ public class BattleManager extends Renderable {
             case P2_HEAL:
                 break;
             case P1_CAPTURE:
-                Font.getInstance().drawString("YOU ARE CAPTURING", g, 30, 475);
+                Font.getInstance().drawString("YOU ARE CAPTURING"+nombrePokPlayer2, g, 30, 475);
+                break;
+            case POKEMON_CAPTURED:
+                Font.getInstance().drawString("YOU'VE CAPTURED " + nombrePokPlayer2, g, 30, 475);
                 break;
             case P1_IDLE:
                 g.drawImage(fondoOpcion, 450 - 100, 425, 350 + 100, 171, null);
