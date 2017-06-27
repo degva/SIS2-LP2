@@ -2,6 +2,7 @@ package com.grupox.pokemonv.model;
 
 import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.manager.MapManager;
+import com.grupox.pokemonv.model.Renderable.Direction;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
@@ -147,6 +148,28 @@ public class Map {
         pos[0] = i;
         pos[1] = j;
         return pos;
+    }
+    
+    public Direction getDirectionFacingPlayer (Player player, Player enemy){
+        int[] pos1 = getPosPlayer( player );
+        int x1 = pos1[0], y1 = pos1[1];
+        
+        int[] pos2 = getPosPlayer( enemy );
+        int x2 = pos2[0], y2 = pos2[1];
+        
+        if(y1 == y2){
+            if(x1 < x2){
+                return Direction.LEFT;
+            }else{
+                return Direction.RIGHT;
+            }
+        }else{
+            if(y1 < y2){
+                return Direction.UP;
+            }else{
+                return Direction.DOWN;
+            }
+        }
     }
     
     private boolean tryAppearPokemon(Player player){

@@ -52,7 +52,7 @@ public class MapManager {
             state = State.MENU;
         }else if( state == State.MOVING && input.action.isFirstPressed ){
             enemy = map.tryBattle(player, player.getDirection());
-            player.setDirection(Renderable.Direction.UP);
+            enemy.setDirection(map.getDirectionFacingPlayer(player, enemy));
             if(enemy != null){
                 if(enemy.getCanBattle()){
                     dialog = enemy.getBattleDialog();
@@ -104,6 +104,8 @@ public class MapManager {
                 break;
         }
     }
+    
+    
     
     /* Getters && Setters */
     public State getState() {
