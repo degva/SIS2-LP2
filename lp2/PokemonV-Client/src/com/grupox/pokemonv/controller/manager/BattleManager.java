@@ -286,7 +286,7 @@ public class BattleManager extends Renderable {
         menu = new BattleMenu(input, topOffset, rightOffset, game);
         attackMenu = new TypeAttackMenuP1(input, topOffsetAttack, rightOffsetAttack, attack1_name, attack2_name, game);
         bagMenu = new BagMenu(player, 20, rightOffset,battleAgainstPlayer, game);
-        decisionMenu = new DecisionBattleMenu(input, 425, Game.WIDTH / 1000, game);
+        decisionMenu = new DecisionBattleMenu(player, 425, Game.WIDTH / 1000, game);
         captureImages = new ArrayList<>();
         loadCaptureAnimation();
         loadBattleAnimation();
@@ -713,7 +713,7 @@ public class BattleManager extends Renderable {
             case P1_IDLE:
                 g.drawImage(fondoOpcion, 450 - 100, 425, 350 + 100, 171, null);
                 menu.render(g);
-                Font.getInstance().drawString("WHAT'S YOUR NEXT ACTION ?", g, 30, 475);
+                Font.getInstance().drawString("CHOOSE ONE OPTION", g, 30, 475);
                 break;
             case TYPE_ATTACK_MENU:
                 g.drawImage(fondoOpcion, 0, 425, 350 + 200, 171, null);
@@ -736,7 +736,9 @@ public class BattleManager extends Renderable {
                 break;
             case P1_NOT_ENOUGH_POKEBALLS:
                 bagMenu.render(g);
-                Font.getInstance().drawString("YOU DON'T HAVE ANY POKEBALLS. THERE ARE SO MANY AROUND HERE...", g, 30, 475);
+                Font.getInstance().drawString("YOU DON'T HAVE ANY POKEBALLS.", g, 30, 460);
+                Font.getInstance().drawString("THERE ARE SO MANY AROUND HERE...", g, 30, 525);
+                //Font.getInstance().drawString("YOU DON'T HAVE ANY POKEBALLS. THERE ARE SO MANY AROUND HERE...", g, 30, 475);
                 break;
             case P1_NOT_ENOUGH_POTIONS:
                 bagMenu.render(g);
@@ -760,7 +762,7 @@ public class BattleManager extends Renderable {
                 Font.getInstance().drawString("YOU USED THE BAG", g, 30, 475);
                 break;
             case P1_GIVEUP:
-                Font.getInstance().drawString("YOU'VE DECIDED TO LEAVE THE BATTLE.. NOW, RUN", g, 30, 475);
+                Font.getInstance().drawString("YOU'VE DECIDED TO LEAVE THE BATTLE..NOW, RUN..", g, 30, 475);
                 break;
             case P1_DEAD:
                 Font.getInstance().drawString(nombrePokPlayer2+ " DEFEATED YOU..", g, 30, 475);
