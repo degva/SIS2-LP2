@@ -10,13 +10,15 @@ public class BagMenu extends QuantityMenu {
     private Game game;
     private Player player;
     private final int pokeballsIndex, potionsIndex, closeIndex;
+    private boolean battleAgainstPlayer;
 
     /* Constructors */
-    public BagMenu(Player player, int topOffset, int rightOffset, Game game) {
+    public BagMenu(Player player, int topOffset, int rightOffset, boolean typeOfBattle, Game game) {
         super(player.getInput(), topOffset, rightOffset);
 
         this.player = player;
         this.game = game;
+        this.battleAgainstPlayer = typeOfBattle;
 
         pokeballsIndex = this.addItem(player.getPokeballs().getName(), player.getPokeballs().getQuantity());
         potionsIndex = this.addItem(player.getPotions().getName(), player.getPotions().getQuantity());
@@ -27,9 +29,9 @@ public class BagMenu extends QuantityMenu {
     @Override
     public void tick() {
         super.tick();
-        
+
         updateQuantities();
-        
+
         if (Game.getState() == Game.State.BAG) {
             if (input.action.isFirstPressed && !items.isEmpty()) {
                 if (items.get(selectedIndex).getDescription().equals("Close")) {
@@ -41,10 +43,12 @@ public class BagMenu extends QuantityMenu {
         } else if (Game.getState() == Game.State.BATTLE) {
             if (input.action.isFirstPressed && this.selectedIndex > -1) {
                 if (selectedIndex == pokeballsIndex) {
-                    game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
-                    game.getBattleManager().setInitialSpriteForBattle();
-                    int dis = player.getPokeballs().getQuantity()-1;
-                    player.getPokeballs().setQuantity(dis);
+                    if (battleAgainstPlayer == false) {
+                        game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
+                        game.getBattleManager().setInitialSpriteForBattle();
+                        int dis = player.getPokeballs().getQuantity() - 1;
+                        player.getPokeballs().setQuantity(dis);
+                    }
                 } else if (selectedIndex == potionsIndex) {
                     game.getBattleManager().setState(BattleManager.State.P1_HEAL);
                     int dis = player.getPotions().getQuantity();
@@ -57,12 +61,12 @@ public class BagMenu extends QuantityMenu {
             }
         }
     }
-    
-    private void updateQuantities(){
-        QuantityMenuItem item = (QuantityMenuItem)items.get(pokeballsIndex);
+
+    private void updateQuantities() {
+        QuantityMenuItem item = (QuantityMenuItem) items.get(pokeballsIndex);
         item.setQuantity(player.getPokeballs().getQuantity());
-        
-        item = (QuantityMenuItem)items.get(potionsIndex);
+
+        item = (QuantityMenuItem) items.get(potionsIndex);
         item.setQuantity(player.getPotions().getQuantity());
     }
 }

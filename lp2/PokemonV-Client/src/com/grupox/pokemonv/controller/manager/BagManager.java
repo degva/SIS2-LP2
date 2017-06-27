@@ -20,7 +20,7 @@ public class BagManager {
         
         this.player = player;
         
-        bagMenu = new BagMenu(player, 50, Game.WIDTH / 8, game);
+        bagMenu = new BagMenu(player, 50, Game.WIDTH / 8,false,game);
     }
     
     /* Methods */

@@ -99,6 +99,7 @@ public class BattleManager extends Renderable {
     private BufferedReader entrada;
     private String response;
     private boolean endBattle = false;
+    private boolean battleAgainstPlayer;
     private int idPok1, idPok2;
     private int healEffect = 0;
     
@@ -153,6 +154,7 @@ public class BattleManager extends Renderable {
         player = p1;
         player2 = p2;
         input = p1.getInput();
+        battleAgainstPlayer = true;
         attack1_name = p1.getPokemons().get(0).getAttack1().getName();
         attack2_name = p1.getPokemons().get(0).getAttack2().getName();
         initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
@@ -187,7 +189,7 @@ public class BattleManager extends Renderable {
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset, game);
         attackMenu = new TypeAttackMenuP1(input, 420, Game.WIDTH / 3, attack1_name, attack2_name, game);
-        bagMenu = new BagMenu(player, 20, rightOffset, game);
+        bagMenu = new BagMenu(player, 20, rightOffset,battleAgainstPlayer, game);
         captureImages = new ArrayList<>();
         loadCaptureAnimation();
         loadBattleAnimation();
@@ -218,6 +220,7 @@ public class BattleManager extends Renderable {
     public void startBattle(Player p1, Pokemon pokContricante) {
         player = p1;
         input = p1.getInput();
+        battleAgainstPlayer = false;
         attack1_name = p1.getPokemons().get(0).getAttack1().getName();
         attack2_name = p1.getPokemons().get(0).getAttack2().getName();
         initialLifePok1 = vidaPok1 = p1.getPokemons().get(0).getLife();
@@ -252,7 +255,7 @@ public class BattleManager extends Renderable {
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset, game);
         attackMenu = new TypeAttackMenuP1(input, 420, Game.WIDTH / 3, attack1_name, attack2_name, game);
-        bagMenu = new BagMenu(player, 20, rightOffset, game);
+        bagMenu = new BagMenu(player, 20, rightOffset,battleAgainstPlayer, game);
         captureImages = new ArrayList<>();
         loadCaptureAnimation();
         loadBattleAnimation();
@@ -312,7 +315,7 @@ public class BattleManager extends Renderable {
         healPok1.add(imgPokemonStatic_P1);
         healPok1.add(imgHeal);
         Animation healAnimation_first = new Animation("heal1", healPok1, movePeriod);
-
+        /*SEING*/
         ArrayList<BufferedImage> healPok2 = new ArrayList<>();
         healPok2.add(imgPokemonStatic_P2);
         healPok2.add(imgHeal);
@@ -394,7 +397,6 @@ public class BattleManager extends Renderable {
             case POKEMON_CAPTURED:
                 currSprite = imgPokemonStatic_P1;
                 currSprite2 = imgCapture;
-                //currSprite2 = //idleP2.getCurrSprite();
                 if (numTicks == NUM_TICKS_WAIT) {
                     endBattle=true;
                     player2.setCanBattle(false);
