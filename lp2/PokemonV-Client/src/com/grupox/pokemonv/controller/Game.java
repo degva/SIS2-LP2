@@ -241,22 +241,22 @@ public class Game extends Canvas implements Runnable {
 
     public static void main(String args[]) {
 //        new Login().setVisible( true );
-        Game game = new Game();
-        game.start();
-//        FrmLogin frame = new FrmLogin();
-//
-//        while (true) {
-//            if (frame.getA() == 1) {
-//                Game game = new Game();
-//                game.start();
-//                break;
-//            }
-//            try{
-//                Thread.sleep(1000);
-//            }catch(Exception exp){
-//            
-//            }
-//        }
+//        Game game = new Game();
+//        game.start();
+        FrmLogin frame = new FrmLogin();
+
+        while (true) {
+            if (frame.getA() == 1) {
+                Game game = new Game();
+                game.start();
+                break;
+            }
+            try{
+                Thread.sleep(1000);
+            }catch(Exception exp){
+            
+            }
+        }
     }
 
     public int getNumTicks() {
