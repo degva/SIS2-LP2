@@ -49,7 +49,7 @@
             this.DGVplayerxitem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVplayerxitem.Location = new System.Drawing.Point(410, 44);
             this.DGVplayerxitem.Name = "DGVplayerxitem";
-            this.DGVplayerxitem.Size = new System.Drawing.Size(350, 274);
+            this.DGVplayerxitem.Size = new System.Drawing.Size(350, 143);
             this.DGVplayerxitem.TabIndex = 0;
             // 
             // TXTitemid
@@ -193,6 +193,7 @@
             this.Controls.Add(this.LBLplayerid);
             this.Controls.Add(this.LBLitemid);
             this.Controls.Add(this.DGVplayerxitem);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAdminPlayerxItem";
             this.Text = "Admin Player\'s Item";
             ((System.ComponentModel.ISupportInitialize)(this.DGVplayerxitem)).EndInit();

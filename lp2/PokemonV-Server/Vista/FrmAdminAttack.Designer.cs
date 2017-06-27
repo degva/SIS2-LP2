@@ -141,6 +141,7 @@
             this.Controls.Add(this.TXTpoints);
             this.Controls.Add(this.LBLpoints);
             this.Controls.Add(this.LBLname);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAdminAttack";
             this.Text = "FrmAdminAttack";
             ((System.ComponentModel.ISupportInitialize)(this.DGVattack)).EndInit();

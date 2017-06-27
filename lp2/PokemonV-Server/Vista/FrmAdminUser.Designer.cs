@@ -51,10 +51,10 @@
             this.DGVadmin.AllowUserToAddRows = false;
             this.DGVadmin.AllowUserToDeleteRows = false;
             this.DGVadmin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVadmin.Location = new System.Drawing.Point(427, 32);
+            this.DGVadmin.Location = new System.Drawing.Point(487, 290);
             this.DGVadmin.Name = "DGVadmin";
             this.DGVadmin.ReadOnly = true;
-            this.DGVadmin.Size = new System.Drawing.Size(613, 285);
+            this.DGVadmin.Size = new System.Drawing.Size(544, 159);
             this.DGVadmin.TabIndex = 0;
             // 
             // LBLpassword
@@ -215,6 +215,7 @@
             this.Controls.Add(this.LBLusername);
             this.Controls.Add(this.LBLpassword);
             this.Controls.Add(this.DGVadmin);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAdminUser";
             this.Text = "Admin Player";
             ((System.ComponentModel.ISupportInitialize)(this.DGVadmin)).EndInit();

@@ -49,9 +49,9 @@
             // DGVitem
             // 
             this.DGVitem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVitem.Location = new System.Drawing.Point(504, 41);
+            this.DGVitem.Location = new System.Drawing.Point(504, 40);
             this.DGVitem.Name = "DGVitem";
-            this.DGVitem.Size = new System.Drawing.Size(539, 235);
+            this.DGVitem.Size = new System.Drawing.Size(548, 106);
             this.DGVitem.TabIndex = 0;
             // 
             // CMBtype
@@ -223,6 +223,7 @@
             this.Controls.Add(this.TXTcatchprob);
             this.Controls.Add(this.LBLcatchprob);
             this.Controls.Add(this.DGVitem);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAdminItem";
             this.Text = "Admin Item";
             ((System.ComponentModel.ISupportInitialize)(this.DGVitem)).EndInit();

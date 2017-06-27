@@ -55,9 +55,9 @@
             // DGVpokemon
             // 
             this.DGVpokemon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVpokemon.Location = new System.Drawing.Point(396, 37);
+            this.DGVpokemon.Location = new System.Drawing.Point(396, 12);
             this.DGVpokemon.Name = "DGVpokemon";
-            this.DGVpokemon.Size = new System.Drawing.Size(744, 266);
+            this.DGVpokemon.Size = new System.Drawing.Size(744, 207);
             this.DGVpokemon.TabIndex = 0;
             // 
             // TXTname
@@ -292,6 +292,7 @@
             this.Controls.Add(this.LBLdefensepts);
             this.Controls.Add(this.LBLlife);
             this.Controls.Add(this.DGVpokemon);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAdminPokemon";
             this.Text = "Admin Pokemon";
             ((System.ComponentModel.ISupportInitialize)(this.DGVpokemon)).EndInit();

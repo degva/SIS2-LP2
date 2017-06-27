@@ -31,6 +31,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return 0;
             }
 
@@ -51,6 +52,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return 0;
             }
 
@@ -85,6 +87,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return 0;
             }
         }
@@ -106,6 +109,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return 0;
             }
         }
@@ -137,6 +141,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return 0;
             }
         }
@@ -161,6 +166,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return 0;
             }
         }
@@ -185,6 +191,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return 0;
             }
         }
@@ -216,6 +223,7 @@ namespace AccesoDatos
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return 0;
             }
         }
