@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable {
     public Game() {
         // Main loop
         running = false;
-        System.out.println(Tile.Type.valueOf(Tile.Type.FLR02.name()) == Tile.Type.FLR02);
+
         // Keyboard
         input = new InputHandler();
         this.addKeyListener(input);
@@ -60,7 +60,7 @@ public class Game extends Canvas implements Runnable {
         pokemonBeltManager = new PokemonBeltManager(player, this);
         bagManager = new BagManager( player, this);
         battleManager = new BattleManager(this);
-        setState(State.MAP);
+        
              
 //        HARDCODED
 //        player.getPokemons().add(new Pokemon(4, 10, "RAPID ATTACK", 20, "LANZAHOJAS", 20, 120, "Bulbasaur", Pokemon.TypeP.Wind, true));
@@ -71,12 +71,16 @@ public class Game extends Canvas implements Runnable {
 //        player.getPokemons().add(new Pokemon(1,10,10,10,"Carlos2", Pokemon.TypeP.Earth));
 //        enemy.getPokemons().add(new Pokemon(2,10,10,10,"Bulbasaur", Pokemon.TypeP.Earth));
 
-        // UI
-        initUI();
+        
+        
     }
 
     /* Methods */
     public void start() {
+        // UI
+        initUI();
+        setState(State.MAP);
+        
         running = true;
         Thread thread = new Thread(this);   // Start this class as a new thread
         thread.run();   // Calls Game.run();
@@ -251,8 +255,9 @@ public class Game extends Canvas implements Runnable {
 //        new Login().setVisible( true );
 //        Game game = new Game();
 //        game.start();
-          FrmLogin frame = new FrmLogin();
-         
+        Game game = new Game();
+        //FrmLogin frame = new FrmLogin(game);
+        game.start();
     }
     public int getNumTicks(){
         return ticks;
