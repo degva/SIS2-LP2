@@ -44,22 +44,45 @@ public class BagMenu extends QuantityMenu {
             if (input.action.isFirstPressed && this.selectedIndex > -1) {
                 if (selectedIndex == pokeballsIndex) {
                     if (battleAgainstPlayer == false) {
-                        game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
-                        game.getBattleManager().setInitialSpriteForBattle();
                         int dis = player.getPokeballs().getQuantity() - 1;
-                        player.getPokeballs().setQuantity(dis);
+                        if (dis >= 0) {
+                            //Si tengo pokeballs
+                            //Verificar vida del otro jugador
+                            //Referencia de vida
+                            int minimoDamage = 112;
+                            int vidaPok2 = game.getBattleManager().getVidaPok2();
+                            int danioActual = game.getBattleManager().getRespectiveLife(2, vidaPok2, 140);
+                            if (danioActual>=minimoDamage){
+                                game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
+                                game.getBattleManager().setInitialSpriteForBattle();
+                                player.getPokeballs().setQuantity(dis);
+                            }
+                            else {
+                                game.getBattleManager().setState(BattleManager.State.POKEMON_NOT_WEAK);
+                                game.getBattleManager().inicializeTicks();
+                            }
+                            
+                        }
+                        else {
+                            game.getBattleManager().setState(BattleManager.State.P1_NOT_ENOUGH_POKEBALLS);
+                            game.getBattleManager().inicializeTicks();
+                        }
+
                     }
                 } else if (selectedIndex == potionsIndex) {
                     if (!game.getBattleManager().isAlreadyHealed()) {
                         int dis = player.getPotions().getQuantity() - 1;
-                        if (dis>=0){
+                        if (dis >= 0) {
                             game.getBattleManager().setState(BattleManager.State.P1_HEAL);
                             int effect = player.getPotions().getHp();
                             player.getPotions().setQuantity(dis);
                             game.getBattleManager().setHealEffect(effect);
                         }
-                    }
-                    else {
+                        else{
+                            game.getBattleManager().setState(BattleManager.State.P1_NOT_ENOUGH_POTIONS);
+                            game.getBattleManager().inicializeTicks();
+                        }
+                    } else {
                         game.getBattleManager().setState(BattleManager.State.P1_ALREADY_HEALED);
                         game.getBattleManager().inicializeTicks();
                     }
