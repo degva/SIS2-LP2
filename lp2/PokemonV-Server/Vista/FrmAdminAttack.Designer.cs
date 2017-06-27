@@ -82,6 +82,7 @@
             // 
             this.LBLpoints.AutoSize = true;
             this.LBLpoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLpoints.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLpoints.Location = new System.Drawing.Point(30, 205);
             this.LBLpoints.Name = "LBLpoints";
             this.LBLpoints.Size = new System.Drawing.Size(59, 20);
@@ -92,6 +93,7 @@
             // 
             this.LBLname.AutoSize = true;
             this.LBLname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLname.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLname.Location = new System.Drawing.Point(30, 142);
             this.LBLname.Name = "LBLname";
             this.LBLname.Size = new System.Drawing.Size(55, 20);
@@ -118,6 +120,7 @@
             // 
             this.LBLid.AutoSize = true;
             this.LBLid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLid.Location = new System.Drawing.Point(30, 87);
             this.LBLid.Name = "LBLid";
             this.LBLid.Size = new System.Drawing.Size(28, 20);

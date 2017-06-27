@@ -23,6 +23,15 @@ namespace Vista
             TXTpassword.PasswordChar = '*';
             TXTpassword.MaxLength = 30;
 
+            Bitmap image = new Bitmap(Application.StartupPath + @"\imagen\snorlax.jpg");
+            this.BackgroundImage = image;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+            LBLemail.BackColor = Color.Transparent;
+            LBLname.BackColor = Color.Transparent;
+            LBLpassword.BackColor = Color.Transparent;
+            LBLusername.BackColor = Color.Transparent;
+
         }
 
         private void BTNcancel_Click(object sender, EventArgs e)

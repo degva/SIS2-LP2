@@ -130,6 +130,7 @@
             // 
             this.LBLplayerid.AutoSize = true;
             this.LBLplayerid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLplayerid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLplayerid.Location = new System.Drawing.Point(22, 57);
             this.LBLplayerid.Name = "LBLplayerid";
             this.LBLplayerid.Size = new System.Drawing.Size(82, 20);
@@ -156,6 +157,7 @@
             // 
             this.LBLpokemonid.AutoSize = true;
             this.LBLpokemonid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLpokemonid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLpokemonid.Location = new System.Drawing.Point(22, 135);
             this.LBLpokemonid.Name = "LBLpokemonid";
             this.LBLpokemonid.Size = new System.Drawing.Size(107, 20);
@@ -166,6 +168,7 @@
             // 
             this.LBLorder.AutoSize = true;
             this.LBLorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLorder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLorder.Location = new System.Drawing.Point(22, 215);
             this.LBLorder.Name = "LBLorder";
             this.LBLorder.Size = new System.Drawing.Size(154, 20);

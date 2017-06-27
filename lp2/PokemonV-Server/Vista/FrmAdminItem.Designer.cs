@@ -72,6 +72,7 @@
             // 
             this.LBLtype.AutoSize = true;
             this.LBLtype.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLtype.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLtype.Location = new System.Drawing.Point(38, 91);
             this.LBLtype.Name = "LBLtype";
             this.LBLtype.Size = new System.Drawing.Size(47, 20);
@@ -91,6 +92,7 @@
             this.LBLname.AutoSize = true;
             this.LBLname.BackColor = System.Drawing.SystemColors.Menu;
             this.LBLname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLname.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLname.Location = new System.Drawing.Point(38, 29);
             this.LBLname.Name = "LBLname";
             this.LBLname.Size = new System.Drawing.Size(55, 20);
@@ -109,6 +111,7 @@
             // 
             this.LBLcatchprob.AutoSize = true;
             this.LBLcatchprob.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLcatchprob.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLcatchprob.Location = new System.Drawing.Point(38, 152);
             this.LBLcatchprob.Name = "LBLcatchprob";
             this.LBLcatchprob.Size = new System.Drawing.Size(144, 20);
@@ -127,6 +130,7 @@
             // 
             this.LBLhp.AutoSize = true;
             this.LBLhp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLhp.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLhp.Location = new System.Drawing.Point(38, 209);
             this.LBLhp.Name = "LBLhp";
             this.LBLhp.Size = new System.Drawing.Size(33, 20);

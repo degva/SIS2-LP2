@@ -46,9 +46,9 @@
             this.TXTid = new System.Windows.Forms.TextBox();
             this.LBLid = new System.Windows.Forms.Label();
             this.TXTattack1id = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LBLattack1id = new System.Windows.Forms.Label();
             this.TXTattack2id = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LBLattack2id = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGVpokemon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +72,7 @@
             // 
             this.LBLname.AutoSize = true;
             this.LBLname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLname.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLname.Location = new System.Drawing.Point(12, 74);
             this.LBLname.Name = "LBLname";
             this.LBLname.Size = new System.Drawing.Size(55, 20);
@@ -98,6 +99,7 @@
             // 
             this.LBLdefensepts.AutoSize = true;
             this.LBLdefensepts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLdefensepts.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLdefensepts.Location = new System.Drawing.Point(12, 181);
             this.LBLdefensepts.Name = "LBLdefensepts";
             this.LBLdefensepts.Size = new System.Drawing.Size(132, 20);
@@ -108,6 +110,7 @@
             // 
             this.LBLlife.AutoSize = true;
             this.LBLlife.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLlife.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLlife.Location = new System.Drawing.Point(12, 125);
             this.LBLlife.Name = "LBLlife";
             this.LBLlife.Size = new System.Drawing.Size(39, 20);
@@ -118,6 +121,7 @@
             // 
             this.LBLtype.AutoSize = true;
             this.LBLtype.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLtype.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLtype.Location = new System.Drawing.Point(12, 232);
             this.LBLtype.Name = "LBLtype";
             this.LBLtype.Size = new System.Drawing.Size(47, 20);
@@ -217,6 +221,7 @@
             // 
             this.LBLid.AutoSize = true;
             this.LBLid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLid.Location = new System.Drawing.Point(12, 32);
             this.LBLid.Name = "LBLid";
             this.LBLid.Size = new System.Drawing.Size(28, 20);
@@ -231,15 +236,16 @@
             this.TXTattack1id.Size = new System.Drawing.Size(190, 21);
             this.TXTattack1id.TabIndex = 34;
             // 
-            // label1
+            // LBLattack1id
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 293);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 20);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "Attack1 ID";
+            this.LBLattack1id.AutoSize = true;
+            this.LBLattack1id.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLattack1id.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.LBLattack1id.Location = new System.Drawing.Point(12, 293);
+            this.LBLattack1id.Name = "LBLattack1id";
+            this.LBLattack1id.Size = new System.Drawing.Size(95, 20);
+            this.LBLattack1id.TabIndex = 33;
+            this.LBLattack1id.Text = "Attack1 ID";
             // 
             // TXTattack2id
             // 
@@ -249,15 +255,16 @@
             this.TXTattack2id.Size = new System.Drawing.Size(190, 21);
             this.TXTattack2id.TabIndex = 36;
             // 
-            // label2
+            // LBLattack2id
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 350);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 20);
-            this.label2.TabIndex = 35;
-            this.label2.Text = "Attack2 ID";
+            this.LBLattack2id.AutoSize = true;
+            this.LBLattack2id.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLattack2id.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.LBLattack2id.Location = new System.Drawing.Point(12, 350);
+            this.LBLattack2id.Name = "LBLattack2id";
+            this.LBLattack2id.Size = new System.Drawing.Size(95, 20);
+            this.LBLattack2id.TabIndex = 35;
+            this.LBLattack2id.Text = "Attack2 ID";
             // 
             // FrmAdminPokemon
             // 
@@ -265,9 +272,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1152, 490);
             this.Controls.Add(this.TXTattack2id);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.LBLattack2id);
             this.Controls.Add(this.TXTattack1id);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LBLattack1id);
             this.Controls.Add(this.TXTid);
             this.Controls.Add(this.LBLid);
             this.Controls.Add(this.BTNcancel);
@@ -313,8 +320,8 @@
         private System.Windows.Forms.TextBox TXTid;
         private System.Windows.Forms.Label LBLid;
         private System.Windows.Forms.TextBox TXTattack1id;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LBLattack1id;
         private System.Windows.Forms.TextBox TXTattack2id;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LBLattack2id;
     }
 }

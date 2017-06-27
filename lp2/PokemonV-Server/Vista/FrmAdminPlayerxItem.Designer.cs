@@ -72,6 +72,7 @@
             // 
             this.LBLplayerid.AutoSize = true;
             this.LBLplayerid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLplayerid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLplayerid.Location = new System.Drawing.Point(12, 76);
             this.LBLplayerid.Name = "LBLplayerid";
             this.LBLplayerid.Size = new System.Drawing.Size(82, 20);
@@ -82,6 +83,7 @@
             // 
             this.LBLitemid.AutoSize = true;
             this.LBLitemid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLitemid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLitemid.Location = new System.Drawing.Point(12, 145);
             this.LBLitemid.Name = "LBLitemid";
             this.LBLitemid.Size = new System.Drawing.Size(69, 20);
@@ -166,6 +168,7 @@
             // 
             this.LBLquantity.AutoSize = true;
             this.LBLquantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLquantity.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLquantity.Location = new System.Drawing.Point(12, 209);
             this.LBLquantity.Name = "LBLquantity";
             this.LBLquantity.Size = new System.Drawing.Size(76, 20);
