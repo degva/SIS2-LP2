@@ -12,7 +12,7 @@ import com.grupox.pokemonv.controller.manager.MapManager;
 import com.grupox.pokemonv.controller.menu.SingleColumnMenu;
 import com.grupox.pokemonv.controller.manager.PokemonBeltManager;
 import com.grupox.pokemonv.controller.manager.PokemonBelt;
-import com.grupox.pokemonv.controller.reporte;
+import com.grupox.pokemonv.controller.reporte; 
 
 /**
  *
@@ -58,7 +58,7 @@ public class PokemonBeltMenu extends SingleColumnMenu{
                     vez ++;
                 }
             }
-            else if(selectedIndex == Report1Index){
+            else if(selectedIndex == Report1Index){  
                 reporte rep = new reporte();
                 rep.verReporte();
             }

@@ -256,8 +256,86 @@ public class DataAccess {
             Statement sentencia = connection.createStatement();
             ResultSet rs = sentencia.executeQuery(sql);
             
+            
             if(rs.next()){
                 Game.player_id = rs.getInt("id");
+                connection.close();
+                return 1;
+            }else {
+                connection.close();
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }   
+    }
+    
+    public int verifyUsername(String username){
+        
+        
+        char character = '"';
+        String sql= "SELECT * FROM PLAYER WHERE USERNAME = " + character + username + character;
+        
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            ResultSet rs = sentencia.executeQuery(sql);
+            
+            
+            if(rs.next()){
+                connection.close();
+                return 1;
+            }else {
+                connection.close();
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
+    
+    public int verifyEmail(String email){
+        char character = '"';
+        String sql= "SELECT * FROM PLAYER WHERE EMAIL = " + character + email + character;
+        
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            ResultSet rs = sentencia.executeQuery(sql);
+            
+            
+            if(rs.next()){
+                connection.close();
+                return 1;
+            }else {
+                connection.close();
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
+    
+    
+    public int addPlayer(String name, String username , String password, String email){
+        char character = '"';
+        String sql= "INSERT INTO PLAYER NAME = " + character + name + character;
+        
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            int i  = sentencia.executeUpdate(sql);
+            
+            if(i > 0){
+                //Game.player_id = rs.getInt("id");
                 return 1;
             }else {
                 return 0;
@@ -269,6 +347,7 @@ public class DataAccess {
         }
         
     }
+    
     
     public void updateData(int level, int player_id, InputHandler input, Game game){
         try{
