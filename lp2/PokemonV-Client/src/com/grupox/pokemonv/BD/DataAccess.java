@@ -249,7 +249,9 @@ public class DataAccess {
         
         char character = '"';
         String sql= "SELECT * FROM PLAYER WHERE USERNAME = " + character + username + character
-                + " AND PASSWORD = " + character + password + character;
+                + " AND PASSWORD = " + character + password + character
+                + " AND ISADMIN = " + character + 0 + character
+                + " AND DELETED = " + character + 0 + character;
         
         try{
             Connection connection = openConnection();
@@ -279,12 +281,12 @@ public class DataAccess {
         String sql= "SELECT * FROM PLAYER WHERE USERNAME = " + character + username + character;
         
         try{
-            Connection connection = openConnection();
+             Connection connection = openConnection();
             Statement sentencia = connection.createStatement();
             ResultSet rs = sentencia.executeQuery(sql);
             
             
-            if(rs.next()){
+            if(rs.isBeforeFirst()){
                 connection.close();
                 return 1;
             }else {
@@ -309,7 +311,7 @@ public class DataAccess {
             ResultSet rs = sentencia.executeQuery(sql);
             
             
-            if(rs.next()){
+            if(rs.isBeforeFirst()){
                 connection.close();
                 return 1;
             }else {
@@ -327,15 +329,24 @@ public class DataAccess {
     
     public int addPlayer(String name, String username , String password, String email){
         char character = '"';
-        String sql= "INSERT INTO PLAYER NAME = " + character + name + character;
-        
+        String sql= "INSERT INTO PLAYER NAME = " + character + name + character + 
+                    ", USERNAME = " + character +username + character + 
+                    ", PASSWORD = " + character + password+ character + 
+                    ", EMAIL = " + character + email + character + 
+                    ", CAN_BATTLE = " + character + 1 + character + 
+                    ", BATTLE_DIALOG_ID = " + character + 1 + character + 
+                    ", DEFEAT_DIALOG_ID = " + character + 1 + character + 
+                    ", NPC_TYPE = " + character + "PLAYER"+ character + 
+                    ", ISADMIN = " + character + 0 + character + 
+                    ", DIRECTION = " + character + "DOWN" + character + 
+                    ", DELETED = " + character +  0 + character;
+                
         try{
             Connection connection = openConnection();
             Statement sentencia = connection.createStatement();
             int i  = sentencia.executeUpdate(sql);
             
             if(i > 0){
-                //Game.player_id = rs.getInt("id");
                 return 1;
             }else {
                 return 0;

@@ -196,7 +196,12 @@ namespace Vista
                 Random rnd = new Random();
                 int a = rnd.Next(1, 3);
 
-                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text, 0, 0,a);
+                string npc = "PLAYER";
+                int can_battle = 1;
+                int battle_dialog_id = 1;
+                int defeat_dialog_id = 1;
+                Direction direction = Direction.DOWN;
+                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text, 0, 0,npc,can_battle,battle_dialog_id,defeat_dialog_id,direction);
 
                 PlayerDA playerDA = new PlayerDA();
                 if ((playerDA.verifyRepeatUsername(player)) == 1)
@@ -336,9 +341,12 @@ namespace Vista
                 TXTusername.Text = TXTusername.Text.Trim();
 
 
-                Random rnd = new Random();
-                int a = rnd.Next(1, 3);
-                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0, 0,a);
+                string npc = "PLAYER";
+                int can_battle = 1;
+                int battle_dialog_id = 1;
+                int defeat_dialog_id = 1;
+                Direction direction = Direction.DOWN;
+                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0, 0,npc,can_battle,battle_dialog_id,defeat_dialog_id,direction);
 
                 PlayerDA playerDA = new PlayerDA();
                 if((playerDA.verifyRepeatUsername2(player, id)) == 1)

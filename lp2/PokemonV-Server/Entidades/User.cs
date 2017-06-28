@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public enum Direction { Up, Down, Right, Left };
+    public enum Direction { UP, DOWN, RIGHT, LEFT };
     public abstract class User
     {
-        public User(string username, string password, string name, string email, int deleted, int isAdmin, int npc)
+        public User(string username, string password, string name, string email, int deleted, int isAdmin, string npc, int can_battle,
+                        int battle_dialog_id, int defeat_dialog_id, Direction direction)
         {
             this.username = username;
             this.password = password;
@@ -19,6 +20,10 @@ namespace Entidades
             this.deleted = deleted;
             this.isAdmin = isAdmin;
             this.npc_type = npc;
+            this.direction = direction;
+            this.can_battle = can_battle;
+            this.battle_dialog_id = battle_dialog_id;
+            this.defeat_dialog_id = defeat_dialog_id;
         }
 
         public bool move()
@@ -98,10 +103,19 @@ namespace Entidades
         
         public int IsAdmin { get => isAdmin; set => isAdmin = value; }
         public int Deleted { get => deleted; set => deleted = value; }
-        public int Npc_type { get => npc_type; set => npc_type = value; }
+        public string Npc_type { get => npc_type; set => npc_type = value; }
+        public int Can_battle { get => can_battle; set => can_battle = value; }
+        public int Battle_dialog_id { get => battle_dialog_id; set => battle_dialog_id = value; }
+        public int Defeat_dialog_id { get => defeat_dialog_id; set => defeat_dialog_id = value; }
 
         protected int isAdmin;
 
-        protected int npc_type;
+        private string npc_type;
+
+        private int can_battle;
+
+        private int battle_dialog_id;
+
+        private int defeat_dialog_id;
     }
 }
