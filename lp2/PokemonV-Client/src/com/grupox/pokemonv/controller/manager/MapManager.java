@@ -53,8 +53,8 @@ public class MapManager {
         }else if( state == State.MOVING && input.action.isFirstPressed ){
             enemy = map.tryBattle(player, player.getDirection());
             if(enemy != null){
+                enemy.setDirection(map.getDirectionFacingPlayer(player, enemy));
                 if(enemy.getCanBattle()){
-                    enemy.setDirection(map.getDirectionFacingPlayer(player, enemy));
                     dialog = enemy.getBattleDialog();
                     setState(State.BATTLE_DIALOG);
                 }else{
