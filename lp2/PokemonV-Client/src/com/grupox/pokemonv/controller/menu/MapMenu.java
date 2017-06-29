@@ -16,6 +16,7 @@ public class MapMenu extends SingleColumnMenu{
         this.addItem("Pokemon");
         //this.addItem("Battle");
         this.addItem("Bag");
+        this.addItem("Save");
         this.addItem("Close");
     }
     
@@ -30,12 +31,11 @@ public class MapMenu extends SingleColumnMenu{
                 game.getBagManager().setState( BagManager.State.POKEBALLS );
                 game.getBagManager().getBagMenu().setSelectedItem( 0 );
                 game.setState( Game.State.BAG );
+            }else if( items.get( selectedIndex ).getDescription().equals( "Save" ) ){
+                game.getMapManager().updateMap();
             }else if( items.get( selectedIndex ).getDescription().equals( "Close" ) ){
                 game.getMapManager().setState( MapManager.State.MOVING );
-            }/*else if( items.get( selectedIndex ).getDescription().equals( "Battle" ) ){
-                game.setState( Game.State.BATTLE );
-                game.getMapManager().setState( MapManager.State.MOVING );
-            }*/
+            }
         }
     }
     

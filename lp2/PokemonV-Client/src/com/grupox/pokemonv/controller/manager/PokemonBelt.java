@@ -98,10 +98,11 @@ public class PokemonBelt {
     private void drawInfo(Graphics2D g, int ind){
         int x = leftOffset + spriteWidthOut+80, y = topOffset +spriteHeightOut*3/4;//80+
         Pokemon pok = listaPokemones.get(ind);
-        pok.isSelected = true;
+        //pok.isSelected = true;
         listaPokemones.set(ind, pok);
         int fin,ini;
-        if(listaPokemones.size() <6){
+        //System.out.println(ind);
+        if(listaPokemones.size() <7){
             ini = 0;
             fin = listaPokemones.size();
         }
@@ -119,7 +120,11 @@ public class PokemonBelt {
             pok = listaPokemones.get(i);
             int fontAnt = Font.getFontHeightOut();
             Font.setFontHeightOut(fontAnt - 20);
-            if(pok.isSelected) Font.getInstance().drawString(">>", g, x-6*spriteWidthOut, y+10);
+            if(ind == i) {
+                //System.out.println("ini "+ini +"fin "+fin + "ind"+ i);
+                Font.getInstance().drawString(">>", g, x-6*spriteWidthOut, y+10);
+                //System.out.println("ini2 "+ini +"fin "+fin + "ind"+ i);
+            }
             Font.getInstance().drawString(pok.getName(), g, x, y);
             Font.getInstance().drawString("HP:"+Double.toString(pok.getLife()),g, x, y+ spriteHeightOut + spriteHeightOut/2 );
             
@@ -133,8 +138,7 @@ public class PokemonBelt {
             g.drawImage(spriteSheet,430,y-38, 6*spriteWidthOut, 6*spriteHeightOut, null );
             
             Font.setFontHeightOut(fontAnt);
-            pok.isSelected = false;
-            listaPokemones.set(i, pok);
+            
         }
     }
     

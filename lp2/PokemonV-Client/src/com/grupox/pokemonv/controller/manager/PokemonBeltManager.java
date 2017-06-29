@@ -55,6 +55,7 @@ public class PokemonBeltManager {
             presionado = false;
         }else if(input.down.isFirstPressed && ind < pokemonBelt.tamanoLista()-1 && !presionadoF){
             ind++;
+            //System.out.println(pokemonBelt.tamanoLista());
             //System.out.println(ind);
             presionado = false;
         }

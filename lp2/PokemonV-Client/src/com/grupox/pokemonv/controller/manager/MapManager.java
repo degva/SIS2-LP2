@@ -11,16 +11,20 @@ import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Renderable;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MapManager {
     /* Enum declaration */
-    public enum State { MENU, MOVING, BATTLE_DIALOG, DEFEAT_DIALOG };
+    public enum State { MENU, MOVING, BATTLE_DIALOG, DEFEAT_DIALOG, SAVING };
     
     /* Attributes */
     private Game game;
     private Map map;
     private Player player;
     private InputHandler input;
+    private DataAccess da;
     
     private MapMenu menu;
     private State state;
@@ -33,7 +37,7 @@ public class MapManager {
         this.input = game.getInput();
         this.dialog = new Dialog("");
         
-        DataAccess da = new DataAccess();
+        da = new DataAccess();
         map = da.loadMap(1, Game.player_id, input, game);
         player = game.getPlayer();
         
@@ -101,11 +105,23 @@ public class MapManager {
                 break;
             case BATTLE_DIALOG:
             case DEFEAT_DIALOG:
+            case SAVING:
                 dialog.render(g);
                 break;
         }
     }
     
+    public void updateMap(){
+        setState(State.SAVING);
+        dialog.setContent("SAVING. DO NOT CLOSE THE GAME.");
+        try {
+            da.updatePlayers(map);
+        } catch (SQLException ex) {
+            Logger.getLogger(MapManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dialog.setContent("GAME SAVED SUCCESSFULLY!");
+        setState(State.DEFEAT_DIALOG);
+    }
     
     
     /* Getters && Setters */
@@ -132,5 +148,14 @@ public class MapManager {
     public void setDialog(Dialog dialog) {
         this.dialog = dialog;
     }
+
+    public DataAccess getDa() {
+        return da;
+    }
+
+    public void setDa(DataAccess da) {
+        this.da = da;
+    }
+    
     
 }

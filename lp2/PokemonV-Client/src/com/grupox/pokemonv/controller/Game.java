@@ -13,10 +13,14 @@ import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.SpriteSheet;
 import com.grupox.pokemonv.model.Tile;
 import com.grupox.pokemonv.view.FrmLogin;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Game extends Canvas implements Runnable {
-
     /* Enum declaration */
     public enum State {
         MAP, BATTLE, POKEMON_BELT, BAG
@@ -55,6 +59,8 @@ public class Game extends Canvas implements Runnable {
         // Keyboard
         input = new InputHandler();
         this.addKeyListener(input);
+        
+        // WindowsListener
 
         // Initialization
         allPokemons = new DataAccess().loadAllPokemons();
@@ -75,6 +81,14 @@ public class Game extends Canvas implements Runnable {
         running = true;
         Thread thread = new Thread(this);   // Start this class as a new thread
         thread.run();   // Calls Game.run();
+    }
+    
+    public void stop() {
+        running = false;
+        frame.setVisible(false);
+        Sound.getInstance().stop(Sound.AUDIO.BATTLE);
+        Sound.getInstance().stop(Sound.AUDIO.BEFORE_BATTLE);
+        Sound.getInstance().stop(Sound.AUDIO.MAP);
     }
 
     public void initUI() {
@@ -181,7 +195,7 @@ public class Game extends Canvas implements Runnable {
         strategy.show();
         g.dispose();
     }
-
+    
     /* Getters & Setters */
     public static State getState() {
         return state;
