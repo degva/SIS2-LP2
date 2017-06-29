@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAdminPlayerxPokemon));
             this.DGVpokemons = new System.Windows.Forms.DataGridView();
             this.BTNcancel = new System.Windows.Forms.Button();
             this.BTNupdate = new System.Windows.Forms.Button();
@@ -207,6 +208,7 @@
             this.Controls.Add(this.BTNnew);
             this.Controls.Add(this.DGVpokemons);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAdminPlayerxPokemon";
             this.Text = "Admin Player\'s Pokemon";
             ((System.ComponentModel.ISupportInitialize)(this.DGVpokemons)).EndInit();

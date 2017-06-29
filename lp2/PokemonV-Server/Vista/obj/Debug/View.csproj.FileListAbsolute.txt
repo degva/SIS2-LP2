@@ -34,10 +34,6 @@ C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\System.Web.Razor.dl
 C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\System.Web.WebPages.Deployment.dll
 C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\AccesoDatos.pdb
 C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\Entidades.pdb
-C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\MySql.Data.xml
-C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\MySql.Data.Entity.EF5.xml
-C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\MySql.Data.Entity.EF6.xml
-C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\MySql.Web.xml
 C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\WebMatrix.WebData.xml
 C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\System.Web.WebPages.xml
 C:\Users\Carlos\SIS2-LP2\lp2\PokemonV-Server\Vista\bin\Debug\WebMatrix.Data.xml

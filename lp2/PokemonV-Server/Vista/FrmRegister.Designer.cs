@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRegister));
             this.LBLusername = new System.Windows.Forms.Label();
             this.LBLemail = new System.Windows.Forms.Label();
             this.LBLpassword = new System.Windows.Forms.Label();
@@ -158,6 +159,7 @@
             this.Controls.Add(this.LBLemail);
             this.Controls.Add(this.LBLusername);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmRegister";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Register";

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAdminAttack));
             this.BTNupdate = new System.Windows.Forms.Button();
             this.BTNrecover = new System.Windows.Forms.Button();
             this.TXTname = new System.Windows.Forms.TextBox();
@@ -155,6 +156,7 @@
             this.Controls.Add(this.LBLpoints);
             this.Controls.Add(this.LBLname);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAdminAttack";
             this.Text = "FrmAdminAttack";
             ((System.ComponentModel.ISupportInitialize)(this.DGVattack)).EndInit();
