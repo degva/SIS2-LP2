@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f9bbaa4-e3c5-4d25-abc2-3e5559922bbf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM(
+SELECT distinct i.CATCH_PROB, pi.QUANTITY AS POKEBALL_QUANTITY 
+FROM inf282gx.PLAYER_X_ITEM pi, inf282gx.ITEM i 
+WHERE pi.ITEM_ID = i.ID AND pi.PLAYER_ID = 4  AND i.ID = 2) pokeball, 
+(
+SELECT distinct i.HP, pi.QUANTITY AS POTION_QUANTITY 
+FROM inf282gx.PLAYER_X_ITEM pi, inf282gx.ITEM i 
+WHERE pi.ITEM_ID = i.ID AND pi.PLAYER_ID =  4  AND i.ID = 1) potion;]]>
+	</queryString>
+	<field name="CATCH_PROB" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="POKEBALL_QUANTITY" class="java.lang.Integer"/>
+	<field name="HP" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="POTION_QUANTITY" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="79" forecolor="#000000" backcolor="#6633FF" uuid="3493c81d-a7e8-44b6-8e9f-a801582f35af"/>
+			</rectangle>
+			<image>
+				<reportElement x="318" y="0" width="75" height="79" uuid="2b1d7118-3b52-47fa-8168-92506719d76b"/>
+				<imageExpression><![CDATA["C:\\Users\\alulab14.INF.004\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\Bag.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="414" y="22" width="106" height="36" forecolor="#FFFFFF" uuid="dc9bf93e-4450-463a-8e0c-4b60c02f7c19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BAG]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="35" forecolor="#FF9900" backcolor="#FF9900" uuid="4eeb59e0-16c0-4967-8b1e-58b074a86b04"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="26" y="8" width="193" height="20" forecolor="#FFFFFF" uuid="146f68c9-30c6-466b-93ca-22d923de8b6e"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[YOU HAVE THESE ITEMS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="114" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="272" height="36" uuid="e9254977-0599-4f9e-9fdd-cfd1759bc11b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="272" y="0" width="283" height="36" uuid="ad1e075b-bf5f-4624-8dae-8cf9dfcab10e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="85" y="8" width="100" height="20" uuid="7cfe34f7-abaa-4fcd-b377-a963bedc5abe"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[POKEBALL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="363" y="7" width="100" height="20" uuid="c0f2db0a-39fc-45a8-be60-78b943824fb2"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[POTION]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="36" width="136" height="33" uuid="60d4f94c-a39d-4c6b-9666-02f057ec8bb9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="136" y="36" width="136" height="33" uuid="f50766c6-9109-44bd-88c7-bdb09972de4a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="272" y="36" width="142" height="33" uuid="66f378b1-428e-4b09-82b2-9de6400d1179"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="414" y="36" width="141" height="33" uuid="b2754d5f-402b-4dfe-8da3-4a488f90c400"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="44" width="136" height="20" uuid="d5e1552a-f54a-4ffd-865c-f4201324efa9"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[CATCH PROBABILITY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="44" width="100" height="20" uuid="08491a89-98a7-4046-a71c-511ce80d2259"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[QUANTITY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="44" width="100" height="20" uuid="5232b24d-dfd1-4779-a361-0cc5f62b164a"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[HP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="44" width="100" height="20" uuid="98cfd8bb-4c70-4057-9b8b-5043664510ff"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[QUANTITY]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="435" y="82" width="100" height="20" uuid="4eb59aeb-5e90-4fea-a38f-0b1f5f83de21"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{POTION_QUANTITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="82" width="100" height="20" uuid="b9591f1e-c08a-4170-ad3f-4ffa3a6e0861"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{HP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="152" y="82" width="100" height="20" uuid="14a54259-81a7-4992-bf19-051a2bc5b195"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{POKEBALL_QUANTITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="82" width="100" height="20" uuid="5acbe484-a40e-47b8-bd2c-78e84e29aadc"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CATCH_PROB}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="19" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="54" backcolor="#3399FF" uuid="b35e9894-2a7f-4947-a0ce-f6c12717f689"/>
+			</rectangle>
+			<textField>
+				<reportElement x="26" y="22" width="100" height="20" uuid="90ae3284-4e16-4150-add5-8832bc1ae574"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="18" width="80" height="20" uuid="8fa53a1a-fd38-437f-a7d3-d9436aa28d26"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="435" y="18" width="40" height="20" uuid="808f7711-df71-4cef-be6b-b112ef19829b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="475" y="0" width="80" height="54" uuid="1ebe92ef-1418-4e50-ab34-1e24a32698f7"/>
+				<imageExpression><![CDATA["C:\\Users\\alulab14.INF.004\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\Togepi.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

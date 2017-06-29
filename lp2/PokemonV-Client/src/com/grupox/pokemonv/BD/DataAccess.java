@@ -249,15 +249,104 @@ public class DataAccess {
         
         char character = '"';
         String sql= "SELECT * FROM PLAYER WHERE USERNAME = " + character + username + character
-                + " AND PASSWORD = " + character + password + character;
+                + " AND PASSWORD = " + character + password + character
+                + " AND ISADMIN = " + character + 0 + character
+                + " AND DELETED = " + character + 0 + character;
         
         try{
             Connection connection = openConnection();
             Statement sentencia = connection.createStatement();
             ResultSet rs = sentencia.executeQuery(sql);
             
+            
             if(rs.next()){
                 Game.player_id = rs.getInt("id");
+                connection.close();
+                return 1;
+            }else {
+                connection.close();
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }   
+    }
+    
+    public int verifyUsername(String username){
+        
+        
+        char character = '"';
+        String sql= "SELECT * FROM PLAYER WHERE USERNAME = " + character + username + character;
+        
+        try{
+             Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            ResultSet rs = sentencia.executeQuery(sql);
+            
+            
+            if(rs.isBeforeFirst()){
+                connection.close();
+                return 1;
+            }else {
+                connection.close();
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
+    
+    public int verifyEmail(String email){
+        char character = '"';
+        String sql= "SELECT * FROM PLAYER WHERE EMAIL = " + character + email + character;
+        
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            ResultSet rs = sentencia.executeQuery(sql);
+            
+            
+            if(rs.isBeforeFirst()){
+                connection.close();
+                return 1;
+            }else {
+                connection.close();
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
+    
+    
+    public int addPlayer(String name, String username , String password, String email){
+        char character = '"';
+        String sql= "INSERT INTO PLAYER NAME = " + character + name + character + 
+                    ", USERNAME = " + character +username + character + 
+                    ", PASSWORD = " + character + password+ character + 
+                    ", EMAIL = " + character + email + character + 
+                    ", CAN_BATTLE = " + character + 1 + character + 
+                    ", BATTLE_DIALOG_ID = " + character + 1 + character + 
+                    ", DEFEAT_DIALOG_ID = " + character + 1 + character + 
+                    ", NPC_TYPE = " + character + "PLAYER"+ character + 
+                    ", ISADMIN = " + character + 0 + character + 
+                    ", DIRECTION = " + character + "DOWN" + character + 
+                    ", DELETED = " + character +  0 + character;
+                
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            int i  = sentencia.executeUpdate(sql);
+            
+            if(i > 0){
                 return 1;
             }else {
                 return 0;
@@ -269,4 +358,22 @@ public class DataAccess {
         }
         
     }
+    
+    
+    public void updateData(int level, int player_id, InputHandler input, Game game){
+        try{
+            Connection con = openConnection();
+            String query =  "UPDATE inf282gx.MAP SET height="+
+                            " WHERE ID="+String.valueOf(level)+
+                            " and POKEMON_ID=";
+            Statement sentencia = con.prepareStatement(query);
+            int n = sentencia.executeUpdate(query);
+            
+        }
+        catch(Exception e){
+            
+        }
+    }
+    
+    
 }

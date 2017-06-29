@@ -12,13 +12,14 @@ import com.grupox.pokemonv.controller.manager.MapManager;
 import com.grupox.pokemonv.controller.menu.SingleColumnMenu;
 import com.grupox.pokemonv.controller.manager.PokemonBeltManager;
 import com.grupox.pokemonv.controller.manager.PokemonBelt;
+//import com.grupox.pokemonv.controller.reporte; 
 
 /**
  *
  * @author alulab14
  */
 public class PokemonBeltMenu extends SingleColumnMenu{
-    private final int cancelIndex,ExchangeIndex, closeIndex;   // Variables to hold MenuItems indexs
+    private final int cancelIndex,ExchangeIndex, closeIndex, Report1Index,Report2Index;   // Variables to hold MenuItems indexs
     private Game game;  // Needed to change state when an option is selected
     private int vez = 0;
 
@@ -27,10 +28,11 @@ public class PokemonBeltMenu extends SingleColumnMenu{
         super(input, topOffset, rightOffset);
         
         this.game = game;
-        
         cancelIndex = this.addItem("Cancel");
         ExchangeIndex = this.addItem("Exchange");
         closeIndex = this.addItem("Back to Menu");
+        Report1Index = this.addItem("Report1");
+        Report2Index = this.addItem("Report2");
     }
     
     @Override
@@ -56,6 +58,14 @@ public class PokemonBeltMenu extends SingleColumnMenu{
                     vez ++;
                 }
             }
+//            else if(selectedIndex == Report1Index){  
+//                reporte rep = new reporte();
+//                rep.verReporte();
+//            }
+//            else if(selectedIndex == Report2Index){
+//                reporte rep = new reporte();
+//                rep.verReporte2();
+//            }
         }
     }
     
@@ -66,6 +76,5 @@ public class PokemonBeltMenu extends SingleColumnMenu{
     public void setVez(int vez) {
         this.vez = vez;
     }
-    
     
 }

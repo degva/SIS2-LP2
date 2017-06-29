@@ -22,6 +22,14 @@ namespace Vista
             load();
             inicio();
 
+            Bitmap image = new Bitmap(Application.StartupPath + @"\imagen\pikachu.jpg");
+            this.BackgroundImage = image;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+            LBLemail.BackColor = Color.Transparent;
+            LBLname.BackColor = Color.Transparent;
+            LBLpassword.BackColor = Color.Transparent;
+            LBLusername.BackColor = Color.Transparent;
 
         }
 
@@ -188,7 +196,12 @@ namespace Vista
                 Random rnd = new Random();
                 int a = rnd.Next(1, 3);
 
-                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text, 0, 0,a);
+                string npc = "PLAYER";
+                int can_battle = 1;
+                int battle_dialog_id = 1;
+                int defeat_dialog_id = 1;
+                Direction direction = Direction.DOWN;
+                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text, 0, 0,npc,can_battle,battle_dialog_id,defeat_dialog_id,direction);
 
                 PlayerDA playerDA = new PlayerDA();
                 if ((playerDA.verifyRepeatUsername(player)) == 1)
@@ -328,9 +341,12 @@ namespace Vista
                 TXTusername.Text = TXTusername.Text.Trim();
 
 
-                Random rnd = new Random();
-                int a = rnd.Next(1, 3);
-                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0, 0,a);
+                string npc = "PLAYER";
+                int can_battle = 1;
+                int battle_dialog_id = 1;
+                int defeat_dialog_id = 1;
+                Direction direction = Direction.DOWN;
+                Player player = new Player(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0, 0,npc,can_battle,battle_dialog_id,defeat_dialog_id,direction);
 
                 PlayerDA playerDA = new PlayerDA();
                 if((playerDA.verifyRepeatUsername2(player, id)) == 1)
@@ -357,6 +373,34 @@ namespace Vista
         private void BTNcancel_Click(object sender, EventArgs e)
         {
             inicio();
+        }
+
+        protected override void WndProc(ref Message message)
+        {
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_MOVE = 0xF010;
+
+            switch (message.Msg)
+            {
+                case WM_SYSCOMMAND:
+                    int command = message.WParam.ToInt32() & 0xfff0;
+                    if (command == SC_MOVE)
+                        return;
+                    break;
+            }
+
+            base.WndProc(ref message);
+        }
+
+        private void BTNback_Click(object sender, EventArgs e)
+        {
+            FrmAdminEverything form = new FrmAdminEverything();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X, this.Location.Y);
+
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
         }
     }
 }

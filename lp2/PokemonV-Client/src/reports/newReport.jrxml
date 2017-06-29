@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0900acb6-6e7a-4f5f-af5f-a916167e4d82">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="player_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT distinct p.ID as ID, p.NAME as NAME, p.TYPE as TYPE, p.DEFENSE_PTS as DEFENSE_PTS , p.LIFE AS LIFE ,a1.NAME as NAME1, a1.POINTS as POINTS1, a2.NAME as NAME2, a2.POINTS as POINTS2  
+FROM inf282gx.PLAYER_X_POKEMON pp, inf282gx.POKEMON p , inf282gx.ATTACK a1, inf282gx.ATTACK a2 
+where pp.PLAYER_ID = player_id AND p.DELETED = 0 AND pp.DELETED = 0 AND pp.POKEMON_ID = p.ID AND a1.ID = p.ATTACK_1_ID AND a2.ID = p.ATTACK_2_ID 
+order by pp.ORDER_POKEMON;]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TYPE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DEFENSE_PTS" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LIFE" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NAME1" class="java.lang.String"/>
+	<field name="POINTS1" class="java.lang.Integer"/>
+	<field name="NAME2" class="java.lang.String"/>
+	<field name="POINTS2" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="0" width="555" height="79" backcolor="#3399FF" uuid="f5af1ece-1153-4fd3-b866-7f5598a485b8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="306" y="33" width="225" height="25" forecolor="#FFFFFF" uuid="6e0584d1-d370-4dcb-8e58-deb257b19cd4"/>
+				<textElement textAlignment="Right">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LIST OF POKEMONS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="0" width="236" height="79" uuid="009be379-c735-4564-85da-2a75a7c8eef7"/>
+				<imageExpression><![CDATA["C:\\Users\\alulab14.INF.004\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="35" backcolor="#FFCC33" uuid="f46a5689-0710-4282-8b1c-8646c422bdb9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="19" y="8" width="217" height="20" forecolor="#FFFFFF" uuid="98957e32-fd06-4313-807a-e768cc0fc8c1"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[YOU HAVE THESE POKEMONS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="48" y="20" width="40" height="20" uuid="963ce9f6-07c2-430b-b051-5e56698ac20c"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="20" width="51" height="20" uuid="a13fb2d8-2d62-438e-8453-c82bf39fa50e"/>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="20" width="59" height="20" uuid="f7e0852c-f466-4815-ac43-bdb6de677d9a"/>
+				<text><![CDATA[DEFENSE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="20" width="76" height="20" uuid="29a1d616-3b1b-470e-8c88-cb84c1378af4"/>
+				<text><![CDATA[LIFE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="20" width="64" height="20" uuid="fec518fe-b49f-4c30-a994-058ec18aec99"/>
+				<text><![CDATA[TYPE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="20" width="83" height="20" uuid="35c90d85-3749-4f99-bcb2-030dfc875040"/>
+				<text><![CDATA[ATACK]]></text>
+			</staticText>
+			<line>
+				<reportElement x="33" y="50" width="493" height="1" forecolor="#0099FF" uuid="2616765d-89b7-4a66-aa05-805fcf20a481"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="48" y="21" width="40" height="20" uuid="b1d5fc17-2a7d-4aa1-98a5-0b6eef863a72"/>
+				<textFieldExpression><![CDATA[$F{ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="22" width="51" height="20" uuid="b3c52a44-10e1-4836-b47b-ef2cd549bc9a"/>
+				<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="21" width="40" height="20" uuid="eb09b945-256c-4a7b-ac62-744acf29c98d"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{DEFENSE_PTS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="22" width="62" height="20" uuid="4e6d9bc9-c6da-4067-a4f9-676c83ee7453"/>
+				<textFieldExpression><![CDATA[$F{LIFE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="378" y="21" width="64" height="20" uuid="ba37af9f-4b4f-4f39-978a-8dd4c1379a7c"/>
+				<textFieldExpression><![CDATA[$F{TYPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="448" y="21" width="83" height="20" uuid="5eeddbf4-79f2-40e5-9aad-8c4f87cb07ff"/>
+				<textFieldExpression><![CDATA[$F{NAME1}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="21" y="23" width="25" height="13" uuid="cf8c212a-3f1c-497e-aa99-98a9b38fad6c"/>
+				<imageExpression><![CDATA["C:\\Users\\alulab14.INF.004\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\PokeballMini.png"]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="54" forecolor="#0099FF" backcolor="#0066FF" uuid="be71ceef-c10c-4e56-8429-4a436471c918"/>
+			</rectangle>
+			<textField>
+				<reportElement x="28" y="24" width="100" height="20" uuid="199d36a9-1831-4ede-ae2e-59a2fd59c481"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="12" width="80" height="20" uuid="ab8e2903-cd12-4ba6-9f86-66c7c148f03e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="435" y="12" width="40" height="20" uuid="2c6ec09c-ef46-4095-94c4-a5931a28e59f"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="479" y="0" width="59" height="54" uuid="f29221ad-53b6-4fa1-849a-ada3d04f0e2b"/>
+				<imageExpression><![CDATA["C:\\Users\\alulab14.INF.004\\SIS2-LP2\\lp2\\PokemonV-Client\\src\\reports\\Togepi.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

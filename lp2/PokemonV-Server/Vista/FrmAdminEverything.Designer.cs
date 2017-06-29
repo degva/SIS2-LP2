@@ -113,6 +113,7 @@
             this.Controls.Add(this.BTNmanageplayerspokemon);
             this.Controls.Add(this.BTNmanagepokemon);
             this.Controls.Add(this.BTNmanageusers);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAdminEverything";
             this.Text = "Admin Game";
             this.ResumeLayout(false);

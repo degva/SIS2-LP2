@@ -22,6 +22,11 @@ namespace Vista
             load();
             init();
 
+            Bitmap image = new Bitmap(Application.StartupPath + @"\imagen\pokeball.png");
+            this.BackgroundImage = image;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+
             LBLname.BackColor = Color.Transparent;
             LBLcatchprob.BackColor = Color.Transparent;
             LBLhp.BackColor = Color.Transparent;
@@ -420,6 +425,34 @@ namespace Vista
                 TXTcatchprob.Text = "";
                 TXThp.Text = "";
             }
+        }
+
+        protected override void WndProc(ref Message message)
+        {
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_MOVE = 0xF010;
+
+            switch (message.Msg)
+            {
+                case WM_SYSCOMMAND:
+                    int command = message.WParam.ToInt32() & 0xfff0;
+                    if (command == SC_MOVE)
+                        return;
+                    break;
+            }
+
+            base.WndProc(ref message);
+        }
+
+        private void BTNback_Click(object sender, EventArgs e)
+        {
+            FrmAdminEverything form = new FrmAdminEverything();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X, this.Location.Y);
+
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
         }
     }
 }

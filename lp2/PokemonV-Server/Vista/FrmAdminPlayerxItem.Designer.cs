@@ -41,6 +41,7 @@
             this.BTNnew = new System.Windows.Forms.Button();
             this.TXTquantity = new System.Windows.Forms.TextBox();
             this.LBLquantity = new System.Windows.Forms.Label();
+            this.BTNback = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVplayerxitem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             this.DGVplayerxitem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVplayerxitem.Location = new System.Drawing.Point(410, 44);
             this.DGVplayerxitem.Name = "DGVplayerxitem";
-            this.DGVplayerxitem.Size = new System.Drawing.Size(350, 274);
+            this.DGVplayerxitem.Size = new System.Drawing.Size(350, 143);
             this.DGVplayerxitem.TabIndex = 0;
             // 
             // TXTitemid
@@ -72,6 +73,7 @@
             // 
             this.LBLplayerid.AutoSize = true;
             this.LBLplayerid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLplayerid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLplayerid.Location = new System.Drawing.Point(12, 76);
             this.LBLplayerid.Name = "LBLplayerid";
             this.LBLplayerid.Size = new System.Drawing.Size(82, 20);
@@ -82,6 +84,7 @@
             // 
             this.LBLitemid.AutoSize = true;
             this.LBLitemid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLitemid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLitemid.Location = new System.Drawing.Point(12, 145);
             this.LBLitemid.Name = "LBLitemid";
             this.LBLitemid.Size = new System.Drawing.Size(69, 20);
@@ -166,17 +169,30 @@
             // 
             this.LBLquantity.AutoSize = true;
             this.LBLquantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLquantity.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLquantity.Location = new System.Drawing.Point(12, 209);
             this.LBLquantity.Name = "LBLquantity";
             this.LBLquantity.Size = new System.Drawing.Size(76, 20);
             this.LBLquantity.TabIndex = 37;
             this.LBLquantity.Text = "Quantity";
             // 
+            // BTNback
+            // 
+            this.BTNback.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNback.Location = new System.Drawing.Point(21, 12);
+            this.BTNback.Name = "BTNback";
+            this.BTNback.Size = new System.Drawing.Size(73, 28);
+            this.BTNback.TabIndex = 44;
+            this.BTNback.Text = "Back";
+            this.BTNback.UseVisualStyleBackColor = true;
+            this.BTNback.Click += new System.EventHandler(this.BTNback_Click);
+            // 
             // FrmAdminPlayerxItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 566);
+            this.Controls.Add(this.BTNback);
             this.Controls.Add(this.TXTquantity);
             this.Controls.Add(this.LBLquantity);
             this.Controls.Add(this.BTNcancel);
@@ -190,6 +206,7 @@
             this.Controls.Add(this.LBLplayerid);
             this.Controls.Add(this.LBLitemid);
             this.Controls.Add(this.DGVplayerxitem);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAdminPlayerxItem";
             this.Text = "Admin Player\'s Item";
             ((System.ComponentModel.ISupportInitialize)(this.DGVplayerxitem)).EndInit();
@@ -213,5 +230,6 @@
         private System.Windows.Forms.Button BTNnew;
         private System.Windows.Forms.TextBox TXTquantity;
         private System.Windows.Forms.Label LBLquantity;
+        private System.Windows.Forms.Button BTNback;
     }
 }

@@ -23,6 +23,19 @@ namespace Vista
             InitializeComponent();
             load();
             inicio();
+
+            Bitmap image = new Bitmap(Application.StartupPath + @"\imagen\gyarados.jpg");
+            this.BackgroundImage = image;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+            LBLdefensepts.BackColor = Color.Transparent;
+            LBLid.BackColor = Color.Transparent;
+            LBLlife.BackColor = Color.Transparent;
+            LBLname.BackColor = Color.Transparent;
+            LBLtype.BackColor = Color.Transparent;
+            LBLattack1id.BackColor = Color.Transparent;
+            LBLattack2id.BackColor = Color.Transparent;
+
         }
 
         
@@ -467,6 +480,15 @@ namespace Vista
             }
         }
 
-        
+        private void BTNback_Click(object sender, EventArgs e)
+        {
+            FrmAdminEverything form = new FrmAdminEverything();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X, this.Location.Y);
+
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
+        }
     }
 }

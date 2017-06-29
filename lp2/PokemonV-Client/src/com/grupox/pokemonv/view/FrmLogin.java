@@ -95,6 +95,11 @@ public class FrmLogin extends javax.swing.JFrame {
 
         BTNregister.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         BTNregister.setText("Register");
+        BTNregister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNregisterActionPerformed(evt);
+            }
+        });
         jPanel1.add(BTNregister);
         BTNregister.setBounds(390, 300, 110, 30);
 
@@ -135,6 +140,11 @@ public class FrmLogin extends javax.swing.JFrame {
     private void BTNloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNloginActionPerformed
         logueo();
     }//GEN-LAST:event_BTNloginActionPerformed
+
+    private void BTNregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNregisterActionPerformed
+        FrmRegister frame = new FrmRegister();
+        frame.setVisible(true);
+    }//GEN-LAST:event_BTNregisterActionPerformed
 
 //    /**
 //     * @param args the command line arguments

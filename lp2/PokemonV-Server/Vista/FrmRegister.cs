@@ -23,13 +23,27 @@ namespace Vista
             TXTpassword.PasswordChar = '*';
             TXTpassword.MaxLength = 30;
 
+            Bitmap image = new Bitmap(Application.StartupPath + @"\imagen\snorlax.jpg");
+            this.BackgroundImage = image;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+            LBLemail.BackColor = Color.Transparent;
+            LBLname.BackColor = Color.Transparent;
+            LBLpassword.BackColor = Color.Transparent;
+            LBLusername.BackColor = Color.Transparent;
+
         }
 
         private void BTNcancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.No;
-        }
+            FrmLogin form = new FrmLogin();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X, this.Location.Y);
 
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
+        }
 
         private int verifyemail(String cad)
         {
@@ -119,9 +133,12 @@ namespace Vista
                 TXTpassword.Text = TXTpassword.Text.Trim();
                 TXTusername.Text = TXTusername.Text.Trim();
 
-                Random rnd = new Random();
-                int a = rnd.Next(1, 3);
-                admin = new Admin(TXTusername.Text, TXTpassword.Text,TXTname.Text,TXTemail.Text,0, 1,a);
+                string npc = "PLAYER";
+                int can_battle = 1;
+                int battle_dialog_id = 1;
+                int defeat_dialog_id = 1;
+                Direction direction = Direction.DOWN;
+                admin = new Admin(TXTusername.Text, TXTpassword.Text,TXTname.Text,TXTemail.Text,0, 1,npc,can_battle, battle_dialog_id,defeat_dialog_id, direction);
                 AdminDA AdminDA = new AdminDA();
                 if ((AdminDA.verifyRepeatUsername(admin)) == 1)
                 {
@@ -157,95 +174,6 @@ namespace Vista
 
             base.WndProc(ref message);
         }
-
-        private void TXTemail_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == Convert.ToChar(Keys.Enter))
-            {
-                int flag = 1, flag2 = 1;
-
-
-                if (TXTname.Text == "")
-                {
-                    MessageBox.Show("Must enter a name", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    flag = 0;
-                }
-
-                if (TXTusername.Text == "")
-                {
-                    MessageBox.Show("Must enter an username", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    flag = 0;
-                }
-
-                if (TXTpassword.Text == "")
-                {
-                    MessageBox.Show("Must enter a password", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    flag = 0;
-                }
-
-
-                if (TXTemail.Text == "")
-                {
-                    MessageBox.Show("Must enter an email", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    flag = 0;
-                    flag2 = 0;
-                }
-
-                if (flag2 == 1)
-                {
-                    if (verifyemail(TXTemail.Text) == 0)
-                    {
-                        MessageBox.Show("Must enter a valid email ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        flag = 0;
-                    }
-
-
-                }
-
-                if ((TXTusername.Text.Contains(" ")) || (TXTusername.Text.Contains('"')))
-                {
-                    MessageBox.Show("Spaces and quotation marks are not allowed in the username", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    flag = 0;
-                }
-
-                if ((TXTpassword.Text.Contains(" ")) || (TXTpassword.Text.Contains('"')))
-                {
-                    MessageBox.Show("Spaces and quotation marks are not allowed in the password", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    flag = 0;
-                }
-
-
-
-                if (flag == 1)
-                {
-                    TXTemail.Text = TXTemail.Text.ToLower();
-                    TXTemail.Text = TXTemail.Text.Trim();
-                    TXTpassword.Text = TXTpassword.Text.Trim();
-                    TXTusername.Text = TXTusername.Text.Trim();
-
-                    Random rnd = new Random();
-                    int a = rnd.Next(1, 3);
-                    admin = new Admin(TXTusername.Text, TXTpassword.Text, TXTname.Text, TXTemail.Text,0,1,a);
-                    AdminDA playerDA = new AdminDA();
-                    if ((playerDA.verifyRepeatUsername(admin)) == 1)
-                    {
-                        MessageBox.Show("That username has already been registered");
-                    }
-                    else if ((playerDA.verifyRepeatemail(admin)) == 1)
-                    {
-                        MessageBox.Show("That email has already been registered");
-                    }
-                    else
-                    {
-                        playerDA.addAdmin(admin);
-                        MessageBox.Show("You're registered");
-                        this.DialogResult = DialogResult.OK;
-                    }
-
-                }
-            }
-        }
-
         
     }
 }

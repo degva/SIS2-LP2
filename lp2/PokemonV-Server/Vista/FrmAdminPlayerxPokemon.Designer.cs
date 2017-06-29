@@ -41,13 +41,14 @@
             this.TXTpokemonid = new System.Windows.Forms.TextBox();
             this.LBLpokemonid = new System.Windows.Forms.Label();
             this.LBLorder = new System.Windows.Forms.Label();
+            this.BTNback = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVpokemons)).BeginInit();
             this.SuspendLayout();
             // 
             // DGVpokemons
             // 
             this.DGVpokemons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVpokemons.Location = new System.Drawing.Point(406, 46);
+            this.DGVpokemons.Location = new System.Drawing.Point(406, 21);
             this.DGVpokemons.Name = "DGVpokemons";
             this.DGVpokemons.Size = new System.Drawing.Size(349, 236);
             this.DGVpokemons.TabIndex = 0;
@@ -130,6 +131,7 @@
             // 
             this.LBLplayerid.AutoSize = true;
             this.LBLplayerid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLplayerid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLplayerid.Location = new System.Drawing.Point(22, 57);
             this.LBLplayerid.Name = "LBLplayerid";
             this.LBLplayerid.Size = new System.Drawing.Size(82, 20);
@@ -156,6 +158,7 @@
             // 
             this.LBLpokemonid.AutoSize = true;
             this.LBLpokemonid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLpokemonid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLpokemonid.Location = new System.Drawing.Point(22, 135);
             this.LBLpokemonid.Name = "LBLpokemonid";
             this.LBLpokemonid.Size = new System.Drawing.Size(107, 20);
@@ -166,17 +169,30 @@
             // 
             this.LBLorder.AutoSize = true;
             this.LBLorder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLorder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLorder.Location = new System.Drawing.Point(22, 215);
             this.LBLorder.Name = "LBLorder";
             this.LBLorder.Size = new System.Drawing.Size(154, 20);
             this.LBLorder.TabIndex = 33;
             this.LBLorder.Text = "Order of Pokemon";
             // 
+            // BTNback
+            // 
+            this.BTNback.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNback.Location = new System.Drawing.Point(12, 12);
+            this.BTNback.Name = "BTNback";
+            this.BTNback.Size = new System.Drawing.Size(73, 28);
+            this.BTNback.TabIndex = 44;
+            this.BTNback.Text = "Back";
+            this.BTNback.UseVisualStyleBackColor = true;
+            this.BTNback.Click += new System.EventHandler(this.BTNback_Click);
+            // 
             // FrmAdminPlayerxPokemon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 472);
+            this.Controls.Add(this.BTNback);
             this.Controls.Add(this.TXTplayerid);
             this.Controls.Add(this.LBLplayerid);
             this.Controls.Add(this.TXTorder);
@@ -190,6 +206,7 @@
             this.Controls.Add(this.BTNrecover);
             this.Controls.Add(this.BTNnew);
             this.Controls.Add(this.DGVpokemons);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAdminPlayerxPokemon";
             this.Text = "Admin Player\'s Pokemon";
             ((System.ComponentModel.ISupportInitialize)(this.DGVpokemons)).EndInit();
@@ -213,5 +230,6 @@
         private System.Windows.Forms.TextBox TXTpokemonid;
         private System.Windows.Forms.Label LBLpokemonid;
         private System.Windows.Forms.Label LBLorder;
+        private System.Windows.Forms.Button BTNback;
     }
 }

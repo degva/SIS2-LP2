@@ -44,6 +44,7 @@
             // 
             this.LBLusername.AutoSize = true;
             this.LBLusername.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLusername.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLusername.Location = new System.Drawing.Point(124, 132);
             this.LBLusername.Name = "LBLusername";
             this.LBLusername.Size = new System.Drawing.Size(105, 24);
@@ -55,6 +56,7 @@
             // 
             this.LBLemail.AutoSize = true;
             this.LBLemail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLemail.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLemail.Location = new System.Drawing.Point(124, 263);
             this.LBLemail.Name = "LBLemail";
             this.LBLemail.Size = new System.Drawing.Size(62, 24);
@@ -66,6 +68,7 @@
             // 
             this.LBLpassword.AutoSize = true;
             this.LBLpassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLpassword.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLpassword.Location = new System.Drawing.Point(124, 196);
             this.LBLpassword.Name = "LBLpassword";
             this.LBLpassword.Size = new System.Drawing.Size(100, 24);
@@ -93,7 +96,6 @@
             this.TXTemail.Name = "TXTemail";
             this.TXTemail.Size = new System.Drawing.Size(168, 20);
             this.TXTemail.TabIndex = 5;
-            this.TXTemail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXTemail_KeyPress);
             // 
             // BTNregister
             // 
@@ -132,6 +134,7 @@
             // 
             this.LBLname.AutoSize = true;
             this.LBLname.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBLname.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.LBLname.Location = new System.Drawing.Point(124, 76);
             this.LBLname.Name = "LBLname";
             this.LBLname.Size = new System.Drawing.Size(65, 24);
