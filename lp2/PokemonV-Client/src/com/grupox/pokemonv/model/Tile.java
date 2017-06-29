@@ -37,6 +37,8 @@ public class Tile extends Renderable {
     private Map map;
     private boolean isWalkable;
     
+    private boolean drawBackground;
+    
     private BufferedImage topSprite;
     
     public static final int spriteWidthOut = 64;    // Width with which is rendered each sprite
@@ -63,17 +65,50 @@ public class Tile extends Renderable {
     }
     
     public void render( Graphics2D g, int x, int y ){
-        g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
-        if( player != null ){
-            player.render( g, x, y );
+        int dx = 0, dy = 0;
+        Player mainPlayer = map.getGame().getPlayer();
+        if( mainPlayer.getIsMoving() ){
+            switch( mainPlayer.getDirection() ){
+                case DOWN:
+                    dy = (int) ( spriteHeightOut * (1 - mainPlayer.getElapsed() / mainPlayer.getMovePeriod() / 1000000000));
+                    break;
+                case LEFT:
+                    dx = (int) (-1 * spriteWidthOut * (1 - mainPlayer.getElapsed() / mainPlayer.getMovePeriod() / 1000000000));
+                    break;
+                case RIGHT:
+                    dx = (int) ( spriteWidthOut * (1 - mainPlayer.getElapsed() / mainPlayer.getMovePeriod() / 1000000000));
+                    break;
+                case UP:
+                    dy = (int) (-1 * spriteHeightOut * ( 1 -mainPlayer.getElapsed() / mainPlayer.getMovePeriod() / 1000000000));
+                    break;
+            }
         }
-        if(type == Tile.Type.GRA10 || type == Tile.Type.TRW03 || type == Tile.Type.TRW04 || type == Tile.Type.TRW01 ||
-           type == Tile.Type.TRW02 ){
-            g.drawImage(topSprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
+        
+        if( drawBackground ){
+            // Background
+            g.drawImage(sprite, x * spriteWidthOut + dx, y * spriteHeightOut + dy, spriteWidthOut, spriteHeightOut, null );
+
+            // Player
+            if( player != null ){
+                /*if( player.getIsMainPlayer() ){
+                    player.render( g, x * spriteWidthOut , y * spriteHeightOut );
+                }else{
+                    player.render( g, x * spriteWidthOut + dx, y * spriteHeightOut + dy );
+                }*/
+                if(!player.getIsMainPlayer()){
+                    player.render( g, x * spriteWidthOut + dx, y * spriteHeightOut + dy );
+                }
+            }
+        }else{
+            // Front
+            if(type == Tile.Type.GRA10 || type == Tile.Type.TRW03 || type == Tile.Type.TRW04 || type == Tile.Type.TRW01 ||
+               type == Tile.Type.TRW02 ){
+                g.drawImage(topSprite, x * spriteWidthOut + dx, y * spriteHeightOut + dy, spriteWidthOut, spriteHeightOut, null );
+            }
         }
     }
     
-    public boolean containsUser(){
+    public boolean containsPlayer(){
         return this.player != null;
     }
     
@@ -642,5 +677,14 @@ public class Tile extends Renderable {
     public void setIsPokemonSpawner(boolean isPokemonSpawner) {
         this.isPokemonSpawner = isPokemonSpawner;
     }
+
+    public boolean getDrawBackground() {
+        return drawBackground;
+    }
+
+    public void setDrawBackground(boolean drawBackground) {
+        this.drawBackground = drawBackground;
+    }
+ 
     
 }

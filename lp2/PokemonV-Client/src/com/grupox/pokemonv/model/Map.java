@@ -26,11 +26,6 @@ public class Map {
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 grid[i][j].tick();
-//                if(grid[i][j].containsUser()){
-//                    if(grid[i][j].getPlayer().getId() == 4){
-//                        System.out.println(i + "," + j);
-//                    }
-//                }
             }
         }
     }
@@ -77,7 +72,7 @@ public class Map {
                 return false;
         }
         
-        if( !nextTile.containsUser() && nextTile.getIsWalkable() ){
+        if( !nextTile.containsPlayer() && nextTile.getIsWalkable() ){
             player.getTile().setPlayer( null ); // Current tile
             player.setTile(nextTile);
             nextTile.setPlayer(player );
@@ -123,18 +118,39 @@ public class Map {
         int x = pos[0], y = pos[1]; // Asume that the player exists
         
         // Tiles from and to where to draw
-        int xStart = Integer.max( 0, x - TILES_IN_WIDTH / 2 );
-        int yStart = Integer.max( 0, y - TILES_IN_HEIGHT / 2 );
-        int xEnd = Integer.min(width, x + TILES_IN_WIDTH / 2 + 1);
-        int yEnd = Integer.min(height, y + TILES_IN_HEIGHT / 2 + 1);
+        int xStart = Integer.max( 0, x - TILES_IN_WIDTH / 2 - 2);
+        int yStart = Integer.max( 0, y - TILES_IN_HEIGHT / 2 - 2);
+        int xEnd = Integer.min(width, x + TILES_IN_WIDTH / 2 + 2);
+        int yEnd = Integer.min(height, y + TILES_IN_HEIGHT / 2 + 2);
         
+        // Draw backgrounds
+        Tile tile;
+        int xPlayer = 0, yPlayer = 0;
         for( int i = xStart; i < xEnd; i++ ){
             for( int j = yStart; j < yEnd; j++ ){
-                grid[i][j].render( g, TILES_IN_WIDTH / 2 - (x - i) , TILES_IN_HEIGHT / 2 - (y - j) );
+                tile = grid[i][j];
+                tile.setDrawBackground(true);
+                if(tile.containsPlayer()){
+                    if(tile.getPlayer().getIsMainPlayer()){
+                        xPlayer = TILES_IN_WIDTH / 2 - (x - i);
+                        yPlayer = TILES_IN_HEIGHT / 2 - (y - j);
+                    }
+                }
+                tile.render( g, TILES_IN_WIDTH / 2 - (x - i) , TILES_IN_HEIGHT / 2 - (y - j) );
             }
         }
         
+        // Draw player
+        player.render(g, xPlayer * Tile.spriteWidthOut, yPlayer * Tile.spriteHeightOut);
         
+        // Draw tops
+        for( int i = xStart; i < xEnd; i++ ){
+            for( int j = yStart; j < yEnd; j++ ){
+                tile = grid[i][j];
+                tile.setDrawBackground(false);
+                tile.render( g, TILES_IN_WIDTH / 2 - (x - i) , TILES_IN_HEIGHT / 2 - (y - j) );
+            }
+        }
     }
     
     public int[] getPosPlayer( Player player ){

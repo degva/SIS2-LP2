@@ -24,12 +24,16 @@ public class Player extends Renderable{
     private Potion potions;
     private Dialog battleDialog;
     private Dialog defeatDialog;
+    private boolean isMainPlayer;
     
     private boolean canBattle;
     
     private double now;
-    private double lastMove = 0;
+    private double last = 0;
+    private double elapsed = 0;
     private final double movePeriod = 0.2;
+    private boolean isMoving;
+    private Animation anim;
     
     private BufferedImage leftIdle;
     private BufferedImage rightIdle;
@@ -47,72 +51,84 @@ public class Player extends Renderable{
         if( input != null ){
             loadAnimations();
         }
+        isMainPlayer = false;
+        isMoving = true;
     }
     
     /* Methods */
     public void tick(){
         // Check movement
         now = System.nanoTime();
-        if( input != null && now - lastMove > movePeriod * 1000000000 ){
+        elapsed += now - last;
+        last = now;
+        if( input != null && elapsed > movePeriod * 1000000000 ){
             if( input.up.isPressed && !input.down.isPressed ){
                 
                 // Animate
-                Animation walkTop = animations.get( findAnimation( "walkTop" ) );
+                anim = animations.get( findAnimation( "walkTop" ) );
                 if( input.up.isFirstPressed ){
                     //stopAnimations();
-                    walkTop.play();
+                    anim.play();
                 }
-                currSprite = walkTop.getCurrSprite();
                 direction = Direction.UP;
                 
                 if(tile.getMap().tryMove( this, Direction.UP )){
-                    lastMove = now;
+                    elapsed = 0;
+                    isMoving = true;
+                }else{
+                    isMoving = false;
                 }
             }else if( input.down.isPressed && !input.up.isPressed ){
                 
                 // Animate
-                Animation walkDown = animations.get( findAnimation( "walkDown" ) );
+                anim = animations.get( findAnimation( "walkDown" ) );
                 if( input.up.isFirstPressed ){
                     //stopAnimations();
-                    walkDown.play();
+                    anim.play();
                 }
-                currSprite = walkDown.getCurrSprite();
                 direction = Direction.DOWN;
                 
                 if(tile.getMap().tryMove( this, Direction.DOWN )){
-                    lastMove = now;
+                    elapsed = 0;
+                    isMoving = true;
+                }else{
+                    isMoving = false;
                 }
             }else if( input.left.isPressed && !input.right.isPressed ){
                 
                 // Animate
-                Animation walkLeft = animations.get( findAnimation( "walkLeft" ) );
+                anim = animations.get( findAnimation( "walkLeft" ) );
                 if( input.up.isFirstPressed ){
                     //stopAnimations();
-                    walkLeft.play();
+                    anim.play();
                 }
-                currSprite = walkLeft.getCurrSprite();
                 direction = Direction.LEFT;
                 
                 if(tile.getMap().tryMove( this, Direction.LEFT )){
-                    lastMove = now;
+                    elapsed = 0;
+                    isMoving = true;
+                }else{
+                    isMoving = false;
                 }
             }else if( input.right.isPressed && !input.left.isPressed ){
                 
                 // Animate
-                Animation walkRight = animations.get( findAnimation( "walkRight" ) );
+                anim = animations.get( findAnimation( "walkRight" ) );
                 if( input.up.isFirstPressed ){
                     //stopAnimations();
-                    walkRight.play();
+                    anim.play();
                 }
-                currSprite = walkRight.getCurrSprite();
                 direction = Direction.RIGHT;
                 
                 if(tile.getMap().tryMove( this, Direction.RIGHT )){
-                    lastMove = now;
+                    elapsed = 0;
+                    isMoving = true;
+                }else{
+                    isMoving = false;
                 }
             }else if( !input.up.isPressed && !input.down.isPressed && !input.left.isPressed && !input.right.isPressed){
-                //stopAnimations();
-                Animation anim;
+                isMoving = false;
+                
                 switch ( direction ){
                     case DOWN:
                         anim = animations.get( findAnimation( "iddleDown" ) );
@@ -131,29 +147,28 @@ public class Player extends Renderable{
                 currSprite = anim.getCurrSprite();
             }
         }
+        currSprite = anim.getCurrSprite();
     }
     
     public void render( Graphics2D g, int x, int y ){
+        // If npc
         if(input == null){
-            // Render for NPC
             switch(direction){
                 case DOWN:
-                    sprite = downIdle;
+                    currSprite = downIdle;
                     break;
                 case LEFT:
-                    sprite = leftIdle;
+                    currSprite = leftIdle;
                     break;
                 case RIGHT:
-                    sprite = rightIdle;
+                    currSprite = rightIdle;
                     break;
                 case UP:
-                    sprite = upIdle;
+                    currSprite = upIdle;
                     break;
             }
-            g.drawImage(sprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
-        }else{
-            g.drawImage(currSprite, x * spriteWidthOut, y * spriteHeightOut, spriteWidthOut, spriteHeightOut, null );
         }
+        g.drawImage(currSprite, x , y , spriteWidthOut, spriteHeightOut, null );
     }    
     
     private void loadAnimations(){
@@ -337,4 +352,25 @@ public class Player extends Renderable{
     public void setDefeatDialog(Dialog defeatDialog) {
         this.defeatDialog = defeatDialog;
     }
+
+    public boolean getIsMainPlayer() {
+        return isMainPlayer;
+    }
+    public void setIsMainPlayer(boolean isMainPlayer) {
+        this.isMainPlayer = isMainPlayer;
+    }
+
+    public double getElapsed() {
+        return elapsed;
+    }
+
+    public boolean getIsMoving() {
+        return isMoving;
+    }
+
+    public double getMovePeriod() {
+        return movePeriod;
+    }
+    
+    
 }

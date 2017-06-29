@@ -150,6 +150,7 @@ public class DataAccess {
         if(tile_player_id == logged_player_id){
             player = new Player(input);
             game.setPlayer(player);
+            player.setIsMainPlayer(true);
         }else{
             player = new Player(null);
         }
