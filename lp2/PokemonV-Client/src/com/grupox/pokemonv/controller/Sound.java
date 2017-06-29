@@ -9,13 +9,17 @@ import javax.sound.sampled.Clip;
 
 public class Sound {
     /* Enum declaration */
-    public enum AUDIO { MAP, BATTLE };
+    public enum AUDIO { INTRO, MAP, BEFORE_BATTLE, BATTLE };
     
     /* Attributes */
     private final String mapRoute = "res/sounds/route101.wav";
     private final String battleRoute = "res/sounds/battle.wav";
+    private final String introRoute = "res/sounds/intro.wav";
+    private final String beforeBattleRoute = "res/sounds/beforeBattle.wav";
     private Clip mapClip;
     private Clip battleClip;
+    private Clip introClip;
+    private Clip beforeBattleClip;
     private static Sound instance;
     
     /* Constructors */
@@ -28,6 +32,14 @@ public class Sound {
             aIn = AudioSystem.getAudioInputStream(new File(battleRoute));
             battleClip = AudioSystem.getClip();
             battleClip.open(aIn);
+            
+            aIn = AudioSystem.getAudioInputStream(new File(introRoute));
+            introClip = AudioSystem.getClip();
+            introClip.open(aIn);
+            
+            aIn = AudioSystem.getAudioInputStream(new File(beforeBattleRoute));
+            beforeBattleClip = AudioSystem.getClip();
+            beforeBattleClip.open(aIn);
         } catch (Exception ex) {
             Logger.getLogger(Sound.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -49,6 +61,12 @@ public class Sound {
             case MAP:
                 mapClip.loop(Clip.LOOP_CONTINUOUSLY);
                 break;
+            case INTRO:
+                introClip.loop(Clip.LOOP_CONTINUOUSLY);
+                break;
+            case BEFORE_BATTLE:
+                beforeBattleClip.loop(Clip.LOOP_CONTINUOUSLY);
+                break;
         }
     }
     
@@ -62,6 +80,12 @@ public class Sound {
                 mapClip.stop();
                 mapClip.setMicrosecondPosition(0);
                 break;
+            case INTRO:
+                introClip.stop();
+                break;
+            case BEFORE_BATTLE:
+                beforeBattleClip.stop();
+                beforeBattleClip.setMicrosecondPosition(0);
         }
     }
 }

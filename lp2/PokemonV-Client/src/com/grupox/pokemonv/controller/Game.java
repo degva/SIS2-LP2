@@ -68,6 +68,8 @@ public class Game extends Canvas implements Runnable {
     public void start() {
         // UI
         initUI();
+        Sound.getInstance().stop(Sound.AUDIO.INTRO);
+        Sound.getInstance().start(Sound.AUDIO.MAP);
         setState(State.MAP);
         
         running = true;
@@ -189,6 +191,7 @@ public class Game extends Canvas implements Runnable {
         switch (newState) {
             case BATTLE:
                 Sound.getInstance().stop(Sound.AUDIO.MAP);
+                Sound.getInstance().stop(Sound.AUDIO.BEFORE_BATTLE);
                 Sound.getInstance().start(Sound.AUDIO.BATTLE);
                 break;
             case MAP:

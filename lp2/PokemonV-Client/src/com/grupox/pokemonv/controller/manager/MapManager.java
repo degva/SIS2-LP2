@@ -3,6 +3,7 @@ package com.grupox.pokemonv.controller.manager;
 import com.grupox.pokemonv.BD.DataAccess;
 import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.InputHandler;
+import com.grupox.pokemonv.controller.Sound;
 import com.grupox.pokemonv.controller.menu.MapMenu;
 import com.grupox.pokemonv.model.Dialog;
 import com.grupox.pokemonv.model.Map;
@@ -112,6 +113,12 @@ public class MapManager {
         return state;
     }
     public void setState( State state ) {
+        switch(state){
+            case BATTLE_DIALOG:
+                Sound.getInstance().stop(Sound.AUDIO.MAP);
+                Sound.getInstance().start(Sound.AUDIO.BEFORE_BATTLE);
+                break;
+        }
         this.state = state;
     }
 
