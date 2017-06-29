@@ -9,7 +9,6 @@ import com.grupox.pokemonv.model.Player;
 import com.grupox.pokemonv.model.Pokeball;
 import com.grupox.pokemonv.model.Pokemon;
 import com.grupox.pokemonv.model.Potion;
-import com.grupox.pokemonv.model.Renderable;
 import com.grupox.pokemonv.model.Renderable.Direction;
 import com.grupox.pokemonv.model.Tile;
 import java.sql.Connection;
@@ -93,6 +92,69 @@ public class DataAccess {
             System.out.println(ex.getStackTrace());
         }
         return list;
+    }
+    
+    public void updatePlayers(Map map) throws SQLException{
+        Connection con = openConnection();
+        
+        for(int i = 0; i < map.getWidth(); i++){
+            for(int j = 0; j < map.getHeight(); j++){
+                if(map.getGrid()[i][j].containsPlayer()){
+                    updatePlayer(map.getGrid()[i][j].getPlayer(), con);
+                }
+            }
+        }
+        
+        closeConnection(con);
+    }
+    
+    private void updatePlayer(Player player, Connection con) throws SQLException{
+        updateItems(player, con);
+        updatePokemons(player, con);
+    }
+    
+    private void updateItems(Player player, Connection con) throws SQLException{
+        Statement st = con.createStatement();
+        String query = "UPDATE PLAYER_X_ITEM SET QUANTITY = " + player.getPotions().getQuantity() +
+                       " WHERE ITEM_ID = 1 AND PLAYER_ID = " + player.getId();
+        st.executeUpdate(query);
+        
+        query = "UPDATE PLAYER_X_ITEM SET QUANTITY = " + player.getPokeballs().getQuantity() +
+                " WHERE ITEM_ID = 2 AND PLAYER_ID = " + player.getId();
+        st.executeUpdate(query);
+    }
+    
+    private void updatePokemons(Player player, Connection con) throws SQLException{
+        Statement st = con.createStatement();
+        String query;
+        ResultSet rs;
+        
+        // Insert needed rows
+        for( Pokemon pok : player.getPokemons()){
+            query = "SELECT ID FROM PLAYER_X_POKEMON WHERE PLAYER_ID = " + player.getId() + 
+                    " AND POKEMON_ID = " + pok.getId();
+            rs = st.executeQuery(query);
+            boolean found = false;
+            while(rs.next() && !found){
+                found = true;   // If enters in while, there pokemon is already there
+            }
+            if(!found){
+                query = "INSERT INTO PLAYER_X_POKEMON (PLAYER_ID, POKEMON_ID, ORDER_POKEMON, DELETED) VALUES (" +
+                        player.getId() + ", " + pok.getId() + ", 0, 0)";
+                st.executeUpdate(query);
+            }
+        }
+        
+        // Set all pokemons as deleted
+        query = "UPDATE PLAYER_X_POKEMON SET DELETED = 1 WHERE PLAYER_ID = " + player.getId();
+        st.executeUpdate(query);
+        
+        // Update all pokemons in belt
+        for( int i = 0; i < player.getPokemons().size(); i++){
+            query = "UPDATE PLAYER_X_POKEMON SET ORDER_POKEMON = " + (i + 1) + " , DELETED = 0" +
+                    " WHERE PLAYER_ID = " + player.getId() + " AND POKEMON_ID = " + player.getPokemons().get(i).getId();
+            st.executeUpdate(query);
+        }
     }
     
     private void loadTiles(Map map, int player_id, InputHandler input, Connection con, int level, Game game) throws SQLException{
