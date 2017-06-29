@@ -51,7 +51,7 @@
             this.DGVpokemons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVpokemons.Location = new System.Drawing.Point(406, 21);
             this.DGVpokemons.Name = "DGVpokemons";
-            this.DGVpokemons.Size = new System.Drawing.Size(349, 236);
+            this.DGVpokemons.Size = new System.Drawing.Size(363, 236);
             this.DGVpokemons.TabIndex = 0;
             // 
             // BTNcancel
@@ -192,7 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(767, 472);
+            this.ClientSize = new System.Drawing.Size(781, 472);
             this.Controls.Add(this.BTNback);
             this.Controls.Add(this.TXTplayerid);
             this.Controls.Add(this.LBLplayerid);

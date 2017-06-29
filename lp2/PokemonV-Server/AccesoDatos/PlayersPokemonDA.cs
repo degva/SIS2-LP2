@@ -180,5 +180,37 @@ namespace AccesoDatos
             }
         }
 
+
+        public int sameOrder(int idplayer, int order)
+        {
+            try
+            {
+                Connection connection = new Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                char character = '"';
+                string sql = "SELECT * FROM PLAYER_X_POKEMON WHERE PLAYER_ID =" + character + idplayer + character
+                            + "AND ORDER_POKEMON = " +  character + order + character ;
+                cmd.Connection = connection.conn;
+                cmd.CommandText = sql;
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+                reader.Read();
+
+                connection.closeConnection();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
     }
 }

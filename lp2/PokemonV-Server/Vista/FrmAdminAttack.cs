@@ -64,6 +64,7 @@ namespace Vista
 
             BTNrecover.Enabled = true;
             BTNupdate.Enabled = false;
+            BTNcancel.Enabled = true;
 
             TXTname.Text = "";
             TXTpoints.Text = "";
@@ -92,6 +93,7 @@ namespace Vista
 
                 BTNrecover.Enabled = false;
                 BTNupdate.Enabled = true;
+                BTNcancel.Enabled = true;
 
             }
         }
@@ -165,6 +167,11 @@ namespace Vista
             this.Hide();
             form.ShowDialog();
             this.Close();
+        }
+
+        private void BTNcancel_Click(object sender, EventArgs e)
+        {
+            init();
         }
     }
 

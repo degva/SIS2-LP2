@@ -22,9 +22,7 @@ namespace AccesoDatos
             {
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
-                string sql = $"INSERT INTO PLAYER (NAME,USERNAME,PASSWORD,EMAIL,CAN_BATTLE,BATTLE_DIALOG_ID,DEFEAT_DIALOG_ID,NPC_TYPE,ISADMIN,DIRECTION,DELETED) values('{play.Name}'," +
-                    $"              '{play.Username}' , '{play.Password}' , '{play.Email}' , '{play.Can_battle}' , '{play.Battle_dialog_id}' , '{play.Defeat_dialog_id}' , '{play.Npc_type}' , " +
-                    $"                      , '{play.IsAdmin}' , '{play.Direction}'  , '{play.Deleted}')";
+                string sql = $"INSERT INTO PLAYER (NAME,USERNAME,PASSWORD,EMAIL,CAN_BATTLE,BATTLE_DIALOG_ID,DEFEAT_DIALOG_ID,NPC_TYPE,ISADMIN,DIRECTION,DELETED) values('{play.Name}', '{play.Username}' , '{play.Password}' , '{play.Email}' , '{play.Can_battle}' , '{play.Battle_dialog_id}' , '{play.Defeat_dialog_id}' , '{play.Npc_type}', '{play.IsAdmin}' , '{play.Direction}'  , '{play.Deleted}')";
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();

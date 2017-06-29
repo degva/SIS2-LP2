@@ -221,11 +221,7 @@ namespace Vista
                 {
                     MessageBox.Show("You can't do that change", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                
 
-
-
-                
 
                 load();
                 inicio();
@@ -340,8 +336,11 @@ namespace Vista
                 {
                     MessageBox.Show("The player already has that pokemon");
                 }
-                else
+                else if ((playersPokDA.sameOrder(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTorder.Text))) == 1)
                 {
+                    MessageBox.Show("There's a pokemon in that order");
+                }
+                else {
                     playersPokDA.addPlayersPokemon(Convert.ToInt32(TXTplayerid.Text), Convert.ToInt32(TXTpokemonid.Text), Convert.ToInt32(TXTorder.Text), deleted);
 
                 }

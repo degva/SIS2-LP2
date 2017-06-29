@@ -152,7 +152,13 @@ namespace Vista
                 {
                     AdminDA.addAdmin(admin);
                     MessageBox.Show("You're registered");
-                    this.DialogResult = DialogResult.OK;
+                    FrmLogin form = new FrmLogin();
+                    form.StartPosition = FormStartPosition.Manual;
+                    form.Location = new Point(this.Location.X, this.Location.Y);
+
+                    this.Hide();
+                    form.ShowDialog();
+                    this.Close();
                 }
 
             }

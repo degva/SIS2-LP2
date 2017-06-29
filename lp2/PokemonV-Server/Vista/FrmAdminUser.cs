@@ -215,8 +215,6 @@ namespace Vista
                 else
                 {
                     playerDA.addPlayer(player);
-                    MessageBox.Show("New player has been added");
-                    this.DialogResult = DialogResult.OK;
 
                     load();
 
