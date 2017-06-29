@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAdminItem));
             this.DGVitem = new System.Windows.Forms.DataGridView();
             this.CMBtype = new System.Windows.Forms.ComboBox();
             this.LBLtype = new System.Windows.Forms.Label();
@@ -237,6 +238,7 @@
             this.Controls.Add(this.LBLcatchprob);
             this.Controls.Add(this.DGVitem);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAdminItem";
             this.Text = "Admin Item";
             ((System.ComponentModel.ISupportInitialize)(this.DGVitem)).EndInit();

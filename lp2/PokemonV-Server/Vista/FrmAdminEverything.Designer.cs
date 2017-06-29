@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAdminEverything));
             this.BTNmanageusers = new System.Windows.Forms.Button();
             this.BTNmanagepokemon = new System.Windows.Forms.Button();
             this.BTNmanageplayerspokemon = new System.Windows.Forms.Button();
@@ -114,6 +115,7 @@
             this.Controls.Add(this.BTNmanagepokemon);
             this.Controls.Add(this.BTNmanageusers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAdminEverything";
             this.Text = "Admin Game";
             this.ResumeLayout(false);

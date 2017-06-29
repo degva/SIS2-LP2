@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAdminUser));
             this.DGVadmin = new System.Windows.Forms.DataGridView();
             this.LBLpassword = new System.Windows.Forms.Label();
             this.LBLusername = new System.Windows.Forms.Label();
@@ -230,6 +231,7 @@
             this.Controls.Add(this.LBLpassword);
             this.Controls.Add(this.DGVadmin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAdminUser";
             this.Text = "Admin Player";
             ((System.ComponentModel.ISupportInitialize)(this.DGVadmin)).EndInit();

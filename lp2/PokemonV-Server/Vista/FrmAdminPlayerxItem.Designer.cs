@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAdminPlayerxItem));
             this.DGVplayerxitem = new System.Windows.Forms.DataGridView();
             this.TXTitemid = new System.Windows.Forms.TextBox();
             this.TXTplayerid = new System.Windows.Forms.TextBox();
@@ -207,6 +208,7 @@
             this.Controls.Add(this.LBLitemid);
             this.Controls.Add(this.DGVplayerxitem);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAdminPlayerxItem";
             this.Text = "Admin Player\'s Item";
             ((System.ComponentModel.ISupportInitialize)(this.DGVplayerxitem)).EndInit();
