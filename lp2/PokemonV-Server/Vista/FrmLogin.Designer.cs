@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
             this.LBLusername = new System.Windows.Forms.Label();
             this.LBLpassword = new System.Windows.Forms.Label();
             this.TXTusername = new System.Windows.Forms.TextBox();
@@ -80,6 +81,7 @@
             this.BTNlogin.BackColor = System.Drawing.Color.LawnGreen;
             this.BTNlogin.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.BTNlogin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BTNlogin.FlatAppearance.BorderSize = 0;
             this.BTNlogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNlogin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BTNlogin.Location = new System.Drawing.Point(180, 317);
@@ -94,6 +96,7 @@
             // 
             this.BTNregister.BackColor = System.Drawing.Color.LimeGreen;
             this.BTNregister.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BTNregister.FlatAppearance.BorderSize = 0;
             this.BTNregister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNregister.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BTNregister.Location = new System.Drawing.Point(370, 317);
@@ -104,7 +107,7 @@
             this.BTNregister.UseVisualStyleBackColor = false;
             this.BTNregister.Click += new System.EventHandler(this.BTNregister_Click);
             // 
-            // FrmLogueo
+            // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,7 +119,8 @@
             this.Controls.Add(this.LBLpassword);
             this.Controls.Add(this.LBLusername);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "FrmLogueo";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.ResumeLayout(false);

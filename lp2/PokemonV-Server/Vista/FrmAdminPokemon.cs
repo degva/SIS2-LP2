@@ -480,6 +480,15 @@ namespace Vista
             }
         }
 
-        
+        private void BTNback_Click(object sender, EventArgs e)
+        {
+            FrmAdminEverything form = new FrmAdminEverything();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X, this.Location.Y);
+
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
+        }
     }
 }

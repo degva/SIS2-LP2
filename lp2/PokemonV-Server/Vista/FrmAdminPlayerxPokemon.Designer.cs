@@ -41,6 +41,7 @@
             this.TXTpokemonid = new System.Windows.Forms.TextBox();
             this.LBLpokemonid = new System.Windows.Forms.Label();
             this.LBLorder = new System.Windows.Forms.Label();
+            this.BTNback = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVpokemons)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,11 +176,23 @@
             this.LBLorder.TabIndex = 33;
             this.LBLorder.Text = "Order of Pokemon";
             // 
+            // BTNback
+            // 
+            this.BTNback.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNback.Location = new System.Drawing.Point(12, 12);
+            this.BTNback.Name = "BTNback";
+            this.BTNback.Size = new System.Drawing.Size(73, 28);
+            this.BTNback.TabIndex = 44;
+            this.BTNback.Text = "Back";
+            this.BTNback.UseVisualStyleBackColor = true;
+            this.BTNback.Click += new System.EventHandler(this.BTNback_Click);
+            // 
             // FrmAdminPlayerxPokemon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 472);
+            this.Controls.Add(this.BTNback);
             this.Controls.Add(this.TXTplayerid);
             this.Controls.Add(this.LBLplayerid);
             this.Controls.Add(this.TXTorder);
@@ -217,5 +230,6 @@
         private System.Windows.Forms.TextBox TXTpokemonid;
         private System.Windows.Forms.Label LBLpokemonid;
         private System.Windows.Forms.Label LBLorder;
+        private System.Windows.Forms.Button BTNback;
     }
 }

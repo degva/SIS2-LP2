@@ -28,14 +28,11 @@ namespace Vista
             FrmAdminUser form = new FrmAdminUser();
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X, this.Location.Y);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
 
-            }
-            else
-            {
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
 
-            }
         }
 
         private void BTNmanagepokemon_Click(object sender, EventArgs e)
@@ -43,14 +40,11 @@ namespace Vista
             FrmAdminPokemon form = new FrmAdminPokemon();
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X, this.Location.Y);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
 
-            }
-            else
-            {
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
 
-            }
         }
 
         private void BTNmanageplayerspokemon_Click(object sender, EventArgs e)
@@ -58,14 +52,11 @@ namespace Vista
             FrmAdminPlayerxPokemon form = new FrmAdminPlayerxPokemon();
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X, this.Location.Y);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
 
-            }
-            else
-            {
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
 
-            }
         }
 
         private void BTNmanageitem_Click(object sender, EventArgs e)
@@ -73,14 +64,11 @@ namespace Vista
             FrmAdminItem form = new FrmAdminItem();
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X, this.Location.Y);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
 
-            }
-            else
-            {
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
 
-            }
         }
 
         private void BTNpalyersitem_Click(object sender, EventArgs e)
@@ -88,14 +76,11 @@ namespace Vista
             FrmAdminPlayerxItem form = new FrmAdminPlayerxItem();
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X, this.Location.Y);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
 
-            }
-            else
-            {
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
 
-            }
         }
 
         private void BTNmanageattack_Click(object sender, EventArgs e)
@@ -103,14 +88,11 @@ namespace Vista
             FrmAdminAttack form = new FrmAdminAttack();
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X, this.Location.Y);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
 
-            }
-            else
-            {
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
 
-            }
         }
 
         protected override void WndProc(ref Message message)

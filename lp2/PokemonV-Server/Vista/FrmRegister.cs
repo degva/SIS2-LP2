@@ -36,9 +36,14 @@ namespace Vista
 
         private void BTNcancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.No;
-        }
+            FrmLogin form = new FrmLogin();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X, this.Location.Y);
 
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
+        }
 
         private int verifyemail(String cad)
         {

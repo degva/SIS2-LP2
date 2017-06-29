@@ -43,6 +43,7 @@
             this.BTNsave = new System.Windows.Forms.Button();
             this.BTNrecover = new System.Windows.Forms.Button();
             this.BTNnew = new System.Windows.Forms.Button();
+            this.BTNback = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVitem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             this.CMBtype.Items.AddRange(new object[] {
             "Potion",
             "Pokeball"});
-            this.CMBtype.Location = new System.Drawing.Point(203, 88);
+            this.CMBtype.Location = new System.Drawing.Point(200, 137);
             this.CMBtype.Name = "CMBtype";
             this.CMBtype.Size = new System.Drawing.Size(190, 23);
             this.CMBtype.TabIndex = 34;
@@ -73,7 +74,7 @@
             this.LBLtype.AutoSize = true;
             this.LBLtype.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLtype.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLtype.Location = new System.Drawing.Point(38, 91);
+            this.LBLtype.Location = new System.Drawing.Point(35, 140);
             this.LBLtype.Name = "LBLtype";
             this.LBLtype.Size = new System.Drawing.Size(47, 20);
             this.LBLtype.TabIndex = 33;
@@ -82,7 +83,7 @@
             // TXTname
             // 
             this.TXTname.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTname.Location = new System.Drawing.Point(203, 29);
+            this.TXTname.Location = new System.Drawing.Point(200, 78);
             this.TXTname.Name = "TXTname";
             this.TXTname.Size = new System.Drawing.Size(190, 21);
             this.TXTname.TabIndex = 32;
@@ -93,7 +94,7 @@
             this.LBLname.BackColor = System.Drawing.SystemColors.Menu;
             this.LBLname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLname.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLname.Location = new System.Drawing.Point(38, 29);
+            this.LBLname.Location = new System.Drawing.Point(35, 78);
             this.LBLname.Name = "LBLname";
             this.LBLname.Size = new System.Drawing.Size(55, 20);
             this.LBLname.TabIndex = 31;
@@ -102,7 +103,7 @@
             // TXTcatchprob
             // 
             this.TXTcatchprob.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTcatchprob.Location = new System.Drawing.Point(203, 152);
+            this.TXTcatchprob.Location = new System.Drawing.Point(200, 201);
             this.TXTcatchprob.Name = "TXTcatchprob";
             this.TXTcatchprob.Size = new System.Drawing.Size(190, 21);
             this.TXTcatchprob.TabIndex = 29;
@@ -112,7 +113,7 @@
             this.LBLcatchprob.AutoSize = true;
             this.LBLcatchprob.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLcatchprob.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLcatchprob.Location = new System.Drawing.Point(38, 152);
+            this.LBLcatchprob.Location = new System.Drawing.Point(35, 201);
             this.LBLcatchprob.Name = "LBLcatchprob";
             this.LBLcatchprob.Size = new System.Drawing.Size(144, 20);
             this.LBLcatchprob.TabIndex = 27;
@@ -121,7 +122,7 @@
             // TXThp
             // 
             this.TXThp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXThp.Location = new System.Drawing.Point(203, 209);
+            this.TXThp.Location = new System.Drawing.Point(200, 258);
             this.TXThp.Name = "TXThp";
             this.TXThp.Size = new System.Drawing.Size(190, 21);
             this.TXThp.TabIndex = 36;
@@ -131,7 +132,7 @@
             this.LBLhp.AutoSize = true;
             this.LBLhp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLhp.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLhp.Location = new System.Drawing.Point(38, 209);
+            this.LBLhp.Location = new System.Drawing.Point(35, 258);
             this.LBLhp.Name = "LBLhp";
             this.LBLhp.Size = new System.Drawing.Size(33, 20);
             this.LBLhp.TabIndex = 35;
@@ -203,11 +204,23 @@
             this.BTNnew.UseVisualStyleBackColor = true;
             this.BTNnew.Click += new System.EventHandler(this.BTNnew_Click);
             // 
+            // BTNback
+            // 
+            this.BTNback.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNback.Location = new System.Drawing.Point(17, 12);
+            this.BTNback.Name = "BTNback";
+            this.BTNback.Size = new System.Drawing.Size(73, 28);
+            this.BTNback.TabIndex = 43;
+            this.BTNback.Text = "Back";
+            this.BTNback.UseVisualStyleBackColor = true;
+            this.BTNback.Click += new System.EventHandler(this.BTNback_Click);
+            // 
             // FrmAdminItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 500);
+            this.Controls.Add(this.BTNback);
             this.Controls.Add(this.BTNcancel);
             this.Controls.Add(this.BTNupdate);
             this.Controls.Add(this.BTNdelete);
@@ -249,5 +262,6 @@
         private System.Windows.Forms.Button BTNsave;
         private System.Windows.Forms.Button BTNrecover;
         private System.Windows.Forms.Button BTNnew;
+        private System.Windows.Forms.Button BTNback;
     }
 }

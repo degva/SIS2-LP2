@@ -37,6 +37,7 @@
             this.DGVattack = new System.Windows.Forms.DataGridView();
             this.TXTid = new System.Windows.Forms.TextBox();
             this.LBLid = new System.Windows.Forms.Label();
+            this.BTNback = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVattack)).BeginInit();
             this.SuspendLayout();
             // 
@@ -127,11 +128,23 @@
             this.LBLid.TabIndex = 32;
             this.LBLid.Text = "ID";
             // 
+            // BTNback
+            // 
+            this.BTNback.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNback.Location = new System.Drawing.Point(12, 12);
+            this.BTNback.Name = "BTNback";
+            this.BTNback.Size = new System.Drawing.Size(73, 28);
+            this.BTNback.TabIndex = 34;
+            this.BTNback.Text = "Back";
+            this.BTNback.UseVisualStyleBackColor = true;
+            this.BTNback.Click += new System.EventHandler(this.BTNback_Click);
+            // 
             // FrmAdminAttack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 485);
+            this.Controls.Add(this.BTNback);
             this.Controls.Add(this.TXTid);
             this.Controls.Add(this.LBLid);
             this.Controls.Add(this.DGVattack);
@@ -161,5 +174,6 @@
         private System.Windows.Forms.DataGridView DGVattack;
         private System.Windows.Forms.TextBox TXTid;
         private System.Windows.Forms.Label LBLid;
+        private System.Windows.Forms.Button BTNback;
     }
 }

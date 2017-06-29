@@ -19,10 +19,16 @@ namespace Vista
             //MapDA mapDA = new MapDA();
             //mapDA.upload();
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmAdminUser());
-            Application.Run(new FrmLogin());
+            //Application.Run(new FrmLogin());
+
+            FrmLogin inicio = new FrmLogin();
+            inicio.ShowDialog();
+
+
+
             //Application.Run(new FrmAdminPokemon());
             //Application.Run(new FrmAdminPlayerxItem());
             //Application.Run(new FrmAdminPlayerxPokemon());

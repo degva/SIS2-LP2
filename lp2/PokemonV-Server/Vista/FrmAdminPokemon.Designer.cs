@@ -49,6 +49,7 @@
             this.LBLattack1id = new System.Windows.Forms.Label();
             this.TXTattack2id = new System.Windows.Forms.TextBox();
             this.LBLattack2id = new System.Windows.Forms.Label();
+            this.BTNback = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVpokemon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +64,7 @@
             // TXTname
             // 
             this.TXTname.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTname.Location = new System.Drawing.Point(177, 74);
+            this.TXTname.Location = new System.Drawing.Point(181, 105);
             this.TXTname.Name = "TXTname";
             this.TXTname.Size = new System.Drawing.Size(190, 21);
             this.TXTname.TabIndex = 22;
@@ -73,7 +74,7 @@
             this.LBLname.AutoSize = true;
             this.LBLname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLname.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLname.Location = new System.Drawing.Point(12, 74);
+            this.LBLname.Location = new System.Drawing.Point(16, 105);
             this.LBLname.Name = "LBLname";
             this.LBLname.Size = new System.Drawing.Size(55, 20);
             this.LBLname.TabIndex = 21;
@@ -82,7 +83,7 @@
             // TXTdefensepts
             // 
             this.TXTdefensepts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTdefensepts.Location = new System.Drawing.Point(177, 181);
+            this.TXTdefensepts.Location = new System.Drawing.Point(181, 212);
             this.TXTdefensepts.Name = "TXTdefensepts";
             this.TXTdefensepts.Size = new System.Drawing.Size(190, 21);
             this.TXTdefensepts.TabIndex = 19;
@@ -90,7 +91,7 @@
             // TXTlife
             // 
             this.TXTlife.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTlife.Location = new System.Drawing.Point(177, 125);
+            this.TXTlife.Location = new System.Drawing.Point(181, 156);
             this.TXTlife.Name = "TXTlife";
             this.TXTlife.Size = new System.Drawing.Size(190, 21);
             this.TXTlife.TabIndex = 18;
@@ -100,7 +101,7 @@
             this.LBLdefensepts.AutoSize = true;
             this.LBLdefensepts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLdefensepts.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLdefensepts.Location = new System.Drawing.Point(12, 181);
+            this.LBLdefensepts.Location = new System.Drawing.Point(16, 212);
             this.LBLdefensepts.Name = "LBLdefensepts";
             this.LBLdefensepts.Size = new System.Drawing.Size(132, 20);
             this.LBLdefensepts.TabIndex = 17;
@@ -111,7 +112,7 @@
             this.LBLlife.AutoSize = true;
             this.LBLlife.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLlife.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLlife.Location = new System.Drawing.Point(12, 125);
+            this.LBLlife.Location = new System.Drawing.Point(16, 156);
             this.LBLlife.Name = "LBLlife";
             this.LBLlife.Size = new System.Drawing.Size(39, 20);
             this.LBLlife.TabIndex = 16;
@@ -122,7 +123,7 @@
             this.LBLtype.AutoSize = true;
             this.LBLtype.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLtype.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLtype.Location = new System.Drawing.Point(12, 232);
+            this.LBLtype.Location = new System.Drawing.Point(16, 263);
             this.LBLtype.Name = "LBLtype";
             this.LBLtype.Size = new System.Drawing.Size(47, 20);
             this.LBLtype.TabIndex = 23;
@@ -138,7 +139,7 @@
             "Fire",
             "Water",
             "Wind"});
-            this.CMBtype.Location = new System.Drawing.Point(177, 229);
+            this.CMBtype.Location = new System.Drawing.Point(181, 260);
             this.CMBtype.Name = "CMBtype";
             this.CMBtype.Size = new System.Drawing.Size(190, 23);
             this.CMBtype.TabIndex = 24;
@@ -212,7 +213,7 @@
             // TXTid
             // 
             this.TXTid.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTid.Location = new System.Drawing.Point(177, 32);
+            this.TXTid.Location = new System.Drawing.Point(181, 63);
             this.TXTid.Name = "TXTid";
             this.TXTid.Size = new System.Drawing.Size(190, 21);
             this.TXTid.TabIndex = 32;
@@ -222,7 +223,7 @@
             this.LBLid.AutoSize = true;
             this.LBLid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLid.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLid.Location = new System.Drawing.Point(12, 32);
+            this.LBLid.Location = new System.Drawing.Point(16, 63);
             this.LBLid.Name = "LBLid";
             this.LBLid.Size = new System.Drawing.Size(28, 20);
             this.LBLid.TabIndex = 31;
@@ -231,7 +232,7 @@
             // TXTattack1id
             // 
             this.TXTattack1id.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTattack1id.Location = new System.Drawing.Point(177, 293);
+            this.TXTattack1id.Location = new System.Drawing.Point(181, 324);
             this.TXTattack1id.Name = "TXTattack1id";
             this.TXTattack1id.Size = new System.Drawing.Size(190, 21);
             this.TXTattack1id.TabIndex = 34;
@@ -241,7 +242,7 @@
             this.LBLattack1id.AutoSize = true;
             this.LBLattack1id.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLattack1id.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLattack1id.Location = new System.Drawing.Point(12, 293);
+            this.LBLattack1id.Location = new System.Drawing.Point(16, 324);
             this.LBLattack1id.Name = "LBLattack1id";
             this.LBLattack1id.Size = new System.Drawing.Size(95, 20);
             this.LBLattack1id.TabIndex = 33;
@@ -250,7 +251,7 @@
             // TXTattack2id
             // 
             this.TXTattack2id.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXTattack2id.Location = new System.Drawing.Point(177, 350);
+            this.TXTattack2id.Location = new System.Drawing.Point(181, 381);
             this.TXTattack2id.Name = "TXTattack2id";
             this.TXTattack2id.Size = new System.Drawing.Size(190, 21);
             this.TXTattack2id.TabIndex = 36;
@@ -260,17 +261,29 @@
             this.LBLattack2id.AutoSize = true;
             this.LBLattack2id.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBLattack2id.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.LBLattack2id.Location = new System.Drawing.Point(12, 350);
+            this.LBLattack2id.Location = new System.Drawing.Point(16, 381);
             this.LBLattack2id.Name = "LBLattack2id";
             this.LBLattack2id.Size = new System.Drawing.Size(95, 20);
             this.LBLattack2id.TabIndex = 35;
             this.LBLattack2id.Text = "Attack2 ID";
+            // 
+            // BTNback
+            // 
+            this.BTNback.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTNback.Location = new System.Drawing.Point(12, 12);
+            this.BTNback.Name = "BTNback";
+            this.BTNback.Size = new System.Drawing.Size(73, 28);
+            this.BTNback.TabIndex = 44;
+            this.BTNback.Text = "Back";
+            this.BTNback.UseVisualStyleBackColor = true;
+            this.BTNback.Click += new System.EventHandler(this.BTNback_Click);
             // 
             // FrmAdminPokemon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1152, 490);
+            this.Controls.Add(this.BTNback);
             this.Controls.Add(this.TXTattack2id);
             this.Controls.Add(this.LBLattack2id);
             this.Controls.Add(this.TXTattack1id);
@@ -324,5 +337,6 @@
         private System.Windows.Forms.Label LBLattack1id;
         private System.Windows.Forms.TextBox TXTattack2id;
         private System.Windows.Forms.Label LBLattack2id;
+        private System.Windows.Forms.Button BTNback;
     }
 }

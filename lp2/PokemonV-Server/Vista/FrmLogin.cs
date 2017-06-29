@@ -26,6 +26,9 @@ namespace Vista
             this.BackgroundImage = image;
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
+            LBLpassword.BackColor = Color.Transparent;
+            LBLusername.BackColor = Color.Transparent;
+
         }
 
         
@@ -55,14 +58,11 @@ namespace Vista
                     FrmAdminEverything form = new FrmAdminEverything();
                     form.StartPosition = FormStartPosition.Manual;
                     form.Location = new Point(this.Location.X, this.Location.Y);
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
 
-                    }
-                    else
-                    {
-
-                    }
+                    
+                    this.Hide();
+                    form.ShowDialog();
+                    this.Close();
 
                     TXTpassword.Text = "";
                     TXTusername.Text = "";
@@ -79,16 +79,12 @@ namespace Vista
             FrmRegister form = new FrmRegister();
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X, this.Location.Y);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
 
-            }
-            else
-            {
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
 
-            }
         }
-
 
         protected override void WndProc(ref Message message)
         {
@@ -135,14 +131,10 @@ namespace Vista
                         FrmAdminEverything form = new FrmAdminEverything();
                         form.StartPosition = FormStartPosition.Manual;
                         form.Location = new Point(this.Location.X, this.Location.Y);
-                        if (form.ShowDialog() == DialogResult.OK)
-                        {
 
-                        }
-                        else
-                        {
-
-                        }
+                        this.Hide();
+                        form.ShowDialog();
+                        this.Close();
 
                         TXTpassword.Text = "";
                         TXTusername.Text = "";
