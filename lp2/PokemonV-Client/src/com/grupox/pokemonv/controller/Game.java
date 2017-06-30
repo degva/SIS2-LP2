@@ -266,6 +266,7 @@ public class Game extends Canvas implements Runnable {
 
         while (true) {
             if (frame.getA() == 1) {
+                frame.setVisible(false);
                 Game game = new Game();
                 game.start();
                 break;
