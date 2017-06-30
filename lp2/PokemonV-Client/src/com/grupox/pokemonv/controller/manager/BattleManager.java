@@ -118,7 +118,7 @@ public class BattleManager extends Renderable {
         P2_IDLE, P2_ATTACK_FIRST, P2_ATTACK_SECOND, P2_BAG, P2_GIVEUP,
         P1_DEAD, P2_DEAD, P1_HEAL, P2_HEAL, P1_CAPTURE,POKEMON_CAPTURED,
         P1_ALREADY_HEALED,P1_NOT_ENOUGH_POKEBALLS,P1_NOT_ENOUGH_POTIONS,
-        POKEMON_NOT_WEAK,MAKE_DECISION,
+        POKEMON_NOT_WEAK,MAKE_DECISION,YOU_CANT_CATCH,YOU_CANT_GIVEUP,
         TYPE_ATTACK_MENU, BAG_MENU
     };
     
@@ -212,7 +212,7 @@ public class BattleManager extends Renderable {
         } catch (Exception exp) {
         }
         state = State.P1_IDLE;
-        menu = new BattleMenu(input, topOffset, rightOffset, game);
+        menu = new BattleMenu(input, topOffset, rightOffset,battleAgainstPlayer, game);
         attackMenu = new TypeAttackMenuP1(input, topOffsetAttack, rightOffsetAttack, attack1_name, attack2_name, game);
         bagMenu = new BagMenu(player, 20, rightOffset,battleAgainstPlayer, game);
         captureImages = new ArrayList<>();
@@ -288,7 +288,7 @@ public class BattleManager extends Renderable {
         } catch (Exception exp) {
         }
         state = State.P1_IDLE;
-        menu = new BattleMenu(input, topOffset, rightOffset, game);
+        menu = new BattleMenu(input, topOffset, rightOffset,battleAgainstPlayer, game);
         attackMenu = new TypeAttackMenuP1(input, topOffsetAttack, rightOffsetAttack, attack1_name, attack2_name, game);
         bagMenu = new BagMenu(player, 20, rightOffset,battleAgainstPlayer, game);
         decisionMenu = new DecisionBattleMenu(player, 425, Game.WIDTH / 1000, game);
@@ -387,6 +387,16 @@ public class BattleManager extends Renderable {
     }
     public void tick() {
         switch (state) {
+            case YOU_CANT_CATCH:
+                if (numTicks == NUM_TICKS_WAIT) {
+                    state = State.BAG_MENU;
+                }
+                break;
+            case YOU_CANT_GIVEUP:
+                if (numTicks == NUM_TICKS_WAIT) {
+                    state = State.P1_IDLE;
+                }
+                break;
             case BAG_MENU:
                 if (vidaPok1==initialLifePok1)
                     alreadyHealed = true;
@@ -394,22 +404,22 @@ public class BattleManager extends Renderable {
                 bagMenu.tick();
                 break;
             case P1_ALREADY_HEALED:
-                if (numTicks == NUM_TICKS_WAIT-1) {
+                if (numTicks == NUM_TICKS_WAIT) {
                     state = State.BAG_MENU;
                 }
                 break;
             case P1_NOT_ENOUGH_POKEBALLS:
-                if (numTicks == NUM_TICKS_WAIT-1) {
+                if (numTicks == NUM_TICKS_WAIT) {
                     state = State.BAG_MENU;
                 }
                 break;
             case P1_NOT_ENOUGH_POTIONS:
-                if (numTicks == NUM_TICKS_WAIT-1) {
+                if (numTicks == NUM_TICKS_WAIT) {
                     state = State.BAG_MENU;
                 }
                 break;
             case POKEMON_NOT_WEAK:
-                if (numTicks == NUM_TICKS_WAIT-1) {
+                if (numTicks == NUM_TICKS_WAIT) {
                     state = State.BAG_MENU;
                 }
                 break;
@@ -549,7 +559,6 @@ public class BattleManager extends Renderable {
                         System.out.println("El usuario 2 realizo HUIR");
                         state = State.P2_GIVEUP;
                         numTicks = 0;
-                        //game.setState(Game.State.MAP); //Finaliza la batalla pokemon
                     } else if (response.equals("curarse")) {
                         System.out.println("El usuario 2 usó MOCHILA");
                         state = State.P2_HEAL;
@@ -645,6 +654,12 @@ public class BattleManager extends Renderable {
         if ((state == State.POKEMON_NOT_WEAK) && (game.getNumTicks() == 58)) {
             numTicks++;
         }
+        if ((state == State.YOU_CANT_CATCH) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
+        if ((state == State.YOU_CANT_GIVEUP) && (game.getNumTicks() == 58)) {
+            numTicks++;
+        }
         
         if (endBattle) {
             game.setState(Game.State.MAP);
@@ -706,6 +721,7 @@ public class BattleManager extends Renderable {
         Font.getInstance().drawString(nombrePokPlayer2, g, 120, 40 + 55);
 
         switch (state) {
+            
             case P1_HEAL:
                 break;
             case P2_HEAL:
@@ -745,6 +761,13 @@ public class BattleManager extends Renderable {
                 Font.getInstance().drawString("YOU DON'T HAVE ANY POKEBALLS.", g, 30, 460);
                 Font.getInstance().drawString("THERE ARE SO MANY AROUND HERE...", g, 30, 525);
                 //Font.getInstance().drawString("YOU DON'T HAVE ANY POKEBALLS. THERE ARE SO MANY AROUND HERE...", g, 30, 475);
+                break;
+            case YOU_CANT_CATCH:
+                bagMenu.render(g);
+                Font.getInstance().drawString("YOU CANT CATCH OTHER TRAINER'S POKEMON..", g, 30, 475);
+                break;
+            case YOU_CANT_GIVEUP:
+                Font.getInstance().drawString("YOU CANT GIVE UP AGAINST OTHER TRAINER", g, 30, 475);
                 break;
             case P1_NOT_ENOUGH_POTIONS:
                 bagMenu.render(g);
@@ -788,7 +811,11 @@ public class BattleManager extends Renderable {
                 Font.getInstance().drawString("YOUR OPPONENT HAS JUST USED THE BAG", g, 30, 475);
                 break;
             case P2_GIVEUP:
-                Font.getInstance().drawString("YOUR OPPONENT RAN AWAY, SO.. YOU WON", g, 30, 475);
+                if (battleAgainstPlayer)
+                    Font.getInstance().drawString("YOUR OPPONENT RAN AWAY, SO.. YOU WON", g, 30, 475);
+                else 
+                    Font.getInstance().drawString("THE POKEMON HAS JUST ESCAPED...", g, 30, 475);
+                
                 break;
             case P2_DEAD:
                 Font.getInstance().drawString("YOU'VE DEFEATED "+nombrePokPlayer2 , g, 30, 475);

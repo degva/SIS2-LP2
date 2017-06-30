@@ -9,13 +9,14 @@ public class BattleMenu extends DoubleColumnBattle {
     /* Attributes */
     private Game game;
     private final int attackIndex, bagIndex, giveUpIndex;
+    private boolean battleAgainstPlayer;
 
     /* Constructors */
-    public BattleMenu(InputHandler input, int topOffset, int rightOffset, Game game) {
+    public BattleMenu(InputHandler input, int topOffset, int rightOffset, boolean value, Game game) {
         super(input, topOffset, rightOffset);
 
         this.game = game;
-
+        this.battleAgainstPlayer = value;
         attackIndex = this.addItem("Atacar");
         bagIndex = this.addItem("Mochila");
         giveUpIndex = this.addItem("Huir");
@@ -31,8 +32,14 @@ public class BattleMenu extends DoubleColumnBattle {
             } else if (selectedIndex == bagIndex) {
                 game.getBattleManager().setState(BattleManager.State.BAG_MENU);
             } else if (selectedIndex == giveUpIndex) {
-                game.getBattleManager().setState(BattleManager.State.P1_GIVEUP);
-                game.getBattleManager().inicializeTicks();
+                if (battleAgainstPlayer == false) {
+                    game.getBattleManager().setState(BattleManager.State.P1_GIVEUP);
+                    game.getBattleManager().inicializeTicks();
+                } else {
+                    game.getBattleManager().setState(BattleManager.State.YOU_CANT_GIVEUP);
+                    game.getBattleManager().inicializeTicks();
+                }
+
             }
         }
     }

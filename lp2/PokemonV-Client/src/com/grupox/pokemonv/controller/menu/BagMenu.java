@@ -69,6 +69,10 @@ public class BagMenu extends QuantityMenu {
                         }
 
                     }
+                    else {
+                        game.getBattleManager().setState(BattleManager.State.YOU_CANT_CATCH);
+                        game.getBattleManager().inicializeTicks();
+                    }
                 } else if (selectedIndex == potionsIndex) {
                     if (!game.getBattleManager().isAlreadyHealed()) {
                         int dis = player.getPotions().getQuantity() - 1;
