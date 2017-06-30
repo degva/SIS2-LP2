@@ -112,6 +112,13 @@ public class FrmRegister extends javax.swing.JFrame {
         DataAccess playeradmin = new DataAccess();
         
         if(playeradmin.addPlayer(TXTname.getText(), TXTusername.getText(), TXTpassword.getText(), TXTemail.getText()) == 1){
+            int id = playeradmin.getId(TXTusername.getText());
+            playeradmin.addItem1(id);
+            playeradmin.addItem2(id);
+            playeradmin.addPokemon(id);
+            int y = playeradmin.gety();
+            playeradmin.addPlayerTile(id,y);
+            
             setVisible(false);
         }else {
              showMessageDialog(null, "Cant registered");

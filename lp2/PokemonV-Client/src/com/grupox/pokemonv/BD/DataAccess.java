@@ -415,6 +415,155 @@ public class DataAccess {
         
     }
     
+    public int getId(String username){
+        char character = '"';
+        String sql= "SELECT * FROM PLAYER WHERE USERNAME = " + character + username + character;
+
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            ResultSet rs = sentencia.executeQuery(sql);
+            
+            if(rs.next()){
+                int id = rs.getInt("ID");
+                connection.close();
+                return id;
+            }else {
+                connection.close();
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
+    
+    public int gety(){
+        
+        char character = '"';
+        String sql= "SELECT * FROM TILE WHERE X =" + character + 22 + character + " AND y > 37 " + 
+                    " AND player_id IS NULL";
+
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            ResultSet rs = sentencia.executeQuery(sql);
+            
+            if(rs.next()){
+                int y = rs.getInt("y");
+                connection.close();
+                return y;
+            }else {
+                connection.close();
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
+    
+    public int addItem1(int id){
+        char character = '"';
+
+        String sql1 = "INSERT INTO PLAYER_X_ITEM (PLAYER_ID,ITEM_ID,QUANTITY) "
+                + " VALUE ('"+id+"',1,1)";
+        
+        
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            int i  = sentencia.executeUpdate(sql1);
+            
+            if(i > 0){
+                return 1;
+            }else {
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
+    
+    public int addItem2(int id){
+        char character = '"';
+
+        String sql1 = "INSERT INTO PLAYER_X_ITEM (PLAYER_ID,ITEM_ID,QUANTITY) "
+                + " VALUE ('"+id+"',2,1)";
+        
+        
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            int i  = sentencia.executeUpdate(sql1);
+            
+            if(i > 0){
+                return 1;
+            }else {
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
+    
+    public int addPokemon(int id){
+        char character = '"';
+
+        String sql1 = "INSERT INTO PLAYER_X_POKEMON (PLAYER_ID,POKEMON_ID,ORDER_POKEMON,DELETED) "
+                + " VALUE ('"+id+"',4,1,0)";
+        
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            int i  = sentencia.executeUpdate(sql1);
+            
+            if(i > 0){
+                return 1;
+            }else {
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
+    
+    public int addPlayerTile(int id, int y){
+        char character = '"';
+
+        String sql1 = "UPDATE TILE SET player_id = " + character  +  id + character + 
+                    "where x = " + character + 22 + character + " AND y = " + character + y + character;
+        
+        try{
+            Connection connection = openConnection();
+            Statement sentencia = connection.createStatement();
+            int i  = sentencia.executeUpdate(sql1);
+            
+            if(i > 0){
+                return 1;
+            }else {
+                return 0;
+            }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getSQLState());
+            return 0;
+        }
+        
+    }
     
     public void updateData(int level, int player_id, InputHandler input, Game game){
         try{

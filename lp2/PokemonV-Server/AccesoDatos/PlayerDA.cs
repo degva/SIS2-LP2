@@ -38,6 +38,97 @@ namespace AccesoDatos
 
         }
 
+        public int addItem1(int id)
+        {
+            try
+            {
+                Connection connection = new Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                string sql = $"INSERT INTO PLAYER_X_ITEM (PLAYER_ID,ITEM_ID,QUANTITY) values('{id}' , '{1}'  , '{1}')";
+                cmd.Connection = connection.conn;
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+
+                connection.closeConnection();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+
+        }
+
+        public int addItem2(int id)
+        {
+            try
+            {
+                Connection connection = new Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                string sql = $"INSERT INTO PLAYER_X_ITEM (PLAYER_ID,ITEM_ID,QUANTITY) values('{id}' , '{2}'  , '{1}')";
+                cmd.Connection = connection.conn;
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+
+                connection.closeConnection();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+
+        }
+
+
+        public int addPokemon(int id)
+        {
+            try
+            {
+                Connection connection = new Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                string sql = $"INSERT INTO PLAYER_X_POKEMON (PLAYER_ID,POKEMON_ID,ORDER_POKEMON,DELETED) values('{id}' , '{4}'  , '{1}' , '{0}')";
+                cmd.Connection = connection.conn;
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+
+                connection.closeConnection();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+
+        }
+
+        public int addPlayerTile(int id, int y)
+        {
+            try
+            {
+                Connection connection = new Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                char character = '"';
+                string sql = "UPDATE TILE SET player_id = " + character  +  id + character + 
+                    "where x = " + character + 22 + character + " AND y = " + character + y + character;
+                cmd.Connection = connection.conn;
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+
+                connection.closeConnection();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+
+        }
+
 
         public int deletePlayer(string cadena)
         {
@@ -151,6 +242,76 @@ namespace AccesoDatos
                 return 0;
             }
         }
+
+
+        public int getId(string username)
+        {
+            try
+            {
+                Connection connection = new Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                char character = '"';
+                string sql = "SELECT * FROM PLAYER WHERE USERNAME =" + character + username + character;
+                cmd.Connection = connection.conn;
+                cmd.CommandText = sql;
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    string aux = reader["ID"].ToString();
+                    int id = Convert.ToInt32(aux);
+                    return id;
+                }
+                else
+                {
+                    return 0;
+                }
+                reader.Read();
+
+                connection.closeConnection();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
+
+        public int gety()
+        {
+            try
+            {
+                Connection connection = new Connection();
+                MySqlCommand cmd = new MySqlCommand();
+                char character = '"';
+                string sql = "SELECT * FROM TILE WHERE X =" + character + 22 + character + " AND y > 37 " + 
+                    " AND player_id IS NULL";
+                cmd.Connection = connection.conn;
+                cmd.CommandText = sql;
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    string aux = reader["y"].ToString();
+                    int id = Convert.ToInt32(aux);
+                    return id;
+                }
+                else
+                {
+                    return 0;
+                }
+                reader.Read();
+
+                connection.closeConnection();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
 
         public int verifyRepeatemail(Player play)
         {

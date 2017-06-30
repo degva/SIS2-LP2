@@ -110,6 +110,12 @@ namespace Vista
                 flag = 0;
             }
 
+            if(TXTname.Text.Length > 13)
+            {
+                MessageBox.Show("Name cant have more than 13 characters", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                flag = 0;
+            }
+
 
             if (TXTpoints.Text.Trim() == "")
             {

@@ -24,8 +24,8 @@ namespace Vista
             //Application.Run(new FrmAdminUser());
             //Application.Run(new FrmLogin());
 
-            FrmLogin inicio = new FrmLogin();
-            inicio.ShowDialog();
+            //FrmLogin inicio = new FrmLogin();
+            //inicio.ShowDialog();
 
 
 
@@ -34,7 +34,7 @@ namespace Vista
             //Application.Run(new FrmAdminPlayerxPokemon());
             //Application.Run(new FrmAdminEverything());
             //Application.Run(new FrmAdminItem());
-            //Application.Run(new FrmAdminAttack());
+            Application.Run(new FrmAdminAttack());
         }
     }
 }

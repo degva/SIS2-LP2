@@ -193,9 +193,7 @@ namespace Vista
                 TXTpassword.Text = TXTpassword.Text.Trim();
                 TXTusername.Text = TXTusername.Text.Trim();
 
-                Random rnd = new Random();
-                int a = rnd.Next(1, 3);
-
+                
                 string npc = "PLAYER";
                 int can_battle = 1;
                 int battle_dialog_id = 1;
@@ -215,6 +213,12 @@ namespace Vista
                 else
                 {
                     playerDA.addPlayer(player);
+                    int id = playerDA.getId(TXTusername.Text);
+                    playerDA.addItem1(id);
+                    playerDA.addItem2(id);
+                    playerDA.addPokemon(id);
+                    int y = playerDA.gety();
+                    playerDA.addPlayerTile(id,y);
 
                     load();
 
