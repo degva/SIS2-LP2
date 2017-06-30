@@ -48,7 +48,7 @@ namespace AccesoDatos
                 Connection connection = new Connection();
                 MySqlCommand cmd = new MySqlCommand();
                 char character = '"';
-                string sql = "SELECT * FROM PLAYER WHERE USERNAME =" + character +  username + character + " AND PASSWORD = " + character +  password + character + "AND ISADMIN = " + character + 1 + character;
+                string sql = "SELECT * FROM PLAYER WHERE USERNAME =" + character +  username + character + " AND PASSWORD = " + character +  password + character + "AND ISADMIN = " + character + 1 + character + "AND DELETED = " + character + 0 + character;
                 cmd.Connection = connection.conn;
                 cmd.CommandText = sql;
                 MySqlDataReader reader = cmd.ExecuteReader();

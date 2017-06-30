@@ -392,22 +392,15 @@ public class DataAccess {
     
     public int addPlayer(String name, String username , String password, String email){
         char character = '"';
-        String sql= "INSERT INTO PLAYER NAME = " + character + name + character + 
-                    ", USERNAME = " + character +username + character + 
-                    ", PASSWORD = " + character + password+ character + 
-                    ", EMAIL = " + character + email + character + 
-                    ", CAN_BATTLE = " + character + 1 + character + 
-                    ", BATTLE_DIALOG_ID = " + character + 1 + character + 
-                    ", DEFEAT_DIALOG_ID = " + character + 1 + character + 
-                    ", NPC_TYPE = " + character + "PLAYER"+ character + 
-                    ", ISADMIN = " + character + 0 + character + 
-                    ", DIRECTION = " + character + "DOWN" + character + 
-                    ", DELETED = " + character +  0 + character;
-                
+
+        String sql1 = "INSERT INTO PLAYER (NAME,USERNAME,PASSWORD,EMAIL,CAN_BATTLE,BATTLE_DIALOG_ID,DEFEAT_DIALOG_ID,NPC_TYPE,ISADMIN,DIRECTION,DELETED) "
+                + " VALUE ('"+name+"','"+username+"', '"+password+"', '"+email+"' ,1,1,1, 'PLAYER',0,'DOWN',0)";
+        
+        
         try{
             Connection connection = openConnection();
             Statement sentencia = connection.createStatement();
-            int i  = sentencia.executeUpdate(sql);
+            int i  = sentencia.executeUpdate(sql1);
             
             if(i > 0){
                 return 1;

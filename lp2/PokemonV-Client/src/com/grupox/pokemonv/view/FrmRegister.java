@@ -7,6 +7,7 @@ package com.grupox.pokemonv.view;
 
 import com.grupox.pokemonv.BD.DataAccess;
 import com.grupox.pokemonv.model.SpriteSheet;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -70,12 +71,14 @@ public class FrmRegister extends javax.swing.JFrame {
         
         comprobarCorreo(TXTemail.getText());
         DataAccess playerAdmin = new DataAccess();
-        if(playerAdmin.verifyUsername(TXTusername.getText()) != 1){
+        if(playerAdmin.verifyUsername(TXTusername.getText()) == 1){
             showMessageDialog(null, "That username has already been registered");
+            return false;
         }
         
-        if(playerAdmin.verifyEmail(TXTemail.getText()) != 1){
+        if(playerAdmin.verifyEmail(TXTemail.getText()) == 1){
             showMessageDialog(null, "That email has already been registered");
+            return false;
         }
         
         return true;
@@ -156,6 +159,12 @@ public class FrmRegister extends javax.swing.JFrame {
         TXTname.setBounds(230, 100, 130, 30);
         jPanel1.add(TXTpassword);
         TXTpassword.setBounds(230, 200, 130, 30);
+
+        TXTemail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXTemailKeyTyped(evt);
+            }
+        });
         jPanel1.add(TXTemail);
         TXTemail.setBounds(230, 250, 130, 30);
 
@@ -214,6 +223,14 @@ public class FrmRegister extends javax.swing.JFrame {
     private void BTNcancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNcancelActionPerformed
         setVisible(false);
     }//GEN-LAST:event_BTNcancelActionPerformed
+
+    private void TXTemailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTemailKeyTyped
+        char keypressed = evt.getKeyChar();
+        
+        if(keypressed == KeyEvent.VK_ENTER){
+            register();
+        }
+    }//GEN-LAST:event_TXTemailKeyTyped
 
     /**
      * @param args the command line arguments

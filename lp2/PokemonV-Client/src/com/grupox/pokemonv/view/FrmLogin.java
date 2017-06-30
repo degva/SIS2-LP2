@@ -10,6 +10,9 @@ import com.grupox.pokemonv.controller.Game;
 import com.grupox.pokemonv.controller.Sound;
 import com.grupox.pokemonv.model.SpriteSheet;
 import static javax.swing.JOptionPane.showMessageDialog;
+import java.awt.event.KeyEvent;
+import javax.swing.InputMap;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -108,6 +111,12 @@ public class FrmLogin extends javax.swing.JFrame {
         TXTusername.setToolTipText("");
         jPanel1.add(TXTusername);
         TXTusername.setBounds(310, 220, 130, 20);
+
+        TXTpassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXTpasswordKeyTyped(evt);
+            }
+        });
         jPanel1.add(TXTpassword);
         TXTpassword.setBounds(310, 260, 130, 20);
 
@@ -147,6 +156,14 @@ public class FrmLogin extends javax.swing.JFrame {
         FrmRegister frame = new FrmRegister();
         frame.setVisible(true);
     }//GEN-LAST:event_BTNregisterActionPerformed
+
+    private void TXTpasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTpasswordKeyTyped
+        char keypressed = evt.getKeyChar();
+        
+        if(keypressed == KeyEvent.VK_ENTER){
+            logueo();
+        }
+    }//GEN-LAST:event_TXTpasswordKeyTyped
 
 //    /**
 //     * @param args the command line arguments
