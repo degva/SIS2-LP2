@@ -728,18 +728,23 @@ public class BattleManager extends Renderable {
              g.drawImage(currSprite2, 480, 85, pokAncho, pokAlto, null);
         }
         
-        g.setColor(Color.green);
-        g.fillRect(480+50, 208 + 125, 140, 20);
-        g.setColor(Color.red);
-        g.fillRect(480+50, 208 + 125, getRespectiveLife(1, vidaPok1, 140), 20);
+//        g.setColor(Color.green);
+//        g.fillRect(480+50, 208 + 125, 140, 20);
+//        g.setColor(Color.red);
+//        g.fillRect(480+50, 208 + 125, getRespectiveLife(1, vidaPok1, 140), 20);
+
+          g.setColor(Color.red);
+          g.fillRect(480+50, 208 + 125, 140, 20);
+          g.setColor(Color.green);
+          g.fillRect(480+50, 208 + 125, 140-getRespectiveLife(1, vidaPok1, 140), 20);
 
         g.drawImage(imgBackgroundHP1, 360+50, 145 + 125, 280, 110, null);
         Font.getInstance().drawString(nombrePokPlayer1, g, 450+50, 160 + 125);
         
-        g.setColor(Color.green);
-        g.fillRect(165, 85 + 55, 140, 20);
         g.setColor(Color.red);
-        g.fillRect(165, 85 + 55, getRespectiveLife(2, vidaPok2, 140), 20);
+        g.fillRect(165, 85 + 55, 140, 20);
+        g.setColor(Color.green);
+        g.fillRect(165, 85 + 55, 140-getRespectiveLife(2, vidaPok2, 140), 20);
         
         g.drawImage(imgBackgroundHP2, 60, 30 + 55, 280, 110, null);
         Font.getInstance().drawString(nombrePokPlayer2, g, 120, 40 + 55);
