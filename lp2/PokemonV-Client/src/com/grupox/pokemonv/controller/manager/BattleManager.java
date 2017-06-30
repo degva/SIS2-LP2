@@ -918,8 +918,13 @@ public class BattleManager extends Renderable {
     public void inicializeTicks() {
         numTicks = 0;
     }
-    public void setInitialSpriteForBattle(){
-        currSprite = imgForAnimP1_Normal1;
+    public void setInitialSpriteForCapture(){
+        try{
+             currSprite = ImageIO.read(new File("res/battle/transparente.png"));
+        }
+        catch(Exception exp){
+        }
+       
     }
     public boolean isAlreadyHealed() {
         return alreadyHealed;

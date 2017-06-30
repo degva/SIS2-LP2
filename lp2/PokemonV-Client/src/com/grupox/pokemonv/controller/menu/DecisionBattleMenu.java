@@ -38,7 +38,7 @@ public class DecisionBattleMenu extends DoubleColumnBattle{
             if (selectedIndex == yesIndex) {
                 int dis = player.getPokeballs().getQuantity() - 1;
                 if (dis >= 0) {
-                    game.getBattleManager().setInitialSpriteForBattle();
+                    game.getBattleManager().setInitialSpriteForCapture();
                     game.getBattleManager().setState(BattleManager.State.P1_CAPTURE);
                     player.getPokeballs().setQuantity(dis);
                 }else{
