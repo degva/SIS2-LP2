@@ -57,7 +57,7 @@ public class BattleManager extends Renderable {
     private final int topOffset = 390;
     private final int rightOffset = Game.WIDTH / 1000;
     private final int topOffsetAttack = 390;
-    private final int rightOffsetAttack = Game.WIDTH/2;
+    private final int rightOffsetAttack = 200;
     
     private final double movePeriod = 0.2;
 
@@ -213,7 +213,16 @@ public class BattleManager extends Renderable {
         }
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset,battleAgainstPlayer, game);
-        attackMenu = new TypeAttackMenuP1(input, topOffsetAttack, rightOffsetAttack, attack1_name, attack2_name, game);
+        String name1_format=attack1_name,name2_format=attack2_name;
+        if (attack1_name.length()<=13){
+            for (int l=0;l<13-attack1_name.length();l++)
+                name1_format += " ";
+        }
+        if (attack2_name.length()<=13){
+             for (int l=0;l<13-attack2_name.length();l++)
+                name2_format += " ";
+        }
+        attackMenu = new TypeAttackMenuP1(input, topOffsetAttack, rightOffsetAttack, name1_format, name2_format, game);
         bagMenu = new BagMenu(player, 20, rightOffset,battleAgainstPlayer, game);
         captureImages = new ArrayList<>();
         loadCaptureAnimation();
@@ -289,7 +298,16 @@ public class BattleManager extends Renderable {
         }
         state = State.P1_IDLE;
         menu = new BattleMenu(input, topOffset, rightOffset,battleAgainstPlayer, game);
-        attackMenu = new TypeAttackMenuP1(input, topOffsetAttack, rightOffsetAttack, attack1_name, attack2_name, game);
+        String name1_format=attack1_name,name2_format=attack2_name;
+        if (attack1_name.length()<=13){
+            for (int l=0;l<13-attack1_name.length();l++)
+                name1_format += " ";
+        }
+        if (attack2_name.length()<=13){
+             for (int l=0;l<13-attack2_name.length();l++)
+                name2_format += " ";
+        }
+        attackMenu = new TypeAttackMenuP1(input, topOffsetAttack, rightOffsetAttack, name1_format, name2_format, game);
         bagMenu = new BagMenu(player, 20, rightOffset,battleAgainstPlayer, game);
         decisionMenu = new DecisionBattleMenu(player, 425, Game.WIDTH / 1000, game);
         captureImages = new ArrayList<>();
@@ -390,11 +408,13 @@ public class BattleManager extends Renderable {
             case YOU_CANT_CATCH:
                 if (numTicks == NUM_TICKS_WAIT) {
                     state = State.BAG_MENU;
+                    numTicks = 0;
                 }
                 break;
             case YOU_CANT_GIVEUP:
                 if (numTicks == NUM_TICKS_WAIT) {
                     state = State.P1_IDLE;
+                    numTicks = 0;
                 }
                 break;
             case BAG_MENU:
@@ -406,21 +426,25 @@ public class BattleManager extends Renderable {
             case P1_ALREADY_HEALED:
                 if (numTicks == NUM_TICKS_WAIT) {
                     state = State.BAG_MENU;
+                    numTicks = 0;
                 }
                 break;
             case P1_NOT_ENOUGH_POKEBALLS:
                 if (numTicks == NUM_TICKS_WAIT) {
                     state = State.BAG_MENU;
+                    numTicks = 0;
                 }
                 break;
             case P1_NOT_ENOUGH_POTIONS:
                 if (numTicks == NUM_TICKS_WAIT) {
                     state = State.BAG_MENU;
+                    numTicks = 0;
                 }
                 break;
             case POKEMON_NOT_WEAK:
                 if (numTicks == NUM_TICKS_WAIT) {
                     state = State.BAG_MENU;
+                    numTicks = 0;
                 }
                 break;
             case P1_HEAL:
